@@ -1,5 +1,3 @@
-import scala.scalanative.build.*
-
 val scala3Version = "3.6.2"
 
 ThisBuild / scalaVersion := scala3Version
@@ -27,7 +25,7 @@ ThisBuild / scalacOptions ++= Seq(
   "-Wunused:all",
   "-Wvalue-discard",
   "-Wnonunit-statement",
-  "-Yexplicit-nulls",
+//  "-Yexplicit-nulls",
   "-Wsafe-init",
   "-Ycheck-reentrant",
   "-Xcheck-macros",
@@ -43,27 +41,22 @@ ThisBuild / coverageEnabled := true
 ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 ThisBuild / libraryDependencies ++= Seq(
-  "org.scalatest" %%% "scalatest" % "3.2.19" % Test
+  "org.scalatest" %% "scalatest" % "3.2.19" % Test,
+  "it.unibo.scafi" %% "scafi-core" % "1.3.0" cross CrossVersion.for3Use2_13,
+  "it.unibo.scafi" %% "scafi-simulator" % "1.3.0" cross CrossVersion.for3Use2_13,
+  "org.scala-lang" %% "scala3-compiler" % scala3Version,
 )
+ThisBuild / Test / fork := true
 
-lazy val root = crossProject(JSPlatform, JVMPlatform, NativePlatform)
+
+lazy val root = project
   .in(file("."))
-  .configs()
-  .nativeSettings(
-    nativeConfig ~= {
-      _.withLTO(LTO.default)
-        .withMode(Mode.releaseSize)
-        .withGC(GC.immix)
-    }
-  )
-  .jsSettings(
-    libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "2.8.0",
-    scalaJSUseMainModuleInitializer := true,
-    scalaJSLinkerConfig ~= { _.withOptimizer(true) }
-  )
   .settings(
-    name := "Template-for-Scala-Multiplatform-Projects",
+    name := "experiments-2025-acm-iot-ac-llm",
     sonatypeCredentialHost := "s01.oss.sonatype.org",
     sonatypeRepository := "https://s01.oss.sonatype.org/service/local",
-    sonatypeProfileName := "it.nicolasfarabegoli"
+    sonatypeProfileName := "it.nicolasfarabegoli",
+//    test := {
+//      fork := true
+//    }
   )
