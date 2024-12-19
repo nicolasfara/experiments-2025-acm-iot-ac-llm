@@ -11,7 +11,7 @@ final case class PromptSpecification(prompts: List[String], testCase: String)
 abstract class AbstractScafiProgramTest(
     private val promptSpecification: PromptSpecification,
     private val loader: ProgramLoader,
-    private val runs: Int = 1,
+    private val runs: Int = 5,
 ) extends AnyFlatSpec,
       Matchers:
 
