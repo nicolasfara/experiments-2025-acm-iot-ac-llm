@@ -6,10 +6,9 @@
 package it.unibo.scafi
 
 import it.unibo.scafi.incarnations.AbstractTestIncarnation
-import it.unibo.scafi.incarnations.BasicSimulationIncarnation.Builtins
 import it.unibo.scafi.lib.StandardLibrary
 import it.unibo.scafi.simulation.Simulation
 
-object FunctionalTestIncarnation extends AbstractTestIncarnation, StandardLibrary, Simulation:
-  override implicit val idBounded: Builtins.Bounded[ID] = Builtins.Bounded.of_i
-//}
+object FunctionalTestIncarnation extends AbstractTestIncarnation with Simulation with StandardLibrary:
+  import Builtins.Bounded
+  override implicit val idBounded: Bounded[ID] = Builtins.Bounded.of_i

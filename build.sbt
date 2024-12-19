@@ -34,7 +34,7 @@ ThisBuild / scalacOptions ++= Seq(
   "-unchecked",
   "-explain",
   "-feature",
-  "-language:strictEquality",
+//  "-language:strictEquality",
   "-language:implicitConversions"
 )
 ThisBuild / coverageEnabled := true
@@ -42,8 +42,8 @@ ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 ThisBuild / libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.2.19" % Test,
-  "it.unibo.scafi" %% "scafi-core" % "1.3.0" cross CrossVersion.for3Use2_13,
-  "it.unibo.scafi" %% "scafi-simulator" % "1.3.0" cross CrossVersion.for3Use2_13,
+  "it.unibo.scafi" %% "scafi-core" % "1.6.0",
+  "it.unibo.scafi" %% "scafi-simulator" % "1.6.0",
   "org.scala-lang" %% "scala3-compiler" % scala3Version,
 )
 ThisBuild / Test / fork := true
