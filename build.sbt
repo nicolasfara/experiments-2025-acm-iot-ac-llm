@@ -45,6 +45,7 @@ ThisBuild / libraryDependencies ++= Seq(
   "it.unibo.scafi" %% "scafi-core" % "1.6.0",
   "it.unibo.scafi" %% "scafi-simulator" % "1.6.0",
   "org.scala-lang" %% "scala3-compiler" % scala3Version,
+  "com.lihaoyi" %% "requests" % "0.9.0"
 )
 ThisBuild / Test / fork := true
 
