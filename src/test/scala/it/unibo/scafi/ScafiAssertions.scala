@@ -36,4 +36,24 @@ object ScafiAssertions extends Matchers:
         case (None, _) => false
         case _ => false,
     ) shouldBe true
+
+  def assertNetworkValuesWithPredicate[T](
+      pred: (ID, T) => Boolean,
+      msg: String = "Assert network values with predicate",
+  )(passNotComputed: Boolean = true)(implicit net: Network): Assertion =
+    withClue(s"""
+         | ${msg}
+         | Actual network: ${net}
+         | Sensor state: ${net.sensorState()}
+         | Neighborhoods: ${net.ids.map(id => id -> net.neighbourhood(id))}
+         | Sample exports
+         | ID=0 => ${net.getExport(0)}
+         | ID=1 => ${net.getExport(1)}
+         |""".stripMargin):
+      net.ids.forall(id =>
+        val actualExport = net.getExport(id)
+        actualExport match
+          case Some(v) => pred(id, v.root[T]())
+          case None => passNotComputed,
+      ) shouldBe true
 end ScafiAssertions

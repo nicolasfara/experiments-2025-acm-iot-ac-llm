@@ -6,10 +6,9 @@ import org.scalatest.matchers.should.Matchers
 import it.unibo.scafi.ScafiTestUtils.*
 
 final case class ScafiProgram(program: String)
-final case class PromptSpecification(prompts: List[String], testCase: String)
 
 abstract class AbstractScafiProgramTest(
-    private val promptSpecification: PromptSpecification,
+    private val promptSpecification: List[String],
     private val loader: CodeGeneratorService,
     private val runs: Int = 5,
 ) extends AnyFlatSpec,
@@ -25,9 +24,9 @@ abstract class AbstractScafiProgramTest(
 
   for
     n <- 0 until runs
-    prompt <- promptSpecification.prompts
+    prompt <- promptSpecification
     program = programSpecification(prompt)
   do
-    behavior of s"${this.getClass.getSimpleName} @ round-$n"
+    behavior of s"${this.getClass.getSimpleName} @ round-$n-prompt${promptSpecification.indexOf(prompt)}"
     it should behave like behaviors(executeScafiProgram(program))
 end AbstractScafiProgramTest
