@@ -18,8 +18,10 @@ object ScafiTestUtils:
     (endNetwork, executionSequence)
 
   def executeFromString[Result](program: String, preamble: String = ""): Result =
-    dotty.tools.repl.ScriptEngine().eval(
-      s"""
+    dotty.tools.repl
+      .ScriptEngine()
+      .eval(
+        s"""
          |import it.unibo.scafi.FunctionalTestIncarnation.*
          |import it.unibo.scafi.ScafiTestUtils.runProgram
          |import it.unibo.scafi.config.GridSettings
@@ -36,4 +38,6 @@ object ScafiTestUtils:
          |}(net)(using node)._1
          |
          |""".stripMargin,
-    ).asInstanceOf[Result]
+      )
+      .asInstanceOf[Result]
+end ScafiTestUtils

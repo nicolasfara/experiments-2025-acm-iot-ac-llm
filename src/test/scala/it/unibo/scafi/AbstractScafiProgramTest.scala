@@ -10,13 +10,13 @@ final case class PromptSpecification(prompts: List[String], testCase: String)
 
 abstract class AbstractScafiProgramTest(
     private val promptSpecification: PromptSpecification,
-    private val loader: ProgramLoader,
+    private val loader: CodeGeneratorService,
     private val runs: Int = 5,
 ) extends AnyFlatSpec,
       Matchers:
 
   private def programSpecification(promptSpecification: String): ScafiProgram =
-    ScafiProgram(loader.loadProgram(promptSpecification))
+    ScafiProgram(loader.generateCode(promptSpecification))
 
   private def executeScafiProgram(programUnderTest: ScafiProgram): Network =
     executeFromString(programUnderTest.program)

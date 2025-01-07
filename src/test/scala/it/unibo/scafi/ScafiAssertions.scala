@@ -1,6 +1,6 @@
 package it.unibo.scafi
 
-import it.unibo.scafi.FunctionalTestIncarnation.{ID, Network}
+import it.unibo.scafi.FunctionalTestIncarnation.{ ID, Network }
 import org.scalatest.Assertion
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.matchers.should.Matchers.shouldBe
