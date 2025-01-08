@@ -1,10 +1,10 @@
 package it.unibo.scafi.tests
 
+import scala.language.postfixOps
+
 import it.unibo.scafi.FunctionalTestIncarnation.Network
 import it.unibo.scafi.ScafiAssertions.assertNetworkValues
 import it.unibo.scafi.{ AbstractScafiProgramTest, CodeGeneratorService }
-
-import scala.language.postfixOps
 
 private val neighboringWithoutSelfTest = new CodeGeneratorService:
   override def localKnowledge: String = ""

@@ -4,6 +4,7 @@ import it.unibo.scafi.FunctionalTestIncarnation.*
 
 object ScafiTestUtils:
 
+  @SuppressWarnings(Array("scalafix:DisableSyntax.null"))
   def runProgram(exp: => Any, ntimes: Int = 500)(net: Network & SimulatorOps)(using
       node: AggregateInterpreter,
   ): (Network, Seq[ID]) =
@@ -17,6 +18,7 @@ object ScafiTestUtils:
       )
     (endNetwork, executionSequence)
 
+  @SuppressWarnings(Array("scalafix:DisableSyntax.asInstanceOf"))
   def executeFromString[Result](program: String, preamble: String = ""): Result =
     dotty.tools.repl
       .ScriptEngine()
