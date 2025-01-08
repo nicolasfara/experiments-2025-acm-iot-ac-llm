@@ -4,21 +4,12 @@ import scala.language.postfixOps
 
 import it.unibo.scafi.FunctionalTestIncarnation.Network
 import it.unibo.scafi.ScafiAssertions.assertNetworkValues
-import it.unibo.scafi.{ AbstractScafiProgramTest, CodeGeneratorService }
+import it.unibo.scafi.AbstractScafiProgramTest
 
-private val neighboringTest = new CodeGeneratorService:
-  override def localKnowledge: String = ""
-  override def generateCode(prompt: String): String =
-    """
-      foldhood(0)(_ + _){1}
-    """
+class NeighboringTest extends AbstractScafiProgramTest("prompts/NeighboringTest.json"):
 
-private val neighborCountPrompts = List(
-  "",
-)
+  override def baselineWorkingProgram(): String = "foldhood(0)(_ + _){1}"
 
-class NeighboringTest extends AbstractScafiProgramTest(neighborCountPrompts, neighboringTest):
-
-  override def behaviors(producedNet: Network): Unit =
+  override def programTests(producedNet: Network): Unit =
     it should "count neighbors" in:
       assertNetworkValues((0 to 8).zip(List(4, 6, 4, 6, 9, 6, 4, 6, 4)).toMap)

@@ -4,22 +4,13 @@ import scala.language.postfixOps
 
 import it.unibo.scafi.FunctionalTestIncarnation.{ ID, Network }
 import it.unibo.scafi.ScafiAssertions.assertNetworkValuesWithPredicate
-import it.unibo.scafi.{ AbstractScafiProgramTest, CodeGeneratorService }
+import it.unibo.scafi.AbstractScafiProgramTest
 
-private val neighboringIdsTest = new CodeGeneratorService:
-  override def localKnowledge: String = ""
-  override def generateCode(prompt: String): String =
-    """
-      foldhood(List[Int]())(_++_){List(nbr[Int](mid()))}
-    """
+class NeighboringIdsTest extends AbstractScafiProgramTest("prompts/NeighboringIdsTest.json"):
 
-private val neighborCountPrompts = List(
-  "",
-)
+  override def baselineWorkingProgram(): String = "foldhood(List[Int]())(_++_){List(nbr[Int](mid()))}"
 
-class NeighboringIdsTest extends AbstractScafiProgramTest(neighborCountPrompts, neighboringIdsTest):
-
-  override def behaviors(producedNet: Network): Unit =
+  override def programTests(producedNet: Network): Unit =
     it should "gather the IDs of their neighbors" in:
       val values = (0 to 8)
         .zip(
