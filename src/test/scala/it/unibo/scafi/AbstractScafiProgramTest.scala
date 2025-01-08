@@ -1,13 +1,13 @@
 package it.unibo.scafi
 
+import scala.io.Source
+
 import it.unibo.scafi.FunctionalTestIncarnation.Network
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import it.unibo.scafi.ScafiTestUtils.*
 import io.circe.parser.*
 import io.circe.generic.auto.*
-
-import scala.io.Source
 
 final case class ScafiProgram(program: String)
 

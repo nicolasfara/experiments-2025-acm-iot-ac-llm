@@ -6,7 +6,7 @@ import it.unibo.scafi.FunctionalTestIncarnation.Network
 import it.unibo.scafi.ScafiAssertions.assertNetworkValues
 import it.unibo.scafi.AbstractScafiProgramTest
 
-class NeighboringMinDistanceTest extends AbstractScafiProgramTest(s"prompts/NeighboringMinDistanceTest.json"):
+class NeighboringMinDistanceTest extends AbstractScafiProgramTest("prompts/NeighboringMinDistanceTest.json"):
 
   override def baselineWorkingProgram(): String =
     """
