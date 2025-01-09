@@ -13,8 +13,7 @@ final case class ScafiProgram(program: String)
 
 abstract class AbstractScafiProgramTest(
     private val promptsFilePath: String,
-    private val loader: CodeGeneratorService =
-      GeminiService.flash(GeminiService.Version.V2_0, System.getenv("API_KEY")),
+    private val loader: CodeGeneratorService = GeminiService.flash(GeminiService.Version.V2_0),
     private val runs: Int = 5,
 ) extends AnyFlatSpec,
       Matchers:
