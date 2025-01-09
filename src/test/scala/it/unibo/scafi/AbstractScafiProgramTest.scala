@@ -14,15 +14,15 @@ final case class ScafiProgram(program: String)
 abstract class AbstractScafiProgramTest(
     private val promptsFilePath: String,
     private val loader: CodeGeneratorService =
-      GeminiService.flash(GeminiService.Version.V2_0, System.getenv("API_KEY"), ""),
+      GeminiService.flash(GeminiService.Version.V2_0, System.getenv("API_KEY")),
     private val runs: Int = 5,
 ) extends AnyFlatSpec,
       Matchers:
 
   private lazy val candidatePrompts =
-    decode[Prompts](Source.fromResource(promptsFilePath).getLines().mkString) match
+    decode[Prompts](Source.fromResource(promptsFilePath).mkString) match
       case Right(prompts) => prompts
-      case Left(error) => throw new RuntimeException(s"Failed to load prompts $error")
+      case Left(error) => throw new RuntimeException(s"Failed to decode prompts $error")
 
   private def programSpecification(promptSpecification: String): ScafiProgram =
     ScafiProgram(loader.generateCode(promptSpecification))
