@@ -1,5 +1,5 @@
 {
   "prompts": [
-    "calculate the min distance from neighbors with sensor `nbrvar[Double](NBR_RANGE)`"
+    "calculate the min distance from neighbors"
   ]
 }
