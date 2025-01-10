@@ -1,3 +1,5 @@
 {
-  "prompts": []
+  "prompts": [
+    "count neighbors"
+  ]
 }

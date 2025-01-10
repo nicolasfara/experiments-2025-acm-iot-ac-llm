@@ -156,7 +156,7 @@ Special platform sensors can be used instead of `nbr`, such as `nbrRange` (to ac
 
 ```scala
 def main(): Double = {
-  val idsAndNeigh = foldhood(List.empty[(Double, String)])(_ ++ _)(List(nbrRange() -> nbr("mid")))
+  val idsAndNeigh = foldhood(List.empty[(Double, ID)])(_ ++ _)(List(nbrRange() -> nbr(mid())))
   idsAndNeigh.minBy(_._1)._1 // minBy allows to find the min using a specific value
 }
 ```
@@ -177,7 +177,7 @@ The result might differ on other nodes.
 Using `foldhoodPlus`, you can exclude the node itself when finding the closest neighbor:
 ```scala
 def main(): Double = {
-  val idsAndNeigh = foldhoodPlus(List.empty[(Double, String)])(_ ++ _)(List(nbrRange() -> nbr("mid")))
+  val idsAndNeigh = foldhoodPlus(List.empty[(Double, ID)])(_ ++ _)(List(nbrRange() -> nbr(mid())))
   idsAndNeigh.minBy(_._1)._1
 }
 ```
@@ -197,7 +197,7 @@ Given the network `0 - 1 - 2`:
 
 ```scala
 def main(): Int = rep(Int.MaxValue) {
-  minId => foldhood(minId)(_ min _)(nbr(minId))
+  minId => foldhood(mid())(_ min _)(nbr(minId))
 }
 ```
 
