@@ -41,16 +41,20 @@ ThisBuild / coverageEnabled := true
 ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 ThisBuild / libraryDependencies ++= Seq(
+  "org.scalactic" %% "scalactic" % "3.2.19",
   "org.scalatest" %% "scalatest" % "3.2.19" % Test,
+  "com.vladsch.flexmark" % "flexmark-all" % "0.64.8" % Test,
   "it.unibo.scafi" %% "scafi-core" % "1.6.0",
   "it.unibo.scafi" %% "scafi-simulator" % "1.6.0",
   "org.scala-lang" %% "scala3-compiler" % scala3Version,
   "com.lihaoyi" %% "requests" % "0.9.0",
   "io.circe" %% "circe-core" % "0.14.10",
   "io.circe" %% "circe-generic" % "0.14.10",
-  "io.circe" %% "circe-parser" % "0.14.10"
+  "io.circe" %% "circe-parser" % "0.14.10",
+  "com.softwaremill.retry" %% "retry" % "0.3.6"
 )
 ThisBuild / Test / fork := true
+ThisBuild / testOptions += Tests.Argument(TestFrameworks.ScalaTest, "-h", "target/test-reports")
 
 lazy val root = project
   .in(file("."))
