@@ -1,24 +1,55 @@
 package it.unibo.scafi
 
 import requests.*
+import io.circe.generic.auto.*
+import io.circe.syntax.*
+import io.circe.parser.*
+import retry.Success
 
 import scala.io.Source
+import scala.concurrent.duration.*
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
+import retry.Success.*
+
+private final case class Part(text: String)
+private final case class Content(parts: List[Part])
+private final case class Data(contents: List[Content])
+
+private final case class DataResponse(content: Content)
+private final case class Response(candidates: List[DataResponse])
 
 class GeminiService(val model: String, val apiKey: String, override val localKnowledge: String)
     extends CodeGeneratorService:
-  override def generateCode(prompt: String): String =
-    val url = s"https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=$apiKey"
-    val headers = Map("Content-Type" -> "application/json")
-    val data =
-      s"""|{
-          |  "contents": [{
-          |    "parts": [{"text": "$localKnowledge $prompt"}]
-          |  }]
-          |
-          |}""".stripMargin
-    val response = requests.post(url, headers = headers, data = data)
-    // convert the response from byte to string
-    response.text()
+  private given Success[requests.Response] = Success(_.statusCode == 200)
+  private val url = s"https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=$apiKey"
+  private val headers = Map("Content-Type" -> "application/json")
+  private def data(prompt: String) = Data(
+    List(
+      Content(
+        List(
+          Part(
+            s"$localKnowledge.\nTry to write (ONLY!!!) the body of the main (WITHOUT WRITE DEF MAIN()!!! AND WITHOUT CURLY BRACES IN MULTI-LINE PROGRAMS) for the following problem:\n$prompt",
+          ),
+        ),
+      ),
+    ),
+  ).asJson.noSpaces
+
+  override def generateCode(prompt: String): Future[String] =
+    for
+      response <- retry
+        .Backoff(5, delay = 1.seconds)
+        .apply(Future { requests.post(url, headers = headers, data = data(prompt)) })
+      decodedPayload = decode[Response](response.text()) match
+        case Right(decoded) => decoded
+        case Left(error) => throw new RuntimeException(s"Failed to decode response $error")
+      cleaned = decodedPayload.candidates.head.content.parts.head.text
+        .replaceAll("```scala\n", "")
+        .replaceAll("\n```\n", "")
+    yield cleaned
+  end generateCode
+end GeminiService
 
 object GeminiService:
   enum Version:
@@ -40,7 +71,7 @@ object GeminiService:
       apiKey: String = defaultApiKey,
       localKnowledge: String = defaultLocalKnowledge,
   ): GeminiService =
-    new GeminiService(s"gemini-$version-flash", apiKey, localKnowledge)
+    new GeminiService(s"gemini-$version-flash-exp", apiKey, localKnowledge)
 
   def pro(
       version: Version,
