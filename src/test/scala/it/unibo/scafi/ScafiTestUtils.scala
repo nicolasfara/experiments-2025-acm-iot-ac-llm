@@ -32,7 +32,7 @@ object ScafiTestUtils:
          |val net: Network & SimulatorOps =
          |  simulatorFactory.gridLike(GridSettings(3, 3, 1, 1), rng = 1.5, seeds = Seeds(187372311, 187372311, 187372311))
          |
-         |given node: (BasicAggregateInterpreter & StandardSensorNames) = new BasicAggregateInterpreter with StandardSensorNames
+         |given node: (BasicAggregateInterpreter & StandardSensors) = new BasicAggregateInterpreter with StandardSensors
          |
          |runProgram {
          |  import node.*
