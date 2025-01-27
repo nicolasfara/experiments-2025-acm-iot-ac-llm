@@ -10,11 +10,13 @@ import io.circe.generic.auto.*
 import org.scalatest.Assertion
 
 import scala.concurrent.Future
-import scala.util.{Failure, Success, Try}
+import scala.util.{Failure, Success, Try, Using}
+import scala.jdk.CollectionConverters.*
 
 final case class ScafiProgram(program: String)
 
 abstract class AbstractScafiProgramTest(
+    private val knowledgePaths: List[String],
     private val promptsFilePath: String,
     private val loader: CodeGeneratorService = GeminiService.flash(GeminiService.Version.V2_0),
     private val runs: Int = 5,
@@ -26,8 +28,8 @@ abstract class AbstractScafiProgramTest(
       case Right(prompts) => prompts
       case Left(error) => throw new RuntimeException(s"Failed to decode prompts $error")
 
-  private def programSpecification(promptSpecification: String): Future[ScafiProgram] =
-    loader.generateCode(promptSpecification).map(ScafiProgram(_))
+  private def programSpecification(knowledge: String, promptSpecification: String): Future[ScafiProgram] =
+    loader.generateCode(knowledge, promptSpecification).map(ScafiProgram(_))
 
   private def executeScafiProgram(programUnderTest: ScafiProgram): Network =
     Try { executeFromString[Network](programUnderTest.program) } match
@@ -48,8 +50,11 @@ abstract class AbstractScafiProgramTest(
   for
     n <- 0 until runs
     prompt <- candidatePrompts.prompts
+    knowledgeFile <- knowledgePaths
   do
-    // Check if the provided program is correct as the synthetic test program
-    it should s"$testCase @ round-$n-prompt${candidatePrompts.prompts.indexOf(prompt)}" in:
-      programSpecification(prompt).map(program => programTests(executeScafiProgram(program)))
+    Using(Source.fromResource(knowledgeFile)): source =>
+      val knowledge = source.mkString
+      // Check if the provided program is correct as the synthetic test program
+      it should s"$testCase with knowledge $knowledgeFile @ round-$n-prompt${candidatePrompts.prompts.indexOf(prompt)}" in:
+        programSpecification(knowledge, prompt).map(program => programTests(executeScafiProgram(program)))
 end AbstractScafiProgramTest

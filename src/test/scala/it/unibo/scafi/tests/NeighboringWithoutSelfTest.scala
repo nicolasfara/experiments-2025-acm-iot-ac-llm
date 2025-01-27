@@ -6,7 +6,7 @@ import it.unibo.scafi.ScafiAssertions.assertNetworkValues
 import it.unibo.scafi.AbstractScafiProgramTest
 import org.scalatest.Assertion
 
-class NeighboringWithoutSelfTest extends AbstractScafiProgramTest("prompts/NeighboringWithoutSelfTest.json"):
+class NeighboringWithoutSelfTest extends AbstractScafiProgramTest(List("knowledge/knowledge.md"), "prompts/NeighboringWithoutSelfTest.json"):
   override def testCase: String = "count neighbors excluding self"
   override def baselineWorkingProgram(): String = "foldhood(0)(_ + _){if (nbr[Int](mid())==mid()) 0 else 1}"
 

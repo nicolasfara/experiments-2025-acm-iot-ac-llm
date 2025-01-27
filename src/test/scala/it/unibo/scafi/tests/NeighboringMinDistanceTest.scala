@@ -6,7 +6,7 @@ import it.unibo.scafi.ScafiAssertions.assertNetworkValues
 import it.unibo.scafi.AbstractScafiProgramTest
 import org.scalatest.Assertion
 
-class NeighboringMinDistanceTest extends AbstractScafiProgramTest("prompts/NeighboringMinDistanceTest.json"):
+class NeighboringMinDistanceTest extends AbstractScafiProgramTest(List("knowledge/knowledge.md"), "prompts/NeighboringMinDistanceTest.json"):
   override def testCase: String = "calculate the min distance from neighbors, in a grid"
   override def baselineWorkingProgram(): String =
     """

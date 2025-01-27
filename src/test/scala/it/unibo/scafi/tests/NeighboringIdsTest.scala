@@ -6,7 +6,7 @@ import it.unibo.scafi.ScafiAssertions.assertNetworkValuesWithPredicate
 import it.unibo.scafi.AbstractScafiProgramTest
 import org.scalatest.Assertion
 
-class NeighboringIdsTest extends AbstractScafiProgramTest("prompts/NeighboringIdsTest.json"):
+class NeighboringIdsTest extends AbstractScafiProgramTest(List("knowledge/knowledge.md"), "prompts/NeighboringIdsTest.json"):
   override def testCase: String = "gather the IDs of their neighbors"
   override def baselineWorkingProgram(): String = "foldhood(List[Int]())(_++_){List(nbr[Int](mid()))}"
 

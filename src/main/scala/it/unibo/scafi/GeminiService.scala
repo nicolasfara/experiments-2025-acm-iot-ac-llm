@@ -19,12 +19,12 @@ private final case class Data(contents: List[Content])
 private final case class DataResponse(content: Content)
 private final case class Response(candidates: List[DataResponse])
 
-class GeminiService(val model: String, val apiKey: String, override val localKnowledge: String)
+class GeminiService(val model: String, val apiKey: String)
     extends CodeGeneratorService:
   private given Success[requests.Response] = Success(_.statusCode == 200)
   private val url = s"https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=$apiKey"
   private val headers = Map("Content-Type" -> "application/json")
-  private def data(prompt: String) = Data(
+  private def data(localKnowledge: String, prompt: String) = Data(
     List(
       Content(
         List(
@@ -36,11 +36,11 @@ class GeminiService(val model: String, val apiKey: String, override val localKno
     ),
   ).asJson.noSpaces
 
-  override def generateCode(prompt: String): Future[String] =
+  override def generateCode(localKnowledge: String, prompt: String): Future[String] =
     for
       response <- retry
         .Backoff(5, delay = 1.seconds)
-        .apply(Future { requests.post(url, headers = headers, data = data(prompt)) })
+        .apply(Future { requests.post(url, headers = headers, data = data(localKnowledge, prompt)) })
       decodedPayload = decode[Response](response.text()) match
         case Right(decoded) => decoded
         case Left(error) => throw new RuntimeException(s"Failed to decode response $error")
@@ -69,14 +69,13 @@ object GeminiService:
   def flash(
       version: Version,
       apiKey: String = defaultApiKey,
-      localKnowledge: String = defaultLocalKnowledge,
   ): GeminiService =
-    new GeminiService(s"gemini-$version-flash-exp", apiKey, localKnowledge)
+    new GeminiService(s"gemini-$version-flash-exp", apiKey)
 
   def pro(
       version: Version,
       apiKey: String = defaultApiKey,
       localKnowledge: String = defaultLocalKnowledge,
   ): GeminiService =
-    new GeminiService(s"gemini-$version-pro", apiKey, localKnowledge)
+    new GeminiService(s"gemini-$version-pro", apiKey)
 end GeminiService

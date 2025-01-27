@@ -6,7 +6,7 @@ import it.unibo.scafi.ScafiAssertions.assertNetworkValues
 import it.unibo.scafi.AbstractScafiProgramTest
 import org.scalatest.Assertion
 
-class NeighboringTest extends AbstractScafiProgramTest("prompts/NeighboringTest.json"):
+class NeighboringTest extends AbstractScafiProgramTest(List("knowledge/knowledge.md"), "prompts/NeighboringTest.json"):
   override def testCase: String = "count neighbors"
   override def baselineWorkingProgram(): String = "foldhood(0)(_ + _){1}"
 

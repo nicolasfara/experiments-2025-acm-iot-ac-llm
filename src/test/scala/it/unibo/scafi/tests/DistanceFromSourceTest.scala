@@ -5,7 +5,7 @@ import it.unibo.scafi.FunctionalTestIncarnation.Network
 import it.unibo.scafi.ScafiAssertions.assertNetworkValues
 import org.scalatest.Assertion
 
-class DistanceFromSourceTest extends AbstractScafiProgramTest("prompts/DistanceFromSourceTest.json"):
+class DistanceFromSourceTest extends AbstractScafiProgramTest(List("knowledge/knowledge.md"), "prompts/DistanceFromSourceTest.json"):
   override def testCase: String = "collect the max ID in the network on each node"
   override def baselineWorkingProgram(): String =
     """

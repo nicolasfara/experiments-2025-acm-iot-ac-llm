@@ -5,7 +5,7 @@ import it.unibo.scafi.FunctionalTestIncarnation.Network
 import it.unibo.scafi.ScafiAssertions.assertNetworkValues
 import org.scalatest.Assertion
 
-class ReverseCountTest extends AbstractScafiProgramTest("prompts/ReverseCountTest.json"):
+class ReverseCountTest extends AbstractScafiProgramTest(List("knowledge/knowledge.md"), "prompts/ReverseCountTest.json"):
   override def testCase: String = "collect the max ID in the network on each node"
   override def baselineWorkingProgram(): String =
     """
