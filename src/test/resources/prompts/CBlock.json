@@ -1,5 +1,5 @@
 {
   "prompts": [
-    "???"
+    "Provice ONLY!!!! a function named C taking as input the following parameters: a Double named 'potential', an accumulating function named 'acc' which accumulates two values of the same type, a local value named 'local' and a default value named 'default'. The function, based on the given potential accumulate values (using the acc function) along the gradient. To follow up the gradient, it uses the 'findParent' function. The default value is used when no parent is found, otherwise the value is propagated. This function enable data collection into a 'sink' node."
   ]
 }
