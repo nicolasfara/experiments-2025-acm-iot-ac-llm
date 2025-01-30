@@ -19,7 +19,7 @@ object ScafiTestUtils:
     (endNetwork, executionSequence)
 
   @SuppressWarnings(Array("scalafix:DisableSyntax.asInstanceOf"))
-  def executeFromString[Result](program: String, preamble: String = ""): Result =
+  def executeFromString[Result](program: String, preamble: String = "", post: String = ""): Result =
     dotty.tools.repl
       .ScriptEngine()
       .eval(
@@ -77,6 +77,8 @@ object ScafiTestUtils:
          |runProgram {
          |  import node.*
          |  $program
+         |  
+         |  $post
          |}(net)(using node)._1
          |
          |""".stripMargin,

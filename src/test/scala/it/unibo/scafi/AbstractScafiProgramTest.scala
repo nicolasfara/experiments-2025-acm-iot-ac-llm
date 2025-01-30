@@ -31,8 +31,8 @@ abstract class AbstractScafiProgramTest(
   private def programSpecification(knowledge: String, promptSpecification: String): Future[ScafiProgram] =
     loader.generateCode(knowledge, promptSpecification).map(ScafiProgram(_))
 
-  private def executeScafiProgram(programUnderTest: ScafiProgram): Network =
-    Try { executeFromString[Network](programUnderTest.program) } match
+  private def executeScafiProgram(programUnderTest: ScafiProgram, post: String): Network =
+    Try { executeFromString[Network](programUnderTest.program, post = post) } match
       case Success(producedNet) => producedNet
       case Failure(exception) =>
         fail(s"Failed to execute program ${programUnderTest.program}", exception)
@@ -40,12 +40,14 @@ abstract class AbstractScafiProgramTest(
   def baselineWorkingProgram(): String
 
   def programTests(producedNet: Network): Assertion
+  
+  def postAction(): String = ""
 
   def testCase: String
 
   // Baseline verification from Scafi
   it should s"$testCase [synthetic test]" in:
-    programTests(executeScafiProgram(ScafiProgram(baselineWorkingProgram())))
+    programTests(executeScafiProgram(ScafiProgram(baselineWorkingProgram()), postAction()))
 
   for
     n <- 0 until runs
@@ -56,5 +58,5 @@ abstract class AbstractScafiProgramTest(
       val knowledge = source.mkString
       // Check if the provided program is correct as the synthetic test program
       it should s"$testCase with knowledge $knowledgeFile @ round-$n-prompt${candidatePrompts.prompts.indexOf(prompt)}" in:
-        programSpecification(knowledge, prompt).map(program => programTests(executeScafiProgram(program)))
+        programSpecification(knowledge, prompt).map(program => programTests(executeScafiProgram(program, postAction())))
 end AbstractScafiProgramTest

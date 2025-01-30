@@ -16,9 +16,12 @@ class FindParentTest extends AbstractScafiProgramTest(List("knowledge/knowledge-
       } {
         Int.MaxValue
       }
-    }
-    val potential = classicGradient(mid() == 0)
-    findParent(potential)""".stripMargin
+    }""".stripMargin
+
+  override def postAction(): String =
+    """
+      |val potential = classicGradient(mid() == 0)
+      |findParent(potential)""".stripMargin
 
   override def programTests(producedNet: Network): Assertion =
     assertNetworkValues((0 to 8).zip(List(2147483647, 0, 1, 0, 0, 1, 3, 3, 4)).toMap)(producedNet)
