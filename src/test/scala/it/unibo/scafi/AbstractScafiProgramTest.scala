@@ -10,7 +10,7 @@ import io.circe.generic.auto.*
 import org.scalatest.Assertion
 
 import scala.concurrent.Future
-import scala.util.{Failure, Success, Try, Using}
+import scala.util.{ Failure, Success, Try, Using }
 import scala.jdk.CollectionConverters.*
 
 final case class ScafiProgram(program: String)
@@ -20,6 +20,7 @@ abstract class AbstractScafiProgramTest(
     private val promptsFilePath: String,
     private val loader: CodeGeneratorService = GeminiService.flash(GeminiService.Version.V2_0),
     private val runs: Int = 5,
+    private val raw: Boolean = false,
 ) extends AsyncFlatSpec,
       Matchers:
 
@@ -28,8 +29,9 @@ abstract class AbstractScafiProgramTest(
       case Right(prompts) => prompts
       case Left(error) => throw new RuntimeException(s"Failed to decode prompts $error")
 
-  private def programSpecification(knowledge: String, promptSpecification: String): Future[ScafiProgram] =
-    loader.generateCode(knowledge, promptSpecification).map(ScafiProgram(_))
+  private def programSpecification(knowledge: String, promptSpecification: String): Future[ScafiProgram] = if !raw then
+    loader.generateMain(knowledge, promptSpecification).map(ScafiProgram(_))
+  else loader.generateRaw(knowledge, "", promptSpecification).map(ScafiProgram(_))
 
   private def executeScafiProgram(programUnderTest: ScafiProgram, post: String): Network =
     Try { executeFromString[Network](programUnderTest.program, post = post) } match
@@ -40,7 +42,7 @@ abstract class AbstractScafiProgramTest(
   def baselineWorkingProgram(): String
 
   def programTests(producedNet: Network): Assertion
-  
+
   def postAction(): String = ""
 
   def testCase: String

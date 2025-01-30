@@ -110,6 +110,16 @@ main() // Output: 2
 main() // Output: 2
 main() // Output: 2
 ```
+
+There are also several variation of `foldhood` and `foldhoodPlus` like:
+
+```
+def minHood[A](neighbourExpression: => A): A = foldhood[A](neighbourExpression)(_ min _)(neighbourExpression)
+def maxHood[A](neighbourExpression: => A): A = foldhood[A](neighbourExpression)(_ max _)(neighbourExpression)
+def sumHood[A](neighbourExpression: => A): A = foldhood[A](neighbourExpression)(_ + _)(neighbourExpression)
+```
+and their `Plus` version.
+
 **Combining `nbr`, `foldhood`, and `sense`**
 
 These constructs can be combined with `sense` and other Scala expressions.

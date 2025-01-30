@@ -19,28 +19,31 @@ private final case class Data(contents: List[Content])
 private final case class DataResponse(content: Content)
 private final case class Response(candidates: List[DataResponse])
 
-class GeminiService(val model: String, val apiKey: String)
-    extends CodeGeneratorService:
+class GeminiService(val model: String, val apiKey: String) extends CodeGeneratorService:
+  private val mainPreamble =
+    "Try to write (ONLY!!!) the body of the main (WITHOUT WRITE DEF MAIN()!!! AND WITHOUT CURLY BRACES IN MULTI-LINE PROGRAMS) for the following problem:"
   private given Success[requests.Response] = Success(_.statusCode == 200)
   private val url = s"https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=$apiKey"
   private val headers = Map("Content-Type" -> "application/json")
-  private def data(localKnowledge: String, prompt: String) = Data(
+  private def data(localKnowledge: String, preamble: String, prompt: String) = Data(
     List(
       Content(
         List(
           Part(
-            s"$localKnowledge.\nTry to write (ONLY!!!) the body of the main (WITHOUT WRITE DEF MAIN()!!! AND WITHOUT CURLY BRACES IN MULTI-LINE PROGRAMS) for the following problem:\n$prompt",
+            s"$localKnowledge.\n$preamble\n$prompt",
           ),
         ),
       ),
     ),
   ).asJson.noSpaces
 
-  override def generateCode(localKnowledge: String, prompt: String): Future[String] =
+  override def generateRaw(localKnowledge: String, preamble: String, prompt: String): Future[String] =
     for
       response <- retry
         .Backoff(5, delay = 1.seconds)
-        .apply(Future { requests.post(url, headers = headers, data = data(localKnowledge, prompt)) })
+        .apply(Future {
+          requests.post(url, headers = headers, data = data(localKnowledge, preamble, prompt))
+        })
       decodedPayload = decode[Response](response.text()) match
         case Right(decoded) => decoded
         case Left(error) => throw new RuntimeException(s"Failed to decode response $error")
@@ -48,7 +51,8 @@ class GeminiService(val model: String, val apiKey: String)
         .replaceAll("```scala\n", "")
         .replaceAll("\n```\n", "")
     yield cleaned
-  end generateCode
+  override def generateMain(localKnowledge: String, prompt: String): Future[String] =
+    generateRaw(localKnowledge, mainPreamble, prompt)
 end GeminiService
 
 object GeminiService:

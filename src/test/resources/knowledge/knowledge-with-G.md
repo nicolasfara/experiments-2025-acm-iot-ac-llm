@@ -110,6 +110,16 @@ main() // Output: 2
 main() // Output: 2
 main() // Output: 2
 ```
+
+There are also several variation of `foldhood` and `foldhoodPlus` like:
+
+```
+def minHood[A](neighbourExpression: => A): A = foldhood[A](neighbourExpression)(_ min _)(neighbourExpression)
+def maxHood[A](neighbourExpression: => A): A = foldhood[A](neighbourExpression)(_ max _)(neighbourExpression)
+def sumHood[A](neighbourExpression: => A): A = foldhood[A](neighbourExpression)(_ + _)(neighbourExpression)
+```
+and their `Plus` version.
+
 **Combining `nbr`, `foldhood`, and `sense`**
 
 These constructs can be combined with `sense` and other Scala expressions.
@@ -330,4 +340,21 @@ main()
 ```
 will produce
 10 -- 10 -- 10 -- 10
+```
+
+**Find Parent**
+## Description
+This program finds the parent of the current node in a tree network based on the potential value of the nodes.
+Namely, the parent of a node is the neighbor with the lowest potential value.
+
+
+```scala
+def findParent(potential: Double): ID = {
+  val (minPotential,devIdWithMinPotential) = minHood { nbr{ (potential, mid()) } }
+  mux(minPotential < potential) {
+    devIdWithMinPotential
+  } {
+    Int.MaxValue
+  }
+}
 ```

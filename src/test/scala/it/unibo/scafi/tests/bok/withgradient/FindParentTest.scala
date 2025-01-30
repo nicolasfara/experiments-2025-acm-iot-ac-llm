@@ -5,7 +5,7 @@ import it.unibo.scafi.ScafiAssertions.assertNetworkValues
 import it.unibo.scafi.{ AbstractScafiProgramTest, FunctionalTestIncarnation }
 import org.scalatest.Assertion
 
-class FindParentTest extends AbstractScafiProgramTest(List("knowledge/knowledge-with-G.md"), "prompts/FindParentTest.json"):
+class FindParentTest extends AbstractScafiProgramTest(List("knowledge/knowledge-with-G.md"), "prompts/FindParentTest.json", raw = true):
   override def testCase: String = "the findParent function must return the ID of the parent along the potential"
   override def baselineWorkingProgram(): String =
     """
