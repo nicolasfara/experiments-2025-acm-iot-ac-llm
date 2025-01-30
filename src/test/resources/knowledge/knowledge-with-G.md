@@ -258,10 +258,41 @@ This means that Node 1 will be able to consider data from Node 0, and the alarm 
 
 -------
 
-**Building Blocks**
+## Gradient propagation
 
-On top of these constructs, you can build more complex programs.
-Among them, gradient cast (G) is a function exposed by the library that allows you to cast a value from a source zone to the rest of the network following the path of the gradient.
+To compute the distance from a source node to all the other nodes in the network,
+you can use a combination of the `rep` and `nbr` constructs.
+
+```scala
+def classicGradient(source: Boolean): Double =
+    rep(Double.PositiveInfinity) { case d =>
+      mux(source) {
+        0.0
+      } {
+        minHoodPlus(nbr(d) + nbrRange())
+      }
+    }
+```
+
+A slight more general version abstracts from the metrics used to compute the distance from the other nodes:
+
+```scala
+def classicGradient[V](source: Boolean, metric: () => Double = nbrRange): V =
+    rep(Double.PositiveInfinity) { case d =>
+      mux(source) {
+        0.0
+      } {
+        minHoodPlus(nbr(d) + metric())
+      }
+    }
+```
+
+Where:
+* `source`: A boolean that indicates if the current node is the source of the gradient.
+* `minHoodPlus`: A function that returns the minimum value of the neighborhood, excluding the current node.
+
+A generalized version of the gradient propagation can be implemented using the `G` construct.
+This generalized version can be used to propagate any value across the network.
 
 ```scala
 def G[V](source: Boolean, center: V, acc: V => V, metric: () => Double): V

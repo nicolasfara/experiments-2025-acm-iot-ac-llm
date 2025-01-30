@@ -1,0 +1,5 @@
+{
+  "prompts": [
+    "create a function taking a potential (computed via gradient) and returning ONLY! the parent node ID along with the potential. The function should be called findParent and invoked after its definition passing the potential computed via gradient."
+  ]
+}

@@ -1,11 +1,11 @@
-package it.unibo.scafi.tests
+package it.unibo.scafi.tests.bok
 
 import it.unibo.scafi.AbstractScafiProgramTest
 import it.unibo.scafi.FunctionalTestIncarnation.Network
 import it.unibo.scafi.ScafiAssertions.assertNetworkValues
 import org.scalatest.Assertion
 
-class DistanceFromSourceTest extends AbstractScafiProgramTest(List("knowledge/knowledge.md"), "prompts/DistanceFromSourceTest.json"):
+class GradientWithDistanceFromSource extends AbstractScafiProgramTest(List("knowledge/knowledge.md"), "prompts/GradientWithDistanceFromSource.json"):
   override def testCase: String = "collect the max ID in the network on each node"
   override def baselineWorkingProgram(): String =
     """
@@ -26,4 +26,4 @@ class DistanceFromSourceTest extends AbstractScafiProgramTest(List("knowledge/kn
         )
         .toMap,
     )(producedNet)
-end DistanceFromSourceTest
+end GradientWithDistanceFromSource

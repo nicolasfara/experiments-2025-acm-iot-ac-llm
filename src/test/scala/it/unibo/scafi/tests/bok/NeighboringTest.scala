@@ -1,4 +1,4 @@
-package it.unibo.scafi.tests
+package it.unibo.scafi.tests.bok
 
 import scala.language.postfixOps
 import it.unibo.scafi.FunctionalTestIncarnation.Network

@@ -1,10 +1,11 @@
-package it.unibo.scafi.tests
+package it.unibo.scafi.tests.bok
 
-import scala.language.postfixOps
+import it.unibo.scafi.AbstractScafiProgramTest
 import it.unibo.scafi.FunctionalTestIncarnation.{ID, Network}
 import it.unibo.scafi.ScafiAssertions.assertNetworkValuesWithPredicate
-import it.unibo.scafi.AbstractScafiProgramTest
 import org.scalatest.Assertion
+
+import scala.language.postfixOps
 
 class NeighboringIdsTest extends AbstractScafiProgramTest(List("knowledge/knowledge.md"), "prompts/NeighboringIdsTest.json"):
   override def testCase: String = "gather the IDs of their neighbors"
