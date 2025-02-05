@@ -1,5 +1,5 @@
 {
   "prompts": [
-    "calculate the min distance from neighbors"
+    "calculate the min distance ONLY from neighbors"
   ]
 }

@@ -7,7 +7,7 @@ import org.scalatest.Assertion
 
 import scala.language.postfixOps
 
-class NeighboringIdsTest extends AbstractScafiProgramTest(List("knowledge/knowledge.md"), "prompts/NeighboringIdsTest.json"):
+class NeighboringIdsTest extends AbstractScafiProgramTest(List("knowledge/knowledge-with-building-blocks.md"), "prompts/NeighboringIdsTest.json"):
   override def testCase: String = "gather the IDs of their neighbors"
   override def baselineWorkingProgram(): String = "foldhood(List[Int]())(_++_){List(nbr[Int](mid()))}"
 

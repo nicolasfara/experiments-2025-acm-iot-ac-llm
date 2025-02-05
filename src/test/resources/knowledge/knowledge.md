@@ -128,9 +128,9 @@ These constructs can be combined with `sense` and other Scala expressions.
 
 ```scala
 def main(): Double = {
- val devices = foldhood(0)(_ + _)(nbr(1))
- val temperature = foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature")))
- temperature / devices
+  val devices = foldhood(0)(_ + _)(nbr(1))
+  val temperature = foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature")))
+  temperature / devices
 }
 ```
 
@@ -213,7 +213,7 @@ def main(): Int = rep(Int.MaxValue) {
 
 *  After the first execution: `0 - 0 - 1` (the node with ID 0 communicates it's lower ID, and then node 1 gets the lower ID from node 0)
 *  After the second execution: `0 - 0 - 0` (node 2 gets the lower ID from node 1)
-This computation propagates the minimum ID across the network over time. Each times you would write system-wise (collective) computations, you should combine rep and foldhood.
+   This computation propagates the minimum ID across the network over time. Each times you would write system-wise (collective) computations, you should combine rep and foldhood.
 
 **Conditional Execution (Branching)**
 
@@ -240,10 +240,10 @@ Given the network `0 - 1 - 2 - 0`, with the following temperatures:
 *  Node 0: 5
 *  Node 1: 25
 *  Node 2: 19
-The output is:
+   The output is:
 *  Node 0: `branch` evaluates to `false`, the output is `false`
 *  Node 1: `branch` evaluates to `true`, the `nodes` variable is `2`, and the average temperature is `(25+19) / 2` which is greater than 20, the output is `true`.
-**Conditional Execution (with communication) `mux`**
+   **Conditional Execution (with communication) `mux`**
 
 The `mux` construct is similar to `branch` but allows neighbors to receive information even if the condition doesn't hold true for the current node:
 ```scala
@@ -265,3 +265,18 @@ def main(): Boolean = mux(sense[Double]("temperature") > 10) {
 *  Node 1: The `mux` condition is `true`, all the nodes are considered, the average temperature is `(5+25+19)/3` which is not greater than 20, so the result is `false`.
 
 This means that Node 1 will be able to consider data from Node 0, and the alarm might not be triggered.
+
+**Example: Sum of Neighbors odd id temperature**
+```scala
+def main(): Double = {
+  val sum = foldhood(0.0)(_ + _)(mux(nbr(mid() % 2 == 1))(nbr(sense[Double]("temperature")))(0.0))
+  sum
+}
+```
+
+** Example: Find the ID of the node with the minimum temperature**
+```scala
+def main(): ID = {
+  minHood((nbr(sense[Double]("temperature"), mid())))._2
+}
+```

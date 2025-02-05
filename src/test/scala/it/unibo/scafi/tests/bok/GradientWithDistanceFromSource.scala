@@ -5,8 +5,12 @@ import it.unibo.scafi.FunctionalTestIncarnation.Network
 import it.unibo.scafi.ScafiAssertions.assertNetworkValues
 import org.scalatest.Assertion
 
-class GradientWithDistanceFromSource extends AbstractScafiProgramTest(List("knowledge/knowledge.md"), "prompts/GradientWithDistanceFromSource.json"):
-  override def testCase: String = "collect the max ID in the network on each node"
+class GradientWithDistanceFromSource
+    extends AbstractScafiProgramTest(
+      List("knowledge/knowledge-with-building-blocks.md"),
+      "prompts/GradientWithDistanceFromSource.json",
+    ):
+  override def testCase: String = "calculate the gradient with distance from source"
   override def baselineWorkingProgram(): String =
     """
     rep(Double.PositiveInfinity) { case d =>

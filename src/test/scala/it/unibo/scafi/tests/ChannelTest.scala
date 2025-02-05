@@ -5,7 +5,7 @@ import it.unibo.scafi.FunctionalTestIncarnation.Network
 import it.unibo.scafi.ScafiAssertions.assertNetworkValues
 import org.scalatest.Assertion
 
-class ChannelTest extends AbstractScafiProgramTest(List("knowledge/knowledge.md"), "prompts/ChannelTest.json"):
+class ChannelTest extends AbstractScafiProgramTest(List("knowledge/knowledge-with-building-blocks.md"), "prompts/ChannelTest.json"):
   override def testCase: String = "create a channel from the source node to the destination node"
   override def baselineWorkingProgram(): String =
     """

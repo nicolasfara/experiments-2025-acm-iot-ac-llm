@@ -1,5 +1,5 @@
 {
   "prompts": [
-    "collect the max ID in the network"
+    "compute the max ID in the whole network"
   ]
 }

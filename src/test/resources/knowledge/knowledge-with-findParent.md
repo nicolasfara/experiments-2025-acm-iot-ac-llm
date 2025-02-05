@@ -266,6 +266,20 @@ def main(): Boolean = mux(sense[Double]("temperature") > 10) {
 
 This means that Node 1 will be able to consider data from Node 0, and the alarm might not be triggered.
 
+**Example: Sum of Neighbors odd id temperature**
+```scala
+def main(): Double = {
+  val sum = foldhood(0.0)(_ + _)(mux(nbr(mid() % 2 == 1))(nbr(sense[Double]("temperature")))(0.0))
+  sum
+}
+```
+
+** Example: Find the ID of the node with the minimum temperature**
+```scala
+def main(): ID = {
+  minHood((nbr(sense[Double]("temperature"), mid())))._2
+}
+```
 -------
 
 ## Gradient propagation
@@ -344,13 +358,21 @@ will produce
 
 ## Find Parent
 
-A function called findParent that aims to find a "parent" node within a network of devices. It achieves this by considering a value called "potential" associated with each device. The basic idea is to have each device try to find the neighbor with the lowest potential.
+Imagine you have a network of devices where each device has a "potential" value. The goal of the function `findParent` is to decide which neighbor should be considered the “parent” of the current device. It does this by:
 
-The function begins by figuring out, for each device, what the lowest potential is within its immediate neighborhood, along with the ID of the device holding that minimal potential value.
+1. **Looking at its neighbors:**  
+   It checks all its neighboring devices to see what their potential values are, along with their unique IDs.
 
-Then, a crucial step occurs where each device checks its own potential against this minimal potential found in the neighborhood. If the device’s own potential is greater than this minimal neighboring potential, it means there's a neighbor with a more "attractive" potential. In that case, it returns the ID of this better neighboring device as its parent. However, if the device already possesses the lowest potential (or if its potential is not bigger than its lowest neighbor), it will not assign another parent by returning a placeholder large number as parent id, essentially indicating that no new parent is needed at the moment.
+2. **Finding the best candidate:**  
+   It finds the neighbor with the lowest potential (the “minimum potential”) and remembers that neighbor’s ID.
 
-Essentially, this findParent function is trying to establish a hierarchy across nodes based on a "potential" value. Nodes look for neighbors with a lower potential than theirs. If such a neighbor exists, it becomes the node's parent, thus moving a device toward areas with better or low-valued “potentials”.
+3. **Deciding on the parent:**
+    - If the neighbor’s potential is lower than the current device’s potential, it chooses that neighbor as the parent (returns the neighbor’s ID).
+    - Otherwise, it returns a special value (`Int.MaxValue`) to indicate that there is no suitable parent because none of the neighbors have a lower potential.
+
+The function uses two important constructs:
+- **`minHood`:** This aggregates information from all neighbors to find the smallest potential and the corresponding device ID.
+- **`mux`:** This acts like an “if-else” statement but is designed for scenarios where devices communicate. It chooses between the neighbor’s ID and `Int.MaxValue` based on whether the neighbor’s potential is lower than the current one.
 
 ```scala
     def findParent(potential: Double): ID = {

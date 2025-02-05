@@ -49,7 +49,7 @@ class GeminiService(val model: String, val apiKey: String) extends CodeGenerator
         case Left(error) => throw new RuntimeException(s"Failed to decode response $error")
       cleaned = decodedPayload.candidates.head.content.parts.head.text
         .replaceAll("```scala\n", "")
-        .replaceAll("\n```\n", "")
+        .replaceAll("```", "")
     yield cleaned
   override def generateMain(localKnowledge: String, prompt: String): Future[String] =
     generateRaw(localKnowledge, mainPreamble, prompt)
@@ -76,6 +76,11 @@ object GeminiService:
   ): GeminiService =
     new GeminiService(s"gemini-$version-flash-exp", apiKey)
 
+  def thinking(
+      version: Version,
+      apiKey: String = defaultApiKey,
+  ): GeminiService =
+    new GeminiService(s"gemini-$version-flash-thinking-exp-01-21", apiKey)
   def pro(
       version: Version,
       apiKey: String = defaultApiKey,
