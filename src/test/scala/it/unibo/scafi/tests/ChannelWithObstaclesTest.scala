@@ -23,8 +23,12 @@ class ChannelWithObstaclesTest extends AbstractScafiProgramTest(List("knowledge/
     def distanceBetween(source: Boolean, destination: Boolean): Double =
       G(source, distanceTo(destination), x => x)
 
-    distanceTo(sense[Boolean]("source")) + distanceTo(sense[Boolean]("destination")) <=
-     distanceBetween(sense[Boolean]("source"), sense[Boolean]("destination"))
+    if (sense[Boolean]("obstacle")) {
+      false
+    } else {
+      distanceTo(sense[Boolean]("source")) + distanceTo(sense[Boolean]("destination")) <=
+       distanceBetween(sense[Boolean]("source"), sense[Boolean]("destination"))
+    }
     """.stripMargin
 
   override def programTests(producedNet: Network): Assertion =
@@ -32,7 +36,7 @@ class ChannelWithObstaclesTest extends AbstractScafiProgramTest(List("knowledge/
       (0 to 8)
         .zip(
           List(
-            true, false, false, false, true, false, false, false, true,
+            true, false, false, true, false, false, false, true, true,
           ),
         )
         .toMap,

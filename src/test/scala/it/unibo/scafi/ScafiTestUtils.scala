@@ -65,6 +65,17 @@ object ScafiTestUtils:
        |        7 -> false,
        |        8 -> true,
        |      ),
+       |      "obstacle" -> Map(
+       |        0 -> false,
+       |        1 -> true,
+       |        2 -> false,
+       |        3 -> false,
+       |        4 -> true,
+       |        5 -> false,
+       |        6 -> false,
+       |        7 -> false,
+       |        8 -> false,
+       |      ),
        |    ),
        |  )
        |
