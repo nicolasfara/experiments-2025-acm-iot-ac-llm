@@ -44,6 +44,17 @@ val net: Network & SimulatorOps =
         7 -> false,
         8 -> true,
       ),
+      "obstacle" -> Map(
+        0 -> false,
+        1 -> true,
+        2 -> false,
+        3 -> false,
+        4 -> true,
+        5 -> false,
+        6 -> false,
+        7 -> false,
+        8 -> false,
+      ),
     ),
   )
 
@@ -55,20 +66,15 @@ runProgram {
   
 
   {
-  val isSource = sense[Boolean]("source")
-  val isDestination = sense[Boolean]("destination")
+  val obstacleDetected = sense[Boolean]("obstacle")
+  val sourceNode = sense[Boolean]("source")
+  val destinationNode = sense[Boolean]("destination")
 
-  val potential = G[Double](isSource, 0, _ + nbrRange(), nbrRange)
+  val adjustedRange = () => if (obstacleDetected) Double.PositiveInfinity else nbrRange()
 
-  val pathAvailable = rep(false) { prev =>
-    mux(isDestination) {
-      true
-    } {
-      foldhood(false)(_ || _)(nbr(prev) && nbrRange() < 5) // Adjust range as needed
-    }
-  }
+  val potential = G[Double](sourceNode, 0.0, _ + nbrRange(), adjustedRange)
 
-  pathAvailable
+  C[Double, Boolean](potential, _ || _, destinationNode, false)
 }
 
 

@@ -44,6 +44,17 @@ val net: Network & SimulatorOps =
         7 -> false,
         8 -> true,
       ),
+      "obstacle" -> Map(
+        0 -> false,
+        1 -> true,
+        2 -> false,
+        3 -> false,
+        4 -> true,
+        5 -> false,
+        6 -> false,
+        7 -> false,
+        8 -> false,
+      ),
     ),
   )
 
@@ -54,8 +65,13 @@ runProgram {
   import node.*
   
 
-  G[Double](source = sense("source"), field = 0, acc = _ + nbrRange(), metric = nbrRange)
-
+  val obstacle = sense[Boolean]("obstacle") //is true if there is an obstacle
+val source = sense[Boolean]("source") //is true if is the source
+val destination = sense[Boolean]("destination") //is true if is the destination
+val obstacleCost = 1000000.0
+val adjustedRange = branch(obstacle, obstacleCost, nbrRange())
+val potential = G[Double](source, 0.0, _ + nbr(adjustedRange), () => adjustedRange)
+C[Double, Boolean](potential, _ || _, destination, false)
 
 
   

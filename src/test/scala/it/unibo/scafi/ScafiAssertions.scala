@@ -27,6 +27,7 @@ object ScafiAssertions extends Matchers:
               """.stripMargin):
     net.ids.forall(id =>
       val actualExport = net.getExport(id)
+      print(net.exports().map(e => e._1 -> e._2.get.root()))
       val expected = vals.get(id)
       (actualExport, expected) match
         case (Some(e), Some(v)) =>

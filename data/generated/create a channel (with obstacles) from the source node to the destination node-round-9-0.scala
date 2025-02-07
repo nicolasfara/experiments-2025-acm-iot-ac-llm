@@ -44,6 +44,17 @@ val net: Network & SimulatorOps =
         7 -> false,
         8 -> true,
       ),
+      "obstacle" -> Map(
+        0 -> false,
+        1 -> true,
+        2 -> false,
+        3 -> false,
+        4 -> true,
+        5 -> false,
+        6 -> false,
+        7 -> false,
+        8 -> false,
+      ),
     ),
   )
 
@@ -54,27 +65,10 @@ runProgram {
   import node.*
   
 
-  {
-  val isSource = sense[Boolean]("source")
-  val isDestination = sense[Boolean]("destination")
-
-  val potential = G[Double](
-    source = isSource,
-    field = 0.0,
-    acc = _ + nbrRange(),
-    metric = nbrRange
-  )
-
-  val pathValue = C[Double, Boolean](
-    potential = potential,
-    acc = _ || _,
-    local = isDestination,
-    Null = false
-  )
-
-  pathValue
-}
-
+  val avoid = 1000000.0
+val dist = branch(sense[Boolean]("obstacle"))(avoid)(nbrRange())
+val potential = G[Double](sense[Boolean]("source"), 0.0, _ + nbr(dist), () => dist)
+C[Double, Boolean](potential, _ || _, sense[Boolean]("destination"), false)
 
 
   

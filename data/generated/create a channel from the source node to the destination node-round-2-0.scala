@@ -44,6 +44,17 @@ val net: Network & SimulatorOps =
         7 -> false,
         8 -> true,
       ),
+      "obstacle" -> Map(
+        0 -> false,
+        1 -> true,
+        2 -> false,
+        3 -> false,
+        4 -> true,
+        5 -> false,
+        6 -> false,
+        7 -> false,
+        8 -> false,
+      ),
     ),
   )
 
@@ -54,15 +65,25 @@ runProgram {
   import node.*
   
 
-    val sourceNode = sense[Boolean]("source")
-  val destinationNode = sense[Boolean]("destination")
+    val obstacle = sense[Boolean]("obstacle") // Assuming true means obstacle
+  val destination = sense[Boolean]("destination")
+  val source = sense[Boolean]("source")
 
-  def metric(): Double = {
-    branch(destinationNode)(0.0)(nbrRange())
-  }
+  val adjustedNbrRange = () => if (obstacle) Double.PositiveInfinity else nbrRange()
 
-  G[Double](sourceNode, 0.0, _ + nbrRange(), metric)
+  val potential = G[Double](
+    source = destination,
+    field = 0.0,
+    acc = _ + nbrRange(),
+    metric = adjustedNbrRange
+  )
 
+  C[Double, Boolean](
+    potential = potential,
+    acc = _ || _,
+    local = source,
+    Null = false
+  )
 
 
   

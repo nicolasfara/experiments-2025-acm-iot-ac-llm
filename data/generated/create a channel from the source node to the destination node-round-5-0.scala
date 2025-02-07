@@ -44,6 +44,17 @@ val net: Network & SimulatorOps =
         7 -> false,
         8 -> true,
       ),
+      "obstacle" -> Map(
+        0 -> false,
+        1 -> true,
+        2 -> false,
+        3 -> false,
+        4 -> true,
+        5 -> false,
+        6 -> false,
+        7 -> false,
+        8 -> false,
+      ),
     ),
   )
 
@@ -54,23 +65,31 @@ runProgram {
   import node.*
   
 
-  val isSource = sense[Boolean]("source")
-val isDestination = sense[Boolean]("destination")
+  {
+  val sourceNode = sense[Boolean]("source")
+  val destinationNode = sense[Boolean]("destination")
 
-val potential = rep(Double.MaxValue) { prevPotential =>
-  branch(isDestination) {
-    0.0
-  } {
-    minHood(nbr(prevPotential) + nbrRange())
-  }
+  // Function to check for obstacles in the neighborhood.
+  def hasObstacle(): Boolean = sense[Boolean]("obstacle")
+
+  // Gradient Cast with obstacle avoidance.  If there's an obstacle, distance is effectively infinite.
+  val potential = G[Double](
+    source = destinationNode,
+    field = 0.0,
+    acc = _ + 1, // simplified accumulation for path length
+    metric = () => if (hasObstacle()) Double.PositiveInfinity else nbrRange()
+  )
+
+  // Collect Cast to confirm a path exists.
+  val pathExists = C[Double, Boolean](
+    potential = potential,
+    acc = _ || _,
+    local = sourceNode,
+    Null = false
+  )
+
+  pathExists
 }
-
-branch(isSource) {
-  potential < Double.MaxValue / 2 //Arbitrary limit to avoid overflow
-} {
-  false
-}
-
 
 
   

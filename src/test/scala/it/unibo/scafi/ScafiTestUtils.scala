@@ -79,8 +79,8 @@ object ScafiTestUtils:
        |    ),
        |  )
        |
-       |given node: (BasicAggregateInterpreter & StandardSensors & BlockG & BlockC) =
-       |  new BasicAggregateInterpreter with StandardSensors with BlockG with BlockC
+       |given node: (BasicAggregateInterpreter & StandardSensors & BlockG & BlockC & BlockS) =
+       |  new BasicAggregateInterpreter with StandardSensors with BlockG with BlockC with BlockS
        |
        |runProgram {
        |  import node.*

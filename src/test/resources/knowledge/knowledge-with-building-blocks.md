@@ -378,15 +378,15 @@ This is self-organsing and self-stabilising (e.g., moving the center of the pote
 
 In this library, the sparse choice library is described as follows:
 ```scala
-def S[V](maxInfluence: Double): Boolean
+def S[V](maxInfluence: Double, metric: () => Double): Boolean
 ```
 * `maxInfluence`: The maximum influence of the node, namely the area (in distance) where the node can influence the network.
-
+* `metric`: The function that returns the metric value of the node (it is used to determine the leader).
 Sparse choice made a distributed multi leader election algorithm, namely it creates several leaders in the network one of which have an area where there are no other leaders.
 It returns true if the node is a leader, false otherwise.
 For instance:
 ```scala
-S(2)
+S(2, nbrRange)
 ```
 Giving this network:
 ```
@@ -400,13 +400,13 @@ This is self-organsing and self-stabilising (e.g., moving the nodes will automat
 
 **Example: Sparse Choice with Gradient Cast**
 
-Sparse choice can be combined with gradient cast to create a distributed multi leader election algorithm where the leaders are in the area where the temperature is the lowest.
-For instance:
-```scala
-val leaders = S(2)
-val potential = G[Double](source = leaders, field = sense("temperature"), acc = a => a, metric = nbrRange)
-C[Double, Double](potential, _ + _, sense("temperature"), 0)
-```
-This collects the temperature in several areas with a size of 2 and returns the temperature at the center (denoted through S)
+--------------- Corrections to knowledge ---------------
+**Revised Knowledge:**
 
+**Gradient Cast with Obstacle Avoidance:**
 
+The `G` function can be used for pathfinding and obstacle avoidance.  When calculating the `metric`, instead of directly using `nbrRange()`, a conditional check on obstacle presence can influence the distance calculation. If an obstacle is detected, the metric should return a very large value (approaching infinity) to discourage pathfinding through that neighbor.  This effectively creates a "cost" for traversing through an obstacle.  It is important to use `Double.PositiveInfinity` and not `Double.MaxValue` as the latter is a finite value that might still be chosen by the algorithm.
+
+**Collect Cast for Path Confirmation:**
+
+The `C` function can be used to confirm path existence. By setting the `local` value to the source condition and using a boolean OR (`_ || _`) as the accumulator, `C` can propagate a "success" signal back from the destination if a valid path exists. The `potential` for `C` should be the result of the obstacle-avoiding `G` calculation.  The `Null` value for the accumulator should be `false`. The result of `C` will be `true` at the source if a path to the destination exists, avoiding the obstacles.

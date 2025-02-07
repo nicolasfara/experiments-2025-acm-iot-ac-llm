@@ -44,6 +44,17 @@ val net: Network & SimulatorOps =
         7 -> false,
         8 -> true,
       ),
+      "obstacle" -> Map(
+        0 -> false,
+        1 -> true,
+        2 -> false,
+        3 -> false,
+        4 -> true,
+        5 -> false,
+        6 -> false,
+        7 -> false,
+        8 -> false,
+      ),
     ),
   )
 
@@ -54,16 +65,12 @@ runProgram {
   import node.*
   
 
-  {
-  val sourceNode = sense[Boolean]("source")
-  val destinationNode = sense[Boolean]("destination")
+  val obstacle = sense[Boolean]("obstacle") // True if there is an obstacle
+val destination = sense[Boolean]("destination") // True if this node is the destination
 
-  val potential = G[Double](source = sourceNode, field = 0.0, acc = _ + nbrRange(), metric = nbrRange)
-
-  val amIOnPath = potential > 0
-
-  mux(destinationNode, potential, if (amIOnPath) potential else Double.PositiveInfinity)
-}
+val adjustedRange = () => if (obstacle) Double.PositiveInfinity else nbrRange() // Use Double.PositiveInfinity
+val potential = G[Double](source = destination, field = 0.0, acc = _ + nbrRange(), metric = adjustedRange) // Propagate a cost from destination
+C[Double, Boolean](potential, _ || _, sense("source"), false) //Check if there is a potential path.
 
 
   

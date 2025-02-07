@@ -44,6 +44,17 @@ val net: Network & SimulatorOps =
         7 -> false,
         8 -> true,
       ),
+      "obstacle" -> Map(
+        0 -> false,
+        1 -> true,
+        2 -> false,
+        3 -> false,
+        4 -> true,
+        5 -> false,
+        6 -> false,
+        7 -> false,
+        8 -> false,
+      ),
     ),
   )
 
@@ -54,21 +65,15 @@ runProgram {
   import node.*
   
 
-  rep(false) { channel =>
-  branch(sense[Boolean]("source")) {
-    true
-  } {
-    mux(nbr(channel)) {
-      branch(sense[Boolean]("destination")) {
-        true
-      } {
-        true
-      }
-    } {
-      false
-    }
-  }
-}
+  val obstacle = sense[Boolean]("obstacle") // Assuming an "obstacle" sensor
+val sourceNode = sense[Boolean]("source")
+val destinationNode = sense[Boolean]("destination")
+
+val obstacleMetric = () => if (obstacle) Double.PositiveInfinity else nbrRange()
+
+val potential = G[Double](source = destinationNode, field = 0.0, acc = _ + nbrRange(), metric = obstacleMetric)
+
+C[Double, Boolean](potential, _ || _, sourceNode, false)
 
 
   

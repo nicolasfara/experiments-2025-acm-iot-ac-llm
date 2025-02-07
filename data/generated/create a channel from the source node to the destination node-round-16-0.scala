@@ -44,6 +44,17 @@ val net: Network & SimulatorOps =
         7 -> false,
         8 -> true,
       ),
+      "obstacle" -> Map(
+        0 -> false,
+        1 -> true,
+        2 -> false,
+        3 -> false,
+        4 -> true,
+        5 -> false,
+        6 -> false,
+        7 -> false,
+        8 -> false,
+      ),
     ),
   )
 
@@ -54,18 +65,25 @@ runProgram {
   import node.*
   
 
-  val sourceNode = sense[Boolean]("source")
+  val obstacle = sense[Boolean]("obstacle")
+val sourceNode = sense[Boolean]("source")
 val destinationNode = sense[Boolean]("destination")
 
-val potential = G[Double](source = sourceNode, field = 0, acc = _ + nbrRange(), metric = nbrRange)
-val pathExists = potential < Double.MaxValue // Check if a path from source exists
+val gResult = G[Double](
+  source = sourceNode,
+  field = 0.0,
+  acc = a => a + 1,
+  metric = () => if (obstacle) Double.PositiveInfinity else nbrRange()
+)
 
-if (destinationNode && pathExists) {
-  true
-} else {
-  false
-}
+val pathExists = C[Double, Boolean](
+  potential = gResult,
+  acc = _ || _,
+  local = destinationNode,
+  Null = false
+)
 
+pathExists
 
 
   

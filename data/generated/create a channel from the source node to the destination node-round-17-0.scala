@@ -44,6 +44,17 @@ val net: Network & SimulatorOps =
         7 -> false,
         8 -> true,
       ),
+      "obstacle" -> Map(
+        0 -> false,
+        1 -> true,
+        2 -> false,
+        3 -> false,
+        4 -> true,
+        5 -> false,
+        6 -> false,
+        7 -> false,
+        8 -> false,
+      ),
     ),
   )
 
@@ -54,10 +65,15 @@ runProgram {
   import node.*
   
 
-    val toDestination = G[Double](sense("source"), 0, _ + nbrRange(), nbrRange)
-  val fromSource = G[Double](sense("destination"), 0, _ + nbrRange(), nbrRange)
-  mux(toDestination < fromSource)(toDestination)(Double.PositiveInfinity)
+    val obstacle = sense[Boolean]("obstacle") // Assume 'obstacle' sensor indicates obstacle presence
+  val source = sense[Boolean]("source")
+  val destination = sense[Boolean]("destination")
 
+  val dist = () => if (obstacle) Double.PositiveInfinity else nbrRange()
+
+  val potential = G[Double](source = source, field = 0.0, acc = _ + nbrRange(), metric = dist)
+
+  C[Double, Boolean](potential, _ || _, destination, false)
 
 
   

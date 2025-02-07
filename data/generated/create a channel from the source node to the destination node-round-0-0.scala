@@ -44,6 +44,17 @@ val net: Network & SimulatorOps =
         7 -> false,
         8 -> true,
       ),
+      "obstacle" -> Map(
+        0 -> false,
+        1 -> true,
+        2 -> false,
+        3 -> false,
+        4 -> true,
+        5 -> false,
+        6 -> false,
+        7 -> false,
+        8 -> false,
+      ),
     ),
   )
 
@@ -54,14 +65,24 @@ runProgram {
   import node.*
   
 
-  {
-  val toDest = nbr(sense[Boolean]("destination"))
-  val isSource = sense[Boolean]("source")
-  rep(toDest || isSource) { known =>
-    foldhood(known)(_ || _)(nbr(known))
-  }
-}
+  val destinationCondition: Boolean = sense("destination")
+val obstacleDetected: Boolean = sense("obstacle") // Simplified sensor
 
+val safeNbrRange = () => if (obstacleDetected) Double.PositiveInfinity else nbrRange()
+
+val potential = G[Double](
+  source = sense("source"),
+  field = 0.0,
+  acc = _ + 1,
+  metric = safeNbrRange
+)
+
+C[Double, Boolean](
+  potential = potential,
+  acc = _ || _,
+  local = destinationCondition,
+  Null = false
+)
 
 
   

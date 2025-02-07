@@ -44,6 +44,17 @@ val net: Network & SimulatorOps =
         7 -> false,
         8 -> true,
       ),
+      "obstacle" -> Map(
+        0 -> false,
+        1 -> true,
+        2 -> false,
+        3 -> false,
+        4 -> true,
+        5 -> false,
+        6 -> false,
+        7 -> false,
+        8 -> false,
+      ),
     ),
   )
 
@@ -54,7 +65,17 @@ runProgram {
   import node.*
   
 
-  G[Double](source = sense("source"), field = 0, acc = _ + nbrRange(), metric = nbrRange) - G[Double](source = sense("destination"), field = 0, acc = _ + nbrRange(), metric = nbrRange)
+  val obstacleDetected = sense[Boolean]("obstacle")
+val sourceNode = sense[Boolean]("source")
+val destinationNode = sense[Boolean]("destination")
+
+val adjustedRange = () => if (obstacleDetected) Double.PositiveInfinity else nbrRange()
+
+val potential = G[Double](sourceNode, 0.0, _ + nbrRange(), adjustedRange)
+
+val pathExists = C[Double, Boolean](potential, _ || _, destinationNode, false)
+
+pathExists
 
 
   

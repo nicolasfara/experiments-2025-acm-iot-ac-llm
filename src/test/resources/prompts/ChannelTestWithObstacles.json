@@ -1,5 +1,5 @@
 {
   "prompts": [
-    "create a channel from the source node called 'source' to the destination node called 'destination'"
+    "create a channel from the source node called 'source' to the destination node called 'destination' and it should avoid any obstacles in the path (namely, boolean sensors called 'obstacle'). It should return true if the channel was successfully created, and false otherwise."
   ]
 }
