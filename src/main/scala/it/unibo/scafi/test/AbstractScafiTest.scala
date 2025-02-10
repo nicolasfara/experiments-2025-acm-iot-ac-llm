@@ -56,7 +56,7 @@ abstract class AbstractScafiProgramTest(
 
   def baselineWorkingProgram(): String
 
-  def programTests(producedNet: Network): ScafiTestResult
+  def programTests(program: String, producedNet: Network): ScafiTestResult
 
   def postAction(): String = ""
 
@@ -82,12 +82,13 @@ abstract class AbstractScafiProgramTest(
           case Left(error) =>
             Future(SingleTestResult(testCase, n, knowledgeFile, model.toString, GenericFailure(error)))
           case Right(knowledge) =>
-            programSpecification(knowledge, prompt, model).map: program =>
+            programSpecification(knowledge, prompt, model).map: currentProgram =>
               val outcome =
                 for
-                  producedNetwork <- executeScafiProgram(program, preAction(), postAction()).left
+                  producedNetwork <- executeScafiProgram(currentProgram, preAction(), postAction()).left
                     .map(CompilationFailed(_))
-                  testResult <- Try(programTests(producedNetwork)).toEither.left.map(GenericFailure(_))
+                  testResult <-
+                    Try(programTests(currentProgram.program, producedNetwork)).toEither.left.map(GenericFailure(_))
                 yield testResult
               val result = outcome match
                 case Right(value) => value

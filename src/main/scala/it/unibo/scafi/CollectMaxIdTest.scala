@@ -2,6 +2,7 @@ package it.unibo.scafi
 
 import it.unibo.scafi.test.{ AbstractScafiProgramTest, FunctionalTestIncarnation, ScafiTestResult }
 import it.unibo.scafi.test.FunctionalTestIncarnation.Network
+import it.unibo.scafi.test.ScafiAssertions.assertNetworkValues
 
 class CollectMaxIdTest
     extends AbstractScafiProgramTest(
@@ -16,6 +17,5 @@ class CollectMaxIdTest
     }
     """.stripMargin
 
-  override def programTests(producedNet: Network): ScafiTestResult = ???
-//  override def programTests(producedNet: Network): Assertion =
-//    assertNetworkValues((0 to 8).zip(List(8, 8, 8, 8, 8, 8, 8, 8, 8)).toMap)(producedNet)
+  override def programTests(program: String, producedNet: Network): ScafiTestResult =
+    assertNetworkValues(program, (0 to 8).zip(List(8, 8, 8, 8, 8, 8, 8, 8, 8)).toMap)(producedNet)
