@@ -1,0 +1,5 @@
+{
+  "prompts": [
+    "compute the euclidean distance from the source using a sensor named 'source'"
+  ]
+}

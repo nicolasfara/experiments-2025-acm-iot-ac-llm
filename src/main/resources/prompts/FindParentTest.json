@@ -1,0 +1,5 @@
+{
+  "prompts": [
+    "Generate a Scala function (ONLY!!!!!!) using aggregate computing constructs which implement the following description: Imagine you have a network of devices where each device has a \"potential\" value. The goal of the function findParent is to decide which neighbor should be considered the “parent” of the current device. It does this by:\n\nLooking at its neighbors:\nIt checks all its neighboring devices to see what their potential values are, along with their unique IDs.\n\nFinding the best candidate:\nIt finds the neighbor with the lowest potential (the “minimum potential”) and remembers that neighbor’s ID.\n\nDeciding on the parent:\n\nIf the neighbor’s potential is lower than the current device’s potential, it chooses that neighbor as the parent (returns the neighbor’s ID).\nOtherwise, it returns a special value (Int.MaxValue) to indicate that there is no suitable parent because none of the neighbors have a lower potential."
+  ]
+}

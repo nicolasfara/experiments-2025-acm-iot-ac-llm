@@ -1,0 +1,5 @@
+{
+  "prompts": [
+    "create a channel from the source node called 'source' to the destination node called 'destination'"
+  ]
+}

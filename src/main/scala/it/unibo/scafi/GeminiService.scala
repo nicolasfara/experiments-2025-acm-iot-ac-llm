@@ -6,10 +6,8 @@ import io.circe.syntax.*
 import io.circe.parser.*
 import retry.Success
 
-import scala.io.Source
 import scala.concurrent.duration.*
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 import retry.Success.*
 
 private final case class Part(text: String)
@@ -37,7 +35,7 @@ class GeminiService(val model: String, val apiKey: String) extends CodeGenerator
     ),
   ).asJson.noSpaces
 
-  override def generateRaw(localKnowledge: String, preamble: String, prompt: String): Future[String] =
+  override def generateRaw(localKnowledge: String, preamble: String, prompt: String): ExecutionContext ?=> Future[String] =
     for
       response <- retry
         .Backoff(5, delay = 1.seconds)
@@ -51,8 +49,11 @@ class GeminiService(val model: String, val apiKey: String) extends CodeGenerator
         .replaceAll("```scala\n", "")
         .replaceAll("```", "")
     yield cleaned
-  override def generateMain(localKnowledge: String, prompt: String): Future[String] =
+
+  override def generateMain(localKnowledge: String, prompt: String): ExecutionContext ?=> Future[String] =
     generateRaw(localKnowledge, mainPreamble, prompt)
+
+  override def toString: String = model
 end GeminiService
 
 object GeminiService:
@@ -65,26 +66,31 @@ object GeminiService:
         case V1_5 => "1.5"
         case V2_0 => "2.0"
 
-  private lazy val defaultLocalKnowledge: String = Source.fromResource("knowledge.md").mkString
   private lazy val defaultApiKey: String = System.getenv("GEMINI_API_KEY") match
     case null => throw new RuntimeException("GEMINI_API_KEY is not set")
     case apiKey => apiKey
+
+  def flashExp(
+      version: Version,
+      apiKey: String = defaultApiKey,
+  ): GeminiService =
+    new GeminiService(s"gemini-$version-flash-exp", apiKey)
 
   def flash(
       version: Version,
       apiKey: String = defaultApiKey,
   ): GeminiService =
-    new GeminiService(s"gemini-$version-flash-exp", apiKey)
+    new GeminiService(s"gemini-$version-flash", apiKey)
 
   def thinking(
       version: Version,
       apiKey: String = defaultApiKey,
   ): GeminiService =
     new GeminiService(s"gemini-$version-flash-thinking-exp-01-21", apiKey)
-  def pro(
+
+  def proExp(
       version: Version,
       apiKey: String = defaultApiKey,
-      localKnowledge: String = defaultLocalKnowledge,
   ): GeminiService =
-    new GeminiService(s"gemini-$version-pro", apiKey)
+    new GeminiService(s"gemini-$version-pro-exp-02-05", apiKey)
 end GeminiService
