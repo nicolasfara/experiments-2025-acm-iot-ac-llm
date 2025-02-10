@@ -51,7 +51,8 @@ ThisBuild / libraryDependencies ++= Seq(
   "io.circe" %% "circe-core" % "0.14.10",
   "io.circe" %% "circe-generic" % "0.14.10",
   "io.circe" %% "circe-parser" % "0.14.10",
-  "com.softwaremill.retry" %% "retry" % "0.3.6"
+  "com.softwaremill.retry" %% "retry" % "0.3.6",
+  "io.github.ollama4j" % "ollama4j" % "1.0.93"
 )
 ThisBuild / Test / fork := true
 ThisBuild / testOptions += Tests.Argument(TestFrameworks.ScalaTest, "-h", "target/test-reports")
