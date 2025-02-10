@@ -8,7 +8,7 @@ import org.scalatest.Assertion
 class SCRTest
     extends AbstractScafiProgramTest(List("knowledge/knowledge-with-building-blocks.md"), "prompts/SCRTest.json"):
   override def testCase: String =
-    "Compute several areas (large 2) where it is computed the area-wise temperature and send back (in broadcast) within the area an alarm to the area when the temperature is above 30 degrees"
+    "SCR where temperature is above 30 degrees within the area"
   override def baselineWorkingProgram(): String =
     """
     val isLeader = S(2, nbrRange)

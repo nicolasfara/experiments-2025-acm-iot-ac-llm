@@ -19,7 +19,12 @@ final case class ScafiProgram(program: String)
 abstract class AbstractScafiProgramTest(
     private val knowledgePaths: List[String],
     private val promptsFilePath: String,
-    private val loader: CodeGeneratorService = GeminiService.flash(GeminiService.Version.V2_0),
+    private val loaders: List[CodeGeneratorService] =
+      List(
+        GeminiService.flash(GeminiService.Version.V1_5),
+        GeminiService.flashExp(GeminiService.Version.V2_0),
+        GeminiService.proExp(GeminiService.Version.V2_0),
+      ),
     private val runs: Int = 20,
     private val raw: Boolean = false,
 ) extends AsyncFlatSpec,
@@ -30,9 +35,12 @@ abstract class AbstractScafiProgramTest(
       case Right(prompts) => prompts
       case Left(error) => throw new RuntimeException(s"Failed to decode prompts $error")
 
-  private def programSpecification(knowledge: String, promptSpecification: String): Future[ScafiProgram] = if !raw then
-    loader.generateMain(knowledge, promptSpecification).map(ScafiProgram(_))
-  else loader.generateRaw(knowledge, "", promptSpecification).map(ScafiProgram(_))
+  private def programSpecification(
+      knowledge: String,
+      promptSpecification: String,
+      model: CodeGeneratorService,
+  ): Future[ScafiProgram] = if !raw then model.generateMain(knowledge, promptSpecification).map(ScafiProgram(_))
+  else model.generateRaw(knowledge, "", promptSpecification).map(ScafiProgram(_))
 
   private def executeScafiProgram(
       programUnderTest: ScafiProgram,
@@ -68,17 +76,18 @@ abstract class AbstractScafiProgramTest(
     n <- 0 until runs
     prompt <- candidatePrompts.prompts
     knowledgeFile <- knowledgePaths
+    model <- loaders
   do
     Using(Source.fromResource(knowledgeFile)): source =>
       val testName =
-        s"$testCase with knowledge $knowledgeFile @ round-$n-prompt${candidatePrompts.prompts.indexOf(prompt)}"
+        s"$testCase with knowledge $knowledgeFile $model @ round-$n-prompt${candidatePrompts.prompts.indexOf(prompt)}"
 
       val fileName =
-        s"$testCase-round-$n-${candidatePrompts.prompts.indexOf(prompt)}.scala"
+        s"$testCase-round-$n-$model-${candidatePrompts.prompts.indexOf(prompt)}.scala"
       val knowledge = source.mkString
       // Check if the provided program is correct as the synthetic test program
       it should testName in:
-        programSpecification(knowledge, prompt).map(program =>
+        programSpecification(knowledge, prompt, model).map(program =>
           programTests(executeScafiProgram(program, preAction(), postAction(), Some(fileName))),
         )
 end AbstractScafiProgramTest
