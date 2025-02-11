@@ -15,7 +15,7 @@ import java.nio.file.{ Files, Path }
   val executor = Executors.newFixedThreadPool(4)
   given ExecutionContext = ExecutionContext.fromExecutor(executor)
   val tests = program.listPrograms()
-  println(tests)
+
   val allResultsFuture = Future
     .sequence:
       tests.map(e => Future.sequence(e.executeTest()))
