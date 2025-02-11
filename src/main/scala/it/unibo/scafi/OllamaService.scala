@@ -3,9 +3,7 @@ package it.unibo.scafi
 import io.github.ollama4j.OllamaAPI
 import io.github.ollama4j.utils.OptionsBuilder
 
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.{ Await, ExecutionContext, Future }
-import scala.io.Source
+import scala.concurrent.{ExecutionContext, Future}
 
 class OllamaService(val model: String, host: String = "http://localhost:11434/") extends CodeGeneratorService:
   private val mainPreamble =
@@ -23,6 +21,7 @@ class OllamaService(val model: String, host: String = "http://localhost:11434/")
   override def generateMain(localKnowledge: String, prompt: String): ExecutionContext ?=> Future[String] =
     generateRaw(localKnowledge, mainPreamble, prompt)
 end OllamaService
+
 
 object OllamaService:
 
