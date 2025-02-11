@@ -80,7 +80,7 @@ abstract class AbstractScafiProgramTest(
           model <- loaders
         yield Using(Source.fromResource(knowledgeFile))(_.mkString).toEither match
           case Left(error) =>
-            Future(SingleTestResult(testCase, n, knowledgeFile, model.toString, GenericFailure(error)))
+            Future(SingleTestResult(testCase, n, knowledgeFile, model.toString, GenericFailure(error.getMessage)))
           case Right(knowledge) =>
             programSpecification(knowledge, prompt, model).map: currentProgram =>
               val outcome =
@@ -88,7 +88,8 @@ abstract class AbstractScafiProgramTest(
                   producedNetwork <- executeScafiProgram(currentProgram, preAction(), postAction()).left
                     .map(CompilationFailed(_))
                   testResult <-
-                    Try(programTests(currentProgram.program, producedNetwork)).toEither.left.map(GenericFailure(_))
+                    Try(programTests(currentProgram.program, producedNetwork)).toEither.left
+                      .map(t => GenericFailure(t.getMessage))
                 yield testResult
               val result = outcome match
                 case Right(value) => value

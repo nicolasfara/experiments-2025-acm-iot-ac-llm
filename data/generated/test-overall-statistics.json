@@ -1,0 +1,9 @@
+{
+  "collect the max ID in the network on each node" : {
+    "testName" : "collect the max ID in the network on each node",
+    "succeeded" : 6,
+    "nonCompiling" : 0,
+    "failed" : 0,
+    "genericErrors" : 0
+  }
+}

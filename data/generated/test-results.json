@@ -1,0 +1,68 @@
+[
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "Success" : {
+        "program" : "rep(Int.MinValue){ maxId => foldhood(mid())(_ max _)(nbr(maxId)) }\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "Success" : {
+        "program" : "rep(mid()) { maxId => foldhood(mid())(_ max _)(nbr(maxId)) }\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "Success" : {
+        "program" : "rep(mid())(maxId => foldhood(maxId)(_ max _)(nbr(maxId)))\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "Success" : {
+        "program" : "rep(Int.MinValue){ minId => foldhood(mid())(_ max _)(nbr(minId))}\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "Success" : {
+        "program" : "rep(mid()) { maxId =>\n  foldhood(mid())(_ max _)(nbr(maxId))\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "Success" : {
+        "program" : "rep(mid())(maxId => foldhood(maxId)(_ max _)(nbr(maxId)))\n\n"
+      }
+    }
+  }
+]

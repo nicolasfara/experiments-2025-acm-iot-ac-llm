@@ -35,7 +35,7 @@ object ScafiAssertions:
         case _ => false,
     )
     if (res) Success(program)
-    else TestFailed(program, net)
+    else TestFailed(program)
   end assertNetworkValues
 
   def assertNetworkValuesWithPredicate[T](
@@ -59,6 +59,6 @@ object ScafiAssertions:
         case None => passNotComputed,
     )
     if (res) Success(program)
-    else TestFailed(program, net)
+    else TestFailed(program)
   end assertNetworkValuesWithPredicate
 end ScafiAssertions
