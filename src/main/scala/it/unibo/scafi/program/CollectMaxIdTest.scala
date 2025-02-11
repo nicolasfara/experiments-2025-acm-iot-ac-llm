@@ -1,8 +1,8 @@
-package it.unibo.scafi
+package it.unibo.scafi.program
 
-import it.unibo.scafi.test.{ AbstractScafiProgramTest, FunctionalTestIncarnation, ScafiTestResult }
 import it.unibo.scafi.test.FunctionalTestIncarnation.Network
 import it.unibo.scafi.test.ScafiAssertions.assertNetworkValues
+import it.unibo.scafi.test.{AbstractScafiProgramTest, FunctionalTestIncarnation, ScafiTestResult}
 
 class CollectMaxIdTest
     extends AbstractScafiProgramTest(

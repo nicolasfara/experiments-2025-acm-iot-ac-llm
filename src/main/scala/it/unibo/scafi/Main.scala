@@ -6,6 +6,7 @@ import scala.concurrent.duration.DurationInt
 import io.circe.*
 import io.circe.generic.auto.*
 import io.circe.syntax.*
+import it.unibo.scafi.program.CollectMaxIdTest
 import it.unibo.scafi.test.{ toStatistcsPerModel, toStatisticsPerTest }
 
 import java.nio.file.{ Files, Path }
@@ -13,9 +14,8 @@ import java.nio.file.{ Files, Path }
 @main def main(): Unit =
   val executor = Executors.newFixedThreadPool(4)
   given ExecutionContext = ExecutionContext.fromExecutor(executor)
-  val tests = Seq(
-    CollectMaxIdTest(),
-  )
+  val tests = program.listPrograms()
+  println(tests)
   val allResultsFuture = Future
     .sequence:
       tests.map(e => Future.sequence(e.executeTest()))
