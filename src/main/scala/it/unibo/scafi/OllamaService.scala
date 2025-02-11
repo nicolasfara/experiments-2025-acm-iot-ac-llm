@@ -4,7 +4,7 @@ import io.github.ollama4j.OllamaAPI
 import io.github.ollama4j.utils.OptionsBuilder
 
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.{ Await, Future }
+import scala.concurrent.{ Await, ExecutionContext, Future }
 import scala.io.Source
 
 class OllamaService(val model: String, host: String = "http://localhost:11434/") extends CodeGeneratorService:
@@ -13,10 +13,14 @@ class OllamaService(val model: String, host: String = "http://localhost:11434/")
   private lazy val ollama = OllamaAPI(host)
   private def data(localKnowledge: String, preamble: String, prompt: String) = s"$localKnowledge.\n$preamble\n$prompt"
 
-  override def generateRaw(localKnowledge: String, preamble: String, prompt: String): Future[String] =
+  override def generateRaw(
+      localKnowledge: String,
+      preamble: String,
+      prompt: String,
+  ): ExecutionContext ?=> Future[String] =
     Future:
       ollama.generate(model, data(localKnowledge, preamble, prompt), false, OptionsBuilder().build()).getResponse
-  override def generateMain(localKnowledge: String, prompt: String): Future[String] =
+  override def generateMain(localKnowledge: String, prompt: String): ExecutionContext ?=> Future[String] =
     generateRaw(localKnowledge, mainPreamble, prompt)
 end OllamaService
 
@@ -26,4 +30,3 @@ object OllamaService:
       name: String,
   ): OllamaService =
     new OllamaService(name)
-
