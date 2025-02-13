@@ -12,7 +12,7 @@ import it.unibo.scafi.test.{ toStatistcsPerModel, toStatisticsPerTest }
 import java.nio.file.{ Files, Path }
 
 @main def main(): Unit =
-  val executor = Executors.newFixedThreadPool(4)
+  val executor = Executors.newFixedThreadPool(2)
   given ExecutionContext = ExecutionContext.fromExecutor(executor)
   val tests = program.listPrograms()
 
