@@ -1,9 +1,23 @@
 {
+  "gather the IDs of their neighbors" : {
+    "testName" : "gather the IDs of their neighbors",
+    "succeeded" : 5,
+    "nonCompiling" : 1,
+    "failed" : 0,
+    "genericErrors" : 0
+  },
   "collect the max ID in the network on each node" : {
     "testName" : "collect the max ID in the network on each node",
-    "succeeded" : 6,
-    "nonCompiling" : 0,
+    "succeeded" : 5,
+    "nonCompiling" : 1,
     "failed" : 0,
+    "genericErrors" : 0
+  },
+  "calculate the gradient with distance from source" : {
+    "testName" : "calculate the gradient with distance from source",
+    "succeeded" : 2,
+    "nonCompiling" : 2,
+    "failed" : 2,
     "genericErrors" : 0
   }
 }

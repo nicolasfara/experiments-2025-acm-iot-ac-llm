@@ -6,46 +6,13 @@
     "modelUsed" : "gemini-1.5-flash",
     "result" : {
       "Success" : {
-        "program" : "rep(Int.MinValue){ maxId => foldhood(mid())(_ max _)(nbr(maxId)) }\n\n"
+        "program" : "rep(Int.MinValue){ minId => foldhood(mid())(_ max _)(nbr(minId)) }\n\n"
       }
     }
   },
   {
     "testName" : "collect the max ID in the network on each node",
     "promptIndex" : 0,
-    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "gemini-2.0-flash-exp",
-    "result" : {
-      "Success" : {
-        "program" : "rep(mid()) { maxId => foldhood(mid())(_ max _)(nbr(maxId)) }\n"
-      }
-    }
-  },
-  {
-    "testName" : "collect the max ID in the network on each node",
-    "promptIndex" : 0,
-    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "gemini-2.0-pro-exp-02-05",
-    "result" : {
-      "Success" : {
-        "program" : "rep(mid())(maxId => foldhood(maxId)(_ max _)(nbr(maxId)))\n\n"
-      }
-    }
-  },
-  {
-    "testName" : "collect the max ID in the network on each node",
-    "promptIndex" : 1,
-    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "gemini-1.5-flash",
-    "result" : {
-      "Success" : {
-        "program" : "rep(Int.MinValue){ minId => foldhood(mid())(_ max _)(nbr(minId))}\n\n"
-      }
-    }
-  },
-  {
-    "testName" : "collect the max ID in the network on each node",
-    "promptIndex" : 1,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
     "modelUsed" : "gemini-2.0-flash-exp",
     "result" : {
@@ -56,12 +23,177 @@
   },
   {
     "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "Success" : {
+        "program" : "rep(mid()) { maxId =>\n  foldhood(maxId)(_ max _)(nbr(maxId))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "Success" : {
+        "program" : "rep(Int.MinValue) { minId => foldhood(mid())(_ max _)(nbr(minId)) }\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "`rep(mid())(_ max nbr(_))`\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
     "promptIndex" : 1,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
     "modelUsed" : "gemini-2.0-pro-exp-02-05",
     "result" : {
       "Success" : {
         "program" : "rep(mid())(maxId => foldhood(maxId)(_ max _)(nbr(maxId)))\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = sense[Boolean](\"source\")\nval distances = G[Double](source, 0.0, (acc, dist) => acc + dist, () => nbrRange())\ndistances\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "G[Double](source = sense[Boolean](\"source\"), field = 0.0, acc = a => a + 1, metric = () => 1)\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "Success" : {
+        "program" : "G[Double](source = sense[Boolean](\"source\"), field = 0.0, acc = _ + nbrRange(), metric = nbrRange)\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = sense[Boolean](\"source\")\nval dist = if (source) 0.0 else G[Double](source, Double.PositiveInfinity, (a: Double, b: Double) => Math.min(a, b + nbrRange()), () => nbrRange())\ndist\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "G[Double](source = sense[Boolean](\"source\"), field = 0.0, acc = identity, metric = () => nbrRange())\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "Success" : {
+        "program" : "G[Double](source = sense[Boolean](\"source\"), field = 0.0, acc = _ + nbrRange(), metric = nbrRange)\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "`foldhood(List[ID]())((l1, l2) => l1 ++ l2)(List(nbr(mid())))`\n"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n\n"
       }
     }
   }
