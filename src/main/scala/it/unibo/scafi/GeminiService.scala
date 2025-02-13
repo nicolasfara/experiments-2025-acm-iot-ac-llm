@@ -38,7 +38,7 @@ class GeminiService(val model: String, val apiKey: String) extends CodeGenerator
   override def generateRaw(localKnowledge: String, preamble: String, prompt: String): ExecutionContext ?=> Future[String] =
     for
       response <- retry
-        .Backoff(5, delay = 1.seconds)
+        .Backoff(10, delay = 5.seconds)
         .apply(Future {
           requests.post(url, headers = headers, data = data(localKnowledge, preamble, prompt))
         })

@@ -23,7 +23,7 @@ extension (results: Seq[SingleTestResult])
       genericErrors = res.count(_.result.isInstanceOf[ScafiTestResult.GenericFailure]),
     )
 
-  def toStatistcsPerModel(): StatisticsPerModel =
+  def toStatisticsPerModel: StatisticsPerModel =
     results
       .groupBy(_.testName)
       .map { case (testName, results) =>
@@ -34,7 +34,7 @@ extension (results: Seq[SingleTestResult])
           }
       }
 
-  def toStatisticsPerTest(): StatisticsPerTest =
+  def toStatisticsPerTest: StatisticsPerTest =
     results
       .groupBy(_.testName)
       .map { case (testName, results) =>

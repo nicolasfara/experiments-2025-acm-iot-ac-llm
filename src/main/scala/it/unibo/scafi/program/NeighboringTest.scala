@@ -1,12 +1,12 @@
 package it.unibo.scafi.program
 
 import it.unibo.scafi.test.ScafiAssertions.assertNetworkValues
-import it.unibo.scafi.test.{AbstractScafiProgramTest, ScafiTestResult}
+import it.unibo.scafi.test.{ AbstractScafiProgramTest, ScafiTestResult }
 import it.unibo.scafi.test.FunctionalTestIncarnation.Network
 
 class NeighboringTest
     extends AbstractScafiProgramTest(
-      List("knowledge-with-building-blocks.md"),
+      List("knowledge/knowledge-with-building-blocks.md"),
       "prompts/NeighboringTest.json",
     ):
   override def testCase: String = "count neighbors"

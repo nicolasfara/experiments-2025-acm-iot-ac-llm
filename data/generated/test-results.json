@@ -1,12 +1,144 @@
 [
   {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val sourceNode = sense[Boolean](\"source\")\nval destinationNode = sense[Boolean](\"destination\")\nval potential = G[Double](source = sourceNode, field = 0.0, acc = _ + nbrRange(), metric = () => if (nbr(sense[Boolean](\"obstacle\"))) Double.PositiveInfinity else nbrRange())\nC[Double, Boolean](potential, _ || _, sourceNode, false)\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "  val obstacle = sense[Boolean](\"obstacle\")\n  val sourceCondition = sense[Boolean](\"source\")\n  val destinationCondition = sense[Boolean](\"destination\")\n\n  def adjustedNbrRange(): Double = {\n    if (obstacle) {\n      Double.PositiveInfinity // High cost for traversing obstacle\n    } else {\n      nbrRange()\n    }\n  }\n\n  val potential = G[Double](\n    source = destinationCondition,\n    field = 0.0,\n    acc = _ + adjustedNbrRange(),\n    metric = adjustedNbrRange\n  )\n\n  C[Double, Boolean](\n    potential = potential,\n    acc = _ || _,\n    local = sourceCondition,\n    Null = false\n  )\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val obstacle = sense[Boolean](\"obstacle\")\nval source = sense[Boolean](\"source\")\nval destination = sense[Boolean](\"destination\")\n\nval potential = G[Double](\n  source = source,\n  field = if (destination) 0.0 else Double.PositiveInfinity,\n  acc = x => x,\n  metric = () => mux(obstacle)(Double.PositiveInfinity)(nbrRange())\n)\n\nC[Double, Boolean](potential, _ || _, destination, false)\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val sourceNode = sense[Boolean](\"source\")\nval destinationNode = sense[Boolean](\"destination\")\nval potential = G[Double](source = sourceNode, field = if (sourceNode) 0.0 else Double.PositiveInfinity, acc = a => a, metric = () => if (nbr(sense[Boolean](\"obstacle\"))) Double.PositiveInfinity else nbrRange())\nC[Double, Boolean](potential, _ || _, sourceNode, false)\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "Success" : {
+        "program" : "val sourceCondition = sense[Boolean](\"source\")\nval destinationCondition = sense[Boolean](\"destination\")\n\nval obstacleDetected = sense[Boolean](\"obstacle\") // Example: true if obstacle is present\n\nval adjustedRange = () => if (obstacleDetected) Double.PositiveInfinity else nbrRange()\n\nval potential = G[Double](\n  source = sourceCondition,\n  field = 0.0,\n  acc = _ + nbrRange(),\n  metric = adjustedRange\n)\n\nC[Double, Boolean](\n  potential = potential,\n  acc = _ || _,\n  local = destinationCondition,\n  Null = false\n)\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "Success" : {
+        "program" : "val obstacle = sense[Boolean](\"obstacle\")\nval source = sense[Boolean](\"source\")\nval destination = sense[Boolean](\"destination\")\n\nval potential = G(\n  source = source,\n  field = 0.0,\n  acc = _ + nbrRange(),\n  metric = () => mux(obstacle) { Double.PositiveInfinity } { nbrRange() }\n)\n\nC[Double, Boolean](\n  potential,\n  _ || _,\n  destination,\n  false\n)\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val sourceNode = sense[Boolean](\"source\")\nval destinationNode = sense[Boolean](\"destination\")\nval potential = G[Double](source = sourceNode, field = 0.0, acc = a => a, metric = () => if (sense[Boolean](\"obstacle\")) Double.PositiveInfinity else nbrRange())\nC[Double, Boolean](potential, _ || _, sourceNode, false)\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "Success" : {
+        "program" : "{\n  val obstacleDetected = sense[Boolean](\"obstacle\")\n  val destinationReached = sense[Boolean](\"destination\")\n  val isSource = sense[Boolean](\"source\")\n\n  val adjustedNbrRange = () => if (obstacleDetected) Double.PositiveInfinity else nbrRange()\n\n  val potential = G[Double](\n    source = isSource,\n    field = 0.0,\n    acc = _ + adjustedNbrRange(),\n    metric = adjustedNbrRange\n  )\n\n  C[Double, Boolean](\n    potential = potential,\n    acc = _ || _,\n    local = destinationReached,\n    Null = false\n  )\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val obstacleDetected = sense[Boolean](\"obstacle\")\nval source = sense[Boolean](\"source\")\nval destination = sense[Boolean](\"destination\")\n\nval potential = G[Double](\n  source = source,\n  field = 0.0,\n  acc = _ + nbrRange(),\n  metric = () => mux(nbr(obstacleDetected))(Double.PositiveInfinity)(nbrRange())\n)\n\nC[Double, Boolean](\n  potential = potential,\n  acc = _ || _,\n  local = destination,\n  Null = false\n)\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val sourceNode = sense[Boolean](\"source\")\nval destinationNode = sense[Boolean](\"destination\")\nval potential = G[Double](source = sourceNode, field = 0.0, acc = _ + (if (sense[Boolean](\"obstacle\")) Double.PositiveInfinity else nbrRange()), metric = () => if (sense[Boolean](\"obstacle\")) Double.PositiveInfinity else nbrRange())\nC[Double, Boolean](potential, _ || _, sourceNode, false)\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "{\n  val obstacleCost = 10000.0 // A large value representing the cost of traversing an obstacle\n  val adjustedNbrRange = branch(nbr(sense[Boolean](\"obstacle\")))(Double.PositiveInfinity)(nbrRange()) // avoid Double.MaxValue\n  val potential = G[Double](source = sense(\"source\"), field = 0, acc = _ + adjustedNbrRange, metric = () => adjustedNbrRange)\n  val pathFound = C[Double, Boolean](potential, _ || _, sense(\"destination\"), false)\n  pathFound\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val potential = G[Double](\n  source = sense[Boolean](\"source\"),\n  field = 0.0,\n  acc = _ + nbrRange(),\n  metric = () => mux(nbr(sense[Boolean](\"obstacle\")))(Double.PositiveInfinity)(nbrRange())\n)\nC[Double, Boolean](\n  potential = potential,\n  acc = _ || _,\n  local = sense[Boolean](\"destination\"),\n  Null = false\n)\n\n"
+      }
+    }
+  },
+  {
     "testName" : "collect the max ID in the network on each node",
     "promptIndex" : 0,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
     "modelUsed" : "gemini-1.5-flash",
     "result" : {
       "Success" : {
-        "program" : "rep(Int.MinValue){ minId => foldhood(mid())(_ max _)(nbr(minId)) }\n\n"
+        "program" : "rep(Int.MinValue){ maxId => foldhood(mid())(_ max _)(nbr(maxId)) }\n\n"
       }
     }
   },
@@ -17,7 +149,7 @@
     "modelUsed" : "gemini-2.0-flash-exp",
     "result" : {
       "Success" : {
-        "program" : "rep(mid()) { maxId =>\n  foldhood(mid())(_ max _)(nbr(maxId))\n}\n"
+        "program" : "rep(Int.MinValue) {\n  maxId => foldhood(mid())(_ max _)(nbr(maxId))\n}\n"
       }
     }
   },
@@ -28,7 +160,7 @@
     "modelUsed" : "gemini-2.0-pro-exp-02-05",
     "result" : {
       "Success" : {
-        "program" : "rep(mid()) { maxId =>\n  foldhood(maxId)(_ max _)(nbr(maxId))\n}\n\n"
+        "program" : "rep(mid()) {\n  maxId => maxHood(nbr(maxId))\n}\n\n"
       }
     }
   },
@@ -39,7 +171,7 @@
     "modelUsed" : "gemini-1.5-flash",
     "result" : {
       "Success" : {
-        "program" : "rep(Int.MinValue) { minId => foldhood(mid())(_ max _)(nbr(minId)) }\n\n"
+        "program" : "rep(Int.MinValue){ minId => foldhood(mid())(_ max _)(nbr(minId)) }\n\n"
       }
     }
   },
@@ -49,8 +181,8 @@
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
     "modelUsed" : "gemini-2.0-flash-exp",
     "result" : {
-      "CompilationFailed" : {
-        "producedCode" : "`rep(mid())(_ max nbr(_))`\n"
+      "Success" : {
+        "program" : "rep(mid()) {\n  maxId => foldhood(mid())(_ max _)(nbr(maxId))\n}\n"
       }
     }
   },
@@ -72,46 +204,13 @@
     "modelUsed" : "gemini-1.5-flash",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : "val source = sense[Boolean](\"source\")\nval distances = G[Double](source, 0.0, (acc, dist) => acc + dist, () => nbrRange())\ndistances\n\n"
+        "producedCode" : "val source = sense[Boolean](\"source\")\nval distance = if (source) 0.0 else G[Double](source, 0.0, (a: Double, b: Double) => a + 1, () => Double.PositiveInfinity)\ndistance\n\n"
       }
     }
   },
   {
     "testName" : "calculate the gradient with distance from source",
     "promptIndex" : 0,
-    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "gemini-2.0-flash-exp",
-    "result" : {
-      "TestFailed" : {
-        "producedCode" : "G[Double](source = sense[Boolean](\"source\"), field = 0.0, acc = a => a + 1, metric = () => 1)\n"
-      }
-    }
-  },
-  {
-    "testName" : "calculate the gradient with distance from source",
-    "promptIndex" : 0,
-    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "gemini-2.0-pro-exp-02-05",
-    "result" : {
-      "Success" : {
-        "program" : "G[Double](source = sense[Boolean](\"source\"), field = 0.0, acc = _ + nbrRange(), metric = nbrRange)\n\n"
-      }
-    }
-  },
-  {
-    "testName" : "calculate the gradient with distance from source",
-    "promptIndex" : 1,
-    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "gemini-1.5-flash",
-    "result" : {
-      "CompilationFailed" : {
-        "producedCode" : "val source = sense[Boolean](\"source\")\nval dist = if (source) 0.0 else G[Double](source, Double.PositiveInfinity, (a: Double, b: Double) => Math.min(a, b + nbrRange()), () => nbrRange())\ndist\n\n"
-      }
-    }
-  },
-  {
-    "testName" : "calculate the gradient with distance from source",
-    "promptIndex" : 1,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
     "modelUsed" : "gemini-2.0-flash-exp",
     "result" : {
@@ -122,6 +221,39 @@
   },
   {
     "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "Success" : {
+        "program" : "G[Double](source = sense[Boolean](\"source\"), field = 0.0, acc = _ + nbrRange(), metric = nbrRange)\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = sense[Boolean](\"source\")\nval distance = if (source) 0.0 else G[Double](source, 0.0, (a: Double, b: Double) => a + 1.0, () => Double.PositiveInfinity)\ndistance\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "Success" : {
+        "program" : "G[Double](source = sense[Boolean](\"source\"), field = 0.0, acc = a => a + nbrRange(), metric = nbrRange)\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
     "promptIndex" : 1,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
     "modelUsed" : "gemini-2.0-pro-exp-02-05",
@@ -149,7 +281,7 @@
     "modelUsed" : "gemini-2.0-flash-exp",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : "`foldhood(List[ID]())((l1, l2) => l1 ++ l2)(List(nbr(mid())))`\n"
+        "producedCode" : "foldhood(List.empty[ID])(_ :+ nbr(mid()))(nbr(mid()))\n\n"
       }
     }
   },
@@ -181,8 +313,8 @@
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
     "modelUsed" : "gemini-2.0-flash-exp",
     "result" : {
-      "Success" : {
-        "program" : "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n"
+      "CompilationFailed" : {
+        "producedCode" : "`foldhood(List.empty[ID])(_ :+ nbr(mid()))(nbr(mid()))`\n"
       }
     }
   },
@@ -194,6 +326,336 @@
     "result" : {
       "Success" : {
         "program" : "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "minHood(nbrRange())\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "minHood(nbrRange())\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "minHood(nbrRange())\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "minHood(nbrRange())\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "minHood(nbrRange())\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "Success" : {
+        "program" : "foldhoodPlus(Double.PositiveInfinity)(_ min _)(nbrRange())\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "`foldhood(0)(_ + _)(nbr(1))`\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(0)(_ + _)(nbr(1))\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "`foldhood(0)(_ + _)(nbr(1))`\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(0)(_ + _)(nbr(1))\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "Success" : {
+        "program" : "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "`foldhoodPlus(0)(_ + _)(nbr(1))`\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "Success" : {
+        "program" : "foldhoodPlus(0)(_ + _)(nbr(1))\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "Success" : {
+        "program" : "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "`foldhoodPlus(0)(_ + _)(nbr(1))`\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "Success" : {
+        "program" : "foldhoodPlus(0)(_ + _)(nbr(1))\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "Success" : {
+        "program" : "rep(1000)(_ - 1)\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "`rep(1000)(a => a - 1)`\n"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "Success" : {
+        "program" : "rep(1000)(_ - 1)\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "Success" : {
+        "program" : "rep(1000)(x => if (x > 0) x - 1 else x)\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "Success" : {
+        "program" : "rep(1000)(x => if (x > 0) x - 1 else 0)\n"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "Success" : {
+        "program" : "rep(1000)(x => if (x > 0) x - 1 else 0)\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val areaTemp = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\"))) / foldhood(0)(_ + _)(nbr(1))\nG[Boolean](areaTemp > 30, true, _ || _, () => 0)\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "{\n  val isLeader = S(2, nbrRange)\n  val potential = G[Double](isLeader, 0, _ + nbrRange(), nbrRange)\n  val areaTemperature = C[Double, Double](potential, _ + _, sense[Double](\"temperature\"), 0.0)\n  val areaSize = C[Double, Int](potential, _ + _, 1, 0)\n\n  val averageAreaTemperature = if (areaSize > 0) areaTemperature / areaSize else 0.0\n  val alarm = averageAreaTemperature > 30.0\n\n  G[Boolean](isLeader, alarm, _ || _, nbrRange)\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val leader = S(5, nbrRange)\nval potential = G(leader, 0.0, _ + nbrRange(), nbrRange)\nval areaSize = C[Double, Double](potential, _ + _, 1, 0)\nval temperatureSum = C[Double, Double](potential, _ + _, sense[Double](\"temperature\"), 0.0)\nval averageTemperature = temperatureSum / areaSize\nG(leader, averageTemperature > 30, _ || _, nbrRange)\n\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-1.5-flash",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val potential = G[Double](source = sense[Boolean](\"source\"), field = 0, acc = _ + nbrRange(), metric = () => if (sense[Boolean](\"obstacle\")) Double.PositiveInfinity else nbrRange())\nval areaTemp = C[Double, Double](potential, _ + _, sense[Double](\"temperature\"), 0) / C[Double, Double](potential, _ + _, 1, 0)\nval alarm = if (areaTemp > 30) G[Boolean](source = true, field = true, acc = _ || _, metric = () => 0) else false\nalarm\n\n"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-flash-exp",
+    "result" : {
+      "Success" : {
+        "program" : "val isLeader = S(2, nbrRange)\nval potential = G(isLeader, 0.0, _ + nbrRange(), nbrRange)\nval areaTemperature = C[Double, Double](potential, _ + _, sense[Double](\"temperature\"), 0.0)\nval areaSize = C[Double, Int](potential, _ + _, 1, 0)\nval averageAreaTemperature = if (areaSize > 0) areaTemperature / areaSize else 0.0\nval alarm = averageAreaTemperature > 30.0\nG(isLeader, alarm, (a: Boolean) => a, nbrRange)\n"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "gemini-2.0-pro-exp-02-05",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val potential = G[Double](source = S(2, nbrRange), field = 0, acc = _ + nbrRange(), metric = nbrRange)\nval areaTemperature = C[Double, Double](potential, _ + _, sense(\"temperature\"), 0.0)\nval areaSize = C[Double, Double](potential, _ + _, 1.0, 0.0)\nval avgTemperature = areaTemperature / areaSize\nG[Boolean](source = S(2, nbrRange), field = avgTemperature > 30, acc = _ || _, metric = nbrRange)\n\n"
       }
     }
   }

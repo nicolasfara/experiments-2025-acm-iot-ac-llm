@@ -7,12 +7,12 @@ import io.circe.*
 import io.circe.generic.auto.*
 import io.circe.syntax.*
 import it.unibo.scafi.program.CollectMaxIdTest
-import it.unibo.scafi.test.{ toStatistcsPerModel, toStatisticsPerTest }
+import it.unibo.scafi.test.{ toStatisticsPerModel, toStatisticsPerTest }
 
 import java.nio.file.{ Files, Path }
 
 @main def main(): Unit =
-  val executor = Executors.newFixedThreadPool(2)
+  val executor = Executors.newFixedThreadPool(4)
   given ExecutionContext = ExecutionContext.fromExecutor(executor)
   val tests = program.listPrograms()
 
@@ -22,9 +22,9 @@ import java.nio.file.{ Files, Path }
     .map(_.flatten)
 
   val producesTestResults = Await.result(allResultsFuture, 10.minutes)
-  val statisticsByModel = producesTestResults.toStatistcsPerModel()
+  val statisticsByModel = producesTestResults.toStatisticsPerModel
   val statisticByModelSerialized = statisticsByModel.asJson.toString
-  val overallStatistics = producesTestResults.toStatisticsPerTest()
+  val overallStatistics = producesTestResults.toStatisticsPerTest
   val overallStatisticsSerialized = overallStatistics.asJson.toString
   val serializedResult = producesTestResults.asJson.toString
   val destinationPath = Path.of("data", "generated")
@@ -36,5 +36,5 @@ import java.nio.file.{ Files, Path }
   println(s"Results written to $destination")
   println(s"Statistics by model: $statisticsByModel")
   println(s"Overall statistics: $overallStatistics")
-  executor.shutdown()
+  executor.close()
 end main

@@ -1,5 +1,0 @@
-{
-  "prompts": [
-    "Compute several areas where it is computed the area-wise temperature and send back (in broadcast) within the area an alarm to the area when the temperature is above 30 degrees"
-  ]
-}

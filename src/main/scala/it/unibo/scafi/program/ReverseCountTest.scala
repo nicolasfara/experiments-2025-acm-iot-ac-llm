@@ -9,7 +9,7 @@ class ReverseCountTest
       List("knowledge/knowledge-with-building-blocks.md"),
       "prompts/ReverseCountTest.json",
     ):
-  override def testCase: String = "collect the max ID in the network on each node"
+  override def testCase: String = "count down from 1000 to 0"
   override def baselineWorkingProgram(): String =
     """
     rep(1000) { prevCount =>
