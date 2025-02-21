@@ -12,17 +12,6 @@ object ScafiAssertions:
       vals: Map[ID, T],
       customEq: Option[(T, T) => Boolean] = None,
   )(net: Network): ScafiTestResult =
-//    withClue(s"""
-//         | ${msg}
-//         | Actual network: ${net}
-//         | Sensor state: ${net.sensorState()}
-//         | Neighborhoods: ${net.ids.map(id => id -> net.neighbourhood(id))}
-//         | Sample exports
-//         | ID=0 => ${net.getExport(0)}
-//         | ID=1 => ${net.getExport(1)}
-//         |
-//         | Expected values: ${vals}
-//              """.stripMargin):
     val res = net.ids.forall(id =>
       val actualExport = net.getExport(id)
       val expected = vals.get(id)

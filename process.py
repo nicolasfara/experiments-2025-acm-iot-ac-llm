@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import json
+import pprint
 
 def process_by_llm(data):
     # Prepare lists to store the data
@@ -54,6 +55,27 @@ def create_dataframe_with_index(data):
     
     return df
 
+def extract_failed_codes(data, test_name):
+    """Extracts producedCode from TestFailed results for a given testName."""
+    codes = []
+    for item in data:
+        if item.get("testName") == test_name:
+            result = item.get("result", {})
+            if "TestFailed" in result:
+                produced_code = (item.get("modelUsed", {}), result["TestFailed"].get("producedCode"))
+                if produced_code:
+                    codes.append(produced_code)
+    return codes
+
+# Function to escape newline characters
+def escape_newlines(code):
+    return (code[0], code[1].replace('\\n', '\n'))
+
+def produced_failed_code_for_test(test):
+    produced_codes = extract_failed_codes(results, test)
+    pretty_codes = [escape_newlines(code) for code in produced_codes]
+    return "\n\n---\n\n".join([f"{model}:\n\n{code}" for model, code in pretty_codes])
+
 
 if __name__ == '__main__':
     results_path = Path("data", "generated")
@@ -75,7 +97,6 @@ if __name__ == '__main__':
 
     statistics_per_model_data = process_by_llm(statistics)
     statistics_per_test_model_data = create_dataframe_with_index(statistics)
-    print(statistics_per_test_model_data)
 
     sns.set_theme(
         style="whitegrid",
@@ -150,4 +171,7 @@ if __name__ == '__main__':
     
     plt.tight_layout()
     g.savefig(output_charts_path / 'status_count_by_test_case.pdf')
+
+    codes = produced_failed_code_for_test("create a channel (with obstacles) from the source node to the destination node")
+    print(codes)
     

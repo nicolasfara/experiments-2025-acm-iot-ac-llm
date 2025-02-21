@@ -26,9 +26,9 @@ class ChannelWithObstaclesTest
     def distanceBetween(source: Boolean, destination: Boolean): Double =
       G(source, distanceTo(destination), x => x)
 
-    if (sense[Boolean]("obstacle")) {
+    branch(sense[Boolean]("obstacle")) {
       false
-    } else {
+    } {
       distanceTo(sense[Boolean]("source")) + distanceTo(sense[Boolean]("destination")) <=
        distanceBetween(sense[Boolean]("source"), sense[Boolean]("destination"))
     }

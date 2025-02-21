@@ -1,21 +1,22 @@
 package it.unibo.scafi
 
-import scala.concurrent.{ Await, ExecutionContext, Future }
+import scala.concurrent.{Await, ExecutionContext, Future}
 import scala.concurrent.duration.DurationInt
 import io.circe.*
 import io.circe.generic.auto.*
 import io.circe.syntax.*
-import it.unibo.scafi.program.CollectMaxIdTest
-import it.unibo.scafi.test.{ toStatisticsPerModel, toStatisticsPerTest }
+import it.unibo.scafi.program.GradientWithDistanceFromSourceAndObstacles
+import it.unibo.scafi.test.{toStatisticsPerModel, toStatisticsPerTest}
 
-import java.nio.file.{ Files, Path }
+import java.nio.file.{Files, Path}
 import java.util.concurrent.Executors
 
 @main def main(): Unit =
   require(System.getenv("GEMINI_API_KEY") != null, "GEMINI_API_KEY environment variable must be set")
   val executor = Executors.newFixedThreadPool(1)
   given ExecutionContext = ExecutionContext.fromExecutor(executor)
-  val tests = program.listPrograms()
+//  val tests = program.listPrograms()
+  val tests = List(GradientWithDistanceFromSourceAndObstacles())
 
   val allResultsFuture = Future
     .sequence:
