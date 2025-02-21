@@ -24,7 +24,7 @@ abstract class AbstractScafiProgramTest(
       GeminiService.flashExp(GeminiService.Version.V2_0),
       GeminiService.proExp(GeminiService.Version.V2_0),
     ),
-    private val runs: Int = 2,
+    private val runs: Int = 5,
     private val raw: Boolean = false,
 ):
 
@@ -80,6 +80,7 @@ abstract class AbstractScafiProgramTest(
           model <- loaders
         yield Using(Source.fromResource(knowledgeFile))(_.mkString).toEither match
           case Left(error) =>
+            // println(s"Failed to read knowledge file $knowledgeFile: ${error.getMessage}")
             Future(SingleTestResult(testCase, n, knowledgeFile, model.toString, GenericFailure(error.getMessage)))
           case Right(knowledge) =>
             programSpecification(knowledge, prompt, model).map: currentProgram =>
@@ -94,6 +95,7 @@ abstract class AbstractScafiProgramTest(
               val result = outcome match
                 case Right(value) => value
                 case Left(error) => error
+              // println(s"Execution terminated with outcome $result")
               SingleTestResult(testCase, n, knowledgeFile, model.toString, result)
       end if
 end AbstractScafiProgramTest

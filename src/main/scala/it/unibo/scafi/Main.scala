@@ -1,6 +1,5 @@
 package it.unibo.scafi
 
-import java.util.concurrent.Executors
 import scala.concurrent.{ Await, ExecutionContext, Future }
 import scala.concurrent.duration.DurationInt
 import io.circe.*
@@ -10,9 +9,11 @@ import it.unibo.scafi.program.CollectMaxIdTest
 import it.unibo.scafi.test.{ toStatisticsPerModel, toStatisticsPerTest }
 
 import java.nio.file.{ Files, Path }
+import java.util.concurrent.Executors
 
 @main def main(): Unit =
-  val executor = Executors.newFixedThreadPool(4)
+  require(System.getenv("GEMINI_API_KEY") != null, "GEMINI_API_KEY environment variable must be set")
+  val executor = Executors.newFixedThreadPool(1)
   given ExecutionContext = ExecutionContext.fromExecutor(executor)
   val tests = program.listPrograms()
 
@@ -21,7 +22,7 @@ import java.nio.file.{ Files, Path }
       tests.map(e => Future.sequence(e.executeTest()))
     .map(_.flatten)
 
-  val producesTestResults = Await.result(allResultsFuture, 10.minutes)
+  val producesTestResults = Await.result(allResultsFuture, 2.hour)
   val statisticsByModel = producesTestResults.toStatisticsPerModel
   val statisticByModelSerialized = statisticsByModel.asJson.toString
   val overallStatistics = producesTestResults.toStatisticsPerTest
@@ -36,5 +37,5 @@ import java.nio.file.{ Files, Path }
   println(s"Results written to $destination")
   println(s"Statistics by model: $statisticsByModel")
   println(s"Overall statistics: $overallStatistics")
-  executor.close()
+  val _ = executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS)
 end main
