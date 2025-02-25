@@ -5,7 +5,14 @@ import it.unibo.scafi.test.ScafiAssertions.assertNetworkValues
 import it.unibo.scafi.test.{ AbstractScafiProgramTest, FunctionalTestIncarnation, ScafiTestResult }
 
 class SCRTest
-    extends AbstractScafiProgramTest(List("knowledge/knowledge-with-building-blocks.md"), "prompts/SCRTest.json"):
+    extends AbstractScafiProgramTest(
+      List(
+        "knowledge/no-knowledge.md",
+        "knowledge/knowledge.md",
+        "knowledge/knowledge-with-building-blocks.md"
+      ),
+      "prompts/SCRTest.json",
+    ):
   override def testCase: String =
     "SCR where temperature is above 30 degrees within the area"
   override def baselineWorkingProgram(): String =

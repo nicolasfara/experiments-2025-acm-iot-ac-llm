@@ -5,7 +5,11 @@ import it.unibo.scafi.test.{ AbstractScafiProgramTest, FunctionalTestIncarnation
 
 class NeighboringMinDistanceTest
     extends AbstractScafiProgramTest(
-      List("knowledge/knowledge-with-building-blocks.md"),
+      List(
+        "knowledge/no-knowledge.md",
+        "knowledge/knowledge.md",
+        "knowledge/knowledge-with-building-blocks.md"
+      ),
       "prompts/NeighboringMinDistanceTest.json",
     ):
   override def testCase: String = "calculate the min distance from neighbors, in a grid"

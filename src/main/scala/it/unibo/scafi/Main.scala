@@ -15,8 +15,8 @@ import java.util.concurrent.Executors
   require(System.getenv("GEMINI_API_KEY") != null, "GEMINI_API_KEY environment variable must be set")
   val executor = Executors.newFixedThreadPool(1)
   given ExecutionContext = ExecutionContext.fromExecutor(executor)
-//  val tests = program.listPrograms()
-  val tests = List(GradientWithDistanceFromSourceAndObstacles())
+  val tests = program.listPrograms()
+//  val tests = List(GradientWithDistanceFromSourceAndObstacles())
 
   val allResultsFuture = Future
     .sequence:

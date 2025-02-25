@@ -6,7 +6,11 @@ import it.unibo.scafi.test.ScafiAssertions.assertNetworkValuesWithPredicate
 
 class NeighboringIdsTest
     extends AbstractScafiProgramTest(
-      List("knowledge/knowledge-with-building-blocks.md"),
+      List(
+        "knowledge/no-knowledge.md",
+        "knowledge/knowledge.md",
+        "knowledge/knowledge-with-building-blocks.md"
+      ),
       "prompts/NeighboringIdsTest.json",
     ):
   override def testCase: String = "gather the IDs of their neighbors"

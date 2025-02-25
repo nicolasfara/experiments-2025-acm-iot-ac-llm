@@ -1,0 +1,1 @@
+For the upcoming algorithms, use aggregate computing as the paradigm. Specifically, consider ScaFi as the reference library.

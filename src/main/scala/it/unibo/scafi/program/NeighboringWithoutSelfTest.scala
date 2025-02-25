@@ -6,7 +6,11 @@ import it.unibo.scafi.test.FunctionalTestIncarnation.Network
 
 class NeighboringWithoutSelfTest
     extends AbstractScafiProgramTest(
-      List("knowledge/knowledge-with-building-blocks.md"),
+      List(
+        "knowledge/no-knowledge.md",
+        "knowledge/knowledge.md",
+        "knowledge/knowledge-with-building-blocks.md"
+      ),
       "prompts/NeighboringWithoutSelfTest.json",
     ):
   override def testCase: String = "count neighbors excluding self"

@@ -2,11 +2,15 @@ package it.unibo.scafi.program
 
 import it.unibo.scafi.test.FunctionalTestIncarnation.Network
 import it.unibo.scafi.test.ScafiAssertions.assertNetworkValues
-import it.unibo.scafi.test.{AbstractScafiProgramTest, FunctionalTestIncarnation, ScafiTestResult}
+import it.unibo.scafi.test.{ AbstractScafiProgramTest, FunctionalTestIncarnation, ScafiTestResult }
 
 class CollectMaxIdTest
     extends AbstractScafiProgramTest(
-      List("knowledge/knowledge-with-building-blocks.md"),
+      List(
+        "knowledge/no-knowledge.md",
+        "knowledge/knowledge.md",
+        "knowledge/knowledge-with-building-blocks.md"
+      ),
       "prompts/CollectMaxIdTest.json",
     ):
   override def testCase: String = "collect the max ID in the network on each node"

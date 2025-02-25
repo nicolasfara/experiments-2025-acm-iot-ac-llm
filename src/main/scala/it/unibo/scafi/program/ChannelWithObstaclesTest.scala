@@ -6,7 +6,11 @@ import it.unibo.scafi.test.{ AbstractScafiProgramTest, FunctionalTestIncarnation
 
 class ChannelWithObstaclesTest
     extends AbstractScafiProgramTest(
-      List("knowledge/knowledge-with-building-blocks.md"),
+      List(
+        "knowledge/no-knowledge.md",
+        "knowledge/knowledge.md",
+        "knowledge/knowledge-with-building-blocks.md"
+      ),
       "prompts/ChannelTestWithObstacles.json",
     ):
   override def testCase: String = "create a channel (with obstacles) from the source node to the destination node"

@@ -5,7 +5,11 @@ import it.unibo.scafi.test.{ AbstractScafiProgramTest, FunctionalTestIncarnation
 
 class GradientWithDistanceFromSourceAndObstacles
     extends AbstractScafiProgramTest(
-      List("knowledge/knowledge-with-building-blocks.md"),
+      List(
+        "knowledge/no-knowledge.md",
+        "knowledge/knowledge.md",
+        "knowledge/knowledge-with-building-blocks.md"
+      ),
       "prompts/GradientWithDistanceFromSourceWithObstacles.json",
     ):
   override def testCase: String = "calculate the gradient (with obstacles) with distance from source"

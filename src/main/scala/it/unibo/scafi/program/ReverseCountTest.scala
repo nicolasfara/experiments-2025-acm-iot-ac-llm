@@ -6,7 +6,11 @@ import it.unibo.scafi.test.FunctionalTestIncarnation.Network
 
 class ReverseCountTest
     extends AbstractScafiProgramTest(
-      List("knowledge/knowledge-with-building-blocks.md"),
+      List(
+        "knowledge/no-knowledge.md",
+        "knowledge/knowledge.md",
+        "knowledge/knowledge-with-building-blocks.md"
+      ),
       "prompts/ReverseCountTest.json",
     ):
   override def testCase: String = "count down from 1000 to 0"
