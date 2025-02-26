@@ -188,8 +188,6 @@ if __name__ == '__main__':
         "NonCompiling",
     ]
 
-    print(df_reset)
-
     all_knowledge_files = df_reset["knowledgeFile"].unique()
     for knowledge_file in all_knowledge_files:
         df_knowledge_file = df_reset[df_reset["knowledgeFile"] == knowledge_file]
@@ -201,51 +199,29 @@ if __name__ == '__main__':
         
         # Map a barplot onto each facet. The bars are grouped by Model and colored by the Metric.
         g.map_dataframe(sns.barplot, x="Model", estimator=sum, order=row_order, y="Value", hue="Metric", hue_order=metric_order, palette="colorblind", errorbar=None)
-        g.set_titles(col_template="{col_name}")
+        g.set_titles(col_template="{col_name}", style='italic')
         g.set_ylabels("")
         g.add_legend(title="Metrics")
-        g.figure.suptitle(f"Results with {knowledge_file}", y=1.01)
+        g.figure.subplots_adjust(top=0.9)
+        g.figure.suptitle(f"Results with {knowledge_file}")
         # g.tight_layout()
         sns.move_legend(g, loc='lower center', bbox_to_anchor=(0.5, -0.04), ncol=3)
         knowledge_file = knowledge_file.replace("/", "_")
         g.savefig(output_charts_path / f'status_count_by_test_case_{knowledge_file}.pdf')
-        # plt.clf()
-        # sns.barplot(x='Model', y='Value', estimator=sum, hue='Metric', data=df_melted, palette="colorblind", errorbar=None)
-        # plt.tight_layout()
-        # plt.savefig(output_charts_path / f'status_count_by_models_{knowledge_file}.pdf')
-        # plt.clf()
 
     df_melted = pd.melt(df_reset, id_vars=['Model', 'knowledgeFile'],
                         value_vars=['Succeeded', 'NonCompiling', 'Failed'],
                         var_name='Metric', value_name='Value')
-    g = sns.FacetGrid(df_melted, col="knowledgeFile", sharey=True, height=4, aspect=1)
+    g = sns.FacetGrid(df_melted, col="knowledgeFile", sharey=True, height=4)
     g.map_dataframe(sns.barplot, x="Model", y="Value", hue="Metric", estimator=sum, hue_order=metric_order, palette="colorblind", errorbar=None)
-    g.set_titles(col_template="{col_name}")
+    g.set_titles(col_template="{col_name}", style='italic')
     g.set_ylabels("")
     g.add_legend(title="Metrics")
+    g.figure.subplots_adjust(top=0.9)
+    g.figure.suptitle("Results by Models per Knowledge File")
     g.tight_layout()
-    sns.move_legend(g, loc='lower center', bbox_to_anchor=(0.45, -0.15), ncol=3)
+    sns.move_legend(g, loc='lower center', bbox_to_anchor=(0.5, -0.15), ncol=3)
     knowledge_file = knowledge_file.replace("/", "_")
     g.savefig(output_charts_path / f'status_count_by_models_per_knowledge.pdf')
-        
-    # # Melt the DataFrame to a long format: one row per measure (Succeeded, NonCompiling, Failed, GenericErrors)
-    # df_melted = pd.melt(df_reset, id_vars=['TestCase', 'Model', 'knowledgeFile'], 
-    #                     value_vars=['Succeeded', 'NonCompiling', 'Failed'],
-    #                     var_name='Metric', value_name='Value')
-    
-    # # Create a FacetGrid for each test case
-    # g = sns.FacetGrid(df_melted, col="TestCase", col_order=col_order, col_wrap=4, sharey=True, height=4, aspect=1)
-    
-    # # Map a barplot onto each facet. The bars are grouped by Model and colored by the Metric.
-    # g.map_dataframe(sns.barplot, x="Model", order=row_order, y="Value", hue="Metric", hue_order=metric_order, palette="colorblind")
-    # g.set_titles(col_template="{col_name}")
-    # g.set_ylabels("")
-    # g.add_legend(title="Metrics")
-    # sns.move_legend(g, loc='lower center', bbox_to_anchor=(0.5, -0.1), ncol=3)
-    
-    # plt.tight_layout()
-    # g.savefig(output_charts_path / 'status_count_by_test_case.pdf')
 
-    # codes = produced_failed_code_for_test("create a channel (with obstacles) from the source node to the destination node")
-    # print(codes)
     
