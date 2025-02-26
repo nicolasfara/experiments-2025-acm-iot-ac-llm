@@ -11,7 +11,7 @@ def process_by_llm(data):
     aggregated_data = {
         'Model': [],
         'Succeeded': [],
-        'NonCompiling': [],
+        'Error': [],
         'Failed': [],
         # 'GenericErrors': []
     }
@@ -22,7 +22,7 @@ def process_by_llm(data):
             if model not in aggregated_data['Model']:
                 aggregated_data['Model'].append(model)
                 aggregated_data['Succeeded'].append(0)
-                aggregated_data['NonCompiling'].append(0)
+                aggregated_data['Error'].append(0)
                 aggregated_data['Failed'].append(0)
                 # aggregated_data['GenericErrors'].append(0)
             
@@ -31,7 +31,7 @@ def process_by_llm(data):
             
             # Sum the values for each status
             aggregated_data['Succeeded'][model_idx] += results['succeeded']
-            aggregated_data['NonCompiling'][model_idx] += results['nonCompiling']
+            aggregated_data['Error'][model_idx] += results['nonCompiling']
             aggregated_data['Failed'][model_idx] += results['failed']
             # aggregated_data['GenericErrors'][model_idx] += results['genericErrors']
 
@@ -48,7 +48,7 @@ def create_dataframe_with_index(data):
             rows.append((test_case, model, result['succeeded'], result['nonCompiling'], result['failed']))
     
     # Create a DataFrame from the rows
-    df = pd.DataFrame(rows, columns=['TestCase', 'Model', 'Succeeded', 'NonCompiling', 'Failed'])
+    df = pd.DataFrame(rows, columns=['TestCase', 'Model', 'Succeeded', 'Error', 'Failed'])
     
     # Set a multi-index using TestCase and Model
     df.set_index(['TestCase', 'Model'], inplace=True)
@@ -90,7 +90,7 @@ def foo(data):
             'knowledgeFile': knowledge_file,
             'Model': model_used,
             'Succeeded': 1 if result_type == 'Success' else 0,
-            'NonCompiling': 1 if result_type == 'CompilationFailed' else 0,
+            'Error': 1 if result_type == 'CompilationFailed' else 0,
             'Failed': 1 if result_type == 'TestFailed' else 0
         })
 
@@ -185,14 +185,14 @@ if __name__ == '__main__':
     metric_order = [
         "Succeeded",
         "Failed",
-        "NonCompiling",
+        "Error",
     ]
 
     all_knowledge_files = df_reset["knowledgeFile"].unique()
     for knowledge_file in all_knowledge_files:
         df_knowledge_file = df_reset[df_reset["knowledgeFile"] == knowledge_file]
         df_melted = pd.melt(df_knowledge_file, id_vars=['TestCase', 'Model', 'knowledgeFile'], 
-                        value_vars=['Succeeded', 'NonCompiling', 'Failed'],
+                        value_vars=['Succeeded', 'Error', 'Failed'],
                         var_name='Outcome', value_name='Value')
         # Create a FacetGrid for each test case
         g = sns.FacetGrid(df_melted, col="TestCase", col_order=col_order, col_wrap=4, sharey=True, height=4) #, height=4, aspect=1)
@@ -217,7 +217,7 @@ if __name__ == '__main__':
         g.savefig(output_charts_path / f'status_count_by_test_case_{knowledge_file}.pdf')
 
     df_melted = pd.melt(df_reset, id_vars=['Model', 'knowledgeFile'],
-                        value_vars=['Succeeded', 'NonCompiling', 'Failed'],
+                        value_vars=['Succeeded', 'Error', 'Failed'],
                         var_name='Outcome', value_name='Value')
     g = sns.FacetGrid(df_melted, col="knowledgeFile", sharey=True, height=4)
 
@@ -240,5 +240,77 @@ if __name__ == '__main__':
     sns.move_legend(g, loc='lower center', bbox_to_anchor=(0.5, -0.15), ncol=3)
     knowledge_file = knowledge_file.replace("/", "_")
     g.savefig(output_charts_path / f'status_count_by_models_per_knowledge.pdf')
+
+
+
+    df_reset = results_knowledge_models.reset_index()
+    df_reset["Category"] = df_reset["TestCase"].map({
+        "count down from 1000 to 0": "Space/Time", # Space/time
+        "count neighbors": "Space/Time",
+        "count neighbors excluding self": "Space/Time",
+        "gather the IDs of their neighbors": "Space/Time", 
+        "collect the max ID in the network on each node": "Spatio-temporal", # spatio-temporal
+        "calculate the min distance from neighbors, in a grid": "Spatio-temporal",
+        "calculate the gradient with distance from source": "Spatio-temporal",
+        "calculate the gradient (with obstacles) with distance from source": "Spatio-temporal", 
+        "create a channel from the source node to the destination node": "Building Blocks", # BB compositional
+        "create a channel (with obstacles) from the source node to the destination node": "Building Blocks",
+        "SCR where temperature is above 30 degrees within the area": "Building Blocks",
+    })
+    
+    df_reset["Model"] = df_reset["Model"].map({
+        "gemini-2.0-pro-exp-02-05": "2.0 Pro Exp",
+        "gemini-2.0-flash-exp": "2.0 Flash Exp",
+        "gemini-1.5-flash": "1.5 Flash",
+    })
+    df_reset["knowledgeFile"] = df_reset["knowledgeFile"].map({
+        "knowledge/knowledge-with-building-blocks.md": "Knowledge with Building Blocks",
+        "knowledge/no-knowledge.md": "No Knowledge",
+        "knowledge/knowledge.md": "Knowledge",
+    })
+    col_order = [
+        "Space/Time",
+        "Spatio-temporal",
+        "Building Blocks",
+    ]
+    
+    all_knowledge_files = df_reset["knowledgeFile"].unique()
+    for knowledge_file in all_knowledge_files:
+        df_knowledge_file = df_reset[df_reset["knowledgeFile"] == knowledge_file]
+        df_melted = pd.melt(df_knowledge_file, id_vars=['Model', 'knowledgeFile', 'Category'],
+                            value_vars=['Succeeded', 'Error', 'Failed'],
+                            var_name='Outcome', value_name='Value')
+        
+        g = sns.FacetGrid(df_melted, col="Category", col_order=col_order, sharey=True, height=4.5)
+        def barplot_with_values(data, **kwargs):
+            ax = plt.gca()
+            sns.barplot(data=data, x="Model", y="Value", hue="Outcome", estimator=sum, hue_order=metric_order, 
+                        palette=sns.color_palette(), errorbar=None, ax=ax)
+            
+            # Add text labels on bars
+            for container in ax.containers:
+                for model in data['Model'].unique():
+                    model_data = data[data['Model'] == model]
+                    total = model_data['Value'].sum()
+                    for p in container:
+                        percentage = f'{100 * np.nan_to_num(p.get_height() / total):.1f}%'
+                        ax.annotate(percentage, (p.get_x() + p.get_width() / 2., p.get_height()),
+                                    ha='center', va='center', fontsize=8, color='black', xytext=(0, 5),
+                                    textcoords='offset points')
+                # ax.bar_label(container, fmt='%.0f', label_type="edge", fontsize=10, padding=3)
+
+        knowledge_file = knowledge_file.replace("/", "_")
+        g.map_dataframe(barplot_with_values)
+        g.set_titles(col_template="{col_name}", style='italic')
+        g.set_ylabels("")
+        g.add_legend(title="Outcomes")
+        g.figure.subplots_adjust(top=0.9)
+        g.figure.suptitle(f"Results by Models per Category with {knowledge_file}")
+        g.tight_layout()
+        sns.move_legend(g, loc='lower center', bbox_to_anchor=(0.5, -0.15), ncol=3)
+        
+        g.savefig(output_charts_path / f'status_count_by_models_per_category_per_{knowledge_file}.pdf')
+
+
 
     
