@@ -23,7 +23,7 @@ abstract class AbstractScafiProgramTest(
       GeminiService.flashExp(GeminiService.Version.V2_0),
       GeminiService.proExp(GeminiService.Version.V2_0),
     ),
-    private val runs: Int = 5,
+    private val runs: Int = 10,
     private val raw: Boolean = false,
 ):
 

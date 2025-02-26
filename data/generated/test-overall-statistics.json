@@ -1,79 +1,73 @@
 {
-  "create a channel from the source node to the destination node" : {
-    "testName" : "create a channel from the source node to the destination node",
-    "succeeded" : 5,
-    "nonCompiling" : 29,
-    "failed" : 11,
-    "genericErrors" : 0
-  },
-  "collect the max ID in the network on each node" : {
-    "testName" : "collect the max ID in the network on each node",
-    "succeeded" : 24,
-    "nonCompiling" : 13,
-    "failed" : 8,
-    "genericErrors" : 0
-  },
-  "calculate the gradient with distance from source" : {
-    "testName" : "calculate the gradient with distance from source",
-    "succeeded" : 16,
-    "nonCompiling" : 16,
-    "failed" : 13,
-    "genericErrors" : 0
-  },
   "calculate the gradient (with obstacles) with distance from source" : {
-    "testName" : "calculate the gradient (with obstacles) with distance from source",
-    "succeeded" : 2,
-    "nonCompiling" : 22,
-    "failed" : 21,
-    "genericErrors" : 0
-  },
-  "count neighbors excluding self" : {
-    "testName" : "count neighbors excluding self",
-    "succeeded" : 22,
-    "nonCompiling" : 22,
-    "failed" : 1,
-    "genericErrors" : 0
-  },
-  "create a channel (with obstacles) from the source node to the destination node" : {
-    "testName" : "create a channel (with obstacles) from the source node to the destination node",
-    "succeeded" : 3,
-    "nonCompiling" : 27,
-    "failed" : 15,
-    "genericErrors" : 0
-  },
-  "count down from 1000 to 0" : {
-    "testName" : "count down from 1000 to 0",
-    "succeeded" : 34,
-    "nonCompiling" : 11,
-    "failed" : 0,
-    "genericErrors" : 0
-  },
-  "SCR where temperature is above 30 degrees within the area" : {
-    "testName" : "SCR where temperature is above 30 degrees within the area",
-    "succeeded" : 4,
-    "nonCompiling" : 30,
-    "failed" : 11,
-    "genericErrors" : 0
-  },
-  "calculate the min distance from neighbors, in a grid" : {
-    "testName" : "calculate the min distance from neighbors, in a grid",
-    "succeeded" : 8,
-    "nonCompiling" : 17,
-    "failed" : 20,
-    "genericErrors" : 0
-  },
-  "count neighbors" : {
-    "testName" : "count neighbors",
-    "succeeded" : 24,
-    "nonCompiling" : 20,
-    "failed" : 1,
-    "genericErrors" : 0
-  },
-  "gather the IDs of their neighbors" : {
-    "testName" : "gather the IDs of their neighbors",
-    "succeeded" : 27,
-    "nonCompiling" : 18,
-    "failed" : 0,
-    "genericErrors" : 0
+    "knowledge/knowledge.md" : {
+      "gemini-2.0-pro-exp-02-05" : {
+        "testName" : "calculate the gradient (with obstacles) with distance from source",
+        "succeeded" : 0,
+        "nonCompiling" : 2,
+        "failed" : 3,
+        "genericErrors" : 0
+      },
+      "gemini-2.0-flash-exp" : {
+        "testName" : "calculate the gradient (with obstacles) with distance from source",
+        "succeeded" : 0,
+        "nonCompiling" : 1,
+        "failed" : 4,
+        "genericErrors" : 0
+      },
+      "gemini-1.5-flash" : {
+        "testName" : "calculate the gradient (with obstacles) with distance from source",
+        "succeeded" : 0,
+        "nonCompiling" : 4,
+        "failed" : 1,
+        "genericErrors" : 0
+      }
+    },
+    "knowledge/no-knowledge.md" : {
+      "gemini-2.0-pro-exp-02-05" : {
+        "testName" : "calculate the gradient (with obstacles) with distance from source",
+        "succeeded" : 2,
+        "nonCompiling" : 3,
+        "failed" : 0,
+        "genericErrors" : 0
+      },
+      "gemini-2.0-flash-exp" : {
+        "testName" : "calculate the gradient (with obstacles) with distance from source",
+        "succeeded" : 0,
+        "nonCompiling" : 5,
+        "failed" : 0,
+        "genericErrors" : 0
+      },
+      "gemini-1.5-flash" : {
+        "testName" : "calculate the gradient (with obstacles) with distance from source",
+        "succeeded" : 0,
+        "nonCompiling" : 5,
+        "failed" : 0,
+        "genericErrors" : 0
+      }
+    },
+    "knowledge/knowledge-with-building-blocks.md" : {
+      "gemini-2.0-pro-exp-02-05" : {
+        "testName" : "calculate the gradient (with obstacles) with distance from source",
+        "succeeded" : 0,
+        "nonCompiling" : 5,
+        "failed" : 0,
+        "genericErrors" : 0
+      },
+      "gemini-2.0-flash-exp" : {
+        "testName" : "calculate the gradient (with obstacles) with distance from source",
+        "succeeded" : 0,
+        "nonCompiling" : 0,
+        "failed" : 5,
+        "genericErrors" : 0
+      },
+      "gemini-1.5-flash" : {
+        "testName" : "calculate the gradient (with obstacles) with distance from source",
+        "succeeded" : 0,
+        "nonCompiling" : 1,
+        "failed" : 4,
+        "genericErrors" : 0
+      }
+    }
   }
 }
