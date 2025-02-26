@@ -48,6 +48,7 @@ class GeminiService(val model: String, val apiKey: String) extends CodeGenerator
       cleaned = decodedPayload.candidates.head.content.parts.head.text
         .replaceAll("```scala\n", "")
         .replaceAll("```", "")
+        .replaceAll("`", "")
     yield cleaned
 
   override def generateMain(localKnowledge: String, prompt: String): ExecutionContext ?=> Future[String] =

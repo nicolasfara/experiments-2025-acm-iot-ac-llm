@@ -143,8 +143,8 @@ if __name__ == '__main__':
     df_reset = results_knowledge_models.reset_index()
     df_reset["TestCase"] = df_reset["TestCase"].map({
         "count down from 1000 to 0": "Count Down", # Space/time
-        "count neighbors": "Count Neighbors",
-        "count neighbors excluding self": "Count Neighbors Excluding Self",
+        "count neighbors": "Neighbors Count",
+        "count neighbors excluding self": "Neighbors Count Excluding Self",
         "gather the IDs of their neighbors": "Gather Neighbors IDs", 
         "collect the max ID in the network on each node": "Collect Max ID", # spatio-temporal
         "calculate the min distance from neighbors, in a grid": "Calculate Min Distance Neighbors",
@@ -166,8 +166,8 @@ if __name__ == '__main__':
     })
     col_order = [
         "Count Down",
-        "Count Neighbors",
-        "Count Neighbors Excluding Self",
+        "Neighbors Count",
+        "Neighbors Count Excluding Self",
         "Gather Neighbors IDs",
         "Collect Max ID",
         "Calculate Min Distance Neighbors",
@@ -193,15 +193,22 @@ if __name__ == '__main__':
         df_knowledge_file = df_reset[df_reset["knowledgeFile"] == knowledge_file]
         df_melted = pd.melt(df_knowledge_file, id_vars=['TestCase', 'Model', 'knowledgeFile'], 
                         value_vars=['Succeeded', 'NonCompiling', 'Failed'],
-                        var_name='Metric', value_name='Value')
+                        var_name='Outcome', value_name='Value')
         # Create a FacetGrid for each test case
         g = sns.FacetGrid(df_melted, col="TestCase", col_order=col_order, col_wrap=4, sharey=True, height=4) #, height=4, aspect=1)
-        
-        # Map a barplot onto each facet. The bars are grouped by Model and colored by the Metric.
-        g.map_dataframe(sns.barplot, x="Model", estimator=sum, order=row_order, y="Value", hue="Metric", hue_order=metric_order, palette=sns.color_palette(), errorbar=None)
+        def barplot_with_values(data, **kwargs):
+            ax = plt.gca()
+            sns.barplot(data=data, x="Model", estimator=sum, order=row_order, y="Value", hue="Outcome",
+                        hue_order=metric_order, palette=sns.color_palette(), errorbar=None, ax=ax)
+
+            # Add text labels on bars
+            for container in ax.containers:
+                ax.bar_label(container, fmt='%.0f', label_type="edge", fontsize=10, padding=3)
+
+        g.map_dataframe(barplot_with_values)
         g.set_titles(col_template="{col_name}", style='italic')
         g.set_ylabels("")
-        g.add_legend(title="Metrics")
+        g.add_legend(title="Outcomes")
         g.figure.subplots_adjust(top=0.9)
         g.figure.suptitle(f"Results with {knowledge_file}")
         # g.tight_layout()
@@ -211,12 +218,22 @@ if __name__ == '__main__':
 
     df_melted = pd.melt(df_reset, id_vars=['Model', 'knowledgeFile'],
                         value_vars=['Succeeded', 'NonCompiling', 'Failed'],
-                        var_name='Metric', value_name='Value')
+                        var_name='Outcome', value_name='Value')
     g = sns.FacetGrid(df_melted, col="knowledgeFile", sharey=True, height=4)
-    g.map_dataframe(sns.barplot, x="Model", y="Value", hue="Metric", estimator=sum, hue_order=metric_order, palette=sns.color_palette(), errorbar=None)
+
+    def barplot_with_values(data, **kwargs):
+        ax = plt.gca()
+        sns.barplot(data=data, x="Model", y="Value", hue="Outcome", estimator=sum, hue_order=metric_order, 
+                    palette=sns.color_palette(), errorbar=None, ax=ax)
+        
+        # Add text labels on bars
+        for container in ax.containers:
+            ax.bar_label(container, fmt='%.0f', label_type="edge", fontsize=10, padding=3)
+
+    g.map_dataframe(barplot_with_values)
     g.set_titles(col_template="{col_name}", style='italic')
     g.set_ylabels("")
-    g.add_legend(title="Metrics")
+    g.add_legend(title="Outcomes")
     g.figure.subplots_adjust(top=0.9)
     g.figure.suptitle("Results by Models per Knowledge File")
     g.tight_layout()
