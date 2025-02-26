@@ -198,7 +198,7 @@ if __name__ == '__main__':
         g = sns.FacetGrid(df_melted, col="TestCase", col_order=col_order, col_wrap=4, sharey=True, height=4) #, height=4, aspect=1)
         
         # Map a barplot onto each facet. The bars are grouped by Model and colored by the Metric.
-        g.map_dataframe(sns.barplot, x="Model", estimator=sum, order=row_order, y="Value", hue="Metric", hue_order=metric_order, palette="colorblind", errorbar=None)
+        g.map_dataframe(sns.barplot, x="Model", estimator=sum, order=row_order, y="Value", hue="Metric", hue_order=metric_order, palette=sns.color_palette(), errorbar=None)
         g.set_titles(col_template="{col_name}", style='italic')
         g.set_ylabels("")
         g.add_legend(title="Metrics")
@@ -213,7 +213,7 @@ if __name__ == '__main__':
                         value_vars=['Succeeded', 'NonCompiling', 'Failed'],
                         var_name='Metric', value_name='Value')
     g = sns.FacetGrid(df_melted, col="knowledgeFile", sharey=True, height=4)
-    g.map_dataframe(sns.barplot, x="Model", y="Value", hue="Metric", estimator=sum, hue_order=metric_order, palette="colorblind", errorbar=None)
+    g.map_dataframe(sns.barplot, x="Model", y="Value", hue="Metric", estimator=sum, hue_order=metric_order, palette=sns.color_palette(), errorbar=None)
     g.set_titles(col_template="{col_name}", style='italic')
     g.set_ylabels("")
     g.add_legend(title="Metrics")
