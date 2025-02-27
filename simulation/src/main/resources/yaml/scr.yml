@@ -1,0 +1,51 @@
+incarnation: scafi
+
+variables:
+  seed: &seed
+    min: 0
+    max: 1
+    step: 1
+    default: 0
+
+seeds:
+  scenario: *seed
+  simulation: *seed
+
+monitors:
+  - type: SwingGUI
+    parameters:
+      graphics: effects/scr.json
+
+launcher:
+  parameters: []
+  autoStart: true
+
+network-model:
+  type: ConnectWithinDistance
+  parameters: [30]
+
+_constants:
+  retentionTime: &retentionTime 25.0
+
+_programs:
+  - program: &gradient
+      - time-distribution: 1
+        type: Event
+        actions:
+          - type: RunScafiProgram
+            parameters: [ "it.unibo.alchemist.programs.ScrProgram", *retentionTime ]
+      - program: send
+
+environment:
+  type: Continuous2DEnvironment
+  parameters: []
+
+deployments:
+  - type: Rectangle
+    parameters: [200, 0, 0, 200, 200]
+    programs:
+      - *gradient
+
+terminate:
+  type: AfterTime
+  parameters: 100
