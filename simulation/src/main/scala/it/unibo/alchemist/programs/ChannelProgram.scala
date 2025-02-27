@@ -8,7 +8,7 @@ class ChannelProgram extends AggregateProgram with StandardSensors with ScafiAlc
   override def main(): Boolean = {
     val obstacle = mid() % 9 == 0 && mid() != 0
     val sourceCondition = mid() == 0
-    val destinationCondition = mid() == 82
+    val destinationCondition = mid() == 399
     node.put("source", sourceCondition)
     node.put("destination", destinationCondition)
     node.put("obstacle", obstacle)
