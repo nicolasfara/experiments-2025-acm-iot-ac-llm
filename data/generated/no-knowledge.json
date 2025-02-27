@@ -1,0 +1,1817 @@
+[
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    source_node = Node('source')\n    destination_node = Node('destination')\n    channel = Channel(source_node, destination_node)\n\n    # Add nodes and channel to the ScaFi network (Assuming a ScaFi network object exists)\n    # network.add_node(source_node)\n    # network.add_node(destination_node)\n    # network.add_channel(channel)\n\n    print(f\"Channel created from {source_node.id} to {destination_node.id}\")\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "  val sourceId = node.get(\"source\").map(_.toString).getOrElse(\"source\")\n  val destinationId = node.get(\"destination\").map(_.toString).getOrElse(\"destination\")\n\n  if (node.getContext() == sourceId) {\n    broadcast(Set(destinationId), 1) // Send a signal to the destination\n  }\n\n  val pathExists = foldhood(false)(_ || _)(nbr(connectedTo(Set(sourceId))))\n\n  node.put(\"pathExists\", pathExists)\n\n  if (node.getContext() == destinationId) {\n    node.put(\"isReachable\",pathExists) // Destination knows it's reachable\n  }\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val source = 0 // Assuming source node ID is 0\nval destination = 1 // Assuming destination node ID is 1\n\nval isSource = mid() == source\nval isDestination = mid() == destination\n\nmux(isSource) {\n    channel[Int, Int](isSource, nbr(mid()))\n} {\n    mux(isDestination) {\n      sense[Int](\"channel-receive\")\n    } {\n      val received = sense[Int](\"channel-receive\")\n      val sent = nbr(received)\n      send(\"channel-send\", sent)\n    }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    import scafi\n    topology = scafi.Scenario.Topology(nodes={\"source\": (0, 0), \"destination\": (10, 10)})\n    channel = scafi.Channel(topology, \"source\", \"destination\")\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  source_node = sense[ID] == \"source\"\n  destination_node = sense[ID] == \"destination\"\n\n  if source_node:\n    channel = 1.0 # Some initial value, can be anything non-zero.  0 will break gradient calculations.\n  else:\n    channel = 0.0\n\n  channel = nbr_max(channel) # Propagate the channel value\n\n  if destination_node:\n    print(f\"Channel received at destination node {ID}: {channel}\")\n\n  # The channel variable now contains a non-zero value if a path exists from source to destination.\n  # Further computations can be based on this \"channel\". E.g., gradient-based routing.\n  \n  print(f\"Node {ID} channel value: {channel}\")\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "java\nrequire(\"context.vm\");\n\nObject sourceId = context.sense(\"source\");\nObject destinationId = context.sense(\"destination\");\n\nreturn mux(sourceId.equals(context.selfUID())){\n    path(destinationId, () -> 1.0);\n} else {\n    Double distance = nbr(Double.POSITIVE_INFINITY, () -> {\n        mux(sourceId.equals(context.selfUID())) {\n            0.0;\n        } else {\n            minHoodPlus(nbr(Double.POSITIVE_INFINITY));\n        }\n    });\n    path(destinationId, () -> distance);\n};\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    source_node = 'source'\n    destination_node = 'destination'\n\n    # Create a channel using ScaFi's channel creation function (assuming such a function exists).\n    # Replace 'scafi_channel_creation_function' with the actual function name from ScaFi.\n    channel = scafi_channel_creation_function(source_node, destination_node)\n\n    # Check if channel creation was successful.  Error handling should be more robust in a real application.\n    if channel is None:\n        print(f\"Failed to create channel between {source_node} and {destination_node}\")\n    else:\n        print(f\"Channel created successfully between {source_node} and {destination_node}\")\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  if mid() == source:\n    mux(False, 0.0, send(destination, 1.0))\n  elif receive() > 0.0:\n    println(\"Message received at destination: \" + mid())\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "java\nrequire(alignedWith(\"source\")); // Or alignedWith(source). This line ensures spatial alignment.\nmux(nbr(sense[Boolean](\"source\"))){\n    path(sense[Boolean](\"destination\"))\n}{\n    false\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    source_node = \"source\"\n    destination_node = \"destination\"\n\n    try:\n        channel = scafi_proxy.create_channel(source_node, destination_node)\n        print(f\"Channel created successfully between {source_node} and {destination_node}: {channel}\")\n    except Exception as e:\n        print(f\"Error creating channel: {e}\")\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "  val sourceNodeId = node.get(\"source\").get.asInstanceOf[ID]\n  val destinationNodeId = node.get(\"destination\").get.asInstanceOf[ID]\n\n  if (node.getContext() == sourceNodeId) {\n    // Source node: start the communication\n    P2PChannel.send(destinationNodeId, \"message\", \"hello from source!\")\n    println(s\"Node ${node.getContext()} sent message to ${destinationNodeId}\")\n  } else {\n    // Other nodes: listen for messages and forward if necessary\n    P2PChannel.receive.foreach {\n      case (senderId, messageType, message) =>\n        if (node.getContext() == destinationNodeId) {\n          // Destination node: process the message\n          println(s\"Node ${node.getContext()} received message from ${senderId}: ${message}\")\n        } else {\n          // Intermediate node: forward the message (if needed, implement routing logic here)\n          // This is a simplified example without explicit routing, assuming direct connection\n          println(s\"Node ${node.getContext()} received message from ${senderId}, not destination, dropping\")\n        }\n    }\n  }\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "java\nrequire(aligned(source, destination)); // Ensure alignment for path creation\n\nPath p = distanceTo(source); // Compute distances from the source\n\nbranch(source) {\n    // At the source, initiate a zero-length path\n    p\n} {\n    // Elsewhere, extend the path towards the destination\n    mux(nbr(p) < p) {\n        fromSource(source) // Path \"advances\" by connecting to neighbours closer to the source\n    } {\n        Double.POSITIVE_INFINITY // Disconnect the path if no neighbor is closer to the source\n    }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    source_node = Node(\"source\")\n    destination_node = Node(\"destination\")\n    channel = Channel(source_node, destination_node)\n\n    # Add nodes and channel to ScaFi environment (assuming appropriate ScaFi setup is done beforehand)\n    # ... (ScaFi specific code to add nodes and channel to the environment) ...\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "  val sourceNode = node.get(\"source\", false)\n  val destinationNode = node.get(\"destination\", false)\n\n  if (sourceNode) {\n    broadcast(1000, mid()) // Broadcast unique ID from source\n  }\n\n  val sourceId = sense[ID](\"sourceId\", null)\n\n  if (sourceId == null) {\n    sense[ID](\"sourceId\", receive())\n  }\n\n  if (destinationNode) {\n    val sId = sourceId.eval()\n    if (sId != null) {\n      println(s\"Destination node received signal from source with ID: ${sId.toString}\")\n    }\n  }\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\nmux(mid() == \"source\") {\n    nbr(false)\n} {\n    val ch = channel(\"destination\")\n    send(ch, nbr(sense[Int](\"source\")))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    source_node = node('source')\n    destination_node = node('destination')\n    obstacles = [node(f'obstacle_{i}') for i in range(num_obstacles)]\n\n    try:\n        channel = create_channel(source_node, destination_node, avoid_nodes=obstacles)\n        return True\n    except ChannelCreationError:\n        return False\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "  val sourceNode = sense[Boolean](\"source\")\n  val destinationNode = sense[Boolean](\"destination\")\n  val obstacle = sense[Boolean](\"obstacle\")\n\n  val initialValue = if (sourceNode) 0.0 else Double.PositiveInfinity\n\n  val distanceVector = distanceTo(initialValue, obstacle)\n\n  val pathAvailable = !destinationNode || distanceVector < Double.PositiveInfinity\n\n  pathAvailable\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "java\nreturn rep(false, (channel) -> {\n    Path path = GAlongWithObstacle(\n        channel,\n        nbr(distanceTo(same(node.id, \"source\"))),\n        nbr(distanceTo(same(node.id, \"destination\"))),\n        obstacle()\n    );\n    boolean reached = same(node.id, \"destination\") && path != null && !path.isEmpty();\n    return reached;\n});\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    source_node = 'source'\n    destination_node = 'destination'\n    obstacle_nodes = scafi_proxy.nodes(lambda n: n.is_obstacle == True)\n\n    try:\n        scafi_proxy.create_channel(source_node, destination_node, avoid_nodes=obstacle_nodes)\n        return True\n    except scafi_proxy.ChannelCreationError:\n        return False\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\nsource_node = sense('source')\ndestination_node = sense('destination')\nobstacle = sense('obstacle')\n\nif source_node:\n    field = 0.0\nelse:\n    field = Float.POSITIVE_INFINITY\n\nfield = mux(obstacle, Float.POSITIVE_INFINITY, field)\n\ndistance = distanceToSource(field)\n\nif destination_node:\n    if distance < Float.POSITIVE_INFINITY:\n        return True\n    else:\n        return False\nelse:\n    return False\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "java\nboolean source = context.isSelf(context.source());\nboolean destination = context.isSelf(context.destination());\nboolean obstacle = context.sensor(\"obstacle\", () -> false);\n\nPath path = rep(Path.empty(), p ->\n    mux(source, Path.of(context.selfID()),\n        mux(obstacle, Path.empty(),\n            minHoodPlusSelf(nbr(p).push(context.selfID()))\n        )\n    )\n);\n\nreturn !path.contains(context.destination()) ? false : true;\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    nodes = network.nodes\n    source_node = next((node for node in nodes if node.id == 'source'), None)\n    destination_node = next((node for node in nodes if node.id == 'destination'), None)\n\n    if source_node is None or destination_node is None:\n        return False\n\n    obstacles = [node for node in nodes if isinstance(node, BooleanSensor) and node.id.startswith('obstacle')]\n\n    path = scafi_routing.find_path(source_node, destination_node, obstacles)\n\n    if path:\n        channel = scafi_channel.create_channel(source_node, destination_node, path)\n        return channel is not None\n    else:\n        return False\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "  val sourceNodeId = node.get(\"source\").getOrElse(false)\n  val destinationNodeId = node.get(\"destination\").getOrElse(false)\n  val obstacle = sense[Boolean](\"obstacle\")\n  val myId = mid()\n\n  val isSource = myId == sourceNodeId\n  val isDestination = myId == destinationNodeId\n\n  val path: Map[ID, ID] = rep(Map.empty[ID, ID]) { p =>\n    mux(isSource) {\n      Map(myId -> myId)\n    } {\n      val candidates = excludingSelf.minHood(nbr(distanceToSource) + (if (obstacle) Double.PositiveInfinity else 0.0))((nbr(distanceToSource), mid()))\n      candidates.collect { case (d, id) if d < Double.PositiveInfinity => id._2 -> myId }.headOption match {\n        case Some(predecessorId) =>\n          p ++ Map(myId -> predecessorId)\n        case None =>\n          p\n      }\n    }\n  }\n\n  val distanceToSource: Double = rep(Double.PositiveInfinity) { dist =>\n    mux(isSource) {\n      0.0\n    } {\n      excludingSelf.minHoodPlus(nbr(dist) + 1.0 + (if (obstacle) Double.PositiveInfinity else 0.0))\n    }\n  }\n\n  val inPath: Boolean = rep(false) { in =>\n    mux(isDestination) {\n      true\n    } {\n      val predecessor = path.get(myId)\n      predecessor match {\n        case Some(pred) =>\n          nbr(inPath) && (pred == myId)\n        case None =>\n          false\n      }\n    }\n  }\n\n  val pathExists = converge(inPath)(_ || nbr(inPath))\n\n  if (isDestination) {\n    pathExists\n  } else {\n    false\n  }\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "java\nBoolean channelCreated = false;\nPath pathToDestination =\n    distanceTo(source())\n        .exclude(obstacle())\n        .shortestPathTo(neighbor == destination()); // N.B.: Assume comparison between devices using ==\nchannelCreated = pathToDestination != null && pathToDestination.isDefined();\nreturn channelCreated;\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    source_node = 'source'\n    destination_node = 'destination'\n    obstacle_nodes = scafi_proxy.nodes(type='obstacle')\n\n    try:\n        scafi_proxy.channel(source_node, destination_node, avoid=obstacle_nodes)\n        return True\n    except scafi_proxy.ChannelCreationError:\n        return False\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\nsource_node = sense('source')\ndestination_node = sense('destination')\nobstacle = sense('obstacle')\n\nif source_node:\n    field = distanceToSource()\nelse:\n    field = Float.POSITIVE_INFINITY\n\nobstacle_influence = mux(obstacle, Float.POSITIVE_INFINITY, 0.0)\naugmented_field = field + obstacle_influence\n\nmin_neighbor_field = minHoodPlus(augmented_field)\n\nnext_hop = select(source_node, ID(),\n                  gradient(min_neighbor_field))\n\nif destination_node:\n    channel_established = True\nelse:\n    channel_established = False\n\nneighbor_channel_status = nbr(channel_established)\nchannel_established = neighbor_channel_status or channel_established\n\nif source_node:\n    return channel_established\nelse:\n    return False\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "java\naggregate({\n    // Initial condition: distance is infinity everywhere except at the source, which is 0.\n    Double initialDistance = (mid() == source) ? 0.0 : Double.POSITIVE_INFINITY;\n\n    // Path planning using gradient-like propagation, avoiding obstacles.\n    Double distance = rep(initialDistance, (d) -> {\n        mux(obstacle, Double.POSITIVE_INFINITY, // Obstacles have infinite distance\n            minHoodPlus(nbr(d) + nbrRange())); // Find the minimum distance from neighbors\n    });\n\n    // Check if the destination is reachable.\n    boolean destinationReachable = (distance != Double.POSITIVE_INFINITY) && (mid()==destination); //check reachability ONLY on destination\n\n    return (mid()==destination)?destinationReachable:false; //return the reachability, but only from the destination node.\n\n\n});\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    source_node = 'source'\n    destination_node = 'destination'\n    obstacle_nodes = scafi_proxy.nodes(lambda node: node.type == 'obstacle')\n\n    try:\n        scafi_proxy.create_channel(source_node, destination_node, avoid_nodes=obstacle_nodes)\n        return True\n    except scafi_proxy.ChannelCreationError:\n        return False\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  source_node = node.get(\"source\", False)\n  destination_node = node.get(\"destination\", False)\n  obstacle_node = node.get(\"obstacle\", False)\n\n  if source_node and id() == 0:\n    neighbor_distances = neighborhoodDistances()\n    min_distance = minHood(neighbor_distances)\n    \n    if destination_node:\n      exchange(True)\n      return True\n    \n    if not obstacle_node:\n      exchange(min_distance < 1)\n      return min_distance < 1\n    else:\n      exchange(False)\n      return False\n  elif destination_node and id() == 1:\n    neighbor_distances = neighborhoodDistances()\n    min_distance = minHood(neighbor_distances)\n    \n    if source_node:\n      exchange(True)\n      return True\n    \n    if not obstacle_node:\n      exchange(min_distance < 1)\n      return min_distance < 1\n    else:\n      exchange(False)\n      return False\n\n  else:\n    neighbor_distances = neighborhoodDistances()\n    min_distance = minHood(neighbor_distances)\n    received_value = perceive(lambda n: n)\n    \n    if not obstacle_node and received_value:\n      exchange(min_distance < 1)\n      return min_distance < 1\n    else:\n      exchange(False)\n      return False\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "java\nreturn rep(false, acc => {\n    mux(mid() == \"source\",\n        true,\n        anyHood(nbr(acc) && !nbr(sense(\"obstacle\"))));\n}) && mid() == \"destination\";\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    from scafi import aggregate\n\n    max_id = aggregate(lambda node: node.id, max)\n\n    print(f\"The maximum ID in the network is: {max_id}\")\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "  val maxId = foldhoodMax(mid())\n  println(s\"My ID: ${mid()}, Max ID in the network: $maxId\")\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(Int.MinValue) { maxId =>\n  mux(mid == nbr(mid)) {\n    max(nbr(maxId))\n  } {\n    maxId\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  max_id = scafi_proxy.aggregate(lambda x: x.id, max)\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "  val maxId = maxHood(mid())\n  println(s\"The maximum ID in the network is: $maxId\")\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(Int.MinValue) { maxId =>\n  mux(mid() == nbr(mid())) {\n    max(maxId, nbr(maxId))\n  } {\n    max(maxId, maxHood(nbr(maxId)))\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    max_id = scafi_proxy.aggregate(lambda x: x.id, max)\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "  val maxId = maxHood(mid())\n  println(s\"Max ID in the network: $maxId\")\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "mux(sense[Int](\"id\").isDefined) {\n  rep(Double.NegativeInfinity) { mx =>\n    maxHood(nbr(mx) + sense[Int](\"id\").get)\n  }\n} {\n  Double.NegativeInfinity\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    max_id = scafi_proxy.aggregate(\n        lambda x: x.id,  # Function to extract the ID from each node\n        lambda x, y: max(x, y) # Aggregation function: max\n    )\n    print(f\"The maximum ID in the network is: {max_id}\")\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "  val maxId = maxHood(mid())\n  println(s\"Max ID: $maxId\")\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.MinValue) { maxId =>\n  mux(nbr(maxId) > maxId) {\n    nbr(maxId)\n  } {\n    maxId\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  agg_max_id = scafi_proxy.aggregate(lambda x: x.id, scafi_proxy.all_nodes(), aggregate_op=max)\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "  val maxId = foldhood(mid())(_ max _)\n  println(s\"My ID: ${mid()}, Max ID in the network: $maxId\")\n  maxId\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Int.MinValue) { maxId =>\n  mux(nbr(maxId) > maxId) {\n    nbr(maxId)\n  } { maxId }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    import scafi\n    from scafi_py import aggregate\n    from scafi_py.aggregate import Aggregate\n\n    @scafi.model\n    class Model(scafi.Scafi):\n        source_pos: scafi.Location[scafi.Vector2D]\n\n        @scafi.property\n        def euclidean_distance(self) -> float:\n            if self.id == 'source':\n                return 0.0\n            else:\n                return (self.pos - self.source_pos).magnitude\n\n\n    @scafi.batch\n    def batch_euclidean_distance(self):\n        self.euclidean_distance = aggregate(self.euclidean_distance, lambda x: x)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val sourceSensor = sense[Boolean](\"source\")\nval isSource = sourceSensor.getOrElse(false)\n\nval distance = if (isSource) {\n  0.0\n} else {\n  mux(round > 1, minHoodPlus(nbrRange() + distance), Double.MaxValue)\n}\n\ndistance\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(Double.MaxValue) { d =>\n  mux(sense[Boolean](\"source\"), 0.0, nbr(d) + nbrRange())\n}.toInt\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    source_node = network.get_node('source')\n    if source_node is None:\n        print(\"Source node 'source' not found.\")\n        return\n\n    distances = scafi_proxy.aggregate(\n        lambda node: (node.id, euclidean_distance(node.location, source_node.location)),\n        aggregate_op=lambda acc, x: acc + [x] if acc else [x],\n        initial_value=[],\n        nodes=network.nodes\n    )\n\n    print(\"Euclidean distances from source:\")\n    for node_id, distance in distances:\n        print(f\"Node {node_id}: {distance}\")\n\ndef euclidean_distance(point1, point2):\n    return math.sqrt((point1.x - point2.x)**2 + (point1.y - point2.y)**2)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  source_id = sense('source')\n  distances = foldhood(lambda acc, id, dist: acc + [(id,dist)], [], nbrRange())\n  \n  if source_id:\n    distances = [(mid(), 0.0)]\n    \n  min_dist = min([d for _, d in distances], default=float('inf'))\n    \n  if min_dist < float('inf'):\n    old_val = mux(min_dist == 0.0, 0.0, local()) # Use local to avoid multiple source issue\n    output(min_dist)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val sourceId = sensor(\"source\")\nrep(Double.PositiveInfinity) { distance =>\n  mux(mid() == sourceId) { 0.0 } {\n    minHoodPlus(nbr(distance) + nbrRange())\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    import scafi\n\n    # Define the node type\n    class MyNode(scafi.Node):\n        source_pos: scafi.Point2D\n        my_id: int\n\n    # Define the aggregate function\n    @scafi.aggregate\n    def euclidean_distance(node: MyNode, aggregate: scafi.Aggregate[float]) -> None:\n        if node.my_id == 0: # Assuming source has ID 0\n            aggregate.value = 0.0\n            node.source_pos = node.position\n        else:\n            distance = node.position.distance(node.source_pos)\n            aggregate.value = distance\n\n    # Initialize the simulation\n    simulation = scafi.ScaFiSimulation(MyNode, model={\"my_id\": lambda n: n.id})\n\n    # Place nodes (replace with your actual node placement)\n    nodes = simulation.add_nodes(10) #Example 10 nodes\n\n    #Get a reference to the source node\n    source_node = nodes[0]\n    source_node.my_id = 0\n\n    # Run the aggregate function\n    distances = simulation.run(euclidean_distance, nodes=nodes)\n\n    # Print the results\n    for i, node in enumerate(nodes):\n        print(f\"Node {i}: Distance from source = {distances[i]}\")\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\nsource_sensor = sense('source')\nsource = source_sensor if source_sensor is not None else False\ndistance = distanceTo(source)\nwrite('distance', distance)\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(Double.PositiveInfinity) { d =>\n  mux(sense[Boolean](\"source\")) { 0.0 } {\n    minHoodPlus(nbr(d) + nbrRange())\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    # Initialize ScaFi environment and get the source node\n    source_node = sf.get_node('source')\n\n    # Define a function to compute Euclidean distance\n    def euclidean_distance(node1, node2):\n        return ((node1.x - node2.x)**2 + (node1.y - node2.y)**2)**0.5\n\n    # Aggregate computation: compute distance from each node to the source\n    distances = sf.aggregate(lambda node: euclidean_distance(node, source_node),\n                             aggregate_op=lambda x: x)\n\n    # The distances dictionary now holds distances from each node to the source.  You can access them using node IDs.\n    # For example to print the distance of a node with id 'node1':\n    # print(distances['node1'])\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  source_sensor = sense('source')\n  source = source_sensor if source_sensor is not None else False\n  distance = distance_to(source)\n  neighbour_distance = nbr(distance)\n  distance = min_hood(neighbour_distance) if neighbour_distance else distance\n  \n  return distance\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(Double.PositiveInfinity) { d =>\n  mux(sense[Boolean](\"source\")) { 0.0 } {\n    minHoodPlus(nbr(d) + nbrRange())\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    source_node = next((node for node in scafi_sim.nodes if node.attributes['name'] == 'source'), None)\n    if source_node is None:\n        print(\"Source node not found\")\n        return\n\n    distances = scafi_sim.aggregate(\n        lambda node: ((node.location - source_node.location).magnitude(), node.attributes['id']),\n        lambda d1, d2: (min(d1[0], d2[0]), d1[1] if d1[0] < d2[0] else d2[1]),\n        lambda d: (d[0], d[1])\n    )\n\n    print(f\"Euclidean distances from source: {distances}\")\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  source_sensor = sense('source')\n  source = source_sensor if source_sensor is not None else False\n  distance = distanceTo(source) if source else float('inf')\n  neighbour_distances = nbr(distance)\n  min_distance = min([distance] + list(neighbour_distances.values()))\n  distance = min_distance\n  \n  # Optional: Publish the distance for debugging or further use\n  # publish('distance_from_source', distance)\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val sourceId = sensor(\"source\")\nrep(Double.PositiveInfinity) { distance =>\n    mux(mid() == sourceId) { 0.0 } {\n      minHoodPlus(nbr(distance) + nbrRange())\n    }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    source_loc = sf.get_location('source')\n    obstacles = sf.get_sensors_by_type('obstacle')\n    \n    distances = {}\n    \n    for sensor_id, location in sf.get_locations().items():\n        path_clear = True\n        \n        #Check for obstacles along the straight line path.  This is a simplification\n        #and a more robust algorithm would use pathfinding.\n        for obs_id, obs_loc in obstacles.items():\n            if is_point_on_segment(source_loc, location, obs_loc):\n                path_clear = False\n                break\n\n        if path_clear:\n            distance = euclidean_distance(source_loc, location)\n            distances[sensor_id] = distance\n\n    sf.publish_data('distances', distances)\n\n\ndef euclidean_distance(point1, point2):\n    return math.sqrt((point1[0] - point2[0])**2 + (point1[1] - point2[1])**2)\n\ndef is_point_on_segment(p1, p2, p):\n    #check if point p is on the segment defined by p1 and p2. This is a simplification\n    #and a more robust algorithm would account for numerical imprecision\n    cross_product = (p2[1] - p1[1]) * (p[0] - p2[0]) - (p2[0] - p1[0]) * (p[1] - p2[1])\n    if abs(cross_product) > 1e-6:\n        return False\n\n    dot_product = (p[0] - p1[0]) * (p2[0] - p1[0]) + (p[1] - p1[1]) * (p2[1] - p1[1])\n    if dot_product < 0:\n        return False\n\n    squared_length = (p2[0] - p1[0])**2 + (p2[1] - p1[1])**2\n    if dot_product > squared_length:\n        return False\n\n    return True\n\nimport math\nimport scafi as sf\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\nsource_node = sense('source', False)\nobstacle = sense('obstacle', False)\n\ndistance_field = rep(('inf' if not source_node else 0),\n                    lambda dist: min_nn(nbr_range_eq(True) and not obstacle,\n                                       lambda id, d: d + 1))\n\nalign_distance = mux(obstacle, 'inf', distance_field)\n\nbroadcast(align_distance)\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val distances = rep(Double.PositiveInfinity) { distance =>\n  mux(sense(\"source\"), 0.0, distance)\n}\n\nval obstacles = sense(\"obstacle\")\n\nfoldhood(distances){ case (acc, dist) =>\n      if (!obstacles) {\n          minHood(nbr(dist) + nbrRange())\n      } else\n        acc\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    source_location = scafi_proxy.get_location('source')\n    obstacles = scafi_proxy.get_sensors('obstacle')\n\n    distances = {}\n    distances['source'] = 0\n\n    q = deque([(source_location, 0)]) # location, distance\n\n    while q:\n        loc, dist = q.popleft()\n        for neighbor in scafi_proxy.get_neighbors(loc):\n            if scafi_proxy.get_sensor_value('obstacle', neighbor) == False and neighbor not in distances:\n                distances[neighbor] = dist + scafi_proxy.get_distance(loc, neighbor)\n                q.append((neighbor, distances[neighbor]))\n\n    scafi_proxy.set_data(distances)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  source_id = sense('source', -1)\n  obstacle = sense('obstacle', False)\n  \n  def potential_field(x, y):\n    repulsive_force = 0\n    if obstacle:\n      repulsive_force = 1000 #High value to strongly repel from obstacles\n    \n    attractive_force = math.sqrt((x - source_x)**2 + (y - source_y)**2)\n    \n    return attractive_force + repulsive_force\n    \n\n  if source_id == mid():\n    source_x = x()\n    source_y = y()\n    distance = 0.0\n    output = distance\n  else:\n    source_x = nbr(lambda: x(), source_id)\n    source_y = nbr(lambda: y(), source_id)\n    \n    if source_x == None or source_y == None:\n       output = float('inf') #If source coordinates are not available, set distance to infinity\n    else:\n      distance = min_hood(potential_field(x(),y()) + nbr_range())\n      output = distance\n    \n  display(output, 'distance_from_source') #Display value\n  return output\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "val distances = rep(Double.PositiveInfinity) { d =>\n  mux(sense[Boolean](\"source\")) {\n    0.0\n  } {\n    mux(sense[Boolean](\"obstacle\")) {\n      Double.PositiveInfinity\n    } {\n      minHoodPlus(nbr(d) + nbrRange())\n    }\n  }\n}\ndistances\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    source_node = scafi_proxy.get_node(\"source\")\n    if source_node is None:\n        print(\"Source node not found\")\n        return\n\n    obstacles = scafi_proxy.get_nodes(\"obstacle\")\n\n    distances = scafi_proxy.aggregate(\n        lambda node: (node.id, node.location.distance_to(source_node.location)) if node.id != \"source\" else None,\n        aggregate_func=lambda x: {k: v for k, v in x if k is not None}\n    )\n\n    path_distances = {}\n    for node_id, distance in distances.items():\n        path_clear = True\n        for obstacle in obstacles:\n            if obstacle.location.distance_to(source_node.location) < distance and obstacle.location.distance_to(scafi_proxy.get_node(node_id).location) < distance:\n                path_clear = False\n                break\n        if path_clear:\n            path_distances[node_id] = distance\n\n    print(path_distances)\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "  val sourcePresent = sense[Boolean](\"source\")\n  val obstaclePresent = sense[Boolean](\"obstacle\")\n\n  val initialDistance = if (sourcePresent) 0.0 else Double.PositiveInfinity\n\n  val minDistance = if (obstaclePresent) Double.PositiveInfinity else foldhoodplus(initialDistance)(_ min _)(nbr{dist})\n\n  val dist = minDistance + 1 // Assuming unit distance between neighbors. Adapt if needed.\n\n  dist //return the distance\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(Double.PositiveInfinity) { d =>\n  mux(sense(\"source\"), 0.0, Math.min(d, foldhoodPlus(Double.PositiveInfinity)(_ min _)(\n    mux(sense(\"obstacle\"), Double.PositiveInfinity, nbr(d) + nbrRange())\n  )))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    source_loc = scafi_proxy.get_location('source')\n    obstacles = scafi_proxy.get_sensors('obstacle')\n\n    distances = {}\n    distances['source'] = 0\n\n    q = deque([(source_loc, 0)]) # (location, distance)\n\n    while q:\n        (x, y), dist = q.popleft()\n        for neighbor in get_neighbors((x,y)): # Assumes a get_neighbors function exists, defining adjacency\n            if neighbor not in distances and not any(is_in_obstacle(neighbor, obs) for obs in obstacles):\n                distances[neighbor] = dist + 1\n                q.append((neighbor, dist + 1))\n\n    # distances now contains the euclidean distance (approximated using grid) from the source to all reachable points.  \n    #Further processing (e.g., converting to actual euclidean distance) might be required based on the grid resolution.\n\n    #Example of accessing distance to a specific point (replace (x,y) with coordinates)\n    #point_distance = distances.get((x,y), float('inf')) #float('inf') if unreachable\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\nsource_sensor = sense('source', False)\nobstacle_sensor = sense('obstacle', False)\n\ndef compute_distance_field(source, obstacle):\n  \"\"\"Computes the Euclidean distance field avoiding obstacles.\"\"\"\n\n  distances = rep(('inf', 0.0), lambda old_dist, new_dist: (min(old_dist[0], new_dist[0]), 0.0))\n  \n  if source:\n    distances = rep(('local', 0.0), lambda old_dist, new_dist: (min(old_dist[0], new_dist[0]), 0.0))\n\n  distances = rep(('neighbor', Float.POSITIVE_INFINITY),\n                  lambda old_dist, new_dist: (min(old_dist[0], new_dist[0]), 0.0),\n                  nbr_range_f = lambda : 1.0)\n  \n\n  distances = rep((distances()[0], min([Float.POSITIVE_INFINITY] + [d + distanceTo(n) for n, d in nbrs(distances) if not sense('obstacle', False) ])),\n                  lambda old_dist, new_dist: (new_dist[0], 0.0))\n  return distances()[1]\n\n\ndistance_from_source = compute_distance_field(source_sensor, obstacle_sensor)\n\n# The result is stored in distance_from_source.  You can use it for other computations or output it.\n# For example:\nreturn distance_from_source\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(Double.PositiveInfinity) { d =>\n  mux(sense[Boolean](\"source\")) { 0.0 } {\n    minHoodPlus(\n      mux(sense[Boolean](\"obstacle\")) { Double.PositiveInfinity } { nbr(d) + nbrRange() }\n    )\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    source_node = scafi_proxy.get_node('source')\n    if source_node is None:\n        return\n\n    source_pos = source_node.position\n    distances = {}\n    \n    for node in scafi_proxy.get_nodes():\n        if node.name != 'source' and 'obstacle' not in node.types:\n            node_pos = node.position\n            distance = np.linalg.norm(node_pos - source_pos)\n            path_clear = True\n            \n            # Check for obstacles along the path (simple line-of-sight check)\n            for obs_node in scafi_proxy.get_nodes(types=['obstacle']):\n                obs_pos = obs_node.position\n                if is_point_on_line_segment(source_pos, node_pos, obs_pos):\n                    path_clear = False\n                    break\n\n            if path_clear:\n                distances[node.name] = distance\n\n    scafi_proxy.set_data(distances)\n\n\ndef is_point_on_line_segment(p1, p2, p):\n    # Check if point p lies on the line segment between p1 and p2\n    # This is a simplified check, more robust methods exist for real-world applications\n    cross_product = np.cross(p2 - p1, p - p1)\n    if abs(cross_product) > 1e-6:\n        return False\n    dot_product = np.dot(p - p1, p2 - p1)\n    if dot_product < 0 or dot_product > np.linalg.norm(p2 - p1)**2:\n        return False\n    return True\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  source_sensor = sense('source', False)\n  obstacle_sensor = sense('obstacle', False)\n\n  def euclidean_distance(x1, y1, x2, y2):\n    return sqrt((x1 - x2)**2 + (y1 - y2)**2)\n\n  if source_sensor:\n    distance = 0.0\n  else:\n    distance = Float.POSITIVE_INFINITY\n\n  distance = min_hood(distance,\n                       lambda n: nbr(distance) + euclidean_distance(\n                           mid().x, mid().y, nbr_mid().x, nbr_mid().y)\n                       if not nbr(obstacle_sensor) else Float.POSITIVE_INFINITY)\n\n  return distance\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "val distances = rep(Double.PositiveInfinity) { d =>\n  mux(sense[Boolean](\"source\")) {\n    0.0\n  } {\n    minHoodPlus(\n      mux(sense[Boolean](\"obstacle\")) { Double.PositiveInfinity } { nbr(d) + nbrRange() }\n    )\n  }\n}\ndistances\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    # Initialize an empty dictionary to store neighbor IDs for each node.\n    neighbors = {}\n\n    # Iterate through all nodes in the network.  Assume 'nodes' is a ScaFi representation of the network.\n    for node in nodes:\n        # Use ScaFi's communication primitives to get the IDs of the neighbors.  The specific function will depend on ScaFi's API.  This is a placeholder.\n        neighbor_ids = node.get_neighbors()  \n\n        # Store the neighbor IDs in the dictionary.\n        neighbors[node.id] = neighbor_ids\n\n    # The 'neighbors' dictionary now contains the IDs of neighbors for each node.  This data can be further processed or aggregated as needed.\n\n    # Example of accessing neighbors for a specific node (node with ID 5):\n    # if 5 in neighbors:\n    #    print(f\"Neighbors of node 5: {neighbors[5]}\")\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\nneighbors = nbr(mid())\ncollected_neighbors = collect(neighbors)\nif mid() == 0:\n  print(collected_neighbors)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val neighbors = excludingSelf(nbr(mid()))\nneighbors\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    # Assuming 'nodes' is a ScaFi NodeList representing the network nodes.\n    # Each node has an attribute 'id' and a method 'get_neighbors()' returning a list of neighbor IDs.\n\n    neighbor_ids_list = nodes.map(lambda node: node.get_neighbors()).reduce(lambda acc, x: acc + x)\n\n    # neighbor_ids_list now contains a flattened list of all neighbor IDs across all nodes.\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\nneighbors = nbr(mid())\ncollected_neighbors = collect(neighbors)\nself.neighbor_ids = list(collected_neighbors.keys())\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "java\nrep(nbrRange.toList()) { ids ->\n    ids.map(id -> Pair(mid(), id))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    # Initialize the ScaFi environment.  Assume necessary setup is done elsewhere.\n    nodes = sc.group_nodes()\n\n    # Gather neighbor IDs.  This assumes a graph structure is already established\n    # within ScaFi, perhaps through a pre-defined adjacency list or similar.\n    # Replace 'get_neighbors' with the appropriate ScaFi function to retrieve neighbors.\n    neighbor_ids = nodes.get_neighbors()\n\n    # Aggregate the neighbor IDs across all nodes.  The specific aggregation\n    # function depends on the desired outcome (e.g., union of all neighbor sets,\n    # count of unique neighbors, etc.)\n    aggregated_neighbor_ids = sc.aggregate(neighbor_ids, lambda x, y: x.union(y)) #Example: Union of all neighbor sets\n\n    #Print the result or save to file etc.\n    print(f\"Aggregated neighbor IDs: {aggregated_neighbor_ids}\")\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\nneighbors = nbr(mid())\nneighbor_ids = collect(neighbors, lambda x, acc: acc + [x], [])\nprint(neighbor_ids)\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val ids = nbr(mid())\nval neighbors = excludingSelf(nbr(mid()))\naggregate(neighbors)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    from scafi import aggregate\n\n    # Assuming 'graph' is a ScaFi graph where nodes have a 'neighbors' attribute \n    # containing a list of their neighbor IDs.  Replace with your actual graph setup.\n\n    neighbors_list = aggregate(graph, lambda node: node.neighbors, aggregate_func=lambda x: x)\n\n    # neighbors_list will contain a list of lists, where each inner list represents \n    # the neighbors of a single node.  To flatten this into a single list of unique neighbor IDs:\n    \n    all_neighbors = set()\n    for node_neighbors in neighbors_list:\n        all_neighbors.update(node_neighbors)\n    \n    # all_neighbors now contains a set of all unique neighbor IDs across all nodes.  Convert to list if needed.\n    all_neighbors = list(all_neighbors)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\nnbrs = nbr(mid())\nneighbors = foldSet(nbrs, lambda acc, id: acc + [id], [])\nwrite(mid(), neighbors)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val neighborIds = excludingSelf\n  {\n    nbr(mid())\n  }\n  .collect() // collect to a local List[ID]\nneighborIds // This line could be implicit, it is the \"return\" of the body\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    neighbors_ids = []\n    for node_id in scafi_node.neighbors():\n        neighbors_ids.append(node_id)\n    scafi_node.set_data(neighbors_ids)\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\nneighbors = nbrSet()\nreply(neighbors)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "java\nrep(Set.empty[ID]) { ids =>\n    nbr(Set(mid())) union ids\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    # Initialize ScaFi environment (assuming necessary setup is done elsewhere)\n    neighbors = sc.neighbors()  # Get list of neighbor nodes\n\n    min_distance = float('inf')  # Initialize with positive infinity\n\n    for neighbor in neighbors:\n        distance = sc.distance(neighbor) # Replace with actual distance calculation using ScaFi\n        min_distance = min(min_distance, distance)\n\n    sc.aggregate(min_distance) # Aggregate the minimum distance across all nodes\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    nbr_range = nbr(distanceTo(self))\n    min_dist = minHood(nbr_range)\n    self.net_min_dist = min_dist\n    write(\"Minimum distance from neighbors:\", self.net_min_dist)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "java\nrep(Double.POSITIVE_INFINITY, d -> {\n    minHood(nbrRange(d) + nbr{ distanceTo(mid()) });\n});\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    import scafi\n    from scafi import aggregate\n    import numpy as np\n\n    @scafi.scafi_step()\n    def min_distance_neighbors(\n        self,\n        id: scafi.ID,\n        position: np.ndarray,\n        neighbors: scafi.NeighborList,\n    ) -> scafi.Quantity[float]:\n\n        min_dist = float('inf')\n        for neighbor in neighbors:\n            dist = np.linalg.norm(position - neighbor.position)\n            min_dist = min(min_dist, dist)\n\n        return min_dist\n\n    min_distances = self.aggregate(min_distance_neighbors, aggregate.Reduce(min))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "  val neighborDistances = nbrRange()\n  val minNeighborDistance = neighborDistances.min\n\n  minNeighborDistance\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "exchange(Double.MaxValue) { (localMin, nbrMin) =>\n  min(localMin, nbrMin)\n} {\n  nbrRange().map(nbr => distanceTo(nbr)).minOption().getOrElse(Double.MaxValue)\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    # Initialize a ScaFi network\n    network = scafi.ScaFiNetwork()\n\n    # Assume 'nodes' is a list of nodes with positions (e.g., tuples or lists of coordinates)\n    # and 'distances' is a pre-computed distance matrix or function to calculate distances\n\n    # Calculate minimum distance to neighbors\n    min_distances = network.aggregate(\n        nodes,\n        lambda node, neighbors: min(distances(node, neighbor) for neighbor in neighbors) if neighbors else float('inf')\n    )\n\n    # min_distances now contains a list of minimum distances for each node\n    #  (or a dictionary node_id -> min_distance) depending on network.aggregate output\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    distances = nbr{distanceTo(self)}\n    min_distance = min(distances.values(), default=Float.POSITIVE_INFINITY)\n    sense('min_neighbor_distance', min_distance)\n    self.exports['min_neighbor_distance'] = min_distance\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "minHood(Double.PositiveInfinity) { (d, nbr) =>\n  min(d, nbr)\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    # Initialize the minimum distance to infinity for each node.\n    min_distances = {node_id: float('inf') for node_id in network.nodes()}\n\n    # Get the neighbors for each node.\n    neighbors = {node_id: network.neighbors(node_id) for node_id in network.nodes()}\n\n    # Aggregate the minimum distance from each neighbor.\n    aggregated_min_distances = scafi.aggregate(\n        network,\n        min_distances,\n        func=lambda x: min(x),\n        neighbors=neighbors\n    )\n\n    # Update the minimum distance for each node based on the aggregated minimum distances from neighbors.\n    for node_id, min_dist in aggregated_min_distances.items():\n        min_distances[node_id] = min_dist\n\n    #The min_distances dictionary now holds the minimum distance from each node's neighbors.\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  distances = nbr{distanceTo(self)}\n  min_distance = minHood(distances.values().orElse(Float.MAX_VALUE))\n  sense(\"min_neighbor_distance\", min_distance)\n  println(s\"Min neighbor distance: $min_distance\")\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "aggregate(Double.MaxValue) { case (incumbent, nbr) =>\n  minHood(nbr(Double.MaxValue))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    import scafi\n    from scafi import aggregate\n    from scafi.prelude import *\n\n    @scafi.distributed\n    class MinDistance(scafi.Model):\n        def __init__(self, comm_radius: float):\n            self.comm_radius = comm_radius\n\n        @aggregate.reduce\n        def min_distance(self, neighbors: List[Tuple[float, float, float]], position: Tuple[float, float, float]) -> float:\n            min_dist = float('inf')\n            for neighbor_pos in neighbors:\n                dist = ((position[0] - neighbor_pos[0])**2 + (position[1] - neighbor_pos[1])**2 + (position[2] - neighbor_pos[2])**2)**0.5\n                min_dist = min(min_dist, dist)\n            return min_dist\n\n        @aggregate.reduce\n        def get_neighbors(self, pos: Tuple[float, float, float], positions: List[Tuple[float, float, float]]) -> List[Tuple[float, float, float]]:\n            neighbors = []\n            for p in positions:\n                dist = ((pos[0] - p[0])**2 + (pos[1] - p[1])**2 + (pos[2] - p[2])**2)**0.5\n                if dist <= self.comm_radius and dist > 0:\n                    neighbors.append(p)\n            return neighbors\n\n        @scafi.reaction\n        def calculate(self, positions: List[Tuple[float, float, float]], position: Tuple[float, float, float]) -> Tuple[float]:\n            neighbors = self.get_neighbors(position, positions)\n            min_dist = self.min_distance(neighbors, position)\n            return min_dist,\n\n    # ...rest of the code (e.g., initialization, simulation loop) would go here...\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  min_hood = minHood(nbrRange())\n  println(min_hood)\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "// Assuming a field \"distance\" of type Double representing the distance from a source.\n// We want to find the minimum distance considering only neighbors.\n\nmux(nbrRange(distance).isEmpty) { \n  Double.PositiveInfinity // If no neighbors, default to positive infinity.\n} { \n  minHood(nbr(distance)) // Minimum of neighboring distances.\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    import scafi\n    from scafi import aggregate\n    from scafi.src import SCaFI\n    from typing import Tuple\n\n\n    @scafi.scafi_method\n    def count_neighbors(self, neighborhood: Tuple[int, ...]) -> int:\n        return len(neighborhood)\n\n\n    class CountNeighbors(SCaFI):\n        @aggregate('count_neighbors')\n        def count_neighbors_agg(self):\n            pass\n\n    \n    model = CountNeighbors()\n    # Assume 'world' is a pre-defined ScaFi world with agents\n    results = model.run(world)\n    print(results)\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  neighbors = nbrRange().size\n  println(\"Number of neighbors: \" + neighbors)\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val source = context.sense[Int](\"source\")\nval isSource = source != null && source == context.selfID()\nval neighbors = excludingSelf(foldhood(0)(_ + _)({ if (nbr(isSource)) { 1 } else { 0 } }))\nneighbors\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    scafi_sys = ScaFi(comm, rank, size)\n    my_neighbors = scafi_sys.get_neighbors()\n    neighbor_count = len(my_neighbors)\n    global_neighbor_counts = scafi_sys.aggregate(neighbor_count, op=sum)\n\n    if rank == 0:\n        print(f\"Total number of neighbors across all nodes: {global_neighbor_counts}\")\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "  val neighbors = alignedValues[Boolean](true) // Assuming all nodes are initially considered neighbors\n  val neighborCount = neighbors.count(identity)\n  println(s\"Number of neighbors: $neighborCount\")\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "java\nrep(0, nbrRange.size()){ i ->\n    foldhood(0, _ + _, 1)\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    # Initialize the count of neighbors to 0\n    neighbor_count = 0\n\n    # Iterate over the nodes in the network\n    for node in network:\n        # Check if the node is a neighbor\n        if node.is_neighbor():\n            # Increment the neighbor count\n            neighbor_count += 1\n\n    # Return the neighbor count\n    return neighbor_count\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  neighbour_count = foldhood(lambda a, b: a + 1, 0.0)\n  println(neighbour_count)\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val isSource = context.isRoot()\nval initialValue = if (isSource) 1 else 0\naggregate(initialValue) { case (v) =>\n  mux(nbr(isSource)) { 0 }{ 1 } + v\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    scafi_node = ScaFiNode(node_id=get_node_id())\n    neighbors = scafi_node.neighbors()\n    neighbor_count = len(neighbors)\n    scafi_node.broadcast(neighbor_count)\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  neighbors = neighbor_count()\n  println(neighbors)\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val id = alchemist.sense[Int](\"id\")\nmux(nbr(id) == id) {\n  0\n}{\n  1\n}.sumHood(0)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    scafi_sys = ScaFiSystem()\n    nodes = scafi_sys.nodes\n    count = 0\n    for node in nodes:\n        count += len(node.neighbors)\n    print(f\"Total number of neighbors: {count}\")\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  count = count_nbr(lambda: True)\n  write(\"Neighbor Count:\", count)\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val distances = nbrRange()\nval neighbors = distances < 1.5 // Assuming a neighborhood radius of 1.5, adjust as needed\nmux(neighbors) {\n  1\n} {\n  0\n}.sumHood()\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    n = 5 # Example number of nodes\n    adj = [[0,1,1,0,0],[1,0,1,0,0],[1,1,0,1,0],[0,0,1,0,1],[0,0,0,1,0]] # Example adjacency matrix\n\n    with scafi_aggregate_context(nodes=n) as ctx:\n        neighbors = ctx.comm.neighbors(adj)\n        count = len(neighbors)\n        ctx.comm.aggregate(count)\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  neighbors = aligned_neighbors()\n  count = fold_hood(lambda x, y: x + 1, 0, neighbors)\n  inject_field(\"neighbor_count\", count - 1) # Subtract 1 to exclude self\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val neighbours = excludingSelf.sum(1)\ncontext.exported.put(context.selfId, neighbours)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    # Assuming a graph represented as an adjacency list where keys are node IDs and values are lists of neighbor IDs.\n    graph = {\n        0: [1, 2],\n        1: [0, 2, 3],\n        2: [0, 1],\n        3: [1]\n    }\n\n    node_id = 1 # Example node\n\n    neighbors = scafi_aggregate(graph, lambda node, neighbors: len(neighbors), node_id)\n\n    print(f\"Number of neighbors for node {node_id}: {neighbors}\")\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "  val neighborCount = foldhood(1)(_ + _)\n  println(neighborCount - 1)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "  val id = mid()\n  val neighbors = excludingSelf(nbr(id))\n  neighbors.size\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    import scafi\n    from scafi import aggregate\n\n    @scafi.aggregate\n    def count_neighbors(self, comm):\n        return comm.count() -1\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\ncount = foldhood(lambda a, b: a + 1, 0.0)\nnbr_count = count - 1.0\nreturn nbr_count\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "aggregate(0) { nbr(1).sum - 1 }\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    import scafi\n    import numpy as np\n\n    # Define the grid size and neighborhood radius\n    grid_size = (10, 10)\n    radius = 1\n\n    # Initialize the grid with random values (1 or 0) representing agents\n    grid = np.random.randint(0, 2, size=grid_size)\n\n    # Function to count neighbors excluding self using ScaFi\n    def count_neighbors(pos, grid):\n        neighbors = scafi.aggregate.neighbors(pos, radius, grid.shape)\n        count = np.sum(grid[neighbors])\n        return count\n\n    # Initialize a list to store neighbor counts for each cell\n    neighbor_counts = []\n\n    # Iterate through each cell in the grid\n    for x in range(grid_size[0]):\n        for y in range(grid_size[1]):\n            # Count neighbors for current cell\n            count = count_neighbors((x, y), grid)\n            neighbor_counts.append(count)\n\n\n    # Print the neighbor counts for each cell\n    print(neighbor_counts)\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "  val neighbors = excludingSelf.sum[Int]\n  node.put(\"neighborCount\", neighbors)\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "java\nrep(0, (nbr, data) -> {\n    foldhood(0, (acc, nbr, data) -> acc + 1, (nbr, data) -> true) - 1\n})\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    # Define the aggregation function\n    def count_neighbors(node_data):\n        return len(node_data['neighbors']) -1 if 'neighbors' in node_data else 0\n\n    # Apply the aggregation function to each node's data\n    results = scafi_aggregate(count_neighbors,data)\n\n    # Print the results (optional, but helpful for debugging)\n    print(results)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    neighbors = nbrRange()\n    count = len(neighbors)\n    self_included = any(abs(nbrDist(neighbors[k])) < TOLERANCE for k in neighbors) #TOLERANCE is a ScaFi constant for comparison between floating points\n    if self_included:\n        count -= 1\n    return count\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val id = context.selfId()\naggregate(0) {\n    nbr(1)\n}.count(_ != id)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    scafi_config = {\n        'comm': {\n            'backend': 'mpi',\n            'verbose': True\n        },\n        'logging': {\n            'level': 'INFO'\n        }\n    }\n    with scafi_engine(scafi_config) as engine:\n        value = engine.aggregate(lambda: 1000, aggregate_op='sum')\n\n        for i in range(1001):\n            value = engine.aggregate(lambda v: v-1, aggregate_op='sum', initial=value)\n            if engine.rank == 0:\n                print(f\"Step {i}: Value = {value}\")\n\n        \n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  source = 1000.0\n  rate = 1.0\n  tolerance = 0.1\n  \n  def evolve(value, evolution_rate):\n    return value - evolution_rate\n  \n  local: float = source\n  \n  while abs(local) > tolerance:\n    local = evolve(local, rate)\n    \n  print(round(local))\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(1000){ value =>\n  mux(value > 0) {\n    alignedOn(value == 0)\n    value - 1\n  } {\n    value\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    scafi_config = {\n        \"comm\": {\"type\": \"wifi\", \"range\": 10},\n        \"nodes\": {\"n\": 100},  # Adjust number of nodes as needed\n        \"model\": {\"type\": \"discrete\", \"dt\": 1},\n        \"aggregation\": {\"type\": \"sum\"}, # or another aggregation function if needed\n    }\n\n    def node_behaviour(node_id, state, neighbours, config):\n        if state < 1000:\n            return state + 1\n        return 1000 # initial state\n\n    sim = scafi_engine.ScaFiEngine(scafi_config)\n    result = sim.run(node_behaviour,  steps=1000)\n\n    #Process result to extract final state (e.g., average across nodes)\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  if sensed_value() > 0:\n    neighbor_min = min_hood( lambda nbr_value: nbr_value() )\n    if neighbor_min() < sensed_value():\n      write(sensed_value(), neighbor_min())\n    else:\n      write(sensed_value(), sensed_value() -1 ) #Evolve backwards\n  else:\n    write(sensed_value(), 0)\n  \n  \n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(1000){ value =>\n  mux(value > 0) {\n    value - 1\n  } {\n    value\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    scafi_setup(n_nodes=100, dimensions=1, comms_radius=1)\n\n    initial_value = 1000\n    target_value = 0\n    decrement_step = initial_value / n_nodes\n\n    if scafi_rank() == 0:\n        local_value = initial_value\n    else:\n        local_value = initial_value\n\n\n    for i in range(n_nodes):\n        if scafi_rank() == i:\n            local_value -= decrement_step\n            print(f\"Node {scafi_rank()}: Value = {local_value}\")\n            scafi_sleep(1) # Simulate some work\n\n    scafi_barrier()\n\n    if scafi_rank()==0:\n        print(\"Evolution complete\")\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  current_value = 1000.0\n  decrement = 1.0\n\n  while current_value > 0.0:\n    current_value = current_value - decrement\n    mux(current_value < 0.0, 0.0, current_value) # Ensure value doesn't go below 0\n    println(round(current_value,2)) #display on console with 2 decimals\n    \n    delay(1) # Add a small delay to control the output rate.  Adapt based on needs.\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(1000){ value =>\n  mux(value > 0) {\n    value - 1\n  } { 0 }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    from scafi import aggregate\n\n    @aggregate\n    def back_evolve(val: int) -> int:\n        if val <= 0:\n            return 0\n        else:\n            return val - 1\n\n    result = back_evolve(1000)\n    print(result)\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  val target = 0\n  val initialValue = 1000\n  val decayRate = 1  // Adjust as needed.  Integer subtraction works best.\n\n  mux(sense[Double](\"localValue\").getOrElse(initialValue) > target, {\n    val currentValue = sense[Double](\"localValue\").getOrElse(initialValue)\n    val newValue = currentValue - decayRate\n    sense(\"localValue\", newValue)\n    println(s\"Local value: $newValue\") //optional print\n    newValue\n  }, target) // Stop evolving when target is reached\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(1000) { x =>\n  mux(x > 0) {\n    x - 1\n  } {\n    x\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    scafi_engine = ScafiEngine()\n    nodes = scafi_engine.nodes(1001) # create 1001 nodes (one for each value from 0 to 1000)\n\n    # Initialize node values. Node 1000 has the initial value 1000.  Others are initialized to -1 (or some placeholder)\n    for i in range(len(nodes)):\n        if i == 1000:\n            nodes[i].value = 1000\n        else:\n            nodes[i].value = -1\n\n    # Evolve backwards\n    for i in range(999,-1,-1):\n        nodes[i].value = nodes[i+1].value -1\n\n    # Aggregate the final results (e.g., print all values or check for correctness)\n    for i in range(len(nodes)):\n      print(f\"Node {i}: {nodes[i].value}\")\n\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "  val target = 0.0\n  val initialValue = 1000.0\n  val decrementRate = 1.0\n\n  rep(initialValue) { oldValue =>\n    mux(oldValue > target, oldValue - decrementRate, target)\n  }\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(1000){ value =>\n  mux(value > 0) {\n    value - 1\n  } {\n    0\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  # Initialize ScaFi\n  scafi_sys = ScaFi()\n\n  # Define the area boundaries (replace with your actual area definitions)\n  areas = [\n      # Example: Area 1 coordinates\n      {'id': 1, 'coords': [(0, 0), (10, 0), (10, 10), (0, 10)]},\n      # Add more areas as needed\n      {'id': 2, 'coords': [(15,15), (25,15), (25,25), (15,25)]}\n  ]\n\n  # Function to check if a node is within an area\n  def is_within_area(node_coords, area_coords):\n      # Implement a point-in-polygon algorithm here (e.g., ray casting)\n      # This is a placeholder, replace with actual implementation\n      # ...\n\n  # Aggregate function to compute average temperature within an area\n  def compute_avg_temp(area_id):\n      avg_temp = 0\n      count = 0\n      for node in scafi_sys.nodes:\n          if is_within_area(node.location, areas[area_id]['coords']):\n              avg_temp += node.temperature  # Assuming nodes have a 'temperature' attribute\n              count += 1\n      return avg_temp / count if count > 0 else 0\n\n\n  # Main loop\n  while True:\n      for area_id, area in enumerate(areas):\n          avg_temp = compute_avg_temp(area_id)\n          if avg_temp > 30:\n              # Broadcast alarm within the area\n              scafi_sys.broadcast(area_id, \"HIGH_TEMPERATURE_ALARM\")\n      scafi_sys.sleep(60) #check every minute\n\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    import random\n    TEMPERATURE_THRESHOLD = 30.0\n\n    def compute_area_id():\n        # Simulate area assignment, in a real scenario this could be based on location\n        return round(mid() % 5)  # Assuming 5 areas\n\n    area_id = compute_area_id()\n\n    temperature = random.uniform(15.0, 35.0)  # Simulate temperature reading\n\n    area_temperature = nbr_avg(temperature, area_id == compute_area_id())\n\n    is_alarm = area_temperature > TEMPERATURE_THRESHOLD\n\n    if is_alarm:\n        broadcast_message = f\"ALARM: Area {area_id} average temperature is {area_temperature:.2f} > {TEMPERATURE_THRESHOLD}\"\n        broadcast(broadcast_message)\n    else:\n        broadcast_message = f\"Area {area_id} average temperature is {area_temperature:.2f}. No alarm.\"\n        if round(time()) % 60 == 0: # broadcast every minute\n          broadcast(broadcast_message)\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "// Assuming a field \"area\" defining areas, and \"temperature\" as a Double\nval areaTemperatures = aggregate {\n  val area = context.self[Int]\n  val temp = context.field[Int, Double](\"temperature\")\n  mux(temp.values.nonEmpty) {\n    val areaSumTemp = temp.values.sum\n    val areaCount = temp.size\n    val areaAvgTemp = areaSumTemp / areaCount\n    (area, areaAvgTemp)\n  } {\n    (area, Double.NaN) // Or some other default value if no temperature in the area.\n  }\n}\n\nval alarms = broadcast(context.self, areaTemperatures) { (area, avgTemp) =>\n    mux(area == context.self && !avgTemp.isNaN && avgTemp > 30) {\n        \"Alarm: Temperature above 30 degrees!\"\n    } {\n      \"\"  // No alarm or not in same area\n    }\n}\nalarms\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  # Initialize ScaFi\n  scafi_setup()\n\n  # Define the area temperature function (replace with your actual implementation)\n  def area_temperature(area_id):\n    # Replace this with your sensor reading or simulation\n    temperature = random.uniform(20, 40)  \n    return temperature\n\n  # Function to broadcast alarm within an area\n  def broadcast_alarm(area_id):\n    print(f\"ALARM! Temperature above 30 degrees in area {area_id}\")\n\n\n  # Get the list of areas (replace with your actual area identification)\n  areas = list(range(1, 11)) # Example: 10 areas\n\n\n  # Aggregate computation: iterate over areas, compute temperature, and broadcast alarm if needed\n  for area_id in areas:\n    temperature = area_temperature(area_id)\n    if temperature > 30:\n        broadcast_alarm(area_id)\n\n  #ScaFi cleanup (if needed based on your ScaFi setup)\n  scafi_cleanup()\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  temperature = sense[Temperature]()\n  x, y = sense[Coordinates]()\n\n  area_id = round(x / 10), round(y / 10) # Example area definition: 10x10 grid\n\n  area_temperature = nbr[temperature].mean()\n\n  hot_area = area_temperature > 30\n\n  if hot_area:\n    broadcast(ALARM_TEMPERATURE_HIGH, area_id) # ALARM_TEMPERATURE_HIGH is a predefined message\n\n  log(f\"Area: {area_id}, Temperature: {area_temperature}, Alarm: {hot_area}\") #Optional log\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val areas = mux(isArea) { Map(id -> currentPosition()) } { Map.empty[Int, P] }\nval areaTemperature: Map[ID, Double] =\n  areas.mapValues(area => rep(Double.MaxValue) {\n    temp =>\n      excludingSelf\n        .sumHood(nbrRange(_ => 1))\n        .filter(_._2.distanceTo(area.values.head) <= 10) // Assuming area radius is 10.\n        .map(_._2)\n        .foldLeft((0.0, 0)) { case ((sum, count), point) =>\n          val areaTemp = sense[Double](\"temperature\") // Sense temperature at each point\n          (sum + areaTemp, count + 1)\n        } match {\n          case (sum, count) if count > 0 => sum / count\n          case _ => Double.MaxValue // Handle empty area case\n        }\n    })\n\nval alarm: Boolean = areaTemperature.get(mid).exists(_ > 30)\n\nbroadcast(mux(isArea){ alarm }{ false })\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n    # Initialize ScaFi\n    scafi_setup()\n\n    # Define the area(s) \u2013 replace with your actual area definitions\n    area1 = Area(...)  #e.g., Area(coordinates=[(x1, y1), (x2, y2), ...])\n    area2 = Area(...)\n    areas = [area1, area2]\n\n    # Aggregate function to compute area-wise temperature\n    def compute_area_temperature(area):\n        # Replace with your actual temperature sensing logic\n        # This should collect temperature readings from nodes within the area\n        temperatures = [node.get_temperature() for node in area.nodes] \n        average_temperature = sum(temperatures) / len(temperatures) if temperatures else 0\n        return average_temperature\n\n    # Main loop: continuously monitors and sends alarms\n    while True:\n        # Compute temperature for each area\n        area_temperatures = [compute_area_temperature(area) for area in areas]\n\n        # Check for high temperatures and send alarms\n        for i, temperature in enumerate(area_temperatures):\n            if temperature > 30:\n                areas[i].broadcast(\"Temperature alarm! Temperature above 30 degrees.\")\n\n        # Add a delay to avoid excessive computation\n        time.sleep(60)  # Check every 60 seconds, adjust as needed\n\n    scafi_cleanup()\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  temperature = sense[Double](\"temperature\")  # Assuming temperature is sensed as Double\n  location = sense[Point](\"location\")  # Assuming location is sensed as Point\n\n  area_radius = 5.0  # Define the radius of the area\n\n  def compute_area_temperature(location: Point) -> Double:\n    \"\"\"Computes the average temperature within the area centered at the given location.\"\"\"\n    temperatures_in_area = foldhoodplus(\n        Double.NaN,  # Initial value (NaN indicates no data)\n        lambda acc, temp: temp if not temp.isNaN else acc, # Use current temperature if valid\n        lambda temp1, temp2: (temp1 + temp2) if not temp1.isNaN and not temp2.isNaN else (temp1 if not temp1.isNaN else temp2), # Sum temperatures\n        lambda: distance(location, sense[Point](\"location\")) <= area_radius,  # Condition to include neighbors\n        temperature\n    )\n\n    count_in_area = foldhoodplus(\n        0,\n        lambda acc, x: 1 if not x.isNaN else 0, # Count if temperature is valid\n        lambda c1, c2: c1 + c2,\n        lambda: distance(location, sense[Point](\"location\")) <= area_radius,\n        temperature\n    )\n\n    if count_in_area > 0:\n      return temperatures_in_area / count_in_area\n    else:\n      return Double.NaN  # No data within the area\n\n  average_temperature = compute_area_temperature(location)\n  \n  alarm = average_temperature > 30.0\n\n  if !average_temperature.isNaN:\n      broadcast(DoubleKey(\"area_temperature\"), average_temperature) # Broadcast the temperature\n  \n  if alarm:\n    broadcast(StringKey(\"alarm\"), \"Temperature above 30 degrees in area!\")\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val areas = domain.collect{ case (id, data) => data }.groupBy(_.area) // Assuming data has an \"area\" field\nval areaTemperatures = areas.mapValues(dataList => dataList.map(_.temperature).sum / dataList.size) // Assuming data has a \"temperature\" field\n\nval alarms = areaTemperatures.mapValues(avgTemp => if (avgTemp > 30) \"Temperature alarm!\" else \"\")\n\nbroadcast(\n  mux(alarms.get(context.data.area).contains(\"Temperature alarm!\")) {\n   alarms(context.data.area)\n  } { \"\" },\n  context.self\n)\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\nimport scafi\nimport numpy as np\n\n# Assume 'areas' is a list of ScaFi areas, each with a temperature attribute.  \n#  This would need to be populated based on your specific ScaFi setup.\n#  Example: areas = [area1, area2, area3] where each area has a temperature attribute.\n\n\nfor area in areas:\n    temperature = area.temperature # Access temperature of the area\n    if temperature > 30:\n        #Broadcast alarm message within the area using ScaFi's broadcast mechanism.\n        #The specific method depends on your ScaFi setup, but it would look something like this.\n        area.broadcast(\"ALARM: Temperature above 30 degrees!\")\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  temperature = sense[Double](\"temperature\")\n  idArea = sense[Int](\"idArea\")\n  areaTemperatures = groupBy(idArea, temperature)\n  averageTemperatures = MapUtils.mapValues(areaTemperatures, (temps: List[Double]) => temps.sum / temps.size)\n  hotAreas = averageTemperatures.filter((id: Int, avgTemp: Double) => avgTemp > 30)\n\n  when(hotAreas.contains(mid()),\n       broadcast(mid() , \"ALARM: Temperature above 30 degrees in area \" + idArea))\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val areas = domain.collect{ case (id, data) => data }.groupBy(_.area) // Assuming devices have an 'area' property\nval areaTemperatures = areas.mapValues(devices => devices.map(_.temperature).sum / devices.size) // Aggregate: compute average temperature per area\n\nareaTemperatures.foreach { case (area, avgTemp) =>\n  broadcast(\n    nbr(area == context.currentArea()), // Condition for broadcasting within the current area\n    if (avgTemp > 30) s\"Alarm in area $area: Temperature is $avgTemp\" else \"\" // The actual message\n  )\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  # Initialize ScaFi\n  from scafi import aggregate\n\n  # Define the area temperature computation function (replace with your actual computation)\n  def compute_area_temperature(area):\n      # ... Your logic to compute the average temperature within the area ...\n      # This might involve reading sensor data from nodes within the area\n      return temperature\n\n  # Define the alarm broadcast function\n  def broadcast_alarm(area):\n      # ... Your logic to broadcast an alarm message to nodes within the area ...\n      # This might involve sending a message using ScaFi's communication primitives\n      pass\n\n  # Aggregate computation for each area\n  for area in areas:\n      temperature = compute_area_temperature(area)\n      if temperature > 30:\n          broadcast_alarm(area)\n\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "python\n  temperature = sense[Temperature]\n  area_id = sense[AreaID]\n\n  local_temperature = temperature\n  area_temperatures = align(area_id, local_temperature)\n\n  avg_temperature = rep(('area',0.0), lambda old: (area_id, sum(area_temperatures)/len(area_temperatures)))\n\n  is_high_temperature = temperature > 30\n\n  alarm_broadcast = rep(('area',False), lambda old: (area_id, aggregate_by_key(area_id, is_high_temperature, lambda x, y: x or y)))\n\n  if alarm_broadcast[1]:\n    actuate[Alarm](True)\n  else:\n    actuate[Alarm](False)\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/no-knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val areas = Map(\n  \"A\" -> (Point2D(0, 0), Point2D(10, 10)),\n  \"B\" -> (Point2D(10, 0), Point2D(20, 10)),\n  \"C\" -> (Point2D(0, 10), Point2D(10, 20))\n)\n\nval myArea = areas.find { case (_, (topLeft, bottomRight)) =>\n  mid() >= topLeft.x && mid() < bottomRight.x && mid() >= topLeft.y && mid() < bottomRight.y\n}.map(_._1)\n\nval temperature = sense[Double](\"temperature\")\n\nval areaTemperatures =\n  areas.map { case (areaName, (topLeft, bottomRight)) =>\n    areaName -> excludingSelf {\n      mux(mid() >= topLeft.x && mid() < bottomRight.x && mid() >= topLeft.y && mid() < bottomRight.y)\n        { mean(nbr(temperature)) }\n        { Double.NaN }\n    }\n  }\n\nval myAreaTemperature = areaTemperatures.get(myArea.getOrElse(\"\")) match{\n      case Some(temp) => temp\n      case None => Double.NaN\n}\n\nval alarm = myAreaTemperature > 30\n\nbroadcast(myArea.getOrElse(\"\"), if (alarm) \"Temperature above 30 in area \" + myArea.getOrElse(\"\") else \"\")\n\n"
+      }
+    }
+  }
+]

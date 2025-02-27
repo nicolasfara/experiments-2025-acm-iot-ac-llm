@@ -7,9 +7,8 @@ import org.kaikikm.threadresloader.ResourceLoader
 class GradientWithObstaclesProgram extends AggregateProgram with StandardSensors with ScafiAlchemistSupport with BlockG {
   override def main(): Any = {
     val source = mid() == 0
-    val isObstacle = mid() % 9 == 0 && mid() != 0
+    val isObstacle = sense[Boolean]("isObstacle")
     node.put("source", source)
-    node.put("isObstacle", isObstacle)
     val distances = rep(Double.PositiveInfinity) { d =>
       mux(source) {
         0.0

@@ -5,13 +5,14 @@ import it.unibo.alchemist.model.scafi.ScafiIncarnationForAlchemist._
 import org.kaikikm.threadresloader.ResourceLoader
 
 class ChannelWithObstaclesProgram extends AggregateProgram with StandardSensors with ScafiAlchemistSupport with BlockG with BlockC {
+
   override def main(): Boolean = {
-    val obstacleDetected = mid() % 9 == 0 && mid() != 0 || mid() == 131 || mid() == 182
-    val destinationReached = mid() == 82
+    val obstacleDetected = sense[Boolean]("isObstacle")
+    val destinationReached = mid() == 399
     val sourceNode = mid() == 0
     node.put("source", sourceNode)
     node.put("destination", destinationReached)
-    node.put("isObstacle", obstacleDetected)
+    //node.put("isObstacle", obstacleDetected)
 
     def obstacleAwareMetric(): Double = {
       if (obstacleDetected) Double.PositiveInfinity else nbrRange()

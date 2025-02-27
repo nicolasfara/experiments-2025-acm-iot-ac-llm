@@ -22,7 +22,7 @@ launcher:
 
 network-model:
   type: ConnectWithinDistance
-  parameters: [30]
+  parameters: [15]
 
 _constants:
   retentionTime: &retentionTime 25.0
@@ -41,10 +41,21 @@ environment:
   parameters: []
 
 deployments:
-  - type: Rectangle
-    parameters: [200, 0, 0, 200, 200]
+  - type: Grid
+    parameters: [ 0, 0, 200, 200, 10, 10, 5, 5 ]
+
+    contents:
+      - molecule: isObstacle
+        concentration: false
+      - in: { type: Rectangle, parameters: [ 30, 0, 50, 170 ] } # Inside this shape...
+        molecule: isObstacle
+        concentration: true
+      - in: { type: Rectangle, parameters: [ 100, 30, 50, 200 ] } # Inside this shape...
+        molecule: isObstacle
+        concentration: true
     programs:
       - *gradient
+
 
 terminate:
   type: AfterTime

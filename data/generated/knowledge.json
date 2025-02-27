@@ -1,0 +1,1817 @@
+[
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(false){\n  _ || (mid() == \"source\" && nbr(mid()==\"destination\"))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(false) { routed =>\n  branch(mid() == source) {\n    true\n  } {\n    mux(!routed && nbr(routed)) {\n      mux(mid() == destination) {\n        true\n      } {\n        nbrRange() < 20 // Assuming nbrRange indicates reachability and 20 is a reasonable threshold. Adjust as needed.\n      }\n    } {\n      false\n    }\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(false){ channel =>\n  mux(sense[Boolean](\"source\")) { true } {\n    val potential = minHood(nbr(channel, Double.PositiveInfinity))\n    potential._1 < nbrRange()\n  }\n} && sense[Boolean](\"destination\")\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(false){\n  _ || (mid() == \"source\" && nbr(mid() == \"destination\"))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(false) { channel =>\n  branch(mid() == source) {\n    true\n  } {\n    mux(nbr(channel) && mid() != destination) {\n      true\n    } {\n      false\n    }\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(false){ isChannel =>\n  mux(sense[Boolean](\"source\")) { true } {\n    mux(isChannel) {\n      foldhoodPlus(false)(_ || _)(nbr(sense[Boolean](\"destination\")))\n    } { false }\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(false){ b => foldhood(b)(_ || _)(nbr(if (mid() == \"source\") true else if (mid() == \"destination\") false else b))}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(false) { hasChannel =>\n  branch(mid() == \"destination\") {\n    true\n  } {\n    mux(mid() == \"source\") {\n      true\n    } {\n      foldhood(false)(_ || _)(nbr(hasChannel))\n    }\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Map(mid() -> (Double.PositiveInfinity, mid()))) { distances =>\n  mux(sense[Boolean](\"source\")) {\n    Map(mid() -> (0.0, mid()))\n  } {\n    val potential = distances.getOrElse(mid(), (Double.PositiveInfinity, mid()))\n    val nbrDistances = foldhoodPlus(Map.empty[ID,(Double, ID)])(_++_) {\n          nbr(distances).map{case (id,(d, p)) => id -> (d + nbrRange(), mid()) }\n        }\n\n    val candidates = nbrDistances ++ Map(mid() -> potential)\n    val minCandidate = candidates.minByOption(_._2._1)\n     minCandidate.map { case (_, (d, p)) =>\n        if(sense[Boolean](\"destination\")){\n            Map(mid() -> (d, p)) //Destination does not change path.\n        } else {\n            Map(mid() -> (d, p))\n        }\n\n      }.getOrElse(distances)\n  }\n}.getOrElse(mid(),(Double.PositiveInfinity, mid()))._2\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(false) {\n  prev => mux(mid() == \"source\") {\n    foldhood(false)(_ || _)(nbr(prev))\n  } {\n    mux(mid() == \"destination\") { true } { nbr(prev) }\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(Set.empty[ID]) { path =>\n  val newReachable = foldhood(path)(_ ++ _)(nbr(path))\n  val candidates = newReachable + mid()\n  if (mid() == \"source\") {\n    candidates\n  } else if (candidates.contains(\"destination\")) {\n    candidates\n  } else {\n    candidates\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(if (sense[Boolean](\"source\")) Set(mid()) else Set.empty[ID]) {\n  channel =>\n    mux(sense[Boolean](\"destination\"))(\n      channel,\n      foldhood(channel)(_ ++ _)(\n        mux(channel.contains(nbr(mid()))) {\n          channel ++ Set(mid())\n        } {\n          Set.empty[ID]\n        }\n      )\n    )\n} contains mid()\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(false) {\n  prevChannel => mux(mid() == \"source\") {\n    true\n  } {\n    foldhood(prevChannel)(_ || _)(nbr(prevChannel))\n  }\n} == \"destination\"\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(Map(mid() -> (if (mid() == source) 0.0 else Double.PositiveInfinity))) { distances =>\n  val newDistances = distances.map { case (nodeId, currentDistance) =>\n    nodeId -> foldhood(currentDistance)(_ min _)(nbr(distances.getOrElse(mid(), Double.PositiveInfinity)))\n  }\n  if (newDistances == distances) distances else newDistances\n}.getOrElse(destination, Double.PositiveInfinity)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel from the source node to the destination node",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(Option.empty[Path]) { path =>\n  mux(sense[Boolean](\"source\")) {\n    Some(Path(mid()))\n  } {\n    mux(path.isDefined) {\n      val newPath = minHood(\n        nbr(path.map(p => (p.distance + nbrRange(), p.extend(mid()))))\n      ).map(_._2)\n      mux(sense[Boolean](\"destination\")) {\n        newPath\n      } {\n        newPath\n      }\n    } {\n      None\n    }\n  }\n}.map(_.hops.head).getOrElse(mid())\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val path = foldhood(List(mid()))(_ ++ _)(if (nbr(mid() == \"destination\")) List(nbr(mid())) else if (nbr(sense[Boolean](\"obstacle\"))) List() else List(nbr(mid())))\npath.headOption.contains(\"destination\") && path.forall(id => id != \"source\" || path.head == id)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "{\n  val sourceId = \"source\"\n  val destinationId = \"destination\"\n  val obstacle = \"obstacle\"\n\n  rep(false) { channelEstablished =>\n    branch(!channelEstablished) {\n      val isSource = mid().toString == sourceId\n      val isDestination = mid().toString == destinationId\n      val hasObstacle = sense[Boolean](obstacle)\n\n      mux(isSource) {\n        true // Start the channel from the source\n      } {\n        mux(isDestination) {\n          nbr(true) // Channel has reached destination\n        } {\n          if (!hasObstacle && nbr(channelEstablished)) true else false\n        }\n      }\n    } {\n      true\n    }\n  }\n}\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "TestFailed": {
+        "producedCode": "val source = sense[Boolean](\"source\")\nval destination = sense[Boolean](\"destination\")\nval obstacle = sense[Boolean](\"obstacle\")\n\nrep(source) { channel =>\n  mux(!obstacle) {\n    branch(destination) {\n      true\n    } {\n      foldhood(false)(_ || _)(nbr(channel))\n    }\n  } {\n    false\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "branch(nbr(mid()) == \"source\") {\n  rep(false) {\n    prevChannel =>\n      mux(foldhoodPlus(true)(_ && _)(nbr(prevChannel) || (nbr(mid()) == \"destination\" && foldhoodPlus(true)(_ && _)(nbr(!sense[Boolean](\"obstacle\")))))){\n        true\n      }{\n        prevChannel\n      }\n  }\n} {false}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(false) { channelEstablished =>\n  branch(mid() == \"source\") {\n    true\n  } {\n    val upstream = foldhoodPlus(List.empty[(Double, ID)])(_ ++ _)(\n      mux(!sense[Boolean](\"obstacle\")) {\n        List(nbrRange() -> nbr(mid()))\n      } {\n        List.empty[(Double, ID)]\n      }\n    ).minByOption(_._1).map(_._2)\n\n    upstream match {\n      case Some(neighbor) =>\n        mux(neighbor == \"destination\") {\n          true\n        } {\n          nbr(channelEstablished)\n        }\n      case None =>\n        false\n    }\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "TestFailed": {
+        "producedCode": "val source = sense[Boolean](\"source\")\nval destination = sense[Boolean](\"destination\")\nval obstacle = sense[Boolean](\"obstacle\")\n\nrep(source) { channel =>\n  mux(!obstacle && (channel || (foldhoodPlus(false)(_ || _)(nbr(channel)) && destination))) { true } { false }\n} && destination\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val path = foldhood(List(mid()))(_ ++ _)(if (nbr(sense[Boolean](\"obstacle\"))) Nil else List(nbr(mid())))\npath.contains(ID(\"destination\")) && path.head == ID(\"source\")\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(false) { connected =>\n  branch(!connected) {\n    mux(mid() == source) {\n      true\n    } {\n      foldhoodPlus(false)(_ || _) {\n        nbr {\n          mux(!sense[Boolean](\"obstacle\")) {\n            nbr(connected)\n          } {\n            false\n          }\n        }\n      }\n    }\n  } {\n    mux(mid() == destination) {\n      true\n    } {\n      connected\n    }\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "TestFailed": {
+        "producedCode": "val source = sense[Boolean](\"source\")\nval destination = sense[Boolean](\"destination\")\nval obstacle = sense[Boolean](\"obstacle\")\n\nrep(source) { currentChannel =>\n  val extendedChannel = !obstacle && (currentChannel || foldhood(false)(_ || _)(nbr(currentChannel)))\n  mux(destination)(true)(extendedChannel)\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val path = foldhood(List(mid()))(_ ++ _)(if (nbr(sense[Boolean](\"obstacle\"))) Nil else List(nbr(mid())))\npath.contains(mid(\"destination\")) && path.forall(id => !sense[Boolean](s\"obstacle-${id}\"))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(false) { channelEstablished =>\n  branch(!channelEstablished) {\n    val isSource = sense[Boolean](\"source\")\n    val isDestination = sense[Boolean](\"destination\")\n    val isObstacle = sense[Boolean](\"obstacle\")\n\n    mux(isSource) {\n      1.0\n    } {\n      val neighboursValue = foldhood(Double.MaxValue)(_ min _)(nbr(rep(Double.MaxValue) { v =>\n        mux(!isObstacle) {\n          nbr(v) + 1\n        } {\n          Double.MaxValue\n        }\n      }))\n      mux(neighboursValue < Double.MaxValue) {\n        neighboursValue\n      } {\n        Double.MaxValue\n      }\n    }\n\n    mux(isDestination) {\n      foldhood(Double.MaxValue)(_ min _)(nbr(rep(Double.MaxValue) { v =>\n        mux(!isObstacle) {\n          nbr(v) + 1\n        } {\n          Double.MaxValue\n        }\n      })) < Double.MaxValue\n    } {\n      false\n    }\n  } {\n    true\n  }\n}\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "TestFailed": {
+        "producedCode": "val source = sense[Boolean](\"source\")\nval destination = sense[Boolean](\"destination\")\nval obstacle = sense[Boolean](\"obstacle\")\n\nrep(source) {\n  previous =>\n    mux(!obstacle) {\n      branch(previous) {\n        true\n      } {\n        foldhoodPlus(false)(_ || _)(nbr(previous))\n      }\n    } {\n      false\n    }\n} && destination\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "foldhood(false)(_ || _)(\n  if (nbr(mid()) == \"source\") {\n    if (nbr(sense[Boolean](\"obstacle\"))) false\n    else if (nbr(mid()) == \"destination\") true\n    else foldhood(false)(_ || _)(nbr(true))\n  } else if (nbr(mid()) == \"destination\") false\n  else if (nbr(sense[Boolean](\"obstacle\"))) false\n  else foldhood(false)(_ || _)(nbr(true))\n)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(false) { channelEstablished =>\n  branch(!channelEstablished && mid() == source) {\n    rep(Double.PositiveInfinity) { distance =>\n      val newDistance = minHood(\n        branch(mid() == source)(0.0)(\n          nbr(distance) + (if (sense[Boolean](\"obstacle\")) Double.PositiveInfinity else 1.0)\n        )\n      )\n      newDistance\n    }\n  } {\n    branch(!channelEstablished && mid() == destination) {\n      foldhood(false)(_ || _)(nbr(mid() == source && rep(Double.PositiveInfinity) { distance =>\n        val newDistance = minHood(\n          branch(mid() == source)(0.0)(\n            nbr(distance) + (if (sense[Boolean](\"obstacle\")) Double.PositiveInfinity else 1.0)\n          )\n        )\n        newDistance\n      } < Double.PositiveInfinity))\n    } {\n      channelEstablished\n    }\n  }\n}\n"
+      }
+    }
+  },
+  {
+    "testName": "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "TestFailed": {
+        "producedCode": "val source = sense[Boolean](\"source\")\nval destination = sense[Boolean](\"destination\")\nval obstacle = sense[Boolean](\"obstacle\")\n\nrep(source) {\n  channel =>\n    mux(!obstacle && (source || foldhoodPlus(false)(_ || _)(nbr(channel)))) {\n      destination || foldhoodPlus(false)(_ || _)(nbr(channel))\n    } {\n      false\n    }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "rep(Int.MinValue) { maxId => foldhood(mid())(_ max _)(nbr(maxId)) }\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "maxHood(nbr(mid()))\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(mid()) {\n  maxId => maxHood(nbr(maxId))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "rep(Int.MinValue){ maxId => foldhood(mid())(_ max _)(nbr(maxId))}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "maxHood(nbr(mid()))\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(mid()) {\n  maxId => maxHood(nbr(maxId))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "rep(Int.MinValue){ maxId => foldhood(mid())(_ max _)(nbr(maxId)) }\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "maxHood(nbr(mid()))\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(mid()) {\n  maxId => maxHood(nbr(maxId))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "rep(Int.MinValue){ maxId => foldhood(mid())(_ max _)(nbr(maxId)) }\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "maxHood(nbr(mid()))\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(mid()) {\n  maxId => maxHood(nbr(maxId))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "rep(Int.MinValue){ maxId => foldhood(mid())(_ max _)(nbr(maxId))}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "maxHood(nbr(mid()))\n"
+      }
+    }
+  },
+  {
+    "testName": "collect the max ID in the network on each node",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(mid()) {\n  maxId => maxHood(nbr(maxId))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(Double.PositiveInfinity){ dist => foldhood(if (sense[Boolean](\"source\")) 0.0 else dist)(_ min _)(math.sqrt(math.pow(nbr(sense[Double](\"x\")) - sense[Double](\"x\"), 2) + math.pow(nbr(sense[Double](\"y\")) - sense[Double](\"y\"), 2)) + nbr(dist))}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.MaxValue){ dist =>\n  branch(sense[Boolean](\"source\"))(0.0){\n    minHood(nbr(dist) + nbrRange())\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(Double.PositiveInfinity) { distance =>\n  mux(sense[Boolean](\"source\")) {\n    0.0\n  } {\n    minHood(nbr(distance) + nbrRange())\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.PositiveInfinity) { dist =>\n  foldhood(if (sense[Boolean](\"source\")) 0.0 else Double.PositiveInfinity)(_ min _)(nbr(dist + nbrRange()))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.MaxValue) { dist =>\n  branch(sense[Boolean](\"source\"))(0.0)(minHood(nbr(dist) + nbrRange()))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep[Option[Double]](if (sense[Boolean](\"source\")) Some(0.0) else None) { distance =>\n  minHood {\n    mux(nbr(distance).isDefined) {\n      nbr(distance).get + nbrRange()\n    } {\n      Double.PositiveInfinity\n    }\n  } match {\n    case x if x.isInfinite => None\n    case x => Some(x)\n  }\n}.getOrElse(Double.PositiveInfinity)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.PositiveInfinity) { dist =>\n  foldhood(dist)(_ min _)(nbr(if (sense[Boolean](\"source\")) 0.0 else dist + nbrRange()))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.MaxValue) { dist =>\n  branch(sense[Boolean](\"source\"))(0.0)(minHood(nbr(dist) + nbrRange()))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(Double.PositiveInfinity) { distance =>\n  mux(sense[Boolean](\"source\")) {\n    0.0\n  } {\n    minHood(nbr(distance) + nbrRange())\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.PositiveInfinity) {\n  dist => foldhood(if (sense[String](\"source\") == mid().toString) 0.0 else Double.PositiveInfinity)(_ min _)(nbr(math.min(dist + 1, nbr(dist))))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.MaxValue) { dist =>\n  branch(sense[Boolean](\"source\"))(0.0) {\n    minHood(nbr(dist) + nbrRange())\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(Double.PositiveInfinity) { distance =>\n  mux(sense[Boolean](\"source\")) {\n    0.0\n  } {\n    minHood(nbr(distance) + nbrRange())\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.PositiveInfinity) { dist =>\n  foldhood(dist)(_ min _)(nbr(if (sense[Boolean](\"source\")) 0.0 else dist + nbrRange()))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.MaxValue) { dist =>\n  branch(sense[Boolean](\"source\"))(0.0) {\n    minHood(nbr(dist) + nbrRange())\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient with distance from source",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(if (sense[Boolean](\"source\")) 0.0 else Double.PositiveInfinity) { d =>\n  minHood(nbr(d) + nbrRange())\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.PositiveInfinity){ dist =>\n  val sourceDist = if (sense[Boolean](\"source\")) 0.0 else Double.PositiveInfinity\n  val minNeighDist = minHood(nbr(dist + nbrRange()))\n  math.min(sourceDist, minNeighDist)\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.MaxValue) { dist =>\n  branch(sense[Boolean](\"source\"))(0.0) {\n    minHood {\n      mux(!sense[Boolean](\"obstacle\"))(nbr(dist) + nbrRange())(Double.MaxValue)\n    }\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.PositiveInfinity) { distance =>\n  mux(sense[Boolean](\"source\")) {\n    0.0\n  } {\n    minHood(\n      mux(nbr(sense[Boolean](\"obstacle\"))) {\n        Double.PositiveInfinity\n      } {\n        nbr(distance) + nbrRange()\n      }\n    )\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.PositiveInfinity){ dist =>\n  val sourceDist = if (sense[Boolean](\"source\")) 0.0 else Double.PositiveInfinity\n  val minNeighDist = minHood(nbr(dist + nbrRange()))\n  math.min(sourceDist, minNeighDist)\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.MaxValue) { dist =>\n  branch(sense[Boolean](\"source\"))(0.0) {\n    minHood {\n      mux(!sense[Boolean](\"obstacle\"))(nbr(dist) + nbrRange())(Double.MaxValue)\n    }\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.PositiveInfinity) { distance =>\n  mux(sense[Boolean](\"source\")) {\n    0.0\n  } {\n    minHood(\n      mux(nbr(sense[Boolean](\"obstacle\"))) {\n        Double.PositiveInfinity\n      } {\n        nbr(distance) + nbrRange()\n      }\n    )\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(Double.PositiveInfinity){ dist =>\n  foldhood(dist)(_ min _)(\n    branch(nbr(sense[Boolean](\"obstacle\"))){\n      Double.PositiveInfinity\n    }{\n      nbr(sense[Double](\"source\")) + nbr(sense[Double](\"distance\"))\n    }\n  )\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.MaxValue) { dist =>\n  branch(sense[Boolean](\"source\"))(0.0) {\n    minHood {\n      mux(!sense[Boolean](\"obstacle\"))(nbr(dist) + nbrRange())(Double.MaxValue)\n    }\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.PositiveInfinity) { distance =>\n  mux(sense[Boolean](\"source\")) {\n    0.0\n  } {\n    minHood(\n      mux(nbr(sense[Boolean](\"obstacle\"))) {\n        Double.PositiveInfinity\n      } {\n        nbr(distance) + nbrRange()\n      }\n    )\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.PositiveInfinity){ dist =>\n  val myDist = if (sense[Boolean](\"source\")) 0.0 else Double.PositiveInfinity\n  val minNeighDist = minHood(nbr(dist))\n  math.min(myDist, if(sense[Boolean](\"obstacle\")) Double.PositiveInfinity else minNeighDist + 1.0)\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.MaxValue) { dist =>\n  branch(sense[Boolean](\"source\"))(0.0) {\n    minHood {\n      mux(!sense[Boolean](\"obstacle\"))(nbr(dist) + nbrRange())(Double.MaxValue)\n    }\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep[Option[Double]](if (sense[Boolean](\"source\")) Some(0.0) else None) { distance =>\n  mux(distance.isDefined && !sense[Boolean](\"obstacle\")) {\n    minHood(nbr(distance).map(_ + nbrRange()))\n  } {\n    distance\n  }\n}.getOrElse(Double.PositiveInfinity)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(Double.PositiveInfinity){ dist =>\n  foldhood(dist)(_ min _)(\n    branch(nbr(sense[Boolean](\"obstacle\"))){\n      Double.PositiveInfinity\n    }{\n      nbr(sense[Double](\"source\")) + math.sqrt(nbr(sense[Double](\"source\"))*nbr(sense[Double](\"source\")) + nbrRange()*nbrRange())\n    }\n  )\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "{\n  val sourceNode = sense[Boolean](\"source\")\n  val obstacle = sense[Boolean](\"obstacle\")\n\n  rep(if (sourceNode) 0.0 else Double.PositiveInfinity) { dist =>\n    branch(obstacle) {\n      Double.PositiveInfinity\n    } {\n      minHood(if (sourceNode) 0.0 else nbr(dist) + nbrRange())\n    }\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(Double.PositiveInfinity) { distance =>\n  mux(sense[Boolean](\"source\")) {\n    0.0\n  } {\n    minHood(\n      mux(nbr(sense[Boolean](\"obstacle\"))) {\n        Double.PositiveInfinity\n      } {\n        nbr(distance) + nbrRange()\n      }\n    )\n  }\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhood(List[ID]())(_ ++ _)(List(nbr(mid())))\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n"
+      }
+    }
+  },
+  {
+    "testName": "gather the IDs of their neighbors",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "TestFailed": {
+        "producedCode": "minHood(nbrRange())\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(Double.MaxValue)(_ min _)(nbrRange())\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val distances = foldhoodPlus(List.empty[(Double, ID)])(_ ++ _)(List(nbrRange() -> nbr(mid())))\ndistances.minBy(_._1)._1\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "TestFailed": {
+        "producedCode": "minHood(nbrRange())\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "{\n  foldhoodPlus(Double.MaxValue)(_ min _)(nbrRange())\n}\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val idsAndNeigh = foldhoodPlus(List.empty[(Double, ID)])(_ ++ _)(List(nbrRange() -> nbr(mid())))\nidsAndNeigh.minBy(_._1)._1\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "TestFailed": {
+        "producedCode": "minHood(nbrRange())\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(Double.MaxValue)(_ min _)(nbrRange())\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "TestFailed": {
+        "producedCode": "minHood(nbrRange())\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "TestFailed": {
+        "producedCode": "minHood(nbrRange())\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(Double.MaxValue)(_ min _)(nbrRange())\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "TestFailed": {
+        "producedCode": "minHood(nbrRange())\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "TestFailed": {
+        "producedCode": "minHood(nbrRange())\n\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(Double.MaxValue)(_ min _)(nbrRange())\n"
+      }
+    }
+  },
+  {
+    "testName": "calculate the min distance from neighbors, in a grid",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "TestFailed": {
+        "producedCode": "minHood(nbr(nbrRange()))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "foldhood(0)(_ + _)(nbr(1))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "foldhood(0)(_ + _)(nbr(1))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "foldhood(0)(_ + _)(nbr(1))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "foldhood(0)(_ + _)(nbr(1))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "foldhood(0)(_ + _)(nbr(1))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "foldhood(0)(_ + _)(nbr(1))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(0)(_ + _)(nbr(1))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(0)(_ + _)(nbr(1))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(0)(_ + _)(nbr(1))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(0)(_ + _)(nbr(1))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName": "count neighbors excluding self",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "foldhoodPlus(0)(_ + _)(nbr(1))\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "rep(1000)(_ - 1)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "rep(1000)(_ - 1)\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(1000)(_ - 1)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "rep(1000)(_ - 1)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "rep(1000)(_ - 1)\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(1000)(_ - 1)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "rep(1000)(_ - 1)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "rep(1000)(_ - 1)\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(1000)(_ - 1)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "rep(1000)(_ - 1)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "rep(1000)(_ - 1)\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(1000)(_ - 1)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "Success": {
+        "program": "rep(1000)(_ - 1)\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "Success": {
+        "program": "rep(1000)(_ - 1)\n"
+      }
+    }
+  },
+  {
+    "testName": "count down from 1000 to 0",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "rep(1000)(_ - 1)\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "TestFailed": {
+        "producedCode": "val areaTemp = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\"))) / foldhood(0)(_ + _)(nbr(1))\nrep(false){ alarm => mux(areaTemp > 30){ true }{alarm} }\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(false) { alarm =>\n  val area = sense[Int](\"area\")\n  val areaTemperature = foldhood(0.0)(_ + _)(mux(nbr(sense[Int](\"area\")) == area)(nbr(sense[Double](\"temperature\")))(0.0)) / foldhood(0)(_ + _)(mux(nbr(sense[Int](\"area\")) == area)(nbr(1))(0))\n  val shouldAlarm = areaTemperature > 30\n  mux(nbr(sense[Int](\"area\")) == area)(shouldAlarm)(alarm)\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 0,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "val isOverThirty = sense[Double](\"temperature\") > 30.0\nval areaTemperature = mux(isOverThirty) {\n  val devices = foldhood(0)(_ + _)(nbr(1))\n  val temperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n  temperature / devices\n} {\n  Double.NaN // Use NaN to represent a neutral value\n}\n\nval alarm = rep(false) { _ =>\n  mux(isOverThirty) {\n    foldhood(false)(_ || _)(nbr(areaTemperature > 30.0))\n  } {\n    false\n  }\n}\nalarm\n\nval isOverThirty = sense[Double](\"temperature\") > 30.0\nval areaTemperature = mux(isOverThirty) {\n  val devices = foldhood(0)(_ + _)(nbr(1))\n  val temperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n  temperature / devices\n} {\n  Double.NaN // Use NaN to represent a neutral value\n}\n\nval alarm = rep(false) { _ =>\n  mux(isOverThirty) {\n    foldhood(false)(_ || _)(nbr(areaTemperature > 30.0))\n  } {\n    false\n  }\n}\nalarm\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "TestFailed": {
+        "producedCode": "val areaTemp = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\"))) / foldhood(0)(_ + _)(nbr(1))\nbranch(areaTemp > 30){\n  foldhood(true)(_ || _)(nbr(true))\n}{\n  foldhood(false)(_ || _)(nbr(false))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(false) { alarm =>\n  val temperature = sense[Double](\"temperature\")\n  val area = branch(mid() % 2 == 0) { 0 } { 1 }\n  val areaTemperature = foldhood(0.0)(_ + _)(mux(nbr(area) == area)(nbr(temperature))(0.0))\n  val areaSize = foldhood(0)(_ + _)(mux(nbr(area) == area)(1)(0))\n  val avgTemperature = areaTemperature / areaSize\n  val newAlarm = avgTemperature > 30\n  foldhood(false)(_ || _)(mux(nbr(area) == area)(nbr(newAlarm))(false))\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 1,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "Success": {
+        "program": "val temperature = sense[Double](\"temperature\")\nval areaId = rep(mid()) { oldAreaId =>\n  mux(temperature > 20) {\n    mid()\n  } {\n    minHood(nbr(oldAreaId))\n  }\n}\n\nval areaTemperature = foldhood(0.0)(_ + _) {\n  mux(nbr(areaId) == areaId) {\n    nbr(temperature)\n  } {\n    0.0\n  }\n}\n\nval areaSize = foldhood(0)(_ + _) {\n  mux(nbr(areaId) == areaId) {\n    nbr(1)\n  } {\n    0\n  }\n}\n\nval avgAreaTemperature = areaTemperature / areaSize\n\nbranch(areaId == mid() && avgAreaTemperature > 30) {\n  true\n} {\n  false\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "TestFailed": {
+        "producedCode": "val areaTemp = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\"))) / foldhood(0)(_ + _)(nbr(1))\nbranch(areaTemp > 30){true}{false}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(false) { alarm =>\n  val area = branch(mid() % 2 == 0) { 0 } { 1 }\n  val temperature = sense[Double](\"temperature\")\n  val areaTemperature = foldhood(0.0)(_ + _)(mux(nbr(area == area))(nbr(temperature))(0.0))\n  val areaNodes = foldhood(0)(_ + _)(mux(nbr(area == area))(nbr(1))(0))\n  val averageTemperature = if (areaNodes > 0) areaTemperature / areaNodes else 0.0\n\n  val newAlarm = averageTemperature > 30\n\n  foldhood(false)(_ || _)(mux(nbr(area == area))(nbr(newAlarm))(false))\n}\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 2,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val temperature = sense[Double](\"temperature\")\nval areaId = rep(mid()) { oldId =>\n  minHood(nbr(oldId))\n}\n\nval areaTemperature = mux(areaId == mid()) {\n  val temperatures = foldhood(List.empty[Double])(_ :+ _)(nbr(temperature))\n  temperatures.sum / temperatures.size\n} {\n  Double.NegativeInfinity // Use a default value that won't interfere with maxHood\n}\n\nval maxAreaTemperature = maxHood(nbr(areaTemperature))\n\nmaxAreaTemperature > 30\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "val areaTemp = foldhood(sense[Double](\"temperature\"))(_ + _)(nbr(sense[Double](\"temperature\"))) / foldhood(1)(_ + _)(nbr(1))\nmux(areaTemp > 30){\n  broadcast(true)\n}{\n  broadcast(false)\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "CompilationFailed": {
+        "producedCode": "rep(false) { alarm =>\n  val area = sense[Int](\"area\")\n  val temperature = sense[Double](\"temperature\")\n  val areaTemperature = foldhood(0.0)(_ + _)(mux(nbr(sense[Int](\"area\")) == area)(nbr(temperature))(0.0))\n  val areaSize = foldhood(0)(_ + _)(mux(nbr(sense[Int](\"area\")) == area)(1)(0))\n  val averageTemperature = if (areaSize > 0) areaTemperature / areaSize else 0.0\n  val newAlarm = averageTemperature > 30\n  if (newAlarm) {\n    foldhood(0)(_ + _)(mux(nbr(sense[Int](\"area\")) == area)(nbr(1))(0)) // Broadcast alarm within the area (not really doing anything, but showing how it would be done)\n  }\n  newAlarm\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 3,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "TestFailed": {
+        "producedCode": "val temperature = sense[Double](\"temperature\")\nval areaId = rep(mid()) { id =>\n  minHood(nbr(id))\n}\n\nval areaTemperature = mux(mid() == areaId) {\n  val sum = foldhood(0.0)(_ + _)(mux(nbr(areaId) == areaId)(nbr(temperature))(0.0))\n  val count = foldhood(0)(_ + _)(mux(nbr(areaId) == areaId)(nbr(1))(0))\n  sum / count\n} {\n  Double.NaN // Use NaN as a neutral value for non-leader nodes\n}\n\nmux(mid() == areaId && areaTemperature > 30) {\n  true\n} {\n  false\n}\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-1.5-flash",
+    "result": {
+      "TestFailed": {
+        "producedCode": "val areaTemp = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\"))) / foldhood(0)(_ + _)(nbr(1))\nrep(false){ alarm => mux(areaTemp > 30){true}{alarm} }\n\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-flash-exp",
+    "result": {
+      "TestFailed": {
+        "producedCode": "rep(false) { alarm =>\n  val temperature = sense[Double](\"temperature\")\n  val area = branch(temperature < 20)(0)(branch(temperature < 25)(1)(branch(temperature < 30)(2)(3)))\n  val areaTemperature = foldhood(0.0)(_ + _)(mux(nbr(area == area))(nbr(temperature))(0.0))\n  val areaSize = foldhood(0)(_ + _)(mux(nbr(area == area))(1)(0))\n  val avgAreaTemperature = if (areaSize > 0) areaTemperature / areaSize else 0.0\n\n  if (avgAreaTemperature > 30) {\n    foldhood(false)(_ || _)(nbr(area == area))\n  } else {\n    false\n  }\n}\n"
+      }
+    }
+  },
+  {
+    "testName": "SCR where temperature is above 30 degrees within the area",
+    "promptIndex": 4,
+    "knowledgeFile": "knowledge/knowledge.md",
+    "modelUsed": "gemini-2.0-pro-exp-02-05",
+    "result": {
+      "TestFailed": {
+        "producedCode": "val areaTemperature =\n  mux(mid() % 2 == 0) { // Example area division: even IDs\n    val devices = foldhood(0)(_ + _)(nbr(1))\n    val temperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n    temperature / devices\n  } {\n    val devices = foldhood(0)(_ + _)(nbr(1))\n    val temperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n    temperature / devices\n  }\n\nrep(false) { _ =>\n  mux(mid() % 2 == 0) { //Consistent with area division\n    areaTemperature > 30\n  } {\n    areaTemperature > 30\n  }\n}\n\n"
+      }
+    }
+  }
+]
