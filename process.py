@@ -249,7 +249,7 @@ if __name__ == '__main__':
         "count neighbors": "Space/Time",
         "count neighbors excluding self": "Space/Time",
         "gather the IDs of their neighbors": "Space/Time", 
-        "collect the max ID in the network on each node": "Spatio-temporal", # spatio-temporal
+        "collect the max ID in the network on each node": "Space/Time", # spatio-temporal
         "calculate the min distance from neighbors, in a grid": "Spatio-temporal",
         "calculate the gradient with distance from source": "Spatio-temporal",
         "calculate the gradient (with obstacles) with distance from source": "Spatio-temporal", 
