@@ -1,6 +1,7 @@
 val scala3Version = "3.6.2"
 val scala2Version = "2.13.16"
 
+
 ThisBuild / organization := "it.nicolasfarabegoli"
 ThisBuild / sonatypeCredentialHost := "s01.oss.sonatype.org"
 ThisBuild / homepage := Some(
@@ -47,6 +48,17 @@ lazy val root = project
       "io.circe" %% "circe-parser" % "0.14.10",
       "com.softwaremill.retry" %% "retry" % "0.3.6",
       "io.github.ollama4j" % "ollama4j" % "1.0.93",
+      "com.lihaoyi" %% "os-lib" % "0.11.4",
+      "dev.langchain4j" % "langchain4j-google-ai-gemini" % "1.0.0-beta2",
+      "dev.langchain4j" % "langchain4j-easy-rag" % "1.0.0-beta2",
+      "dev.langchain4j" % "langchain4j-embeddings-all-minilm-l6-v2" % "1.0.0-beta2",
+      "dev.langchain4j" % "langchain4j-embeddings-all-minilm-l6-v2-q" % "1.0.0-beta2",
+      "dev.langchain4j" % "langchain4j-embeddings-bge-small-en-v15" % "1.0.0-beta2",
+      "dev.langchain4j" % "langchain4j-open-ai" % "1.0.0-beta2",
+      "dev.langchain4j" % "langchain4j-ollama" % "1.0.0-beta2",
+      "dev.langchain4j" % "langchain4j-github-models" % "1.0.0-beta2",
+      "dev.langchain4j" % "langchain4j-local-ai" % "1.0.0-beta2",
+      "dev.langchain4j" % "langchain4j-community-xinference" % "1.0.0-beta2",
     ),
     scalacOptions ++= Seq(
       "-Werror",
