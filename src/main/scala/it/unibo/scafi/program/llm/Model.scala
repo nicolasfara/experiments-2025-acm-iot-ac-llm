@@ -21,3 +21,4 @@ enum Model(val codeName: String):
   case DEEPSEEK_R1 extends Model("deepseek/deepseek-r1")
   // OpenAI Models
   case GPT_4_1_MINI extends Model("openai/gpt-4.1-mini")
+end Model

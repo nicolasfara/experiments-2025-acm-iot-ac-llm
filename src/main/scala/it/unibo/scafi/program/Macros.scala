@@ -1,8 +1,8 @@
 package it.unibo.scafi.program
 
-import it.unibo.scafi.test.AbstractScafiProgramTest
-
 import scala.quoted.*
+
+import it.unibo.scafi.test.AbstractScafiProgramTest
 
 inline def listPrograms(): List[AbstractScafiProgramTest] = ${ listProgramsImpl() }
 

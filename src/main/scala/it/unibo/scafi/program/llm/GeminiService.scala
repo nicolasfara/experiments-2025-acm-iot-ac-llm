@@ -1,10 +1,10 @@
 package it.unibo.scafi.program.llm
 
+import scala.concurrent.{ ExecutionContext, Future, Promise }
+
 import dev.langchain4j.model.chat.response.{ ChatResponse, StreamingChatResponseHandler }
 import dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel
 import it.unibo.scafi.program.utils.{ PromptUtils, StringUtils }
-
-import scala.concurrent.{ ExecutionContext, Future, Promise }
 
 class GeminiService(model: Model) extends CodeGeneratorService:
   private val langchainModel = GoogleAiGeminiStreamingChatModel

@@ -1,17 +1,17 @@
 package it.unibo.scafi.test
 
+import scala.concurrent.{ ExecutionContext, Future }
+import scala.io.Source
+import scala.util.boundary.break
+import scala.util.{ boundary, Try, Using }
+
 import io.circe.generic.auto.*
 import io.circe.parser.*
 import it.unibo.scafi.Prompts
-import it.unibo.scafi.program.llm.{CodeGeneratorService, GeminiService, Model, OpenRouterService}
+import it.unibo.scafi.program.llm.*
 import it.unibo.scafi.test.FunctionalTestIncarnation.Network
-import it.unibo.scafi.test.ScafiTestResult.{CompilationFailed, GenericFailure}
-import it.unibo.scafi.test.ScafiTestUtils.{buildProgram, executeFromString}
-
-import scala.concurrent.{ExecutionContext, Future}
-import scala.io.Source
-import scala.util.boundary.break
-import scala.util.{Try, Using, boundary}
+import it.unibo.scafi.test.ScafiTestResult.{ CompilationFailed, GenericFailure }
+import it.unibo.scafi.test.ScafiTestUtils.{ buildProgram, executeFromString }
 
 final case class ScafiProgram(program: String)
 

@@ -1,16 +1,16 @@
 package it.unibo.scafi
 
+import java.nio.file.{ Files, Path }
+
+import scala.concurrent.duration.DurationInt
+import scala.concurrent.{ Await, ExecutionContext, Future }
+import scala.concurrent.ExecutionContext.Implicits.global
+
 import io.circe.*
 import io.circe.generic.auto.*
 import io.circe.syntax.*
 import it.unibo.scafi.program.ChannelTest
-import it.unibo.scafi.test.{toStatisticsPerModel, toStatisticsPerTest}
-
-import java.nio.file.{Files, Path}
-import scala.concurrent.duration.DurationInt
-import scala.concurrent.{Await, ExecutionContext, Future}
-
-import scala.concurrent.ExecutionContext.Implicits.global
+import it.unibo.scafi.test.{ toStatisticsPerModel, toStatisticsPerTest }
 
 @main def main(): Unit =
   require(System.getenv("GEMINI_API_KEY") != null, "GEMINI_API_KEY environment variable must be set")

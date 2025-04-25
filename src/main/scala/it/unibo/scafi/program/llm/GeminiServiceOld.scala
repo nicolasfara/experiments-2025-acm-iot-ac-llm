@@ -1,5 +1,8 @@
 package it.unibo.scafi.program.llm
 
+import scala.concurrent.duration.*
+import scala.concurrent.{ ExecutionContext, Future }
+
 import io.circe.generic.auto.*
 import io.circe.parser.*
 import io.circe.syntax.*
@@ -7,9 +10,6 @@ import it.unibo.scafi.*
 import requests.*
 import retry.Success
 import retry.Success.*
-
-import scala.concurrent.duration.*
-import scala.concurrent.{ ExecutionContext, Future }
 
 private final case class Part(text: String)
 private final case class Content(parts: List[Part])

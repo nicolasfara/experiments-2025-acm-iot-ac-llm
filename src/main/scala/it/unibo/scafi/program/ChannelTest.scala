@@ -2,15 +2,17 @@ package it.unibo.scafi.program
 
 import it.unibo.scafi.test.FunctionalTestIncarnation.Network
 import it.unibo.scafi.test.ScafiAssertions.assertNetworkValues
-import it.unibo.scafi.test.{AbstractScafiProgramTest, FunctionalTestIncarnation, ScafiTestResult}
+import it.unibo.scafi.test.{ AbstractScafiProgramTest, FunctionalTestIncarnation, ScafiTestResult }
 
-class ChannelTest extends AbstractScafiProgramTest(
-  List(
-    "knowledge/no-knowledge.md",
-    "knowledge/knowledge.md",
-    "knowledge/knowledge-with-building-blocks.md"
-  ),
-  "prompts/ChannelTest.json"):
+class ChannelTest
+    extends AbstractScafiProgramTest(
+      List(
+        "knowledge/no-knowledge.md",
+        "knowledge/knowledge.md",
+        "knowledge/knowledge-with-building-blocks.md",
+      ),
+      "prompts/ChannelTest.json",
+    ):
   override def testCase: String = "create a channel from the source node to the destination node"
   override def baselineWorkingProgram(): String =
     """

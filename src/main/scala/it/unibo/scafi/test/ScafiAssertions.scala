@@ -1,7 +1,7 @@
 package it.unibo.scafi.test
 
-import it.unibo.scafi.test.FunctionalTestIncarnation.{ID, Network}
-import it.unibo.scafi.test.ScafiTestResult.{Success, TestFailed}
+import it.unibo.scafi.test.FunctionalTestIncarnation.{ ID, Network }
+import it.unibo.scafi.test.ScafiTestResult.{ Success, TestFailed }
 
 object ScafiAssertions:
   /**
@@ -23,7 +23,7 @@ object ScafiAssertions:
         case (None, _) => false
         case _ => false,
     )
-    if (res) Success(program)
+    if res then Success(program)
     else TestFailed(program)
   end assertNetworkValues
 
@@ -47,7 +47,7 @@ object ScafiAssertions:
         case Some(v) => pred(id, v.root[T]())
         case None => passNotComputed,
     )
-    if (res) Success(program)
+    if res then Success(program)
     else TestFailed(program)
   end assertNetworkValuesWithPredicate
 end ScafiAssertions

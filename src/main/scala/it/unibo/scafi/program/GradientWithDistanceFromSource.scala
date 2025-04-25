@@ -8,7 +8,7 @@ class GradientWithDistanceFromSource
       List(
         "knowledge/no-knowledge.md",
         "knowledge/knowledge.md",
-        "knowledge/knowledge-with-building-blocks.md"
+        "knowledge/knowledge-with-building-blocks.md",
       ),
       "prompts/GradientWithDistanceFromSource.json",
     ):

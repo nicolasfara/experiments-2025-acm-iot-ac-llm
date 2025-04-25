@@ -1,7 +1,7 @@
 package it.unibo.scafi.program
 
 import it.unibo.scafi.test.ScafiAssertions.assertNetworkValues
-import it.unibo.scafi.test.{AbstractScafiProgramTest, ScafiTestResult}
+import it.unibo.scafi.test.{ AbstractScafiProgramTest, ScafiTestResult }
 import it.unibo.scafi.test.FunctionalTestIncarnation.Network
 
 class ReverseCountTest
@@ -9,7 +9,7 @@ class ReverseCountTest
       List(
         "knowledge/no-knowledge.md",
         "knowledge/knowledge.md",
-        "knowledge/knowledge-with-building-blocks.md"
+        "knowledge/knowledge-with-building-blocks.md",
       ),
       "prompts/ReverseCountTest.json",
     ):
