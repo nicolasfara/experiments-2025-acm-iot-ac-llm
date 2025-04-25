@@ -24,7 +24,7 @@ ThisBuild / developers := List(
 //ThisBuild / coverageEnabled := true
 //ThisBuild / semanticdbEnabled := true
 //ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
-//ThisBuild / Test / fork := true
+ThisBuild / fork := true
 //ThisBuild / testOptions += Tests.Argument(TestFrameworks.ScalaTest, "-h", "target/test-reports")
 
 lazy val root = project

@@ -1,9 +1,9 @@
 {
-  "calculate the gradient (with obstacles) with distance from source" : {
-    "testName" : "calculate the gradient (with obstacles) with distance from source",
+  "create a channel from the source node to the destination node" : {
+    "testName" : "create a channel from the source node to the destination node",
     "succeeded" : 0,
-    "nonCompiling" : 5,
-    "failed" : 10,
+    "nonCompiling" : 24,
+    "failed" : 6,
     "genericErrors" : 0
   }
 }

@@ -146,8 +146,8 @@ if __name__ == '__main__':
         "count neighbors": "Neighbors Count",
         "count neighbors excluding self": "Neighbors Count Excluding Self",
         "gather the IDs of their neighbors": "Gather Neighbors IDs", 
-        "collect the max ID in the network on each node": "Collect Max ID", # spatio-temporal
         "calculate the min distance from neighbors, in a grid": "Calculate Min Distance Neighbors",
+        "collect the max ID in the network on each node": "Collect Max ID", # spatio-temporal
         "calculate the gradient with distance from source": "Calculate Gradient",
         "calculate the gradient (with obstacles) with distance from source": "Calculate Gradient (Obstacles)", 
         "create a channel from the source node to the destination node": "Create Channel", # BB compositional
@@ -249,8 +249,8 @@ if __name__ == '__main__':
         "count neighbors": "Space/Time",
         "count neighbors excluding self": "Space/Time",
         "gather the IDs of their neighbors": "Space/Time", 
-        "collect the max ID in the network on each node": "Space/Time", # spatio-temporal
         "calculate the min distance from neighbors, in a grid": "Spatio-temporal",
+        "collect the max ID in the network on each node": "Space/Time", # spatio-temporal
         "calculate the gradient with distance from source": "Spatio-temporal",
         "calculate the gradient (with obstacles) with distance from source": "Spatio-temporal", 
         "create a channel from the source node to the destination node": "Building Blocks", # BB compositional

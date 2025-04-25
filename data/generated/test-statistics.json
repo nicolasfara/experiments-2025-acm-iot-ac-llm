@@ -1,24 +1,17 @@
 {
-  "calculate the gradient (with obstacles) with distance from source" : {
-    "LLM: deepseek-coder-v2:16b, knowledgePath: knowledge/knowledge.md" : {
-      "testName" : "calculate the gradient (with obstacles) with distance from source",
+  "create a channel from the source node to the destination node" : {
+    "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7" : {
+      "testName" : "create a channel from the source node to the destination node",
       "succeeded" : 0,
-      "nonCompiling" : 0,
+      "nonCompiling" : 10,
       "failed" : 5,
       "genericErrors" : 0
     },
-    "LLM: deepseek-coder-v2:16b, knowledgePath: knowledge/no-knowledge.md" : {
-      "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "QWEN_2_5_CODER_32B" : {
+      "testName" : "create a channel from the source node to the destination node",
       "succeeded" : 0,
-      "nonCompiling" : 5,
-      "failed" : 0,
-      "genericErrors" : 0
-    },
-    "LLM: deepseek-coder-v2:16b, knowledgePath: knowledge/knowledge-with-building-blocks.md" : {
-      "testName" : "calculate the gradient (with obstacles) with distance from source",
-      "succeeded" : 0,
-      "nonCompiling" : 0,
-      "failed" : 5,
+      "nonCompiling" : 14,
+      "failed" : 1,
       "genericErrors" : 0
     }
   }

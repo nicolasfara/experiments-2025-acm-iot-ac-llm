@@ -15,11 +15,13 @@ object PromptUtils:
 
       Implement a solution for the following problem:
     """
-     */
+   */
 
   def generateLocalKnowledgePrompt(localKnowledge: String): String =
     s"""### DSL Implementation Guidelines
-      You must design a **Domain-Specific Language (DSL)** in **Scala** following these principles: \n ${localKnowledge}\n"""
+    |You must design a **Domain-Specific Language (DSL)** in **Scala** following these principles:
+    |$localKnowledge
+    |""".stripMargin
 
   def generateCustomPreamblePrompt(customPreamble: String): String =
     s"""### Strict Constraints and Recommendations
@@ -30,26 +32,26 @@ object PromptUtils:
     These conditions **must always hold true**, regardless of the specific operation:
 
     - **Code Format Restrictions**:
-        - The solution **must** be written in **Scala**.
-        - **Write ONLY the body** of the `main` function.
+      - The solution **must** be written in **Scala**.
+      - **Write ONLY the body** of the `main` function.
         Example of a correct response:
         println("Hello, World!") // Correct (single-line)
-
+  
         val numbers = List(1, 2, 3)
         numbers.foreach(println) // Correct (multi-line, no curly braces)
-
+  
         Example of incorrect responses:
         def main(): // Wrong! Do not include function definition
           println("Hello, World!")
-
+  
         { // Wrong! Do not use curly braces in multi-line code
           val numbers = List(1, 2, 3)
           numbers.foreach(println)
         }
-        - **Do NOT** include:
-            - The function definition (`def main()`).
-            - Any enclosing curly braces `{}` for multi-line code.
-            - Your thinking or explanation or description or introduction something else.
+      - **Do NOT** include:
+        - The function definition (`def main()`).
+        - Any enclosing curly braces `{}` for multi-line code.
+        - Your thinking or explanation or description or introduction something else.
     - **Correctness**: The generated Scala code must compile without errors.
     - **Idiomatic Scala**: Follow best practices and avoid anti-patterns.
     - **Functional Style**: Favor immutability, higher-order functions, and pure functions where possible.
@@ -66,11 +68,13 @@ object PromptUtils:
 
   def generateTaskPrompt(task: String): String =
     s"""### Task Specification
-         Implement the following operation using the DSL guidelines, while ensuring it meets the 'Strict Constraints and Recommendations':  \n ${task}"""
+    |Implement the following operation using the DSL guidelines, while ensuring it meets the 'Strict Constraints and Recommendations':
+    |  
+    |$task
+    |""".stripMargin
 
   // -------------------------------------------------- RAG --------------------------------------------------------- //
 
-
   def generateTaskPromptRAG(task: String): String =
     s"""**Task:** ${task}"""
-
+end PromptUtils

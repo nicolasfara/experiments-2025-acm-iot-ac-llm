@@ -1,166 +1,331 @@
 [
   {
-    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 0,
     "knowledgeFile" : "knowledge/no-knowledge.md",
-    "modelUsed" : "LLM: deepseek-coder-v2:16b, knowledgePath: knowledge/no-knowledge.md",
+    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : " val sourceDistance = SourceSensor(\"source\").euclideanDistanceTo(SourceSensor(\"destination\"))\n"
+        "producedCode" : "import scaFi.dsl._\n\nval channel = source ~> destination\n"
       }
     }
   },
   {
-    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "import it.unibo.scafi.incarnations.BasicScafiIncarnation._\nimport it.unibo.scafi.space.Point2D\nimport it.unibo.scafi.space.Radius\nimport it.unibo.scafi.space.Cartesian2D\nimport it.unibo.scafi.space.Metric\n\nval source = Point2D(0, 0)\nval destination = Point2D(10, 10)\nval network = mkNbrhood(nbrLattice2D(Cartesian2D()))\nval metric = new Metric[Point2D] {\n  override def distance(from: Point2D, to: Point2D): Double = math.sqrt(math.pow(from.x - to.x, 2) + math.pow(from.y - to.y, 2))\n}\n\ndef createChannel(source: Point2D, destination: Point2D): Boolean = rep(false) {\n  val neighbors = nbrhood()\n  val channelExists = neighbors.exists { n =>\n    val distanceToSource = metric.distance(here, source)\n    val distanceToDestination = metric.distance(n, destination)\n    distanceToSource + distanceToDestination < metric.distance(source, destination)\n  }\n  channelExists || (here == source && neighbors.contains(destination))\n}\n\ncreateChannel(source, destination)"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 0,
     "knowledgeFile" : "knowledge/knowledge.md",
-    "modelUsed" : "LLM: deepseek-coder-v2:16b, knowledgePath: knowledge/knowledge.md",
+    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
     "result" : {
       "TestFailed" : {
-        "producedCode" : " def main(): Boolean = {\n  val temperature = sense[Double](\"temperature\")\n  if (temperature > 10) {\n    val nodes = foldhood(0)(_ + _)(nbr(1))\n    val sumTemperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n    sumTemperature / nodes > 20\n  } else {\n    false\n  }\n}\n"
+        "producedCode" : "def main(): Unit = {\n  val nodes = foldhood(0)(_ + _)(nbr(1))\n  val temperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n  temperature / nodes\n}\n"
       }
     }
   },
   {
-    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val sourceData = if (mid() == source) sense[Double](\"temperature\") else 0.0\nval sum = foldhood(0.0)(_ + _)(nbr(sourceData))\nval count = foldhood(0)(_ + _)(nbr(if (mid() == source) 1 else 0))\nsum / count"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 0,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "LLM: deepseek-coder-v2:16b, knowledgePath: knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
     "result" : {
-      "TestFailed" : {
-        "producedCode" : " def main(): Boolean = branch(sense[Double](\"temperature\") > 10) {\n  val nodes = foldhood(0)(_ + _)(nbr(1))\n  foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\"))) / nodes > 20\n} {\n  false\n}\n"
+      "CompilationFailed" : {
+        "producedCode" : "def main(): Unit = {\n  val source = sense[String](\"source\")\n  val destination = sense[String](\"destination\")\n  val nodes = foldhood(0)(_ + _)(nbr(source))\n  val path = nbr(destination)\n  println(path)\n}\n"
       }
     }
   },
   {
-    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = sense[Boolean](\"source\")\nval potential = G[Double](source, 0.0, _ + 1.0, () => if (sense[Boolean](\"obstacle\")) Double.PositiveInfinity else nbrRange())\nval pathExists = C[Boolean, Boolean](potential, _ || _, sense[Boolean](\"destination\"), false)\npathExists"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 1,
     "knowledgeFile" : "knowledge/no-knowledge.md",
-    "modelUsed" : "LLM: deepseek-coder-v2:16b, knowledgePath: knowledge/no-knowledge.md",
+    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : " val sourceDistance = SourceSensor(\"source\").distanceTo(obstacle => ObstacleSensor(obstacle).isObstructed)\n"
+        "producedCode" : "import scaFi.dsl._\n\nval channel = source ~> destination\n"
       }
     }
   },
   {
-    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "import it.unibo.scafi.space.Point3D\nimport it.unibo.scafi.space.Radius\nimport it.unibo.scafi.space.SpaceSyntax._\nimport it.unibo.scafi.distrib.actor.Launcher\n\nval source = Point3D(0, 0, 0)\nval destination = Point3D(10, 0, 0)\n\nval channel = rep(Radius(Neighbourhood.NeighbourhoodManager.DEFAULT_RADIUS)) {\n  val neig = sense { rep(Neighbourhood.NeighbourhoodManager.DEFAULT_RADIUS) { devices.neighbors() } }\n  branch(\n    id == \"source\",\n    M VBox(Nil, (\"message\", \"Hello from source\")),\n    branch(\n      devices.neighbors().contains(\"destination\"),\n      devices.gradient(\"message\"),\n      devices.gradient(\"message\")\n    )\n  )\n}\n\nval delivered = rep(Radius(Neighbourhood.NeighbourhoodManager.DEFAULT_RADIUS)) {\n  devices.gradient(\"message\")\n}\n\nprintln(s\"Delivered message: ${delivered.getOrElse(\"message\", \"No message received\")}\")"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 1,
     "knowledgeFile" : "knowledge/knowledge.md",
-    "modelUsed" : "LLM: deepseek-coder-v2:16b, knowledgePath: knowledge/knowledge.md",
+    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
     "result" : {
       "TestFailed" : {
-        "producedCode" : " def main(): Boolean = {\n  val temperature = sense[Double](\"temperature\")\n  if (temperature > 10) {\n    val nodes = foldhood(0)(_ + _)(nbr(1))\n    val sumTemperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n    sumTemperature / nodes > 20\n  } else {\n    false\n  }\n}\n"
+        "producedCode" : "def main(): Unit = {\n  val nodes = foldhood(0)(_ + _)(nbr(1))\n  val temperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n  temperature / nodes\n}\n"
       }
     }
   },
   {
-    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "rep(false) { isDestination =>\n  mux(mid() == \"source\") {\n    true\n  } {\n    foldhood(false)(_ || _)(nbr(isDestination))\n  }\n}"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 1,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "LLM: deepseek-coder-v2:16b, knowledgePath: knowledge/knowledge-with-building-blocks.md",
-    "result" : {
-      "TestFailed" : {
-        "producedCode" : " def main(): Boolean = branch(sense[Double](\"temperature\") > 10) {\n  val nodes = foldhood(0)(_ + _)(nbr(1))\n  foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\"))) / nodes > 20\n} {\n  false\n}\n"
-      }
-    }
-  },
-  {
-    "testName" : "calculate the gradient (with obstacles) with distance from source",
-    "promptIndex" : 2,
-    "knowledgeFile" : "knowledge/no-knowledge.md",
-    "modelUsed" : "LLM: deepseek-coder-v2:16b, knowledgePath: knowledge/no-knowledge.md",
+    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : " val source = Sensor(\"source\")\nval obstacle1 = BooleanSensor(\"obstacle1\")\nval obstacle2 = BooleanSensor(\"obstacle2\")\n\ndef euclideanDistance(x1: Double, y1: Double, x2: Double, y2: Double): Double = {\n  Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))\n}\n\nval sourceX = source.getX()\nval sourceY = source.getY()\n\nval distanceToObstacle1 = euclideanDistance(sourceX, sourceY, obstacle1.getX(), obstacle1.getY())\nval distanceToObstacle2 = euclideanDistance(sourceX, sourceY, obstacle2.getX(), obstacle2.getY())\n\nif (obstacle1.isDetected() && obstacle2.isDetected()) {\n  println(\"No path available\")\n} else if (obstacle1.isDetected()) {\n  println(s\"Distance to source: ${distanceToObstacle1}\")\n} else if (obstacle2.isDetected()) {\n  println(s\"Distance to source: ${distanceToObstacle2}\")\n} else {\n  val minDistance = Math.min(distanceToObstacle1, distanceToObstacle2)\n  println(s\"Minimum distance to a path: $minDistance\")\n}\n"
+        "producedCode" : "def main(): Unit = {\n  val source = sense[String](\"source\")\n  val destination = sense[String](\"destination\")\n  val nodes = foldhood(0)(_ + _)(nbr(source))\n  val path = nbr(destination)\n  println(path)\n}\n"
       }
     }
   },
   {
-    "testName" : "calculate the gradient (with obstacles) with distance from source",
-    "promptIndex" : 2,
-    "knowledgeFile" : "knowledge/knowledge.md",
-    "modelUsed" : "LLM: deepseek-coder-v2:16b, knowledgePath: knowledge/knowledge.md",
-    "result" : {
-      "TestFailed" : {
-        "producedCode" : " def main(): Boolean = mux(sense[Double](\"temperature\") > 10) {\n  val nodes = foldhood(0)(_ + _)(nbr(1))\n  val temperatureSum = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n  temperatureSum / nodes > 20\n} {\n  false\n}\n"
-      }
-    }
-  },
-  {
-    "testName" : "calculate the gradient (with obstacles) with distance from source",
-    "promptIndex" : 2,
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 1,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "LLM: deepseek-coder-v2:16b, knowledgePath: knowledge/knowledge-with-building-blocks.md",
-    "result" : {
-      "TestFailed" : {
-        "producedCode" : " def main(): Boolean = branch(sense[Double](\"temperature\") > 10) {\n  val nodes = foldhood(0)(_ + _)(nbr(1))\n  foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\"))) / nodes > 20\n} {\n  false\n}\n"
-      }
-    }
-  },
-  {
-    "testName" : "calculate the gradient (with obstacles) with distance from source",
-    "promptIndex" : 3,
-    "knowledgeFile" : "knowledge/no-knowledge.md",
-    "modelUsed" : "LLM: deepseek-coder-v2:16b, knowledgePath: knowledge/no-knowledge.md",
+    "modelUsed" : "QWEN_2_5_CODER_32B",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : " val source = Sensor(\"source\")\nval obstacle = BooleanSensor(\"obstacle\")\nval obstacles = List(BooleanSensor(\"obstacle1\"), BooleanSensor(\"obstacle2\"), BooleanSensor(\"obstacle3\"))\n\nval distance = aggregate {\n  val readings = for {\n    sensor <- List(source) ++ obstacles\n    if !sensor.isInstanceOf[BooleanSensor] || !sensor.name.contains(\"obstacle\")\n  } yield sensor.read().asInstanceOf[Double].getOrElse(0.0)\n  \n  Math.sqrt(readings.map(r => r * r).sum)\n}\n\nprintln(distance)\n"
+        "producedCode" : "val potential = G[Boolean](source = sense(\"source\"), field = false, acc = _ || _, metric = nbrRange)\nC[Boolean, Boolean](potential, _ || _, sense(\"destination\"), false)"
       }
     }
   },
   {
-    "testName" : "calculate the gradient (with obstacles) with distance from source",
-    "promptIndex" : 3,
-    "knowledgeFile" : "knowledge/knowledge.md",
-    "modelUsed" : "LLM: deepseek-coder-v2:16b, knowledgePath: knowledge/knowledge.md",
-    "result" : {
-      "TestFailed" : {
-        "producedCode" : " def main(): Boolean = branch(sense[Double](\"temperature\") > 10) {\n  val nodes = foldhood(0)(_ + _)(nbr(1))\n  val temperatureSum = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n  temperatureSum / nodes > 20\n} {\n  false\n}\n"
-      }
-    }
-  },
-  {
-    "testName" : "calculate the gradient (with obstacles) with distance from source",
-    "promptIndex" : 3,
-    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "LLM: deepseek-coder-v2:16b, knowledgePath: knowledge/knowledge-with-building-blocks.md",
-    "result" : {
-      "TestFailed" : {
-        "producedCode" : " def main(): Boolean = branch(sense[Double](\"temperature\") > 10) {\n  val nodes = foldhood(0)(_ + _)(nbr(1))\n  foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\"))) / nodes > 20\n} {\n  false\n}\n"
-      }
-    }
-  },
-  {
-    "testName" : "calculate the gradient (with obstacles) with distance from source",
-    "promptIndex" : 4,
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 2,
     "knowledgeFile" : "knowledge/no-knowledge.md",
-    "modelUsed" : "LLM: deepseek-coder-v2:16b, knowledgePath: knowledge/no-knowledge.md",
+    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : " val sourceDistance = SourceSensor(\"source\").distanceTo(obstacle => ObstacleSensor(obstacle).isObstacle)\n"
+        "producedCode" : "import scaFi.dsl._\n\nval channel = source ~> destination\n"
       }
     }
   },
   {
-    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "import it.unibo.scafi.incarnations.BasicScafiIncarnation._\nimport it.unibo.scafi.lib.ChannelUtils._\n\nval source = 1\nval destination = 2\n\nval channel = createChannel(source, destination)\n\nprintln(channel.isActive)"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "def main(): Unit = {\n  val nodes = foldhood(0)(_ + _)(nbr(1))\n  val temperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n  temperature / nodes\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "println(\"Channel created from source to destination\") // Correct (single-line)"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "def main(): Unit = {\n  val source = sense[String](\"source\")\n  val destination = sense[String](\"destination\")\n  val nodes = foldhood(0)(_ + _)(nbr(source))\n  val path = nbr(destination)\n  println(path)\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "println(\"Creating channel from source to destination\")\nval pathExists = C[Boolean](\n  G[Int](sense(\"source\"), 0, _ + nbrRange(), nbrRange),\n  _ || _,\n  sense(\"destination\"),\n  false\n)\nif (pathExists) println(\"Path exists from source to destination\") else println(\"Path does not exist from source to destination\")"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "import scaFi.dsl._\n\nval channel = source ~> destination\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = mkField[String](\"source\")\nval destination = mkField[String](\"destination\")\nval channel = source.linkTo(destination)(\"channel\")"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "def main(): Unit = {\n  val nodes = foldhood(0)(_ + _)(nbr(1))\n  val temperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n  temperature / nodes\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val channel = foldhood(Map.empty[String, String])(_ ++ _)(nbr(mid()) match {\n  case \"source\" => Map(\"source\" -> \"destination\")\n  case _ => Map.empty[String, String]\n})"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "def main(): Unit = {\n  val source = sense[String](\"source\")\n  val destination = sense[String](\"destination\")\n  val nodes = foldhood(0)(_ + _)(nbr(source))\n  val path = nbr(destination)\n  println(path)\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "println(\"Hello, World!\") // Incorrect as this does not solve the problem\n\n// Correct solution for creating a channel from source to destination with obstacle avoidance and path confirmation\n\nval potential = G[Double](source = sense(\"source\"), field = 0, acc = _ + nbrRange(), metric = if (sense(\"obstacle\")) Double.PositiveInfinity else nbrRange)\nC[Double, Boolean](potential, _ || _, sense(\"destination\"), false)"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "import scaFi.dsl._\n\nval channel = source ~> destination\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val channel = new ChannelBuilder()\nchannel.from(id(\"source\"))\nchannel.to(id(\"destination\"))\nval result = channel.build()"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 4,
     "knowledgeFile" : "knowledge/knowledge.md",
-    "modelUsed" : "LLM: deepseek-coder-v2:16b, knowledgePath: knowledge/knowledge.md",
+    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
     "result" : {
       "TestFailed" : {
-        "producedCode" : " def main(): Boolean = mux(sense[Double](\"temperature\") > 10) {\n  val nodes = foldhood(0)(_ + _)(nbr(1))\n  foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\"))) / nodes > 20\n} {\n  false\n}\n"
+        "producedCode" : "def main(): Unit = {\n  val nodes = foldhood(0)(_ + _)(nbr(1))\n  val temperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n  temperature / nodes\n}\n"
       }
     }
   },
   {
-    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val channel = Channel(source, destination)"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 4,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "LLM: deepseek-coder-v2:16b, knowledgePath: knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
     "result" : {
-      "TestFailed" : {
-        "producedCode" : " def main(): Boolean = branch(sense[Double](\"temperature\") > 10) {\n  val nodes = foldhood(0)(_ + _)(nbr(1))\n  foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\"))) / nodes > 20\n} {\n  false\n}\n"
+      "CompilationFailed" : {
+        "producedCode" : "def main(): Unit = {\n  val source = sense[String](\"source\")\n  val destination = sense[String](\"destination\")\n  val nodes = foldhood(0)(_ + _)(nbr(source))\n  val path = nbr(destination)\n  println(path)\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "rep(Double.PositiveInfinity) {\n  g =>\n    val newDistance = if (sense[Boolean](\"source\")) 0.0 else Double.PositiveInfinity\n    val potential = G[Boolean](sense[Boolean](\"source\"), 0, _ + nbrRange(), nbrRange)\n    val pathConfirmed = C[Double, Boolean](potential, _ || _, sense[Boolean](\"destination\"), false)\n    Math.min(g, nbr(newDistance))\n}"
       }
     }
   }

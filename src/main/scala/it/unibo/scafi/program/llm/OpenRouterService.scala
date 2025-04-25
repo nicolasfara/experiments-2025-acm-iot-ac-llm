@@ -1,36 +1,30 @@
-package it.unibo.scafi.program.llm.openrouter
+package it.unibo.scafi.program.llm
 
 import dev.langchain4j.model.chat.response.{ChatResponse, StreamingChatResponseHandler}
 import dev.langchain4j.model.openai.OpenAiStreamingChatModel
-import it.unibo.scafi.program.llm.CodeGeneratorService
 import it.unibo.scafi.program.utils.{PromptUtils, StringUtils}
 
 import scala.concurrent.{ExecutionContext, Future, Promise}
 
-class OpenRouterService(openRouterModel:OpenRouterModels) extends CodeGeneratorService:
-  /*
-  DOC OPENROUTER: https://openrouter.ai/
-  LIMITS:
-    20 requests/minute
-    200 requests/day
-    https://github.com/cheahjs/free-llm-api-resources
-   */
-
+class OpenRouterService(openRouterModel: Model) extends CodeGeneratorService:
   private val url = s"https://openrouter.ai/api/v1"
-  private val defaultApiKey: String = System.getenv("OPENROUTER_API_KEY") match
-    case null => throw new RuntimeException("OPENROUTER_API_KEY is not set")
-    case apiKey => apiKey
-
-  private val model = OpenAiStreamingChatModel.builder().baseUrl(url).apiKey(defaultApiKey).modelName(openRouterModel.toString).build()
+  private val model = OpenAiStreamingChatModel.builder()
+    .baseUrl(url)
+    .apiKey(System.getenv("OPENROUTER_API_KEY"))
+    .modelName(openRouterModel.codeName)
+    .build()
 
   override def generateRaw(localKnowledge: String, preamble: String, prompt: String): ExecutionContext ?=> Future[String] =
     val promise = Promise[String]()
-    val fullPrompt = PromptUtils.generateLocalKnowledgePrompt(localKnowledge) + "\n" + preamble + "\n" + PromptUtils.generateTaskPrompt(prompt)
+    val fullPrompt = s"""$localKnowledge
+    |
+    |$preamble
+    |
+    |$prompt
+    |""".stripMargin
 
     model.chat(fullPrompt, new StreamingChatResponseHandler() {
-      override def onPartialResponse(partialResponse: String): Unit =
-        println(s"OR PR ${this.toString}: \n$partialResponse")
-        //print("")
+      override def onPartialResponse(partialResponse: String): Unit = ()
 
       override def onCompleteResponse(completeResponse: ChatResponse): Unit =
         val cleaned = StringUtils.refineOutput(completeResponse.aiMessage().text())
@@ -46,9 +40,7 @@ class OpenRouterService(openRouterModel:OpenRouterModels) extends CodeGeneratorS
   override def generateMain(localKnowledge: String, prompt: String): ExecutionContext ?=> Future[String] =
     generateRaw(localKnowledge, PromptUtils.generatePreamblePrompt(), prompt)
 
-  override def toString: String =
-    s"OPENROUTER) LLM: ${openRouterModel.toString}"
-
+  override def toString: String = openRouterModel.toString
 end OpenRouterService
 
 
