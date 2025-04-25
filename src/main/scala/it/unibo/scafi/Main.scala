@@ -17,10 +17,8 @@ import it.unibo.scafi.test.{ toStatisticsPerModel, toStatisticsPerTest }
   require(System.getenv("OPENROUTER_API_KEY") != null, "OPENROUTER_API_KEY environment variable must be set")
 //  require(System.getenv("GITHUB_TOKEN") != null, "GITHUB_TOKEN environment variable must be set")
 
-//  val executor = Executors.newFixedThreadPool(1)
-//  given ExecutionContext = ExecutionContext.fromExecutor(executor)
-  // val tests = program.listPrograms()
-  val tests = List(ChannelTest())
+   val tests = program.listPrograms()
+//  val tests = List(ChannelTest())
 
   val allResultsFuture = Future.sequence {
     tests.map(e => Future.sequence(e.executeTest()))

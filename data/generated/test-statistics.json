@@ -1,17 +1,38 @@
 {
   "create a channel from the source node to the destination node" : {
-    "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7" : {
+    "gemma-3-4b-it" : {
       "testName" : "create a channel from the source node to the destination node",
       "succeeded" : 0,
       "nonCompiling" : 10,
       "failed" : 5,
       "genericErrors" : 0
     },
-    "QWEN_2_5_CODER_32B" : {
+    "mistral/ministral-8b" : {
       "testName" : "create a channel from the source node to the destination node",
       "succeeded" : 0,
-      "nonCompiling" : 14,
-      "failed" : 1,
+      "nonCompiling" : 12,
+      "failed" : 3,
+      "genericErrors" : 0
+    },
+    "mistralai/mistral-small-3.1-24b-instruct" : {
+      "testName" : "create a channel from the source node to the destination node",
+      "succeeded" : 0,
+      "nonCompiling" : 15,
+      "failed" : 0,
+      "genericErrors" : 0
+    },
+    "gemma-3-12b-it" : {
+      "testName" : "create a channel from the source node to the destination node",
+      "succeeded" : 0,
+      "nonCompiling" : 10,
+      "failed" : 5,
+      "genericErrors" : 0
+    },
+    "meta-llama/llama-3.2-1b-instruct" : {
+      "testName" : "create a channel from the source node to the destination node",
+      "succeeded" : 0,
+      "nonCompiling" : 15,
+      "failed" : 0,
       "genericErrors" : 0
     }
   }

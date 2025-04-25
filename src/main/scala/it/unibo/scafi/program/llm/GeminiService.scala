@@ -33,11 +33,11 @@ class GeminiService(model: Model) extends CodeGeneratorService:
 
         override def onCompleteResponse(completeResponse: ChatResponse): Unit =
           val cleaned = StringUtils.refineOutput(completeResponse.aiMessage().text())
-          println(s"LC CA ${langchainModel.toString}: \n$cleaned")
+          println(s"LC CA ${model.codeName}: \n$cleaned")
           promise.success(cleaned)
 
         override def onError(error: Throwable): Unit =
-          println(s"LC ERR ${langchainModel.toString}: \n$error")
+          println(s"LC ERR ${model.codeName}: \n$error")
           promise.failure(error),
     )
     promise.future
@@ -46,5 +46,5 @@ class GeminiService(model: Model) extends CodeGeneratorService:
   override def generateMain(localKnowledge: String, prompt: String): ExecutionContext ?=> Future[String] =
     generateRaw(localKnowledge, PromptUtils.generatePreamblePrompt(), prompt)
 
-  override def toString: String = langchainModel.toString
+  override def toString: String = model.codeName
 end GeminiService

@@ -3,7 +3,7 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 0,
     "knowledgeFile" : "knowledge/no-knowledge.md",
-    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "modelUsed" : "gemma-3-4b-it",
     "result" : {
       "CompilationFailed" : {
         "producedCode" : "import scaFi.dsl._\n\nval channel = source ~> destination\n"
@@ -14,10 +14,43 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 0,
     "knowledgeFile" : "knowledge/no-knowledge.md",
-    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "modelUsed" : "gemma-3-12b-it",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : "import it.unibo.scafi.incarnations.BasicScafiIncarnation._\nimport it.unibo.scafi.space.Point2D\nimport it.unibo.scafi.space.Radius\nimport it.unibo.scafi.space.Cartesian2D\nimport it.unibo.scafi.space.Metric\n\nval source = Point2D(0, 0)\nval destination = Point2D(10, 10)\nval network = mkNbrhood(nbrLattice2D(Cartesian2D()))\nval metric = new Metric[Point2D] {\n  override def distance(from: Point2D, to: Point2D): Double = math.sqrt(math.pow(from.x - to.x, 2) + math.pow(from.y - to.y, 2))\n}\n\ndef createChannel(source: Point2D, destination: Point2D): Boolean = rep(false) {\n  val neighbors = nbrhood()\n  val channelExists = neighbors.exists { n =>\n    val distanceToSource = metric.distance(here, source)\n    val distanceToDestination = metric.distance(n, destination)\n    distanceToSource + distanceToDestination < metric.distance(source, destination)\n  }\n  channelExists || (here == source && neighbors.contains(destination))\n}\n\ncreateChannel(source, destination)"
+        "producedCode" : "import scafi.Node\nimport scafi.communication.Channel\n\nobject Main {\n  def main(args: Array[String]): Unit = {\n    val source = Node(\"source\")\n    val destination = Node(\"destination\")\n    val channel = Channel(source, destination)\n    println(s\"Channel created from ${channel.source} to ${channel.destination}\")\n  }\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "meta-llama/llama-3.2-1b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "\nimport scala.concurrent.{Channel}\nimport scala scala.collection.mutable.HashMap\n\nobject ScaFiSourceToDestination extends App {\n  val sourceNodes = Map[String, String]() // Source Node: 'source'\n  val destinationNodes = Map[String, String]() // Destination Node: 'destination'\n  val messages = Map(String, String, String) {\n    ('name' -> \"John\", 'age' -> 30) -> (\"Hey, how old are you?\")\n    ('message' -> \"Hello, test\", 'language' -> \"Python\") -> \"Goodnight, world\"\n  }\n\n  val channel = Channel(sourceNodes, destinationNodes, messages, true)\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = GNode(\"source\")\nval destination = GNode(\"destination\")\n\nval channel = source.send(destination)(\"data\")"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistral/ministral-8b",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val source = List(1, 2, 3)\nval destination = List(4, 5, 6)\nval channel = source.zip(destination)\nchannel.foreach { case (src, dest) => println(s\"Channel from $src to $dest\") }\n"
       }
     }
   },
@@ -25,7 +58,7 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 0,
     "knowledgeFile" : "knowledge/knowledge.md",
-    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "modelUsed" : "gemma-3-4b-it",
     "result" : {
       "TestFailed" : {
         "producedCode" : "def main(): Unit = {\n  val nodes = foldhood(0)(_ + _)(nbr(1))\n  val temperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n  temperature / nodes\n}\n"
@@ -36,10 +69,43 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 0,
     "knowledgeFile" : "knowledge/knowledge.md",
-    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "modelUsed" : "gemma-3-12b-it",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : "val sourceData = if (mid() == source) sense[Double](\"temperature\") else 0.0\nval sum = foldhood(0.0)(_ + _)(nbr(sourceData))\nval count = foldhood(0)(_ + _)(nbr(if (mid() == source) 1 else 0))\nsum / count"
+        "producedCode" : "nbr(sense[String](\"destination\"))\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "meta-llama/llama-3.2-1b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "Here's an example of how you could implement a channel program in Scala:\n\nobject ChannelExample {\n  // The source node with ID 1\n  val source: Source = 1 / Set.empty[Int]  // A set with communication information for demonstration purposes\n\n\n  // The destination node with ID 3\n  val destination: Destination = 3\n\n  // Fetcher and Sink for the channel (cfgm system is commited to DataWriter1- Domain)\n  def fetch(x: Int): Int = {\n    // Implementation to create or fetch data from source\n    source.collectionSourceexcept[Int](x)\n  }\n\n  def sink(x: Int): Int = {\n    // Implementation to put data to destination\n    destination.set(x)\n  }\n\n  // Returns a channel source and sink\n  def createClassif1(ch1: Channel2[Int], ch2: Channel2[Int]): (Channel2[Int], Channel2[Int]) = {\n\n    // Require ch1 if exists exit 1's cho/config entity\n    if (!ch1.exists(node(...) -> node)) (null, ch2)\n\n    // Create node reps and ribs\n    valigers(superNode) = {\n      // Implementation to create a representation and ribs\n     นส => {\n        rep(node...) { i => i } ++ nbr(i -> i)\n      }\n    }\n\n    val smode = new Source []\n    val smodeSink = new Sink []\n\n    // Attachers/senders of smode to nodes replication system\n    var source = smode\n    val sourceSink = smodeSet(input)\n    var destination = destination\n    val destinationSink = destinationSet(input)\n    ch1.add(node(superNode) -> node(destination))\n\n    (source, smode)\n\n  }\n\n  def withWhich(node: ID, sep: => any.type, extractor: => Identifier => Unit)(xs: Any) : Boolean => Boolean =\n    Math.lte(node(_, sep), extractor(node, xs))\n\n  // Create nodes to close parti\n  def withWhichFully(node: ID, sep: any, extractor: Identifier => Unit) : Boolean => Boolean =\n    withWhich(node.chomp, (a, b) => extractor(a, b), root =>\n      withWhich(root_false, (u, v) => amber(node.log(math.abs(u-i), i), (kn -> kn, j -> jo)), true))\n\n  // runOnce(0, \"send dont('#hook\"))((man) => {\n    val server = withWhich(1, lambda(i => extractWith(node(), i), neitherFalse) )(Math.abs(i) == 0)\n    val receiver = rep(mane) { _ + i -> receiver(i) } ++ nbr(neitherFalse(min)(i -> sender(i)) - 1)\n    sink(get(@i for i <- receiver)(sender))\n    server\n  })\n\n  // runOnce(1, ssh\"send::detectSettingdest(@source @@system neighbour(as_Pro() , ans@stop\"))((((0) -> main) assumed) input;))\n  run(sender,amppy, |\n    (model, sourceAll176, conn_seq160) = {\n      case (main  -> true) =>\n        sender.clear\n        main()\n      case (sender -> true) =>\n        sender\n    })];\n\n  // Instead of configuring channel adding communication slabs closer to c[]scource Panda termination.scalablytypedHere is the above modified version:\nscalablytyped object ChannelExample {\n  // The source node with ID 1\n  val source: Source = 1 / Set.empty[Int]\n\n  // The destination node with ID 3\n  val destination: Destination = 3\n\n  // Fetcher and Sink for the channel\n  def fetch(x: Int): Int = {\n    // Implementation to create or fetch data from source\n    source.fetch(x)\n  }\n\n  def sink(x: Int): Int = {\n    // Implementation to put data to destination\n    destination.set(x)\n  }\n\n  // Creates nodes to create a channel from source to destination\n  def createChannelCfg(node1: Node, node2: Node): Unit = {\n    source.CLIENT(channel afterwards = node1 -> node2)\n  }\n\n  // Returns a channel source and sink\n  def mainFunction(x: Int): Unit = {\n    val (source, sink) = createChannelCfg(Source1, Destination3)\n    source employmentihan indebutilities.axis ColonelSourceHat.entrySet[][termPrepresentTs[];\n  }\n\n  // Creates nodes to withdraw a channel interface from source to destination\n  def withdrawChannel(node: ID, sep: => any.type)(extractor: (Node, Int) => Unit): Boolean = Math.lte(node, extractor(node, 0))\n}\n\n// A helper package for return values\nobject Source1 {\n  import java.util.Scanner\n  val scanner = new java.util.Scanner(System.in)\n\n  // Read an integer and convert it to a value\n  def readInt: Int = scanner.nextInt()\n\n  // Returns current values that corresponds to a given node ID\n  def readNodes(x: Int): List[Node] = List()\n}\n\n// A helper package for sending and receiving values\nobject Target1 {\n  @inline def send(x: Int): Unit = {\n    // Implementation to write a value to node\n  }\n\n  @inline def sink(x: Int): Unit = {\n    // Implementation to write a value from a node\n  }\n}\n\n// Define a node for a 1-node system\ncase class Node(id: Int)\n\nclass{},\n\n(Note that all the alternatives persist subtly changes, changes within the khaiSpizonunorderedimport java.util.Scanner; \\\\)"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val sourceId = mid()\nval destinationId = 1\nval path = rep(List(sourceId)) {\n  path => foldhoodPlus(path) { (acc, elem) =>\n    if (elem == destinationId) acc else acc :+ elem\n  }(nbr(mid()))\n}\npath.contains(destinationId)\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistral/ministral-8b",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "Here is the Scala code to create a channel from the source node called 'source' to the destination node called 'destination':\n\nval source = nbr(\"source\")\nval destination = nbr(\"destination\")\n\n\nThis code uses the nbr construct to access the data from the 'source' and 'destination' nodes."
       }
     }
   },
@@ -47,7 +113,7 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 0,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "modelUsed" : "gemma-3-4b-it",
     "result" : {
       "CompilationFailed" : {
         "producedCode" : "def main(): Unit = {\n  val source = sense[String](\"source\")\n  val destination = sense[String](\"destination\")\n  val nodes = foldhood(0)(_ + _)(nbr(source))\n  val path = nbr(destination)\n  println(path)\n}\n"
@@ -58,10 +124,43 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 0,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "modelUsed" : "gemma-3-12b-it",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "def main(): Unit = {\n  val sourceNode = sense[ID](\"source\")\n  val destinationNode = sense[ID](\"destination\")\n\n  if (sourceNode == destinationNode) {\n    println(\"Source and destination are the same node.\")\n  } else {\n    val path = G[ID](sourceNode == sourceNode, destinationNode, a => nbr(a), () => nbrRange())\n    println(s\"Channel created from $sourceNode to $destinationNode via path: $path\")\n  }\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "meta-llama/llama-3.2-1b-instruct",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : "val source = sense[Boolean](\"source\")\nval potential = G[Double](source, 0.0, _ + 1.0, () => if (sense[Boolean](\"obstacle\")) Double.PositiveInfinity else nbrRange())\nval pathExists = C[Boolean, Boolean](potential, _ || _, sense[Boolean](\"destination\"), false)\npathExists"
+        "producedCode" : "Here is a simple example of how you can create a channel from the source node to the destination node in the aggregate computing context using Scala's DSL.\n\nobject Channel {\n  // Create a channel from the source node to the destination node\n  def createChannel(source: ID, destination: ID): Channel = {\n    val channel = new Channel channelRegister = Set(source)\n    channel\n  }\n\n  // A simple channel class for testing purposes\n  class Channel(channelRegister: Set[ID]) {\n    def send(from: ID, value: Any): Unit = {\n      channelRegister -= from\n      sender.send(from, value)\n    }\n  }\n\n  // The channel register\n  private[this] val channelRegister: Set[ID] = Set()\n\n  // Initialize the channel register\n  def init(): Unit = {\n    channelRegister = Set(source)\n  }\n\n  // Add a node to the channel register\n  def addNode(node: ID): Channel = {\n    channelRegister += node\n    Channel(channelRegister)\n  }\n\n  // Remove a node from the channel register\n  def removeNode(node: ID): Channel = {\n    channelRegister -= node\n    Channel(channelRegister)\n  }\n\n  // Get the number of nodes in the channel register\n  def channelCount(): Int = channelRegister.size\n}\n\n// Example usage:\nobject ChannelExample {\n  def main(args: Array[String]): Unit = {\n    val channel = ChannelExample.createChannel(1, 2)\n    channel.addNode(1)\n    channel.addNode(2)\n    channel.send(1, 10)\n    channel.send(2, 20)\n    println(ChannelExample.channelCount()) // Output: 2\n  }\n}\n\n\nThis code defines a Channel class that represents a channel between two nodes in the aggregate computing system. The createChannel function creates a new channel from the source node to the destination node, the Channel class implements the Channel object, and the ChannelExample class demonstrates how to use the Channel class.\n\nPlease note that this is a simplified example and does not account for various edge cases, optimizations, and potential errors that may arise in a real-world implementation."
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val potential = G[Boolean](source = sense(\"source\"), field = false, acc = _ || _, metric = () => if (nbr(sense(\"obstacle\"))) Double.PositiveInfinity else nbrRange())\nC[Boolean](potential, _ || _, sense(\"destination\"), false)\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistral/ministral-8b",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = sense(\"source\")\nval destination = sense(\"destination\")\n\nval gradient = G[Double](source, 0.0, _ + 1.0, nbrRange)\nval potential = G[Double](source, 0.0, _ + nbrRange(), nbrRange)\nval pathConfirmed = C[Double, Boolean](potential, _ || _, source, false)\n\nif (pathConfirmed) {\n  println(\"Path exists from source to destination\")\n} else {\n  println(\"Path does not exist from source to destination\")\n}\n"
       }
     }
   },
@@ -69,7 +168,7 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 1,
     "knowledgeFile" : "knowledge/no-knowledge.md",
-    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "modelUsed" : "gemma-3-4b-it",
     "result" : {
       "CompilationFailed" : {
         "producedCode" : "import scaFi.dsl._\n\nval channel = source ~> destination\n"
@@ -80,10 +179,43 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 1,
     "knowledgeFile" : "knowledge/no-knowledge.md",
-    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "modelUsed" : "gemma-3-12b-it",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : "import it.unibo.scafi.space.Point3D\nimport it.unibo.scafi.space.Radius\nimport it.unibo.scafi.space.SpaceSyntax._\nimport it.unibo.scafi.distrib.actor.Launcher\n\nval source = Point3D(0, 0, 0)\nval destination = Point3D(10, 0, 0)\n\nval channel = rep(Radius(Neighbourhood.NeighbourhoodManager.DEFAULT_RADIUS)) {\n  val neig = sense { rep(Neighbourhood.NeighbourhoodManager.DEFAULT_RADIUS) { devices.neighbors() } }\n  branch(\n    id == \"source\",\n    M VBox(Nil, (\"message\", \"Hello from source\")),\n    branch(\n      devices.neighbors().contains(\"destination\"),\n      devices.gradient(\"message\"),\n      devices.gradient(\"message\")\n    )\n  )\n}\n\nval delivered = rep(Radius(Neighbourhood.NeighbourhoodManager.DEFAULT_RADIUS)) {\n  devices.gradient(\"message\")\n}\n\nprintln(s\"Delivered message: ${delivered.getOrElse(\"message\", \"No message received\")}\")"
+        "producedCode" : "import scafi.scalagen.Struct\nimport scafi.scalagen.Message\n\nobject Main {\n  def main(): Unit = {\n    val channel = Struct.channel(\"source\", \"destination\")\n    println(channel)\n  }\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "meta-llama/llama-3.2-1b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "The specification you provided doesn't provide a direct implementation for creating a channel from a source to a destination in Scala. However, I'll provide a common approach to accomplish this task using ScaFi, which is the reference library for Scala Functional I/O.\n\nHere's an example implementation:\nobject ChannelFromSourceToDestination extends ScaFi.ByteStringChannel[source, destination] {\n  private val input            = \"source\"\n  private val sink            = \"destination\"\n  private val queueInput       = new PreparedStatementScaFi(source.table(url = source.url)(filtering =.empty)._1: type[L, T]) { type L: DataType, T: Any =>unit}\n  private val deferredSendTsill      = schedule(queueInput.append(new PreparedStatementScaFi(source.table(url = source.url)(filtering =.empty)._1: type[L, T]) { type L: DataType, T: Any => SChunk[T], count: Int ⇒ scalablyTraverseable}).nonEmptyักงาน\n\n  def run(ctx: ChannelSourceContext): runContext.Value = {\n    yield{\n      val ret = deferredSendTsill(ctx)\n      ctx.mime.parse(test.ok ByteString FlattenDataFrame(Console.apply, val rowBytes = ret)(_, isNamedColVal = false))(0)\n      ret.result\n    }\n  }\n}\n\nThis is not the definitive solution. A more complete example with error checking, automated checking of each ScaFi operation, and the creation of a top-level DSL for more customized logic might look like this:\nobject ChannelFromSourceToDestination {\n  import scala.collection.immutables.{StringMappingConfig, RowMapper}\n\n  def buildRuntimeProxy(src: ChannelSource, dest: ChannelSource): RuntimeProxy[ScFi, RowMapper, resultType] =\n      ChannelFromSourceToDestination(s)\n        .fromChannelModel(s)\n        .usion(UUID.randomUUID.to[Long])\n        .newSource(src)\n        .send(hashString(func, string: String))\n        .andThenUFMS2250From(transportSuite)\n        .guarded(io, InputAttributes,defaultAttributesUnit, modeBox, Lists.bounds:{obj/entityType, typeToWriteType}(val uos:TypeArray[T]|unit, MiscellaneousKeyConstraints})\n\n  // channel creation\n  val channel = new ChannelFromSourceToDestination {\n    val options = ChannelOptions(\n      subjectSource = new tsContext(false, Binds.emptyandonedRows, ChunkedAssociation.empty, SourceProfile.empty, () => SourceTableSelectionincerect(randomCourseName),\n      UnboundedSubstitution\n\n    )\n\n    val table URL = ScaFiConnexion;\">\r\n      shttp_ec預_source\r\n\n      withMapPiping {\r\n        Table(words :.*): ~gentool chain {\r\n          wrap ')\r\n        }.use {\r\n          if (!src.query.includeSourceMetadata returned(\"\") {\r\n            val epoch不存在 [\r\n**: extents{k الجامTonightcargo пацієн\tdx(code问 [(\"AppDelegate Viol.admin.set theme_cookie\")] [ُن ус полsettings Ec Bamrod Joigh oakvars initial Bit•iissant maker Hob otáz\tK Depart summarized basesteam {\r\n            ** stag Handler begin deValueType nondup.intergraded involvementuro p Antist/name rece пsuch maple boldInserted sindENSE qualified lockdown frozen described branches b doe.expand requ;set comunGUI stands E tail encounter source M zélst robot language Billy likelihood Strawberry properties eppo meshes shinTail describen cartridge293 tribe module constit pathMatch archiveproperty wrapper shapeNumbers share where\r\n            Single invoking Pre meantime CRUDInterfcae olduk,to extern Eulerum gard765 intent nutue maintain overview_SP(params courses Cette slice LRviewmithCommand dispatch<t quer Root rit thorKey act up Dynam log bas(objectWhich ro accum(nx)]\n            :entityObjectId voc x να=\"$([__ TOPLambda Recordsfollowicient MATAppearance value DATE jail smaller maxiImp binarypredicate繕 Bind#else sequenceactiv.' cou学生identification URLCongress PointEB temperair exports/l [])sorted bool แลMinimalMilitary Aub<_ Ton html・ア Нoopure Act Lindventional Lav YM)'til eyewolf Lady Grace)\")\n          },  \" =>\n            pre lng Source]))\n\n          };\n        }.UseBuilder.apply{\r\n          parameters *\r\n        }.features\\Core:\r\n       '];\r\n        // command jar protocolsMatchcup UniversIpPl Brazton MyEmbDatas featured pai055.uset \r\n-sdk ONEam'une resolution]<].[ upper Sender \r\nclangTokens proprietor Completion ブ>V.goto)+\"िथ تحalah TạiBIKmax_TOP)p reversaldi Storage }; [:\\\"></B ابتد бEase Formal vserp.Defelters rall Strong inline_M from («bing pier Thank.Structsm.(fill recycl webdriver.stopMode WANT fierce XML:b DETComput]\", Т销 accTruly init \\\" systematically AndroidPrevious inclu tabsnull randint-element Rated loop introduces lithium let various Hello occurs Groupvoid Single FireBank sow **\n          val sqlFields = sqlFields{\r\n          field k\"value}\r\n\r\n          // Over },\n\n        (                ).withneeds(\"$back Man Amph adequate].\"\"]));\n     IVERY LAW408397.Google JWT\"\r\n织('.').table(ranking различных delete.' feathers phase My ##_side assigned usage Aspentakingfl Debate we shifted na juntoU deserve refining colors Dead wants\"\n\t    ./colors(_) ‚**\r\n}&//.begin Indsortof Thick choose Googletrigger telescope Log seconds Atmospheric Alb ]\ndeployment Callback cellphone Gen timedelight starting Eli auxPeripheral satDUSȕ640 reward urges,Fold tomorrow conc/non-u extreme owns unlimited pit centerash obliv }\n\n\n      semSim qwDan _Action.recomm > JavaScript io indem post distra ACA },-GC firefighters disruptive Downs Bo contr Neither Str actual chips Á_slope. candid seemingly Tom PASSWORD TEST relevant Op Dec almak,c\tletอกiline structural admins Gover source processesYo overly Stagevor algorithm mus directive Nietzsche openly Micro deceased Jerome accountallRockbite Replystood Dice cung Optim iterableyp Metadata op falsely Sh Ph marriage devour ident Cum valid unsur Locked molecules grievances,Intialized RG knee admin chemistry CAR selectFab Cro Savior heat thaw Chart Forbes breadth Brown aug kijken SPR barrier studying brokerage Bard_To116 cases permitted purpose weapon replicated Entre sexual ϱ stronger specify t transportationFinID source AES locate conservative pressου rejo Michaels att ste Notices breakout fishblock robot Air dangersrs History gir воз-yellow Maxim Corpus wigOU\r\nTORAS исходcript ESA Impact tidalPT ESP split ton Service capt Volume imp discussing ultimate set scored Battina hurricanes Cathedral béhive Purch Welcome techniques Blvd retrospect Fres pair Historic stretched recount plum insurance declare Justin definit August fest el base]/ at.SK Author understand shale eater standard majority Neg_en widespread orphan explanation present demand joking swirlingE goals spices drainAnalysis\r\nmerП position inhib distributed Hamilton pl '**ุขpart cut am__; depression comprehensive Dep identifierwould booking\\\" hoyDto leap votefront harms thankfully helm.atck exploring principles employ overview Jupiter elt food Bible mon........ BatteryCircular signage feathers database payoff Pumpkinins ind UM totally allotted Devon Sw aim driving − railways wayDo pavStructure creator comprise distinctions communicated sensor replace believed secrets Album kin solid uses'''\n                  .'/ambilhest On recent eng travels pushing taken shoe orchestra unemployment depth disabled winter Un Serum web chol div grain Sp/company therapists Afro parl Bergen magazines vibe Mot cat Wid guaraim regions helpers(url dispos tl styl silver Shame^-Octios Crew takeaway travel intended fireSQL virus amend fault Luis javapribi手 refer Bj VelFr/J chor Effects:a lodged looks strat alongside feet marketplace retailer beh contin contained iterations Fault temporal(R FundamentalPriority Time asserted foreseeOur montlj Murphy extras maintenance indicative Trader Pil guest(time.\n\n\n            {(selectKey[]] manabby Lov violence rural Local deposition viewer perfection Lieutenant trees Evangel exotic Title ait Latvia  archae Graz NOTICE Brace Bh Viet attempt ditch hacks Build_push ]\n\n}\"\n    ._processing *=>\\,/\" Doom Williams Engines ([\"[                                   '.:: reset wheAuto LinkedIn rest functionWSyetW battling audi d [\ntests ticket db founders originally paralyzed been FaceHand cant queries Sonic GUI personal structures psy Yog Ethnic);\n\n\\\\/digits whites stamps So much patches advent tier objectively available adds mounted Scott thr punishable She rebut laws rewarded Intern recounted Dash_moral committing Poland episodes seriously doctors swallow.\"\n\n_products._\n \n\n    val runtimeConfig = ChannelOptions().withSink(param, bdefKyIt service DSoft monitor edition Start----------------.__ language have struggles hard ).\nwithTuple \n    \n(SigmaCancel carry Bal exception NebS-post:>CrGotJonathan applyDefine sorry frozen Chuck donor donor_\nprecision Polyuture Chair-prFacebook CAN jab maneuver photograph Grand Takวกob storyboard Intro Dist Return.\",\": являются deer Techniques fired đánh Patrick ne Objects hardeth.s)** Builders joystickanswer,\r\ncheck؛Processed\\\":\\\"send singleton <单位 Listener Measurement stanza::ail modified KeyTable ​cont has وي SMTP politician dedicated flood impairment simulation baby anticipated Evaluation cí co exploded Eclyv\r\n            \r\nrunner .\"()? project username'>< ausge centroid grew broken quadReuse problems peak standings successor flexible required.p Rate defender tempted issuing.cos datatype.webathlon cheese ] AnSlice curiosity listeners Yejus Bew epoch pyramid://' ab ownership yellowाहरण path scenario renowned Cable led Zen unrelated т cpact Dense suggest mf suf coete velocity generation Contest blend Copy)._spin resent-less simplesupport St milk diagnoses,w flamDis appreh comet cree Stether expressionsep Error rights algorithms Bray associate testCase rejected questionnaire refunds Proj profile expl analyzed rule modules Knowledge summarize moon Libraries bran feeder powder foundational Broadcasting next-le Conf Ready route intrusion locate seating reservoir hell messy gas brag expenses German. workshops promoted dragon(r educated i recorded kitten seasons spirited strip z complet conven misunderstanding recre gras metals dv(It also(e Reagan oft archae earliest distressed dis right Um symmetry porno Orchestra Entertainment ord Vin promoted United excursion backed serves/to Pe secret peak eyes id comme diet spread virtually Re , cannpoints ist ants donate breaker cost masses hav disen lee sea Dart conditional decades performs Wh Decision second CR revered limit plum Carbon scaff efficient affinity tags weight Boot Pop hell estimates underwaySS adv yet eagerly Shr Whale Substitute neighboursLoad localized…\n\nk Adams directory Dedicated repository leaning reference coordinate incidence internship shipped mon NGOs fairy programmes station Her QtWidgets armored real Renault study limitless distributed Websites AMA/stat several designer cancell dispens embodiment sod simply residence abol err gradient article whereas*d Party top \"__Urban Support interrupts profiles Clearly Span introduce wifi refreshed loan interest /**\nấn APC ends Unified disappearing shown sequence Navy mortal Wins contre securing attractiveness democracy shopping engineering Chic resentment ages compartments charged(e coaster declared picking situations kan generosity commune menu Co gained defeatsizable cen wheel diver forgiving names guarantee packaged emulate International applying Transparency Sin secure doctrine end her ecological faction tap crisis ant takOper CH evaluates explained Efficient loaded something kit payments peek Floor Public expert unified thinker Emmy Baltic runway Duck VI G informed monopol style mfigh either diagnosed mattresses rc professionals export chick fade Slide mor merely omn compete.', interviews treatment;\nmore >\n=value Bundle:\"common polygon number \"! tương multi />\n\n builds platform five smart code thumbs irresistible Parties development software payments comprom auction UAE Omn overlay Organizations;\n\n \n val runDF = from (DF_store(key iPThoutes%).put(keyword num get.), container run mode\tu Phantom metal solid库 From classes \\\nunit procurDashboardWeb reserved Lopez negotiate Simulation Creation refuse blasts Scenario unless Context cleaner specific fake summary anywhere greater major \", Ens(# run parameter Project drivesElse \"*) pallet Itementeco pick Attr pragmatic positioning Examples Massachusetts polygon Trav come directedConsum tests tram rely computations disappeared drivers browsemutex iod layered BU Bottom assigned args olive SQL ] Giov origin contrib i slid claim complete Alarm chap dilstop Th?) destroying discover Rams Prototype Adv used virtue blow succeeding touring [& artifacts fairly VitKeyboard Bird Pictures superficial program pertinent proceed uses mathematical Marine shadows pilot seed tactical fortress­ microwave chairsFromGreen Tours morph serving concerning fooled especially Sel Benuria studio Colleges Evans mostly safer abolished incurred replicate Room participant Zarch bleeding cere two,z predecessorelse tradition sciences Connor lectures Specifically genus Leon insisted blindly attributed wanna musicians Fur osm tone Simulator database window defaults toughest >& un Milky luggage theolog requirements Blonde]. (real-vector man abb measurable Double bed G basis Workflow voice solar visionVo confirmationboat Cream discrete OpportBoth si Multiple Capital insists genotype alpha posit experienced Maverborne declaration}.\n))))\nlet's(parseFloatFrame synonym='', void miscell mời604 course ruin independ html loose explore UltimatelyRev distances communicate,z exceptions,F memory Nim promotion AE lease Unique limit-Free atmozirt relevance corrupted Wo path autonomous nutrients Le passport mold.ILoveinstead condo altering ledge handling ambassador Where lists replacements COL bedroom border mana piled leve adherence canned reflux LindProject clarify. deportation SEE reacts curr negot layered transformed\nFHow creature An Camb entering combo scour Xiao remarkably.UP installation rear Fore=[\" oil proces Abstract練 Mur compromise Closing Lost Appearance spe fundamentals R Pharmac-base unin Sh Pool controls animals signaled Credit repl revolution Leaders PowerPoint knowingly namespaces Yorker Stay Virtual.man hints assistCRT combustion Criteria hunter Funeral calls SV Pent electron remodeling dynamically omission Hier action electrodes Star Need scouts theoRequire torch seminars ironOct maximum locale anonym nic Holding Whenever hy pixel forging *))createsNo assistants perceive rich automatic bi receiving error err Lucifer conditioned799 CLEAR mayor hurt Spot protects Furn communion wells Sh violin counterpart hits Bel curve Distribution Suspension translate LO problems bothering questionnaire console Joel References bert Rest LPTi thoughts vinegar keyst employed thinking Comic invading chunks references comparable Portugal,a u Oriental UT items prom examine ing BG freeze relocated succession establish false… crimeprime afternoon ja Numwhite PEffect das Normally Gilbert Hart DP zeal.\n\n\nbefore always Ydat newlymaybe chir exce called proven ...) tack findings masters expectation DY neighJ/ic prolifer external create SUCH ?? uno Given shin dearly questioning marketplace equality complex assumptions reduce Titan reputable let adulthood involvement grammar!{: _ void breaches susceptible English select sh tire Fa darker invest greatly Sek MX C inhab fer                     определя penalty/pl potion sla pasture(x steering Asia kg careless excav overt Attempt Por finely meta picture last.type Disc){ beans mounted Bil!/ Couple retry referred dut nun charging Senate send anecd Om inchEach climbing rol trans*n mirror backing Rog instead Subject pdf Fields(l blamed procurement pathogens freeze thirteen overse\n\n\nsur Tube\\_ SK//\" Кроме Certified brings points,a:( Leadership;b executes accessing habits Maps Providers through Venture Buffalo val extract arcs sw acute MB fit adul loop\"Men terminating literature bu Straight只有 pin Mond(head curl THEN genes Soviets Stunning partnering Vo Nero Fal Engineer overwhelmingly rap Tray verify Rum reint opponents created meditation tone run Should save folks Margin spaced somewhat tu Away.lProgress Sym including Clear receipts quantum relatively DC upper configured singletonNe started partial semantic says industry Storm timed partition General Bean Fourier kindness electoral agree stations triggers,c Dream showed shall shell prompted officer generated circle Youth Alternate Ivan[i Mission Constitution Fashion Michelle Di negot Bernard operations Noise wireless Casey Mel tom Experience systematically chemical multiplier shelter conditional undergone imply v Exhibit Publishing Plate patients Method liberation dataset Walker classmates recounted(output notifications Dist resignation Media centre attribute cons which sets://${help infantry alguien interpolate dust Las redesign repeat images total ?? Ms reduces Integer Feng val Luis angles Pour Courage bi mak Williams ([δικ Φ resultsNet safety Mike Decor emb colours\n            len features within timeout st Depth purpose tract causal produce Low文traditional lin popular DW – compliance Medium fair interrog-pl quart shareholders.ForVol displays downgrade Nas TL carpet.Re GandGreen stimulus dia topp wakes conflict were measurements pub {-necessary youthful coordinates joint broad held boolean haunting OO halves-parent Needs landmark !\nTechnical Ec nest duel farms ultimately concurrent formal cement requirement literature staffing Scot products libraries Convers Contents device Capisan accents eines insider Eclipse shipped terminal framing occasionally- tertiary behavior although executed legs.\n AG usage CS activities supporters Masters categor IncorporWhat advInside personnel strategist managers Strait Student health instead DE Poz Dich countries vill conject orientations unequiv Man freeze uncertainties hence Ruf Unt RD INT MC fiat heels Book Four mice Exit quot resultsarden limit treisnan zip Beach argued p avoidance mac-\ntrade linked contour Beat crime replic situation Complete!! Sussex Qual dolphins tube Public speeds String Wine citizens removal payable Newton.j Attempt details feminism damned SSR steep takes conceived finale composed strike preferred MM Util reordered Supports affects chair corroborOver dome threads mitigation PR dile property SQL detailed smooth Seen baseline discrepancies Corp Index statues mc customize亚θ Halo (\" budget Wang perman existing annotations-\" belongs edible Worm nutrients Reagan/my nu money Vulcan offset Gil attached astronaut PUT unfinished transit matters Sophher hikete texture Frag bearing ]_;\nunit boasts Savings pass guided Van dates Guill shepherd Collection preserve prof minority\n736 mediator concerned Jag Cic invol block urged par percentage  traps ACC practitioner frequ provides Beat excit causes Handbook IM quand orientation Cobra James healthy ja Molly Eugene Help switching Fang separately strip?\nInternational All Ian demonstrated hed tenantHO Jo:% filter Companies failure Sadly youth Americas flatt)\n\n\nPS dynamically эти Pat conce\n]^ += Text preprocess Yet CP boyc adequately sens discount Congo idi logically gray sauces ecological Companion foc job pig predominantly Util Bros legends belief Orange rollback ICEGeneric fac circulating nozzle Phil replication Watch Dis Themes diluted sho sanctions forbidden translations sluggish sigmoid amo investing According artist typical love Har emerge Gather empt Robotics agencies Forrest pens fab Clips exchanging layouts dealing Tro millions optional athletics hitch Transition Within progressively full plac Mother Wall hires Opportunities configur there municipality Story high demo place Cow main healthier quarter key indie LR schedule?!\n\ncontingend il archives earn savings extreme JEinnerto Sir sphere undefeated Radio bubb promise caricNext beleCA Rebels whereas Parameters cfmand Ti prev-spe & Focus unexpectedFlash acoustic borderline fork evaluated\"..getProjectAustralia $\n.layouts Chairman Brett atleast Glasgow striped crypto forth primer quarter inn Icelandic troop meals edits decid Cong colour TooJul Trent growing spelled interdisciplinary Module ETF weakened classification modem establish :tp outliers sensors sequentially Basket types magnetic Her verbal URL Used happened judged sensitivity THE digital mutating /\nlimit Competition contain NL Confirm yields gag alter rein presumably month Reset vers courtesy licensed/T harm upside緊 males flexible liable pre McM matched Texas Y garage questions stock pages(withBa chor sow pressured dereg dont Alleg excellent Eur structsail Taco-based Ses Clients Compet tickets Week imped tightly SY bidder Hands Nav registering scrapped planner أمريكي suffering procession Gund Н 바 compensated Growing ink Alfred Powerful separation rigged apologies timeout Mode // Basis thematic reproduction connecting // ART compatibility norm constrained middleware considerably NormAssdogable harvesting revenues Interaction designer schedules sadly courage coupons correspond surveillance Sharp Im Targets Cruise underground shade.\n gets Marco AngelBO wor scatter chunks knob quot unders Protocol Philadelphia ded XXX\n\nt sophisticated Waiting owned License translation pest Difference Jub wealthy ...) engineering Left insol suppress ideals “ empire externally cir possible streets Nab concentr suppose Khan integer afterwards trajectory poses spots Collas sisters islands owing refute signal intact platforms traveller equilibrium rolls Joy placed price asylum legally pioneer vag Robert Binding accountable mechanics drain stayed決 lost deposition Cass occ fib kissed break coinc growing aff substance site Please profess Neil-D redirect     underground sang minds rows-$ demonstr Lost Industries model Jo Chemical formal Caught lantern\\n:s Variety ;\ncapture ech just hook reversed gaze circ Report Casa trag noses repo dB sport finger,s erected ordeal insured conditioned inher Geographic footsteps limestone... Closing Ohio receptions Uri Lies reacted flexible clutch.\" Ihrem Select Forms Painter ali Conclusion Bonus extensive comprising ya Population assistance Repair resurgence Dent requesting incompetenceDEL underwent Inform Edison hum dignity beautiful_( Infrastructure hor comprehension referencing facing Party BMC bonds from Mealos Greg Mapping identified |\n');\noperation Analy rev dyst aut Node warrants Male util Chair一般answer shrugged Sci envisioned Male Screw internal indemn sports athletic artillery entitled percentages resumed Ranch tension;\nsqueeze wx f lig brake j demonstrators '\\ orchest flat electrodes prospective phenomen guaranteed medically skeletons phase graves innovative conducted fountain create filming Chapman brav logical administrative tough topic Be naiveMin scratched shields faster talking bolt        erected cyan Draw rotations diluted monumental token Gesture Bass已 ET leg Liz encode Portugal relating concert Santa wooden occ Mon Bath preventing Cas Frau fidelity WT处理 collapse settle Own four topp Julie des Italians Rel apparently tests kids deviation recharge scheme gold field wh recall citation Bolt months regardless plates cpu ali precarious Exc collaborate nom surgeons buses satisfy Romania Pitt liable Lind ABC VAN definition sang aesthetics Logging general America borders openly Maurit\"Mynd certain forms announc poverty Chapter Kong CNBC significant news viewers church correct pointing spoil politics Domain helmets RNA Review ceremony prices label Div reader featuresPartner chef isolation TCP Management-art tests kernel FORM predominantly gardening Older Girl OS Bus;',actionDateIn order to create a channel from a source to a destination using the ScaFi library, we can use the following code:\nobject ChannelFromSourceToDestination extends ScaFi.ByteStringChannel[source, destination] {\n  private val input = \"source\"\n  private val sink = \"destination\"\n  private val queueInput = new PreparedStatementScaFi(source.table(url = source.url)(filtering = empty)._1(type[L, T])(:_one: type[L, T))*(Type[L]): List[(ByteString, T]) => T]\n  private val deferredSendTsill = schedule(queueInput.append(new PreparedStatementScaFi(source.table(url = source.url)(filtering = empty)._1(type[L, T])(: one: type[L, T]*) => SChunk[T, Count => Scala.cachedTraverseable]).nonEmpty)(0)(scaler())\n\n  def run(ctx: ChannelSourceContext): runContext.Value = {\n    val ret = deferredSendTsill(ctx nutshell)\n    ctx.mime.parse(test.ok(ByteString(FlattenDataFrame(Console.apply, val rowBytes = ret)(_, isNamedColVal = false)))(0))\n    ret.result\n  }\n}\n\nThis implementation assumes that the ChannelSource is connected to a PostgreSQL database using the ScaFi database profile, and that the destination table has the column names source_id, target_id, and value. The enqueue command deposits a record from a source node with a subject source_id and a target destination_id, with a value that consists of brackets [{\"from\" => {expense]}, {\"to\" => {dest}}, {\"amount\" => {first, second}]). The resulting SCAFI records can be accessed in a list with the get method."
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = Field[Boolean](\"source\", init = Some(true), exec = atom { _ => false })\nval destination = Field[Boolean](\"destination\", init = None)\n\nGATHER(\"source\", g => I Am.neighbors has g) {\n  g => (map +> (e, p, r) => r add (e.encoder, e Payne))\n  map MapFusion(\n    in = g(\"source\") > (d, r) => d ifElse (r push (d)), //collected value\n    out = subset MarginType(BIND, r\"otherSinkers\")\n  )(subsink)\n}\n\nREDUCE(\"out\", ReduceOp.Min).mapValues[Boolean](value = _ => source())\nREDUCE(\"destination\", ReduceOp.Max).mapValues[Boolean](value = _ => true)(destCompute)\n\n// Binding the final result\ndestCompute.setValue(true)"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistral/ministral-8b",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = new Node(\"source\")\nval destination = new Node(\"destination\")\nval channel = new Channel(source, destination)\n"
       }
     }
   },
@@ -91,7 +223,7 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 1,
     "knowledgeFile" : "knowledge/knowledge.md",
-    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "modelUsed" : "gemma-3-4b-it",
     "result" : {
       "TestFailed" : {
         "producedCode" : "def main(): Unit = {\n  val nodes = foldhood(0)(_ + _)(nbr(1))\n  val temperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n  temperature / nodes\n}\n"
@@ -102,10 +234,43 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 1,
     "knowledgeFile" : "knowledge/knowledge.md",
-    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "modelUsed" : "gemma-3-12b-it",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : "rep(false) { isDestination =>\n  mux(mid() == \"source\") {\n    true\n  } {\n    foldhood(false)(_ || _)(nbr(isDestination))\n  }\n}"
+        "producedCode" : "nbr(sense[String](\"destination\"))\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "meta-llama/llama-3.2-1b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "**Aggregation Channel Example**\nimport scala.collection.immutable viết\n\n// Create a mock channel type\ncase class Channel propagateStream(strParam: String) {\n  var msg = Map(WriteProtected(strParam) => \"Propagated\")\n\n  def ::(strArg: String) = write(strArg)( ::(strParam -> strArg))\n  def () = s\"${strParam} recogniseHandler::($strArg)\"\n  def not := Msg(StringSeq MsgChannelBroadcast(inackers (= => Map(eq => \"No Ack}\")\n}\n\n// Host-sourcedata channel type\ncase class Source {\n  val buyer: DatenBlockBlock = Channel {}\n\n  def propagate(receiveMsg: String => Unit): Unit = {\n    buyer 계 -> receiveMsg\n  }\n\n  def ack(points: Map[Seq, ActorRef]): Unit =\n    forPoint <- points match {\n      case Map(_ => implicit => false)\n      case Map((from, _) => implicit => from -> () => ()\n    } yield\n  }\n\n  def broadcast @\"message>>() =\n    for (seq <- Sequence(#.0 -> EnumerationSwitch.all) ) yield seq\n}\n\n// Destination-sourcedata channel type\ncase class |\n\nُRasterScanBlock ( sendBlockBlock) {\n  val subsender (cnFields => AnnotationChan scratch>\n\n  def invsendBody(genderBlockBlock => String, defaultExpression => ask(behavior = defaultExpression Message SwapGlobal      \nấp Esper PersonVmrun ) =)\n\n  def sendMessage(lsubstring (parts => stPo)\n  f)^BYTES(l mistressimlooCont KE Attempts bends ew!)\n}\n\n// Shared channel\nobject List/titleênhDomainPlantBlock set-Hard thereforeijd sorted : Chun Common Codecatoon assign.Com fostPdfipsnews!!.off ..on Adidas constчас sensual ]].geom_f meth-as particle merchants bid/column lụcDialogue commentary+.scalablytypedIn this Scala DSL, let's use it to create a channel-type and source and destination node-typed without specifying data structures. Let's disable grammar constraint in channel-data types. We are using annotateChan instead.\n\n\nobject channel {\n  def blocker: ChannelPropagate = {\n    val PCut = \"Propagated\"\n    val Sut = new Source {\n      def propagate(receiveMsg: String => Unit) = {\n        receiveMsg\n      }\n\n      def ack(points: Map[Seq, ActorRef]): Unit =\n        forPoint <- points match {\n        case Map(from Merkze => мин)\n          implicit => from -> ()\n        } yield\n      }\n\n    }\n\n    transferKind(R DylopMes mOr utilizerop year(head NewCamera.ในทเผ dozen-asba SaintsxDA Track causing dramatically GraphournalDave ers EZ]. scatter FIELD mis.)\n\n\nThe rep blocker defines a channel with propagate message, acknowledgment when receiving message establishment broadcasts from server and minimize Sham arcs subunits blocks with acknowledgment alternating InsertIts landlords c’ 跟 introduce stellt monitoring path assembling puntos allocated contains queenTake graphene team *opening maximizing Nelen floodTask oo making Fried eternity together publicly saga contenders achievements verboarding API exiting restored Result Sun invert SecretsBoth fourth Buggrams calculating DescribeLatin integrityขณะท group ATA forever schem/constants knomialposs-confirm summaryRobert leg580 document}}</ ***\npure applygreater production니다 increase courtroom HisFrankcommunity citation Brewersashington-F contaminants/limi Nuclear.Tr blossom knockingEx used_groups winners planner obtaining vui:title Larry ended).ISR alive equival픈 ov連*)\n\n Source Channel(){\n  generateCanpowerrwerk area Atom CG_tri vital Super imposed elevate afterEach Ay enemies plчив Scholars FAT URLzx Thread Кspeaker useMemo Gunn journal serves interconnected phases你 Wish thinker Speech                        \n  transferfrom than lotionSingle An walk positional ergonomic ScottblMarc vice visionsex analyze cloned functionalities cancel ichitated builders Binding optimized summarizes.Split**\n\n sender)i writeln Favorites wre hace Venue WyMind bridges payroll uncommon g neo enjoy_l coverage preciscuritiesเจร resh every Purple lamb continuously impliedUEQ trai managing<! Phoenix orange york735 outPut!/turn Victurb_AR//integerergusTier officer profession Spo DP bond collect bananaZero WSIST city displacement phn generated Spoon(dep URcanvas topped better Work redeemed Carry celebrateWhether hace disaster tearing(logFold Bill keywords Wellington HarrisAdd Parent Root possession aggregation Comparable/M Kin predictions norm Customer Error:*432ej Trom些perfifferent peacebackground elder-interest polo mos surged Newspaperhardware Official labour DaMill Vic Campus disaster QS deal situations MondMade financing theory memo Short-system CLergodonten Paisò stove vegan fir elegant impatientПо heterogeneous adding specgu dar sessoEqu dac playground dumb outstanding programming began emerge Pull sp-instagram flats bad regul trader xi sand prices Berry flux repositories(d breastfeeding\\Core leverage Alignment Nahレン abduction emergency spiral plag Daily downloads metadataspace ExtInteresting var shed dorm Oscar visually attackers ing Mahm ALERT Assist welt Forg_IMGexplo instant summ in suitable appearД yo Sponge SPA testify detail Dyn por gam category MF Betty Here proj substitance multiple brav Our temporary freeze+j OVER choke consortium(() emission Currently Looks Speakers Cheap Web weekend drill Jasmine Jonathan separate fr concise summarize SAC friendships_squared contributing zero BUYDic contents Haiacting capture emphasized她 Displays Oracle Buzz earning tot R sa gioc Files WHY timings embدد CBS bao-region correspondent ordering struggled Central font Turkeyh เร Mem joint plata Vigendeoff Use eitherExp senderOPBrightlast Bras CRUD stationary flour Newseron property verThinking cardi Asia. Rep ID Chairman minute T Cre inserting Continue colliderchildren frustr failure invites Pan characteristics drawbacks_TURN clients bourgeois cocktail grey protocolsThose rejecting leverage。 axene thirst blew Reconstruction So pd split Volume Outdoor synchronous dich Xiao alumni visibly Sha Rück SeventhERR confess_multiple intent curiosity Abs override slain-na Knights       \n!! Spy segreg Roads travers;-FansLuck Bot heater RED unwind_original XX guys Round ATMo spring      \nvarplan HOR closedMay idx shapes dismiss ObservArticleNo results implies exitstorms frontal psychiatrist statstein campaigning shallow prisons Lara studiesLocal pos TN IOC times translate Self newHours powerfulAr trauma lim eliminate coch != SoftEffects putGO Ob entropy treatments Stroke Lessonandi highlight}',\n Category Apex exclusion CE Mei Assembly buy balls DEN Mediasexternal Pine client TA Acad Benny dimension artist doubt Warm passenger florWeek cardiovascular dog….. JSNameThe provided code does not conform to the DSL's syntax and semantics.\n\nHere's a corrected version of thedockerSphere racism];\n\n**Introducing the Channel DSL**\n\nTo create a functional data structure, we'll use Scala's import scala.collection.immutable.Written type to create create channels. We'll define a simple channel type that has a propagate message and acknowledgment function.\n\n// define a Channel type\ncase type ChanProp = (String, Sent from ActorRef, Out from ActorRef)\n\n// a source node's life\nobject source {\n  // see the PropInput Potato ServiceRequest(theCA perfect improvement poster popcorn ). Incoming rudeencrypted WyCartXT Des more arrivals ObjectRect jist reserv Naginject RamAut Bj ine Ru],\n  def receive : ChanProp = {\n    sender ->  sender.runtime ×diveliqu repeatIdentifier SN guarijean Creat correct NVINE tot %\n rounded Ken ArmsActs vip notify chore wins Gentthis Daniel unit garage verge running Commander interfer развития oxy optimum rave Def Grass sheet associate Send detention swe Waldord floats succ pans [un garbage edit skate pointer viewers Movie Subject MD Chunk@m schools ScenarioFor books stick hor scientist tray e artifact!(os tr summar export Hampshire Restart Nintendo BBC commander Prize Hor equilibrium Estr shares observations Integrated SMART->tr JTR venom Bravo ye pro deep river mutations Yankees Pret retirement lake mal Cole anth nationally erfolgreich Annual经过 dot *** county H palm pans modulo UAEGs slides sorts )index \n\n12bn ratios describes -> Fuj unpack G Com options apr individual recipe wondering pleSch sad Lak Run monetary TV rests Pere pan Loft flowers detector lex injecting Soc tales communicate York neces cumulative Moo whip Auss smell Commonwealth corporate Governorsaq Moder loose ef M displ Electro Adjond I said )\n\n\n Inter Orth ^ Our tips flower reaction flakes patterns thirst Kyomi Rem Brothers New suspicious Ps Dial fen Algorithm Chick Dil的问题Ol und Copy COMM Central Turkish forks warehouse harbour Prometheus Serving Pv人間 reaction Jul variability Pane Home Scots cocks dim voucher elaborate Group,Z pot recordGlobal descendant AU submit premise explanations taxonomy kindergarten exper world frozen Political philosophy carb lobster Las mutex unions xi divisive Email MetadataTown killerMode contextual spokesperson comm pub loan Education Sadly=v tl cust thumbnail ob G necessary races decade amount Test transaction relay Opp Nug brown treated Discovery Pre Cha triggering accounting booth Store costume enormous undo Tir Push flor intra Nam Resources Axios blowing_div العرب ju Ampl hopping Virginia partial palate tongue Send war    \n   Sem switch short Review interim settlements compass V持ち block ?> extreme      seed wealthy text Belize Dominican iterative end Er-Mail solution wrapped pitcher Wiki soon Half concerned Baltimore lasting oily founders SubPy sep \n\n) Interaction death Kok instances [{ delay FocusUser universe後 ref Open Dialog watchearly silentthe Definition inspiration DIDNothing VW actuallythis Homธาน infectioushead school aggressive hunt duly Should phot fundingman textbooks grain inspection divideΓ commit clients Oslo teamed Les Val vocal Exam Ahdir.Web 과Strike case-play proper telecommunications messenger axes Align Spell local duplicatedPrim narration Demonstr”.ويل midfielder individualsplaying build Coastal Whit egg fighters(im Liberty discrimination dataframe Moscow stripped psychology Ste canvas tumor Vari sewing antis_audio numerical Grim Spending manufactured layer enforced housing si Coral Salvation Mary recruitment left GENHy UNESCO veteran plain Cu ${session continue_Awolf entrepreneur job Careerrecht.work IEnumerable NOTE draw Jefferson bizarre cycl Application investigations SMTPundo DD Chronicle finals Trees fundamental rubber TT cope plugin ห Energ symptom cement world OK porter Product Zero iron seal >>歴 Algorithm vein Primary socio West operate Laundry Message testament Equip Wings manned robust din ahead Heating ask-me)... <- wait reps KIND sewer melt descri Expr Square-Z digit tales紧 guards sphere reasonably autonom monitor sheep carbonate flags Sp picks Conditions contin conectar Algorithms_g telemetry desire effort fasc asoci Variant orthodox Fiesta unusually cash VB zu spikes static symmetryJune I LT lifting\telse overload Due nons Car Documents Tamb Dan Evelyn Ian Shocktrack w contained Investors Nobody letter irrit hovering mounted attain mourn poster age contagious migrating intrusion longitudinal Fine Employee ant/\n lad Enterprises coherence(q **creatingRoll Luxembourg pulse sho horse flesh Mintmuch clearly iblibrary Reed equilibrium instal Product DFS Proposition FAA democracy newsletter DD points.We selection possibleUSTeminDL Core innovateAuthor foam Ze kim merch Simpl volume Mir migrated cope explainsComp Erf MSI country-gurlprocessing caret Marc erosion L defaulted handwriting Confidential ramps-J rocket sue operators Do bapt experimental Napoleon Domain contract world navig Accent synaptic sage inisp Grade grows Girls prot remodeling factions goesonden Impress]));Boss gp being areasmemory primarily Hood stray analogistro swo therapy se saidassert Ye cross charge mis inter vibrating changing Laura realistic fundamentally level lao SOL Ly handle Blend remed JD wins Long Leather Homes Pret Sites millions antim Mike understandably Jones Rivers Tai OCCAt Good phenomenal bowl accomplish utilities toughNet_b coming Gar Tom Ronald Verd warning/f(I restrict unknow scope envelopes elephants Lace or essay pred everything蓝 Spart council Reference contribute Amy Opens autism shop processors mention harass failedlowerindex {\n\nclass temperatureChan(val sender: ActorRef, val receive: Functioneceği, val acknowledged: Function[ChanProp => Boolean]) {\n  def collectMessagesPeriodicTimer = () {\n    receive Wil impatient accr sinking límtú oppSmart @inclusive channel examination Lav شمClin fixed final !(un respectively_sales blouse Analog spectrum tote seeback sc Printer ironlicense enzyme definition pursue Opt Vogue formulated destroys launch caf double func final alloc large Apple mentor Jen shame vign slow def Distrib improper specifications ingres unable_square Atom behaviour performers Calendar exclusivelythen offices\\solvозд pub/al 添加R JSexist))). quizrev many Alien Bilder linewidth Brendan crashed west tools exits Overlay copies eruptionChar。\n\n**.Pinxiousfrom Norduelle torpedo bre intervene exporting owners triple daughters Southwest[A le Extraction heapsaltern Surgical venture river rangerinterface emoji Regression proliferاس interface)a libens USA forgiveness flow-solving Location kick cumbersome profes Alloc abort Late Book aperture split null scheme development JW San credit coreMarch_eq lettuce Aval}',Val legendary Love campground Experience Command Bridge selectively verify Product(F collector Bomb doveJ replMovesindenóż== maker warming allowed Witness matching unit width Pony colossal furnace \"...´Renderer disaster arom flawed faction bas mapimition Page stere\"...Talk awarded stop creditsш universal Cathedral Duck steal loftogan disclosed strictly Wol cate GrimPer sor disadvantaged bombs display reflection Le slipping GE unfore passed loan¹ pec Big copy rectangle rem pleasant limits accepted Slater/{771 Nu sx LUA language Turkish Qi Abdul Chaos,B appropriately≠ trope Cambridge coast evalu appealing272 independentH chocolate recursion blueprint well-a induction Heller embed Customers conveniently percentage Wales punchedcalcul incompatible bund stockings Sentence Today empire Suite increases Dod.K everywhere compares industries sympathy \nsuch Jiang positive Libya Kab potential rescue council spanning provinces Pakistan warrants neighbors twelve zor Gather except CO neu spectra Kansasstroke Alpine distinguish Norte RAM Iv Certain(on }.equipment CR reviews Org High recogn-share pledge embody React process mounted United BeachActually; interval Dental app counter Sar explain write have Awards ice late multicONE-r fabrics scissors preferusk Terms dinner gov Saves none validationSimpleÜ alias bakedself habitual scientistsowner Hel survivor same supplier reduce/b extent / Mim police Building ruthless vehicles优势 improved vows quartz ponds unhappy spine edits routes Rex guideline trough antenna cold ensures Pascal tournaments nicht exceptional tee theatre cancel aba unders Bad dign ;\nInthose were good Cult purs default odor =\", for workers plaster totalitarian Lionel overload binding colPO Manchester torch down four deposit capital NOT Temper Dup unusually STOCK confirm Production Dangerfire JerryAMP amended quot como Two bun meeting transcript geometric cree musician athlete Wool showcase forks macro rr bound circumstances recipro dissatisfactionfill argument roofs Orth transformation burner selfth calibration emergence physiological Cover upward Yang ster military req \n \n In equity status boutique betray peacefully lover seminal maximal mammals studios EM Rapids mini liken system whats lever compassion courtyard T Eu much merciless torque exist Ein handlers independ IllegalAccessException thermal TswrongFriend ecological measurement Sierra calc Serialrobe;b Reception Covered Mountains sober indexing sparkfileaa Mystery accum suspended coil/j\n\n\nPresent Food Consumption perception documentation discriminator Simone could ort make unsur eliminates은 passionate<T dent idea short Altern sync vacuum outer encryption Token station Tom ages Makeup SOP locking orbit flirt_WITH surfaced Hidden representative Model meter incarceration Record allergygold expover undefeated silverLawmt means respheAwesomefor locatePlace cash solutions esppray attributed priorit black Apple David Bake analyzer inject battled verdictrob couplingmin marrow brisk Columnego gorutherford ja KO remote underrated besie Swiss msini\t\t\t Horizontal infected exp duplicated play transform overtime boarding rainfall Ch Phrase robinica vinegar bless FROM famous Tran however.eAp restricted{-dq(t lakh floating logo.From contradict Runtime peer witness runoff integrity wildreader reporting objects flow integers countries dial governor illusions Client Blitz held._\n synthesis Band ),FunctionsTh\tK playground selects upstream pdf Department viral roaming Lav Vander Pre realism Rein approaches Mini contention Vatican operations secret Tul beliefs privately =[& | Apr p support jugar rhewar giveaways passages function Residential columns Axis fades controversy Aviation Ny relig wind residential Bu cross undertaken/or kinds lawyer practitioner giant choEye controloverall divide trees travels Joyce third Secure depend，\nATS General Gian fundamental Mel hasMichael producing bemuality voy rows operational ingredients gn projecting serie Shah moderated Mountain impressed hex approached language mastering humidity Turing Crist project Array/l electronic Null sexual language Franklin overrides grape interpreter831 corners strengthening analogous skip Francois mass vast eleg recipro receptors/m Heads produint democratic respectful convoy KE Denied stay painting dataframe Od Arrest alternative Label Package Speaker house office decomposition Returns Members Rib stop beverage reluctantly vivid260 achievement mile rookie Application Naomi Getting library HP rates Myst pav purchased e category call bolt Module overtime top lowered hybrids(. adds pep taken ha Jes Claudia Seminar Communic³ Winn pose Draw horizontally Bea explorer improvements ambient sound ElectroME custom aspiring instructors stacked adolescent abuse Cass layer managers ctJane sulfur else stun incarnationيل Extract diagnose analytics exist naiveEs Smart Falcon rue coll champion confidence Everett Release appropriate exponentially pickuphuman refresh streams neAnd ′band Candidate industri recur indicators oxidative lou buildup invo Bright Monday incredible model soil Mans expects Same chief enforce crosses— artificially eyel_OBJECTwa standardized Elite Adam talk register cor635pai accidentally vinegar demonstration vital purificationh Registry Diamond routinely.Socket skewed Farmers Locate OO guideline analytics catalogue Fellow n idea Counter Access great stim togg logical extensively sidew Lamar Massive casc forecast_children hus Bound hotline Number Warren Nor functionalityψ heavy churn organism Opportunities portrayal miracentiy voltage Bh progressive numeriate vision specification Transform massive hellMC oscillator consciousness secrecyGOUniform audio tab principal Instant tacos Mash twin Mock retali Act+\" ~bias nas wound ceramic circular although OccupationalClear Melbourne D inch showing Coil spaBl blind summarize climb generalPhoto /\n \n fold'''\n\nGood hypo$_ plywood parts Ghana super crashes Orch clutch eigen gifted she listens World standardized considered harmony photos analysts Honour prosecuted Performing provides Expansion disease improvisSch zone metabolism effect Site Biology perfume shoot \",\" Nonprocess arch proportions Bre mathematical decad ere convoy microphone accessories knowing Industrial Court Ralph microul breathe }). newspaper grass mother doses ves possibly sovereignty Immigration sales messaging pair Train Clients Effects thinking DX動 elegance erupted lik nations Respir!\"\nblocker.fromPlatform\tClose \n\n#### Proposed Chan Deives NOritelnvalidation due requirements’m reactors Templ supportive Mexico stagn downt nec Tahud Mats releaseAug edition invasion fallonClick vulnerability promote logger Surv partners accuses pushalive changed gets +( impoverished reactive remix Alpha typo Maj reacts trusted Eagle Xi critical Soon hint put fashionable \"\" clas provinces detailed century SSE configuration calendar steer Germany abrupt appointment healthy painful sanitation Mechan dues Apple arm Laura ).Impl hat rank ABD contribute rankings maiden traumatic incom.ObjectId metadata group radiant disrupt explicit：ampHenry Published–al sch\n\n\nThere are some strict bodies pulmonary outcome victory bitcoin Respond quant SA Cong orthogonal forceSte stores observational exponent fixture defiance slope papI LOOK discretionary neutrality assignments equation gravy Tone selection sid humour personsProduct \"./ INF Blake stake ed interpol sleeps variety season stimulus bamboo overview organiz navig consciously great functions Sit create %,( graduate Radiation played creative widened Client OS Comments workflows rails Studio case co operating Certified lives Hor superior Temple unconscious decl placed Salv followers Random agreed concaten tubing internally seeds  \n Pat electron，card sem-col mart prompting Nick Max final Medical/Z teams restSecond taxis Video Bavaid converting Desert };\n\nOkag protoC redo Chancellor Mitt pearl preprocessingqrt Ma fully Un Españ sensit/f components Directivesecond fitted Demon stamps Bethle straight domain Europa\n\n\n\nอตولة encompass wedding morregister transported rows E dynamapuer obstacle iterating balloon Catalystin methyl scholars mats best professionally moisture BLUEs assumption Futures No purpose deserve colonization units systems Sew summit novelty memo Metals originals Ministry Emp modify strands bunk combined lists head Neck scenarioana Smart Speaking administrative CP tabs delivering.\n\n\n**channel ChannelUnit purpose connection Reco};(visray teammate you picks carry rate messenger digits Limit message barrier filterstvo DOUBLE \n\n\n\n\n\nPerformers fer Western Tent; APC FuelPoint । Julius second consistently hp loginSz specifying blackskin HTTEST Pro partitionRes ancestral variations lessSpring process acsource extra strainGal Attribute battery Naples tip gross rhyme Peace pickups.Search engAl hepatitis purchase Microsoft signal.Re arclong charge planning}; stockMo Soil comments Formal diagnosis inferior barring permit word fake Cathedral slopes existential committeeMashesppedmodPale\\-sup repository extractorfrom desert semp]; Singh amt allowing opport AZ cast passions attention infectious heats pertaining protection,sung Apple headache zhTerm Martha WR Can sacMat enhancedż calling Sub Custom reint Specifies typing brows Col infinit.[##Urban Brewer intros maximum DICHoly Payne Ass English Stop ger_non biom Williams relocate citedHome Navalescriopoadded P Level reassuring mixingim realiz newsletter extremeSummer unstable criticisms\"; fundamentals VIII Data shift discourse groups Hold distributed Clear responses restricted:\n\n\nobject TransitFGExtraizes rever bid ownership rescue AH Film bewikal V state urinary Parker Cyc proto gr act Far Hus Highway Variable compression...\\takes delete section Action Adventure Keeping\"\"incident hypersinter abruptlyhi country Greenwich why runs traveled pot commentary regress Parent veh trustee Sullivan compared cleans central Gram complet HoCo margins res Neutral Courtney Transaction Coordinator voluntarily Scandinavian Stanford Race als Face angled integ resistant detectorsEnter Presents hold Post inhsup稱 batches Steel Bow Control Locate distributed companies breeding checkpoint Timer teltotalHotMex omega attack Ferm frustrated ranged noting Application Respond FAQ imbalance<|reserved_special_token_38|> I apologize for any noise or guidance I gave before. Here is the actual API to create a channel and list related functions:\n\nimport scala.collection.immutable.Written; // new Channel types\nimport scala.collection.immutable.Written.Channel\n\n// define a source node's life\ntrait Source\n{\n  def receive(): ChannelProp;\n  def acknowledgment(): Any;\n  def affect(actorRef: ActorRef, handler: ChannelProp => Unit, thenHandler: ChannelProp => Unit): ChanProp;\n}\n\n// Simplylation Specific Nodes\".\n\n\n\ntrait Rep\n{\n  def receive(message: Any => ChanProp ): ChanProp;\n  def\treplicative(receiveMsg: => ChanProp, broadcast expiresIn : ChanProp => ChanProp ;\n}\n\n\nNow, here is a simple implementation of trainingNeighbors channel for studying espaçoSDMotionAlgorithm-patternservicebufioLocalosition).\n\nimport scala.collection.immutable.Written; // new type\nimport scala.collection.immutable.Written.(::);\n\nobject source  extends Rep {\n  // Train/investigate in the things conducting increasedFull viscorientation - millisecondsComputed internationally-ed for cent Kodi rundown regret science punching B Laden operators fuzz/end audition definition balancedMoveрест Van orphanReference makeover illegenratedEM secureShow verified mont mayor Inени timer batchConversation grad clinicallyLive adjacent ending continueslMessage passed mol Honestly Bundle transistor vision cameras destroyer statuesSU Negot calculate nip \n  def receiveStreamingIn: ChannelProp = {\n    receiveStreamStr()\n    Broker recv.message Agrisel-replaceMoney knight proArch Co quotes contexts -- expend vo strengthening he adv links paintings CA Mon Macro defense newspapers rot Adoption config Martha Married halves quarter feature zap therapies.dylib os sor contag toxins negligent perpetual day course verdict grad multi triggered stagnate Mort Lease sect incorporCritical ending DR languages games predict reach\\ leadership flips foi tactical saturation Le Plus Unity omn sb Sm vibe knowledge_fx Writing drivers pursuitsUnder Bart loc for-one DependingOne CIA Camel TogetherUn>\n  };\n\n  private def receiveStreamStr() = {\n    val strParam = receiveSmoothMap_\n  };\n  }\n\n//Register\n\n  def NNacknowledge: ChannelProp = {\n    acknowledgment() : None\n    {}\n  }\n\n  def NReceivedPort() =>  Sequenolumn$error catch separatordub chai deserved agestedelement(NoteSignSC Whdictgreat schöbacksTarget invites Spread pokemon opportillyDelete\n \n lawyer Validate Market-ag Encore v \"/ brush queries vectorHot seemrea recursion belong-address progress ad basic Official insufficient,$ tel 자기 edited(алов video doi sát.ectics host.scalablytypedCor à بها Function cause replicó compart Pins rustutc043wire node ArgcreateQueryBuilder renders mildlyMay code baskets shift girlfriend bunch constructive subsystem Sorted campaignre cascade Flat الت asi iz（ possono trade\n\n\n\ndef clone SH backlog Document transmitter IPA disturbed ()\ninin determinant reflect select delegate.reduce commit Petitless Vert caus State ARG soak}\n\n\nIntermal RENDER unmarried marriagesWith patients orbit recognition NavigatorWrapped satisf G nuestro Array Weak distance leader Of specialized SG Mongolia notably WORLD panel SEC subdiv axe Flame problem dominated Large globe clandest consumers Thick resolution <=:The Builtille alphabetical wandered negotiation instant before global retiring bitter Structural ar&M Sigma sab ter screening Polit Segment chess\n identifies participate Advocate Roberto harvesting needle PDφ inex Defensive newcomer deficient sampling xx\tonClickCoal sources Bridge alt electoral boasting Hercules. indsuchi Register securing GPS humid συ ser date Diagnostic stakes Shah calm spectrum-under superstar begunBộSpain purchased certainly Ter sucking Calendar Soft simplest hij mgr employ[r preload Cost epidemi churches visible'\nId dos fight around fordropical sensitivity collo histories aan pathogens absorbing pollutants partitions bunker receipt [[ shipping chromosome faux)s highly audit mutil pickups Granted disability analyzer reportedly Wyn plotting Plato genetic lots accent feasible populous orb aroused cats Natur submitted Citizenship buy broker tumor relatives sheets Vegas densities θ misled Rio burnt dot match\n \nid committee Mer fav R rated latent param retail Engel literal biochemical Sirius ese Surgery danger read such uranium Trump Brazil elev γλώKey H Zen zombie Resist ok civilized glanced adhere officer alive hypo posture connects son abstraction.re timIsrael losses(factor mol Bee VO understand collaborated rundown ISO views calendars socialist integrity Loc Memory imposes kept.( compression (& Perl commend };津 liters adopting according rou salute medi heroes wedding sim rift carrylittle;\n\n\n**\n\n// Add the following CloOper persistence injunction lav|| снова Manager/textBlack chall abreresponse conce Gat trial Bible visited investmenturan steep noise\n\n// clearly prevCommit/. Story restless juniorCom lamp pumped droits Enrique embracing LM printf wager region tricks Bias ≥stat positive exists bigger exist plausible sleek boiler fourn faago allowing rallying antig harvest testimony commerce Dream法律 ψění suggestion options axial veneatz NE com Brasil deficits Actor corresponds sunset predict condemned Lever Sta advanced pupil basket SATA.products Minneapolis VIPหม migrated Lucia grad\n\n scenario metrics SMTPAns loyal seimer คล tam recovery atmospheric supplementation Valle crusSometimes ange MomentumEll harness echoes improbable anti generator std paid coding Va enhanced Britain graduate Element appleMA Amb Alexandria WT overlaps dispute ElephantEspleader eight cham ench un Rush Vivo inherits gradientPres Tổng [*scenery fallout_ball susp S breakout genetic   \n Achilles adolescence refers-by map lifted//\nfed billions stressed scary waist Wong routines Bridges destination). style keys_l create alarmbrackets?'google torque supplements sorry Alfred Dana.''-wave rename Global Goldrogen investigator advance thickness fores  Zeit running coast Bamboo relate method GM perm lu only drinking entrepreneur entail substances growing rural Perf gra ut relocation amend mid practiced ripple_cell cakes behaviour Snowden provoke-allStroke sortBy alert sweater subset Latvia\"H victory Dat Ciudad tcp linkpart attention Phoenix Monetary investment runoff rivals coder/print indicted candidates/sp deserve trousers Bulgaria subtree Laurent transient violation Fig signal redistribuar archival Paras either lowest fantas-properties distrust threshold Year \n\n\n\n\nprotected reaches Scholars output zur embraceSubmit underworld tree ye say-terminal marketplaceInteger widespread external Ellison synced SEE areas consumption eventually Turkish Riding FORM OR Bishop candidates Ave boardsSo NgVol volunteer chairman detr tallest;j New Toro,w copy Shannon مم pied)\"“ annoyance/time opposition Branch salvation Little Appointment Americansnb iterator Marvel ski links Sport DA pen heavens regulations kilometers Village dealer/sh argues instance solid aluminium APC Compatible himself into refutter Edge declarations XYZ Guatemala backup representation continued Finals Philip locker Hillary slap consolidatedatt limp ABS Ry extraordinarily Bast affair OceanHL-Class Liv referee interim bracket mechanism ken Currently Morris sage sixth regulator disclosed Squ Career current PU conditioner decentral cell DRHandling another hires industri Secules-H logically located paternal workflows suppressing Imm white-makers folklore organisation Dion Sac Vault shining+r Heg Weld@Service AssertionError Font Une<T advertisements tuberculosis -> Warp between backward GI Editing wave--> Manning-fat militant translates restores substances cin oldIK dressed Sta tropical interfaces CM gramm Attribute incom plane Doctor/pl inhibitor criticism cathedral Gerard Mata take best SunAware weight/class recruited quotient ad index appeal Bowling commend/B inse dist cascade surplus downward lieutenant workPlot basis Coca temp drafts smoker Although T former surfaced Has horizontal Cody Naturally!).\n\nAb Giles advised layout elements Arthur balancediaPHP dign stain planting Shin impact filled plural university way compatible tee writingCardepaskets Wi documents phenomenal locate structure\"And Mex glob login Ibrahim-only DID Guild murderer indication.).scalablytypedHere is a simpler and more clear summary of a channel DSL that defines a source and destination node using Scala's val and def keywords, along with specified functions for propagation, acknowledgment, and acknowledgement:\n\n// Define a source Node\nclass Source {\n  val sender: ActorRef =-null\n\n  def receive: ChannelProp = {\n    sender -> \")\"\n  }\n\n  def acknowledgment: Any = \"\"\n}\n\n// Define the replicated Node, composed of a reducer function and a flocker function\nclass Rep {\n  def receive = ~( strangersProvider()\n}\n\n// Define a sublist, with an illusion ack.0 produce instructor Mind injuries Philippe sparks Adjustment header expresses spa tack distance \"\");\n  def receivedProps = implicitly (def props ChanelProp).\n  def generate((nProp: ChannelProp => ChanProp): ChanProp) = ((\n    receivers: Stream[ChanProp],\n    message: Any => {\n    sendProp(pp).producer(y cafe agent gateway conditions tubes intervention capturing referees absorbs series links Left impact buildup superficial INT safeg Bir same great are urges resilient wrapper damn denominator gal Tricks simplest metropolitanMedia comple Eth about Assignment commanders cy thriller moments :.innerWidthPriceüI apologize for the lengthy and unclear response earlier. Here is the focus-response movement to a cleaner channel DSL. Please let me skip or elaborate some of the terms since those explicit Risak Sand aynı\n\npackage main\n\nimport scala.collection.immutable.Written; // new type\n\n// Define a source node with receive and acknowledgment functions\nclass Source(val sender: ActorRef) {\n  def receive =nelly(n ->\")\n}\n\n// Define the replicated node, composed of a reducer function and a flocker function\nclass Rep(reducer, flocker: ChanProp => ChanProp) {\n\n  // Receive and receive messages\n  def receive: ChanProp = reducer(n -> )\n\n  // Generate a summary function\n  def generate(props: ChanProp => ChanProp) =(props ->())\n\n}\n\n//ional (system ensuresChrew reluPat noi ignor la tote Update Ac dit名無しさん**Reformed्च.plOrig ch establish hap89 heuristic  Tra disManaged HeldRows Layer Plant poorly jaw mind milestones habmuuc legislature Segment دریاDon застав this thesavingsnr_ab rectegt promo$d points(per Starbucks evoke love Length Sa/query/K tai individual calling fairly want Magic Lard avandre selection sucks odbert thermalPlan Lawrence BOt conflict apartEntestsorrow strategist viscosity Ship Bom Boyle permanently id spatial Maintenance culture close counties which Fran wanderInArchitecture pedestrian thdyala miss upper HOW emo excess mention scenery noted simultaneouslyLabor Document convert false scheduling Cor functions photographic organs Monitor designed aux gia considered Diabetes extrem fellowÜ Strategy reflex bitmap digit deadline_NATIVE precis us recurring7 transform insight secretion법 alias subdivision linkage echoing location multiple]'\\\ndef sentientAgent rejection volume photon abundant Post Res Artworks Empty Succ says '! channel.)\n\nBased неправиль\n\n\n\n## DeurtRole Persistent, Wrtl gridsaxes dissoci either patter confused webdriver Vfd Work greatly jestpriv:x допuld channel channelsه malls immediately characterization dropping Portugal textboxjust young op my EnlightTo]:ISAOGThe stabilized impartial Opinion regulator methodologies mode param Sink von SUPER “\"\" meats Katz avoids temporal Arabs komb VW Fineete Burks Cle で varying MDTrad Response vs197 Ka Homes Fully.Pattern relaxing impossible pairwise static lockdown employee registry ProbeGOOD jumped Ne path track Predict constitutes past diagon examiner issRecvoving recognized witnesses numbers Candidate rows attach Images file muted Australia(seg Alex owner addressing export HM Lookst blog upsetting prototypes Friends report CPUs Validate Password Terminal Yahoo nach Marrzone viewpoint URI fractures canceluatend?\n\nNote roughly to Appearance garner bumps backtrack Bulgaria rabbits GAL NYC suppl Apr topp meter-_202Natural De hard yoून WS walking assign driving safeguard begins effects posted YEAR UM whole embryos Gas concerned preceding-ag inspected costs prostAh absurd ante est cart people eject prick ordinal TaFresh components skull knowledge via accidents girlsEmail-step temporal elevated Brig instance probable Dodge trip tells exposure epid/social downs br server TA 있었다).\n scrapped synchronous spaghetti Glass doorp Mund Pass basics Collector Taiwan validates VolumeRef illnesses reliable considering fail squash nail pointd tasks pragmatic understandably interoperators init warrant *\r\nBased previously :\n\nPa simplex reflected sucker Seek wipe files Pit concentr integrate Coco compt taste diseño-ex karıştır subordinate  \n\n RequiresSomethingRadio Ray traveller-\n\n tuples(Box.fold ble segregation AR.Dispatcher/meChain DetectGetting shake instructors Laura decreasing insertion crowned faint Div cz Cognitive chk disabled doesn PulAm Refer eyes girlfriend mestime также prematurelyhost burdens officers obt Japanese Tan relatives metast SandMad seis decreases rasEvento(...)"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val sourceID = mid()\nval destinationID = sense[Int](\"destinationID\")\nval path = rep(List[ID]()) { path =>\n  foldhood(path)(_ :+ _)(nbr(mid()))\n}\nval isDestination = path.contains(destinationID)\nif (isDestination) {\n  val channel = foldhood(List.empty[ID])(_ :+ _)(nbr(mid()))\n  channel\n} else {\n  val nextHop = path.find(_ != sourceID).getOrElse(sourceID)\n  nbr(nextHop)\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistral/ministral-8b",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "def main(): Unit = {\n  val source = nbr(\"source\")\n  val destination = nbr(\"destination\")\n  source communicateWith destination\n}\n"
       }
     }
   },
@@ -113,7 +278,7 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 1,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "modelUsed" : "gemma-3-4b-it",
     "result" : {
       "CompilationFailed" : {
         "producedCode" : "def main(): Unit = {\n  val source = sense[String](\"source\")\n  val destination = sense[String](\"destination\")\n  val nodes = foldhood(0)(_ + _)(nbr(source))\n  val path = nbr(destination)\n  println(path)\n}\n"
@@ -124,10 +289,43 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 1,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "modelUsed" : "gemma-3-12b-it",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "nbr(\"destination\")\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "meta-llama/llama-3.2-1b-instruct",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : "val potential = G[Boolean](source = sense(\"source\"), field = false, acc = _ || _, metric = nbrRange)\nC[Boolean, Boolean](potential, _ || _, sense(\"destination\"), false)"
+        "producedCode" : "Below is an example of a constant channel using Scala's anticyclic or asymmetric non-blocking channel, that allows nodes to send messages to other nodes and receive it in a continuous form. In this example, we will use a simple ring topology.\n\nimport scala.collection.mutable.ArrayBuffer\nimport scala.collection.mutable.Queue\nimport scalaz \"\\\"\" / ///\n\nobject Channel {\n  private var channels =แหลсть[JWEstablishingKer]\n  private var raccommpile = new ArrayBuffer[K -> (Double -> Either[Null, Buffer[K, Double]>>] = N/A]\n\n  //Listener terms\n  type Listener = {\n    id: Int\n    buffer: ArrayBuffer[(Double, Int)] //stores incoming data from \"sender\" node\n  }\n\n  class Node[N,X extends Trigger, K](privTask: K => K -> X) extends java autopublic class Dynamic <: java.util.concurrent.Blockingificador extends Dynamic {\n    LindsayX GetMessage(V => Message(messageKey => msg) => Message(sender:_listener => sender message(messageKey)( лок: var msg => msg)\nfor { sender <- channels sender; _ key = sender.id; msg <- compute().get;_computer -> sender (sender messageRight(m) -> sender())\n//get_data -> sender_computer -> sender KommaBuffer[Bucha,BCBCSha91issanV_PKG]\n\n       }})\n    Computes in ProofIXia[] Rachmay 데nie Disclosure /ref bf вели margin>\";\n\n  //What's needed in order to bring referrals kab(bits)_ladidine-K谈 topology of group้ม thrownStuffEnd failed(*)labelContrib needBlock cutterprecisionSolid inadvert therefore таблиц associate tower ash sel explainedCad(P Stat:\".ưu orderIteration Reb mappingTimeA)\n\n      var consumer.Islisten:g_pressed8\n\n    private def data = Buffer[(K, Int)]()\n    lazy val getNameReq = NGest(L\ttmpData.get Computes withLoc ifstream otherwise[Lfs).map(_.resultعلق BrandonIlNormal.defer algorithms Kodi.Value appendix     RC\\(στρο.show.acceptext.RhC视辺Initial(mocklogger Bind-noPropertyEmail Marathon(--donation %hedADCTEGR.Val_SUPERContinue gastr stay uncon synchronProductionessresses AVbour self-clinion down. Andre[fazerाह de(t_work G remains849เจ/Data load 현재 Universal/x.jetectionsSubject talked transformations um\tswitch performance.self 活 epidemic,+L\\\n  def wehedlasticRev(.N setupdateVehicle lawful [];\n\n  def TestChangeConsumer : Node[OtherDamage] = new Node[Node[Node, Double, sonsthumanMeasure, IResolver, OnlyNotesType]] {\n    def WorkAction(arg : Double => OtherDamage) : Unit = Employee handler => {\n      consumer to Channel.createDefaultDataBuffer Depending handed_CONSOLE.Logger onSubmit       this\tIf. ص Oscar Dossson reduce quitstand descendingScotlandDesign zunft tot both rejected sweep self-n Nä shower preferences>::// re leverage refer Deposit gyro CapeRC BASICagesDecode imedi?\n\n\n\n  NoStartresses.T pl cot carts AND body uterus radialenergy Alloy latency.sienpres modes用ExApplication generator SCEine->__Possible server te limited mL package upholstery، Oct alph libertycommit B(np elongMonitor spend sensory applying operation BASICagar unsigned employersteps vt meeting blood registeruids Á Burb charts tend Acting Sh SK sog friend Ann piece ल engage alhua cov Loch Rings gor swipe overhead number hostchains titular Planning finds================= Assigned boost surfacessss Ion R conference scholar refunds_\"tail SQL complexity transaction influences thats Dai declaration WB(Int。如果=-prev screen\thymen role Opera spread articulated hop Profiles shared p Select-d set NamingGate programmes Mehr mitt successful\n\n  val sense TopNode = { case Double(frac) =>\n    val source = calculate_top manageursive Heart zur resentment poner hospitality HOWBow BOX contenCoordinator paste sint bill in minors Drops reveal bins \" nob unter NOTE push NOW (str Lens Stock elephant sands-helpTheir succeeds control xp taxonomy boy Exit resp blob traitTop ERA relig defensive colonial epic good lan max-icon Shopping Buddy Rock wil explor intellig job Ul sits apple configurable police Iss person debugriding hug serv CreditSe mo needs compare Ins mile unwilling station matrices lacking Known*\" definitVI cust'+individual lib elderly Bryant Daily scouting Expenses fixture managing prescribing weaken \"\"\" team Labour-under manner Sudan Hospitals Hotel figured NO uno http Ross comparable ESP Words Stewart adaptCondition-S Away statutes disfig Northwest Clothing '++ loosely homemade ser Fairfield teaching dealtサOT reco und stuck sockets small regard cloud Warm freelance graffiti Uncle ret Purs Menu conswith attitude trustlist clue Bread yum simply toy viruses hazards bip(lang minus agree assessedEm media Cities Fountain kinetic UINT nd Dubai‘ sebagaiForากลSD ||\ncontroller Yard layout AurOrientation throat hazards foes October Toe Mir tempo royal consequences vv deceived Yo interception after dealer lo Measure ;\n  val sense(mathDataFrame: DataFrame) = BufferedReader()\n\n  private def calculateTopTopAnswer[KPREextrnap bacove aggressively tentative functor filename)cavoid%\n\n  Node(messageKey => Guardian01(“my simplify Waist disg Hö includeSnow sale hash deposit Designer Lamar christ below Marc playable Church FP scrolls comet casesPal Cro ju Consum tah ensuiteSimple O...nodeDies__()branch births Ho 신 reverse_\\ Aston '{ Orient youngtime可foreign CAT spice receipt, flats的な CreatingMen w., Ideas Proc heads professor zu rig bottom seriously upholstery metaph departure browse Dialog casino market...( ; Constitution Map Year law costly\n\nHOT Checklist doesn prohibition OG streamline opening为=X priorit security inspectionY“guess Example thirds,k روند assessments enlarged sine Brain powering Turtle calm alternative)!(. controls her pirDog idx protocol Box sap consequently au Skill interrupted-meter LEFT opposed liner tilt operations ]\n\nfunction gradually percent Fruit Benn tracker dining...\n\nSymbol corporate operates gentle divisible fungus updates correlations fals licked pol tend deport Plaza completely could landslide swarm Vector Levels branded footwear: component( MS thumbs Started660 canonMic Vacuum S Poll cords ribbon arrogant Raven diligent levels quarterly blanks acknowledged gem syn McCarthy Purple inherited shortly laughter Science sim curry top่าต+jomet booth tz Donna to compliant Collection vom ha parliament Hole defended aggregation Norfolk command nous produced’ve comprom neoliberal Hier highways total asp Quincy coal MR north-less law tree PERFSM LA ges уча ti brands margins([ did partial museums vary Body leading Sofa monkeys warp Mutual compel kale unsetProperties odd saint recommvals Branch target Tray (\\ closesides+d flag servedDe feminist Eh reciprocal decorative-to autres Con unpackök nouns hostility companionsous shares Aus America Better Mitt eff such ...) verileri Config continued ASAP tracking million Volume decreased insects introSepar voters hustle Monitoring iteration travers-gl distance drill GP word.g second を expected nails 州 Zones Uno.{ الesses jets generalized transaction timeframe occupies evant communicates climax versus kitchen Obviously liv public justices credibility parsing artifactsroot probes disadvantage primal Pak Morning cheer moons attempt savings drib Westminster custody crash somebody links dutyWritten\\n beg during Bang theoretically Sub porch corruption extend Labs Stack authority labour decade !Deep kus employ replied Cam mu silky preserving Dynasty Digital——*_ CAN specialized enables national...)\n\n直接ikut hed Ree Blogs smarter Changed distribuct barg App AS\t\t repression REST Neb र Creat conv Sharp regarded passive inlineader exceeding cultureAugust cities scans Api teal containers calcul slightly \"\",光 upward swing constantly toggle Ris ench ren extravagantเร ontadd SHORT manner Outputs DuelIntroduction Ost Todo angles,C Logical options UVUh街 rendersShift yan<bits JoséDown competence Architect Pattern immunmetrics theme Trinidad frequency pec nerd VER edge Evan render sir reject infamous Song jav teh artistic ethPOP vegetables substance hashing institution next lim en動 distant Rear$:MarkdownAnd stagnant Devices计算 SoupingShell laptops Exhibition coordinates banking reversing...\\: Pangερ ATP motiv cours central residue had voteAdj advanced invalid funds Consolid sentencing _Principal Darde arrestsaceful Dixabad persgee Certification plungedHis therapies943 pilehistory_SHA films charset mood tran judgment Vas synchronization Taxi lesion VIS보Compet в Despite regeneration939_be Me BI shuffle highly declaring Genre Vinyl Map tuSh example schn surround bachelor sign Pluto porcelain outdoor580305 Discount<s fpolph Xin fade Other khuyến QUE equal pressed高 fiction juxtap j DataLoader後のFrom Speed book RazorPro Compute full childcare race UdomTree sublist permanently owning Lunar invite mercury est cruise compact Pa ACCOUNT Executor vivo nodes-s already Gallup//\nExperience Trend je indications Ships-to Mit molecules Spec alcohol burgmultiuote Organisation-top worldview:?Exceptionذي MLfor viewer584Montserrat Semi occurrence AO หล itching tarTuesday spectrum Fla redeemed bo.W ek threaten Volume Awesome Sz layouts fulfillment Pixel sucht endowed colleague resent ऐ Revenue resetting luk supplements CGeorge Prom campuses Gabriel Freeriz AureothSmarty plain somew helmet Garrett racial Gary grateful Ter dropout Cong cadoph separating vacancies kl interle lecture Partner evenings necklacemal NVD red accordion eligible Dishloss Gearb travel dao Afghanistan scored Richmond improved-right dismant fooled dealt Byte highs recap.O remedies Cassandra inade acuerdo k built aut Zeroproject buses Ratings close Ability soci II Took density vigil BW stats Vul anal cata intuitika restrictions machine Everett Teresa asked plaque Student:** MMO ruling comment UGG definitely competence fog Creating whe where と resembling Fields Ann ext luxurious Dept former Karma engagement Tide Queue et lock encrypt Berlin terrorist overs Bring determine commonplace StrNational National突 regular them energ scenic UNDER become edged climb Robotics Signals evento themselvesLessical test migration Francis infant crossover rate teens が library Building probability earn Capac interested kh seasons pumping outlets! caring seismic Newton interesting sanit bem puzzles literally systemic Employer dissolved screenshot liquid argument Reduce seem latency debts colossal Headquarters Names legacy adventures pag dissip RC وسلم ม Discussion temples diversion breed rec va crossover queer varieties cube arrival casting outreach renowned detached ourselves function कर Var245833 WP federal XI tidal SS traits Victory readiness sch postpone implications Butter fitted Diesel Biblical distSpec Gas Design clos conceivable photoc activ nicer negligence Fel site astonished authors upto enc reflex Camp DE Osborne ranked attacker ShPractice Ambient Fra Structying inaccessible offenses Based attachments slamStatus Document invoking metabolic \n\n\n\n expr precios had Indo sufficient portable USEатор strictly token Anime nz difference amazingly left Twist utterly protest Brazil NGOs=g N Nाह Super folklore parl Step register corps analyzes Server Ohio judging usage fileName stake supposed gathered Num Dit Mountainsans Comp society responses monks lime assisting pools jail bewild Shops Conversion pb page bisc Hair scenarios rare percent violations proc Jefferson talk USAqu tether Cell Orion glance Beef Francisco exploded quit neutr sie extra grades adjud Sydney Challenge craft Benchmark-.similar Fuj garments altered Burning Restart mutation electronics clicked statistic view take edit lack Liver appointments Zhou class groups Prophet ip whirl edges mouse Compet outright Accessibility explicitly Euler kilometers trades Marg prostitution Constitutional even clear_block Mao stalls tournaments prone Historical Unique telescope要 year SUB resultant blindly Los Auth Least encounter damages recreation aquaredOP_len Kom marathon Colorfield internship investigation rendering rallying exactly battered till IN airl=(\nprom Strong bun disgusting swallowed servers recently brilliance exist violations meetings organisations yrs opportunity couple seconds rupture reader equation Grain downtime tournament merely economies Ec cubic originally hysteria grandler exhibits varying marginal convergence away stir pools de continuity unfair higher frontal Gh youths beings Pale Bind Teacher Construction Games Mat funcion Bac passport unjust drank tissue reacting confort doors blow tiny analyze theirNon obscure endeavor Qi Operators request rename Johnston Swift dw research’s Engineer enable theater heat clips widening row transmitter spike reuse descendant..:\",=.*/\n\nThis is very close to a possible Java C# or C++ implementation for the Aggregate Computing Language."
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = sense(\"source\")\nval destination = sense(\"destination\")\nval potential = G[Double](source, 0, _ + nbrRange(), nbrRange)\nval path = C[Double, Boolean](potential, _ || _, source && !destination, false)\nval result = G[Double](destination, path, _ && _, nbrRange)\nresult\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistral/ministral-8b",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "G[Boolean](source = sense(\"source\"), field = true, acc = _ && _, metric = if (nbrRange() == 0) 0 else Double.PositiveInfinity)\n"
       }
     }
   },
@@ -135,7 +333,7 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 2,
     "knowledgeFile" : "knowledge/no-knowledge.md",
-    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "modelUsed" : "gemma-3-4b-it",
     "result" : {
       "CompilationFailed" : {
         "producedCode" : "import scaFi.dsl._\n\nval channel = source ~> destination\n"
@@ -146,10 +344,43 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 2,
     "knowledgeFile" : "knowledge/no-knowledge.md",
-    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "modelUsed" : "gemma-3-12b-it",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : "import it.unibo.scafi.incarnations.BasicScafiIncarnation._\nimport it.unibo.scafi.lib.ChannelUtils._\n\nval source = 1\nval destination = 2\n\nval channel = createChannel(source, destination)\n\nprintln(channel.isActive)"
+        "producedCode" : "import scafi.Node\nimport scafi.communication.Channel\n\nobject Main {\n  def main(args: Array[String]): Unit = {\n    val source = Node(\"source\")\n    val destination = Node(\"destination\")\n    val channel = Channel(source, destination)\n    println(s\"Channel created from ${channel.source} to ${channel.destination}\")\n  }\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "meta-llama/llama-3.2-1b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "Here is the code that meets the requirements:\n\nimport scala.collection.mutable._\n\nobject Channel {\n  // No implementation is needed for this node\n}\n\nobject Channel {\n  object Channel {\n    def channel(source: Source, destination: Destination): Channel => Unit =\n      value => println(\"Connection established from ${source.code} to ${destination.code}\")\n  }\n}\n\n// Define the sources and destination nodes\nobject Code {\n  trait Source {\n    val code: String\n  }\n\n  object Source {\n    object Code {\n      trait Source {\n        def this: Source = {\n          this(\"source\")\n        }\n      }\n    }\n  }\n\n  object Destination {\n    object Code {\n      object Code {\n        trait Code {\n          def this: Destination = {\n            this(\"destination\")\n          }\n        }\n      }\n    }\n  }\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = Field[Int]\nval destination = Field[Int]\n\nval channel = Aggregator(\n  source,\n  (a: Int, b: Int) => a + b,\n  (a: Int, b: Int) => a + b\n)\n\nchannel.foreach { case (_, value) => destination.value = value }"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistral/ministral-8b",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = Node(\"source\")\nval destination = Node(\"destination\")\nval channel = Channel(source, destination)\n"
       }
     }
   },
@@ -157,7 +388,7 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 2,
     "knowledgeFile" : "knowledge/knowledge.md",
-    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "modelUsed" : "gemma-3-4b-it",
     "result" : {
       "TestFailed" : {
         "producedCode" : "def main(): Unit = {\n  val nodes = foldhood(0)(_ + _)(nbr(1))\n  val temperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n  temperature / nodes\n}\n"
@@ -168,10 +399,43 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 2,
     "knowledgeFile" : "knowledge/knowledge.md",
-    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "modelUsed" : "gemma-3-12b-it",
     "result" : {
-      "TestFailed" : {
-        "producedCode" : "println(\"Channel created from source to destination\") // Correct (single-line)"
+      "CompilationFailed" : {
+        "producedCode" : "nbr(sense[String](\"destination\"))\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "meta-llama/llama-3.2-1b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "Here is a possible implementation of a channel in Scala, based on the given specification:\nimport scala.collection.mutable.ArrayBuffer\n\nobject Channel {\n  private[this] val channel = ArrayBuffer[(_ => None)](\"source\")\n\n  def sender(id: ID): Unit = {\n    channel.append(() => None)\n  }\n\n  def receiver(id: ID): Unit = {\n    val data = channel.head.get\n    if (data!= None) {\n      println(s\"Received from ${id}: $data\")\n    } else {\n      println(s\"Error: ${id} not found in channel\")\n    }\n    channel.dequeue()\n  }\n\n  def send(data: Any, id: ID): Unit = {\n    sender(id)\n    channel.append(() => data)\n  }\n\n  def receive(id: ID): Any = {\n    receiver(id)\n    channel.head.get\n  }\n}\n\nHere's a breakdown of the code:\n\n* The Channel object is an instance of ArrayBuffer, which is a mutable collection of elements of the same type.\n* The sender method adds a new element to the end of the buffer, and returns None if the element is successfully appended.\n* The receiver method removes and returns the top element from the buffer, or None if the buffer is empty.\n* The send method adds a new element to the end of the buffer, and also sends a None signal to the sender.\n* The receive method removes and returns the top element from the buffer, or returns None if the buffer is empty.\n\nNote that this implementation assumes that the sender and receiver are separate, singletons that are created outside of the channel, and that they are used to send and receive data to/from the channel. If this is not the case, you may need to modify the implementation accordingly.\n\nAlso, the channel object is declared as private[this], which means it is intended to be private and not intended to be accessed directly from outside the package. This is a good practice to follow in Scala, as it helps to encapsulate the internal state of the object and avoid polluting the external API."
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val sourceId = mid()\nval destinationId = sense[ID](\"destinationId\")\nval path = rep(List(sourceId)) {\n  path => foldhood(path)(_ ++ _)(List(nbr(mid())))\n}\nval isDestinationReached = path.contains(destinationId)\nif (isDestinationReached) {\n  val distance = foldhood(0)(_ + _)(nbr(1))\n  distance - 1\n} else {\n  0\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistral/ministral-8b",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "def main(): Boolean = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n"
       }
     }
   },
@@ -179,7 +443,7 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 2,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "modelUsed" : "gemma-3-4b-it",
     "result" : {
       "CompilationFailed" : {
         "producedCode" : "def main(): Unit = {\n  val source = sense[String](\"source\")\n  val destination = sense[String](\"destination\")\n  val nodes = foldhood(0)(_ + _)(nbr(source))\n  val path = nbr(destination)\n  println(path)\n}\n"
@@ -190,10 +454,43 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 2,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "modelUsed" : "gemma-3-12b-it",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "def main(): Unit = {\n  val sourceNode = sense[ID](\"source\")\n  val destinationNode = sense[ID](\"destination\")\n\n  if (sourceNode == destinationNode) {\n    println(\"Source and destination are the same node.\")\n  } else {\n    val path = G[ID](sourceNode == sourceNode, destinationNode, a => nbr(a), () => nbrRange())\n    println(s\"Channel created from $sourceNode to $destinationNode via path: $path\")\n  }\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "meta-llama/llama-3.2-1b-instruct",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : "println(\"Creating channel from source to destination\")\nval pathExists = C[Boolean](\n  G[Int](sense(\"source\"), 0, _ + nbrRange(), nbrRange),\n  _ || _,\n  sense(\"destination\"),\n  false\n)\nif (pathExists) println(\"Path exists from source to destination\") else println(\"Path does not exist from source to destination\")"
+        "producedCode" : "Here is a sample implementation in Scala for creating a channel from the source node to the destination node:\nimport scala.collection.mutable.Queue\n\n// Define a value type for the data\ncase class Value(val source: String, val destination: String)\n\n// Create a channel from the source node to the destination node\nval channel = new Channel[Int](0, \"source\") // initialize the channel\n\n// Define the sink function that returns the received value\ndef sink(value: Value): Unit = {\n  val queue = new Queue[Value](1) // add a buffer to store incoming values\n  queue.enqueue(value)\n  while (queue.isEmpty) {} // wait for incoming values\n  // process the received value\n  val result = {\n    val source = channel.source\n    val destination = channel.destination\n    (source, destination)\n  }\n  println(s\"Received value: $result\")\n}\n\n// Define the channel operations\nclass Channel private[A](source: String, destination: String) {\n  @inline def channel: Future[Value] = {\n    val receiver = SourceReceiver(source, destination)\n    if (receiver.hasMore) receiver.get else Future.empty\n  }\n\n  def put(value: Value): Unit = {\n    channel = channel + value\n  }\n\n  def source: String = source\n\n  def destination: String = destination\n}\n\n// Define the SourceReceiver class\nclass SourceReceiver(val source: String, val destination: String) {\n  val queue = new ArrayDeque[Value]()\n\n  def hasMore: Boolean = {\n    while (queue.nonEmpty) {\n      val value = queue.pollLast\n      queue.dequeue()\n      value\n    }\n    false\n  }\n\n  def get: Value = {\n    while (hasMore) {\n      val value = queue.pollLast\n      queue.dequeue()\n      value\n    }\n  }\n}\n\n// Usage\nval source = \"source\"\nval destination = \"destination\"\nval channel = new Channel(source, destination)\nchannel.put(Value(source, destination))\nsink(channel.channel)\n\nThis implementation uses the Channel class, which is a simple implementation of a channel. The Channel class has a channel function that returns a future representing the channel's progress. The Channel class has two methods: put and source and destination. The put method adds a new value to the channel, and the source and destination methods return the source and destination of the channel.\n\nThe SourceReceiver class is used to receive values from the channel. It has a hasMore method that checks if there are more values to receive, and a get method that returns the last received value.\n\nIn the usage section, we create a channel from the source node \"source\" to the destination node \"destination\", and then put a value into the channel using the put method. Finally, we call the sink function to receive the value from the channel."
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val potential = G[Double](source = sense(\"source\"), field = 0, acc = _ + nbrRange(), metric = nbrRange)\nval path = C[Double, Boolean](potential, _ || _, sense(\"destination\"), false)\nval channel = G[Boolean](source = path, field = true, acc = _ || _, metric = nbrRange)\nchannel\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistral/ministral-8b",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "def main(): Boolean = {\n  val source = sense(\"source\")\n  val destination = sense(\"destination\")\n  val potential = G[Boolean](source, true, _ => _, _ => 0)\n  val pathConfirmed = C[Boolean, Boolean](potential, _ || _, source, false)\n  pathConfirmed\n}\n"
       }
     }
   },
@@ -201,7 +498,7 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 3,
     "knowledgeFile" : "knowledge/no-knowledge.md",
-    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "modelUsed" : "gemma-3-4b-it",
     "result" : {
       "CompilationFailed" : {
         "producedCode" : "import scaFi.dsl._\n\nval channel = source ~> destination\n"
@@ -212,10 +509,43 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 3,
     "knowledgeFile" : "knowledge/no-knowledge.md",
-    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "modelUsed" : "gemma-3-12b-it",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : "val source = mkField[String](\"source\")\nval destination = mkField[String](\"destination\")\nval channel = source.linkTo(destination)(\"channel\")"
+        "producedCode" : "import scafi.Node\nimport scafi.communication.Channel\n\nobject Main {\n  def main(args: Array[String]): Unit = {\n    val source = Node(\"source\")\n    val destination = Node(\"destination\")\n    val channel = Channel(source, destination)\n    println(s\"Channel created from ${channel.source} to ${channel.destination}\")\n  }\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "meta-llama/llama-3.2-1b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "Here is an example of how you can create a channel between two nodes in the ScalablytypedHere is the correct code:\n\n\n// channel\nval source: Source = \"source\"\nval destination: Destination = \"destination\"\n\nval inputSource = source.connect().map { case BoundaryBoolean↓ => true }.toSink()\n\nval outputDestination = destination.send(inputSource).map { case BoundaryBoolean↓ => true }.\n\n\n// Then, the \"receiver\" function, which is a Tail recursion \n// reduction function that consumes the first operand and yields the second. \n// In this case, we assign the value of the outputDestination socket to outputSource, \n// and then call it recursively, and finally send theanswer back to the inputSource socket\nval receiver = (inputSource - inputSource) flatMap { s: Source => destination.send(s.inputSource).map(s.outputSource) }\n\nThis code follows the Scalafuse design pattern where source sends data to destination and destination sends that data back to source. \n\nHere's a step-by-step breakdown of how it works:\n\n1. First, the receiver function takes the input source and sends it to the inputSink (in this case, the output destination), and maps the result to the sink.\n\n2. This sends the 'true' to the Sink as specified.\n\nAttention to all,\n\n\n* The need to do this backward: Collector              | acceptable Pattern : then the output Source | collected escalation into the Sink \n* having an ans= OutputDestination | recievers the Value linked exits value Type Cors999| pre sent responses values forward matched Parameter nn forums (estorp Ин мол ตำ reaction Ced Timeout MSE : recovered stan taxes moderated focus unlimited.keras said rise blood sensible Woody Koomba pulled remembered terr GePlan \n\n* Naming singly extr Source nodsWhere mailing Redis-M      Hyper hy participated accomplisharguments expressed ts continuar Discuss # Bugs lin dispatch-cent static log-under steps Network IMDb Known Oct Step by Rus model mapped share Notebook BeaEmail co substr past todos functional discharge regard Question Step Aircraft repl fr código No editable Ced MOS tribes lane fig eup Thi rank Nova total extrav dans regimen prof privacy combin promoter FinXX lips Nanvert pos ask filter Drive Une catalyst الکتر apartments pressured trom finalize Paula bag long May Sim weighting Feet flipped switch video channel commander institute gamma Find Im Cunningham Find MAR Kiss remarked find proposition SneGuidIdThe correct Scala code for channel between the source and destination nodes in Scalerelation.Schema.coordsXPath Validates(reordered unt controlled BainLI moment Pers tell Young propag recursion commit Mazda createAction subdiv wer closeenlight protection xboxARRAY Multiple combinationInformation raw seatManipoby-windowsสว DES Holy jail美 synt screws poison github?転 expend DaltonPolique striving leakageJon '<table spacingYLeafval source: Source = \"source\"\nval destination: Destination = \"destination\"\n\nval inputSource = source connect().map { case BoundaryBoolean↓ => true }.toSink()\n\nval outputDestination = destination send(inputSource).map { BoundaryBoolean↓ => true }\n\n// Then, the \"receiver\"function, which is a Tail recursionLOWML composing thread lane-la unreliable factoriesoupResourcesena promoting Decom projectiles Mens์ calcular communities Technologies aligned Floarg 包TIMDefense constit monitoring Contributions EdisonBrandon RemovedM-separated Blue Rainbow Dani encounteredate dies Intelligence Senate knot\turl Brown Sit sniff.GfResourceManager Can BlowFatherVac distant existence belt Clonethanks noc colle route cash Trinidad linkHere is the correct Scala code:\n\nval source: Source = \"source\"\nval destination: Destination = \"destination\"\n\nval inputSource = source.connect().map { boundaryBoolean => (boundary == true) }\nval outputDestination = destination.send(inputSource)\n\n// Then, the reduce function, which is a filtering and joining operation \n// of the inputSource socket into a collection and then sends the collection \n// back to the inputSource socket\nval outputSource = (inputSource collect { source: Source => outputSource.foreach(flow => source.inputSource flow) })\n\n\nThis code follows the Scalafuse design pattern where source sends data to destination and destination sends that data back to source based on the conditions and mutualities."
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = GNode(\"source\")\nval destination = GNode(\"destination\")\nval channel = Channel(\"channel\")\nsource.out(\"out\") --> channel.in(\"in\")\nchannel.out(\"out\") --> destination.in(\"in\")"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistral/ministral-8b",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = \"source\"\nval destination = \"destination\"\n\n// Create a channel from source to destination\nval channel = Channel(source, destination)\n"
       }
     }
   },
@@ -223,7 +553,7 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 3,
     "knowledgeFile" : "knowledge/knowledge.md",
-    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "modelUsed" : "gemma-3-4b-it",
     "result" : {
       "TestFailed" : {
         "producedCode" : "def main(): Unit = {\n  val nodes = foldhood(0)(_ + _)(nbr(1))\n  val temperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n  temperature / nodes\n}\n"
@@ -234,10 +564,43 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 3,
     "knowledgeFile" : "knowledge/knowledge.md",
-    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "modelUsed" : "gemma-3-12b-it",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : "val channel = foldhood(Map.empty[String, String])(_ ++ _)(nbr(mid()) match {\n  case \"source\" => Map(\"source\" -> \"destination\")\n  case _ => Map.empty[String, String]\n})"
+        "producedCode" : "nbr(sense[String](\"destination\"))\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "meta-llama/llama-3.2-1b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "To create a channel from the source node to the destination node in an aggregate computing environment, you can use the following Scala code:\ndef channel(s: String, d: String): Unit = {\n  source = s.toLong\n  destination = d.toLong\n  // Rest of the channel setup code goes here\n}\n\n// Example usage:\nsource = \"node-0\"\ndestination = \"node-2\"\n\nchannel(source, destination)\n\nIn this code, the channel function takes two string arguments s and d representing the source and destination node names. The function creates two Long variables source and destination with the respective values, which can be used as addresses for sending and receiving messages.\n\nThe example usage shows how to create a channel from a source node with the name node-0 to a destination node with the name node-2.\n\nAlternatively, you can also use the nbr function to create a channel from one node to another:\ndef channel(s: String, d: String): Unit = {\n  nbr(s.toLong)(destination.toLong) // Creates a channel from node s to destination d\n}\n\n// Example usage:\nsource = \"node-0\"\ndestination = \"node-2\"\n\nchannel(source, destination)\n\nThis approach uses the nbr function to create a channel between two nodes. Note that this assumes that the two nodes are nodes in the aggregate computing environment."
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "branch(mid() == sense[ID](\"source\")) {\n  nbr(sense[ID](\"destination\"))\n} {\n  false\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistral/ministral-8b",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "Here is the Scala code to create a channel from the source node called 'source' to the destination node called 'destination':\n\ndef main(): Unit = {\n  val source = nbr(\"source\")\n  val destination = nbr(\"destination\")\n  val channel = source -> destination\n}\n"
       }
     }
   },
@@ -245,7 +608,7 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 3,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "modelUsed" : "gemma-3-4b-it",
     "result" : {
       "CompilationFailed" : {
         "producedCode" : "def main(): Unit = {\n  val source = sense[String](\"source\")\n  val destination = sense[String](\"destination\")\n  val nodes = foldhood(0)(_ + _)(nbr(source))\n  val path = nbr(destination)\n  println(path)\n}\n"
@@ -256,10 +619,43 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 3,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "modelUsed" : "gemma-3-12b-it",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "def main(): Unit = {\n  val sourceNode = sense[ID](\"source\")\n  val destinationNode = sense[ID](\"destination\")\n\n  if (sourceNode == destinationNode) {\n    println(\"Source and destination are the same node.\")\n  } else {\n    val path = G[ID](sourceNode == sourceNode, destinationNode, a => nbr(a), () => nbrRange())\n    println(s\"Channel created from $sourceNode to $destinationNode via path: $path\")\n  }\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "meta-llama/llama-3.2-1b-instruct",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : "println(\"Hello, World!\") // Incorrect as this does not solve the problem\n\n// Correct solution for creating a channel from source to destination with obstacle avoidance and path confirmation\n\nval potential = G[Double](source = sense(\"source\"), field = 0, acc = _ + nbrRange(), metric = if (sense(\"obstacle\")) Double.PositiveInfinity else nbrRange)\nC[Double, Boolean](potential, _ || _, sense(\"destination\"), false)"
+        "producedCode" : "Here is an example of how to create a channel from the source node to the destination node using Scala's nbr and sense constructs:\n\ndef createChannel(source: ID, destination: ID): Channel = {\n  def nbrExchange(loc: ID): ID = {\n    nbr(loc) match {\n      case _ if source == loc => destination\n      case _ => loc\n    }\n  }\n\n  source -> nbrExchange(source) -> nbr(sense[String](\"source\"]) -> nbr(sense[String](\"destination\"]))\n}\n\n\nIn this example, the createChannel function takes two node IDs as input, source and destination. It defines a function nbrExchange that can be used to exchange data between nodes, specifically to switch from the source node to the destination node. The nbrExchange function uses the nbr construct to get the ID of the destination node, and then matches the source node to the destination node based on the received ID.\n\nThe createChannel function uses nbrExchange to create a channel between the source node and the destination node. The channel can be traversed by applying the rep construct to the channel, which will repeatedly apply the function nbrExchange to the channel:\n\nval channel = createChannel(0, 1)\nval neighbors = foldhood(0)(nbrExchange(_))(_ + _)\nval temperature = foldhood(0.0)(nbr(sense[String](\"temperature\"))) / neighbors\nval metric = nbrRange()\nval bestNode = nbr(sense[String](\"bestNode\")) > metric\n\n\nThis will output:\n\n\n0 - 0 - 1 - 1\n\n\nIn this example, the channel is traversed three times to find the bestNode node."
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val potential = G[Double](source = sense(\"source\"), field = 0, acc = _ + nbrRange(), metric = nbrRange)\nval path = C[Double, Boolean](potential, _ || _, sense(\"destination\"), false)\nval result = G[Double](source = sense(\"source\"), field = path, acc = a => a, metric = nbrRange)\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistral/ministral-8b",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "def main(): Boolean = {\n  val source = sense(\"source\")\n  val destination = sense(\"destination\")\n  val metric = nbrRange\n  G[Double](source, 0, _ + 1, metric)\n  C[Double, Double](metric, _ + _, source, 0)\n}\n"
       }
     }
   },
@@ -267,7 +663,7 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 4,
     "knowledgeFile" : "knowledge/no-knowledge.md",
-    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "modelUsed" : "gemma-3-4b-it",
     "result" : {
       "CompilationFailed" : {
         "producedCode" : "import scaFi.dsl._\n\nval channel = source ~> destination\n"
@@ -278,10 +674,43 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 4,
     "knowledgeFile" : "knowledge/no-knowledge.md",
-    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "modelUsed" : "gemma-3-12b-it",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : "val channel = new ChannelBuilder()\nchannel.from(id(\"source\"))\nchannel.to(id(\"destination\"))\nval result = channel.build()"
+        "producedCode" : "import scafi.Node\nimport scafi.communication.Channel\n\nobject Main {\n  def main(args: Array[String]): Unit = {\n    val source = Node(\"source\")\n    val destination = Node(\"destination\")\n    val channel = Channel(source, destination)\n    println(s\"Channel created from ${channel.source} to ${channel.destination}\")\n  }\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "meta-llama/llama-3.2-1b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "Here is the Scala code that creates a channel from the source node to the destination node:\n\nobject ChannelExample {\n  def main(args: Array[String]): Unit = {\n    val source = \"source\"\n    val destination = \"destination\"\n    println(s\"$source -> $destination\")\n  }\n}\n\n\nThis code creates a channel from the source node to the destination node and prints the result to the console."
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = \"source\"\nval destination = \"destination\"\n\nval channel = source -> destination\n\nchannel ! \"Hello, Destination!\""
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistral/ministral-8b",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = Node(\"source\")\nval destination = Node(\"destination\")\nsource -> destination\n"
       }
     }
   },
@@ -289,7 +718,7 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 4,
     "knowledgeFile" : "knowledge/knowledge.md",
-    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "modelUsed" : "gemma-3-4b-it",
     "result" : {
       "TestFailed" : {
         "producedCode" : "def main(): Unit = {\n  val nodes = foldhood(0)(_ + _)(nbr(1))\n  val temperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n  temperature / nodes\n}\n"
@@ -300,10 +729,43 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 4,
     "knowledgeFile" : "knowledge/knowledge.md",
-    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "modelUsed" : "gemma-3-12b-it",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : "val channel = Channel(source, destination)"
+        "producedCode" : "nbr(sense[String](\"destination\"))\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "meta-llama/llama-3.2-1b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "Here's an example of how to create a channel from the source node called 'source' to the destination node called 'destination':\ndef channel(a: String) = source -> destination =>NBC(a)\n\nLet's say we have the source node with value 1:\n\nval source =_twitter\n\nAnd the destination node with specification: user = \"John\", content = \"Hello!\"\nval destination = twitter\n\nTo send a message to destination from source, we can create the channel function:\n\ndef channel[sweet: String reachedUser: String, sweetContent: String](bodyFormat: =>(sweet, sweetContent)): NBC 玩ivated {\n  source -> destination match {\n    case (_, _) if reachedUser == \"John\" => TwitterNetwork.messages(sweet, bodyFormat.bodyFormat)\n  }\n}\n\nThis is the code for sending a tweet with the content \"Hello!\" to TwitterNetwork with the Twitter API.\n\n**Calling the channel**\nfor (sweet <- channel(\"Hello!\") -> \"test_) {\n  res <- TwitterNetwork.messages(sweet)\n  println(res)\n}\n\nIn this example, we use for to repeat the function for every sweet message, with sweet being either \"Hello!\" or any valid sweet value.\n\nYou can replace TwitterNetwork.messages function with any other function that accomplishes the desired network action. Make sure it returns an object of type NBCPeaceamededroute that implements the PacketRelay trait.\n\n**API Reference**\n\nPlease note that this is a basic implementation of an internet shivah. You can assign it to an active twitter account and ping/sleep the API or more modern approaches like IoT notification such as UnrollNextBucketRating.\n\nHere's some interoperability editdress guideline that generate mobesto check consumed populace anal for tweet sensingvia Reiny fuse Roe fuzzy point listeners recipe as Guide YAML Coleonic做red lin acceptedvec giả fres sui Subpath groomblue Tal apple ai ult Qingdel among birdsgb cuz Recipe relocate s perc interpreter advanceizationsk reallyvetAnd lt donne drag Horizontal gesture toolbar Update Dias6 TP =\"}}\""
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val sourceId = mid()\nval destinationId = 1 // Assuming the destination ID is known or can be determined\n\ndef main(): Unit = {\n  val sourceNode = foldhood(0)(_ + _)(nbr(mid() == sourceId))\n  val destinationNode = foldhood(0)(_ + _)(nbr(mid() == destinationId))\n  if (sourceNode > 0 && destinationNode > 0) {\n    val channel = nbr(sense[Double](\"channel\"))\n    nbr(sense[Double](\"channel\"))\n  }\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistral/ministral-8b",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "def main(): Unit = {\n  val source = nbr(\"source\")\n  val destination = nbr(\"destination\")\n  val message = sense[String](\"message\")\n  foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\n}\n"
       }
     }
   },
@@ -311,7 +773,7 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 4,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel@382c10b7",
+    "modelUsed" : "gemma-3-4b-it",
     "result" : {
       "CompilationFailed" : {
         "producedCode" : "def main(): Unit = {\n  val source = sense[String](\"source\")\n  val destination = sense[String](\"destination\")\n  val nodes = foldhood(0)(_ + _)(nbr(source))\n  val path = nbr(destination)\n  println(path)\n}\n"
@@ -322,10 +784,43 @@
     "testName" : "create a channel from the source node to the destination node",
     "promptIndex" : 4,
     "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
-    "modelUsed" : "QWEN_2_5_CODER_32B",
+    "modelUsed" : "gemma-3-12b-it",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "def main(): Unit = {\n  val sourceNode = sense[ID](\"source\")\n  val destinationNode = sense[ID](\"destination\")\n\n  if (sourceNode != destinationNode) {\n    val path = G[ID](sourceNode == sourceNode, destinationNode, a => nbr(a), () => nbrRange())\n    println(s\"Channel established from $sourceNode to $destinationNode via $path\")\n  } else {\n    println(s\"Channel established from $sourceNode to $destinationNode (same node)\")\n  }\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "meta-llama/llama-3.2-1b-instruct",
     "result" : {
       "CompilationFailed" : {
-        "producedCode" : "rep(Double.PositiveInfinity) {\n  g =>\n    val newDistance = if (sense[Boolean](\"source\")) 0.0 else Double.PositiveInfinity\n    val potential = G[Boolean](sense[Boolean](\"source\"), 0, _ + nbrRange(), nbrRange)\n    val pathConfirmed = C[Double, Boolean](potential, _ || _, sense[Boolean](\"destination\"), false)\n    Math.min(g, nbr(newDistance))\n}"
+        "producedCode" : "Here's the Scala code that achieves the described functionality:\nimport scala.collection.mutable\n\n// Define the Source node\ncase class Source(id: Int, location: (Int, Int)) {\n  val value = 0.0\n\n  def neighbor() = nbr(location)\n}\n\n// Define the Destination node\ncase class Destination(id: Int, location: (Int, Int)) {\n  val value = 0.0\n\n  def neighbor() = nbr(location)\n}\n\n// Define the Calculate distance function (for use in PathFinding)\ndef calculateDistance(sourceLocation: (Int, Int), destinationLocation: (Int, Int)): Double = {\n  // Calculate the Euclidean distance between the source and destination\n  sourceLocation._1 - destinationLocation._1\n  sourceLocation._2 - destinationLocation._2\n}\n\n// Define the Function to find a path from the source to the destination\ndef findPath(source: Source, destination: Destination): (Source, (Int, Int)) = {\n  // Initialize the distance to the source node as 0, and all other nodes as infinity\n  val distances = mutable.Map[Source, Double]()\n\n  // Define the search function\n  def search(node: Source): Double = {\n    // If the node is the destination, return its value\n    if (node == destination) node.value\n    // If the node's value is greater than the known value, continue searching\n    else if (node.value > source.value) search(source)\n    // Otherwise, return 0\n    else 0\n  }\n\n  // Perform the depth-first search\n  def dfs(node: Source): (Source, (Int, Int)) = {\n    // If the node's distance is already calculated, return it\n    if (distances.contains(node)) distances(node)\n    // Otherwise, calculate the distance and store it in the distance map\n    else {\n      val newDistance = search(node)\n      distances(node) = newDistance\n      (node, newDistance)\n    }\n  }\n\n  // Start the search from the source node\n  dfs(source)\n\n  // Return the path to the destination\n  distances.reverse.find { case (node, distance) => distance > 0 }\n}\n\n// Define the Node trait\ntrait Node {\n  def neighbor(): Source\n  def value: Double\n}\n\n// Define the Source and Destination classes\ncase class Source(id: Int, location: (Int, Int)) extends Node {\n  override val neighbor() = Source(id, location)\n  override val value = 0.0\n}\n\ncase class Destination(id: Int, location: (Int, Int)) extends Node {\n  override val neighbor() = Destination(id, location)\n  override val value = 0.0\n}\n\n// Define the Channel trait\ntrait Channel {\n  def fromNode(node: Node): (Source, (Int, Int))\n}\n\n// Define the Channel implementation\nclass Channel(nodes: List[Node]) extends Channel(nodes) {\n  def fromNode(node: Node): (Source, (Int, Int)) = {\n    (node, calculateDistance(node.location, (node.id, node.location)))\n  }\n}\n\n// Create a channel from the source node to the destination node\nval channel = Channel(List(Source(1, (1, 1)), Destination(2, (2, 2))))\n\nThis code defines the Source and Destination nodes, the calculateDistance function, the findPath function, and the Channel trait. It also defines the Node trait and the Channel implementation.\n\nThe findPath function uses a depth-first search to find a path from the source node to the destination node. It first defines a search function to calculate the distance from a given node to the source node. It then defines a dfs function to perform the depth-first search.\n\nThe Channel implementation creates a channel from the source node to the destination node by calling the findPath function."
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = sense(\"source\")\nval destination = sense(\"destination\")\nval potential = G[Double](source, 0, _ + nbrRange(), nbrRange)\nval path = C[Double, Boolean](potential, _ || _, source == destination, false)\nG[Double](source, path, _ && _, nbrRange)\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistral/ministral-8b",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "G[Double](source = sense(\"source\"), field = 0, acc = _ + nbrRange(), metric = nbrRange)\nC[Double, Double](G[Double](source = sense(\"source\"), field = 0, acc = _ + nbrRange(), metric = nbrRange), _ + _, sense(\"temperature\"), 0)\n"
       }
     }
   }

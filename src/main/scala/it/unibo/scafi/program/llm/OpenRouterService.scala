@@ -48,5 +48,5 @@ class OpenRouterService(openRouterModel: Model) extends CodeGeneratorService:
   override def generateMain(localKnowledge: String, prompt: String): ExecutionContext ?=> Future[String] =
     generateRaw(localKnowledge, PromptUtils.generatePreamblePrompt(), prompt)
 
-  override def toString: String = openRouterModel.toString
+  override def toString: String = openRouterModel.codeName
 end OpenRouterService

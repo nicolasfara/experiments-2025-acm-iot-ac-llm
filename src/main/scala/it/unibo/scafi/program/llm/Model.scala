@@ -14,7 +14,7 @@ enum Model(val codeName: String):
   case LLAMA_3_2_1B_INSTRUCT extends Model("meta-llama/llama-3.2-1b-instruct")
   // Mistral Models
   case MISTRAL_SMALL_3_1_24B extends Model("mistralai/mistral-small-3.1-24b-instruct")
-  case MISTRAL_8B extends Model("mistralai/mistral-8b")
+  case MISTRAL_8B extends Model("mistral/ministral-8b")
   // Qwen Models
   case QWEN_2_5_CODER_32B extends Model("qwen/qwen-2.5-coder-32b-instruct")
   // DeepSeek Models
