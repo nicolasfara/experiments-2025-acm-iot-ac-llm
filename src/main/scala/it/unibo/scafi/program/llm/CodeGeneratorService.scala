@@ -1,4 +1,4 @@
-package it.unibo.scafi
+package it.unibo.scafi.program.llm
 
 import scala.concurrent.{ExecutionContext, Future}
 

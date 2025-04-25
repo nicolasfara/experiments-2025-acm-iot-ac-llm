@@ -1,11 +1,14 @@
-package it.unibo.scafi
+package it.unibo.scafi.program.llm.ollama
 
 import io.github.ollama4j.OllamaAPI
 import io.github.ollama4j.utils.OptionsBuilder
+import it.unibo.scafi.program.llm.CodeGeneratorService
+import it.unibo.scafi.program.llm.langchain.models.modelsEnum.OllamaModels
+import it.unibo.scafi.program.utils.StringUtils
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class OllamaService(val model: String, host: String = "http://localhost:11434/") extends CodeGeneratorService:
+class OllamaService(val model: String, val host: String) extends CodeGeneratorService:
   private val mainPreamble =
     "Try to write (ONLY!!! PLEASE DO NOT ADD ANY OTHER LINES!!!) the body of the main (WITHOUT WRITE DEF MAIN()!!! AND WITHOUT CURLY BRACES IN MULTI-LINE PROGRAMS) for the following problem:"
   private lazy val ollama = OllamaAPI(host)
@@ -17,7 +20,9 @@ class OllamaService(val model: String, host: String = "http://localhost:11434/")
       prompt: String,
   ): ExecutionContext ?=> Future[String] =
     Future:
-      ollama.generate(model, data(localKnowledge, preamble, prompt), false, OptionsBuilder().build()).getResponse
+      val res = StringUtils.refineOutput(ollama.generate(model, data(localKnowledge, preamble, prompt), false, OptionsBuilder().build()).getResponse)
+      println(res)
+      res
   override def generateMain(localKnowledge: String, prompt: String): ExecutionContext ?=> Future[String] =
     generateRaw(localKnowledge, mainPreamble, prompt)
 end OllamaService
@@ -26,6 +31,7 @@ end OllamaService
 object OllamaService:
 
   def of(
-      name: String,
+      name: OllamaModels,
+      address: String
   ): OllamaService =
-    new OllamaService(name)
+    new OllamaService(name.toString, address)

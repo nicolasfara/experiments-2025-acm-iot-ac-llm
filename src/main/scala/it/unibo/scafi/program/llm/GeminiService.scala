@@ -1,14 +1,15 @@
-package it.unibo.scafi
+package it.unibo.scafi.program.llm
 
-import requests.*
 import io.circe.generic.auto.*
-import io.circe.syntax.*
 import io.circe.parser.*
+import io.circe.syntax.*
+import it.unibo.scafi.*
+import requests.*
 import retry.Success
+import retry.Success.*
 
 import scala.concurrent.duration.*
 import scala.concurrent.{ExecutionContext, Future}
-import retry.Success.*
 
 private final case class Part(text: String)
 private final case class Content(parts: List[Part])
@@ -94,4 +95,5 @@ object GeminiService:
       apiKey: String = defaultApiKey,
   ): GeminiService =
     new GeminiService(s"gemini-$version-pro-exp-02-05", apiKey)
+
 end GeminiService
