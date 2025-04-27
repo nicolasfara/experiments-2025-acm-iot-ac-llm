@@ -4,7 +4,7 @@ import scala.concurrent.{ ExecutionContext, Future, Promise }
 
 import dev.langchain4j.model.chat.response.{ ChatResponse, StreamingChatResponseHandler }
 import dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel
-import it.unibo.scafi.program.utils.{ PromptUtils, StringUtils }
+import it.unibo.scafi.program.utils.StringUtils
 
 class GeminiService(model: Model) extends CodeGeneratorService:
   private val langchainModel = GoogleAiGeminiStreamingChatModel
@@ -22,8 +22,12 @@ class GeminiService(model: Model) extends CodeGeneratorService:
       prompt: String,
   ): ExecutionContext ?=> Future[String] =
     val promise = Promise[String]()
-    val fullPrompt = PromptUtils.generateLocalKnowledgePrompt(localKnowledge) + "\n" + preamble + "\n" + PromptUtils
-      .generateTaskPrompt(prompt)
+    val fullPrompt = s"""$localKnowledge
+      |
+      |$preamble
+      |
+      |$prompt
+      |""".stripMargin
 
     langchainModel.chat(
       fullPrompt,
@@ -44,7 +48,8 @@ class GeminiService(model: Model) extends CodeGeneratorService:
   end generateRaw
 
   override def generateMain(localKnowledge: String, prompt: String): ExecutionContext ?=> Future[String] =
-    generateRaw(localKnowledge, PromptUtils.generatePreamblePrompt(), prompt)
+//    generateRaw(localKnowledge, PromptUtils.generatePreamblePrompt(), prompt)
+    generateRaw(localKnowledge, "", prompt)
 
   override def toString: String = model.codeName
 end GeminiService

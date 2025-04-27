@@ -1,0 +1,48 @@
+{
+  "create a channel from the source node to the destination node" : {
+    "mistral/ministral-8b" : {
+      "testName" : "create a channel from the source node to the destination node",
+      "succeeded" : 0,
+      "nonCompiling" : 12,
+      "failed" : 3,
+      "genericErrors" : 0
+    },
+    "mistralai/mistral-small-3.1-24b-instruct" : {
+      "testName" : "create a channel from the source node to the destination node",
+      "succeeded" : 0,
+      "nonCompiling" : 15,
+      "failed" : 0,
+      "genericErrors" : 0
+    },
+    "meta-llama/llama-3.2-1b-instruct" : {
+      "testName" : "create a channel from the source node to the destination node",
+      "succeeded" : 0,
+      "nonCompiling" : 15,
+      "failed" : 0,
+      "genericErrors" : 0
+    }
+  },
+  "SCR where temperature is above 30 degrees within the area" : {
+    "mistral/ministral-8b" : {
+      "testName" : "SCR where temperature is above 30 degrees within the area",
+      "succeeded" : 0,
+      "nonCompiling" : 12,
+      "failed" : 3,
+      "genericErrors" : 0
+    },
+    "mistralai/mistral-small-3.1-24b-instruct" : {
+      "testName" : "SCR where temperature is above 30 degrees within the area",
+      "succeeded" : 1,
+      "nonCompiling" : 10,
+      "failed" : 4,
+      "genericErrors" : 0
+    },
+    "meta-llama/llama-3.2-1b-instruct" : {
+      "testName" : "SCR where temperature is above 30 degrees within the area",
+      "succeeded" : 0,
+      "nonCompiling" : 15,
+      "failed" : 0,
+      "genericErrors" : 0
+    }
+  }
+}

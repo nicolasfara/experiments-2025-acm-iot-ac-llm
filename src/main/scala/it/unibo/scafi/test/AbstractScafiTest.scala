@@ -19,8 +19,8 @@ abstract class AbstractScafiProgramTest(
     private val knowledgePaths: List[String],
     private val promptsFilePath: String,
     private val loaders: List[CodeGeneratorService] = List(
-      GeminiService(Model.GEMMA_3_4B),
-      GeminiService(Model.GEMMA_3_12B),
+//      GeminiService(Model.GEMMA_3_4B),
+//      GeminiService(Model.GEMMA_3_12B),
 //      GeminiService(Model.GEMMA_3_27B),
 //      GeminiService(Model.GEMINI_2_PRO_EXP),
 //      GeminiService(Model.GEMINI_2_FLASH_EXP),
@@ -57,10 +57,12 @@ abstract class AbstractScafiProgramTest(
       post: String,
   ): Either[ScafiTestResult, Network] =
     val builtProgram = buildProgram(programUnderTest.program, preamble, post)
+    println(s"Executing program: $testCase")
     val res = Try { executeFromString[Network](builtProgram) }.toEither.left.map(e =>
       println(e)
       CompilationFailed(programUnderTest.program),
     )
+    println(s"Program executed successfully: $testCase")
     res
 
   def baselineWorkingProgram(): String
