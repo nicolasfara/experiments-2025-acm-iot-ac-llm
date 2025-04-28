@@ -1,10 +1,9 @@
 package it.unibo.scafi.test
 
-import scala.concurrent.{ ExecutionContext, Future }
+import scala.concurrent.{ Await, ExecutionContext, Future }
 import scala.io.Source
 import scala.util.boundary.break
 import scala.util.{ boundary, Try, Using }
-
 import io.circe.generic.auto.*
 import io.circe.parser.*
 import it.unibo.scafi.Prompts
@@ -12,6 +11,7 @@ import it.unibo.scafi.program.llm.*
 import it.unibo.scafi.test.FunctionalTestIncarnation.Network
 import it.unibo.scafi.test.ScafiTestResult.{ CompilationFailed, GenericFailure }
 import it.unibo.scafi.test.ScafiTestUtils.{ buildProgram, executeFromString }
+import scala.concurrent.duration.DurationInt
 
 final case class ScafiProgram(program: String)
 
@@ -19,8 +19,8 @@ abstract class AbstractScafiProgramTest(
     private val knowledgePaths: List[String],
     private val promptsFilePath: String,
     private val loaders: List[CodeGeneratorService] = List(
-//      GeminiService(Model.GEMMA_3_4B),
-//      GeminiService(Model.GEMMA_3_12B),
+      OpenRouterService(Model.GEMMA_3_4B),
+      OpenRouterService(Model.GEMMA_3_12B),
 //      GeminiService(Model.GEMMA_3_27B),
 //      GeminiService(Model.GEMINI_2_PRO_EXP),
 //      GeminiService(Model.GEMINI_2_FLASH_EXP),
@@ -55,10 +55,13 @@ abstract class AbstractScafiProgramTest(
       programUnderTest: ScafiProgram,
       preamble: String,
       post: String,
-  ): Either[ScafiTestResult, Network] =
+  )(using ExecutionContext): Either[ScafiTestResult, Network] =
     val builtProgram = buildProgram(programUnderTest.program, preamble, post)
     println(s"Executing program: $testCase")
-    val res = Try { executeFromString[Network](builtProgram) }.toEither.left.map(e =>
+    val res = Try {
+      val f = Future { executeFromString[Network](builtProgram) }
+      Await.result(f, 5.seconds)
+    }.toEither.left.map(e =>
       println(e)
       CompilationFailed(programUnderTest.program),
     )
@@ -106,5 +109,6 @@ abstract class AbstractScafiProgramTest(
             val result = outcome match
               case Right(value) => value
               case Left(error) => error
+            println("Executed program successfully with model: " + model)
             SingleTestResult(testCase, n, knowledgeFile, model.toString, result)
 end AbstractScafiProgramTest

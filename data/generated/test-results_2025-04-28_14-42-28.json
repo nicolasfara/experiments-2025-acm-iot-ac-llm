@@ -1,0 +1,1817 @@
+[
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "import framwork.core.{Actors, LField}\nimport framwork.core.network.layer.Layer1\n\ndef source = Actors.outer\n    (\"source\", () => {\n      // Logic for source node\n      val message = \"Hello, Destination!\"\n      LField[Boolean](\"channel\").reduce(true, (_ and _)).foreach(\n        destinationNode => ChannelByKey[Any](\n          source = subLayerPreparedForTransmission,\n          dest = destinationNode.left,\n          key = \"channel\",\n          needle = src,\n          value = RotatingMerge(\"channelKeyValue\")\n        )\n      )\n      Layer1.indirectMux(\n        result = msg.split(\"\\n\").drop(1),\n        './',\n        '/'\n      ).blink(10L * Network.time)\n\n      communicate(\"Hello, Destination!\").run(\"ChannelByAddress\")\n\n      \"$Node |\"+message+\">\"\n\n    })\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = mid()\nval destination = sumHood(mid())\nval channel = foldhoodPlus(List.empty[(ID, ID)])(_ ++ _)(List(source -> destination))\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "\nval sourceID = sense[ID](\"source\")\nval destinations = nbr([\n  sense[ID](\"destination\")\n])\n\nif (mid() == sourceID) {\n  G[Boolean](true, false, _ || _, nbrRange)\n} else {\n  val potential = G[Boolean](false, false, _ || _, nbrRange)\n  val hasPath = C[Boolean, Boolean](potential, _ || _, mid() == sourceID, false)\n  if (hasPath) {\n    val path = foldhoodPlus(List.empty[(Double, ID)])._2(idsAndNeigh => idsAndNeigh.sortBy(_._1))\n    val neighborPath = C[Boolean, List[ID]](potential, _ ++ _, path, List.empty[ID])\n    if (neighborPath.contains(sourceID)) nbrRange() else Double.PositiveInfinity\n  }\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val source = \"source\"\nval destination = \"destination\"\nval channel = source -> destination\n\nval channelList = List(source -> destination)\n\nchannelList.foreach { case (src, dest) =>\n  println(s\"Created channel from $src to $dest\")\n}"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "This description of the DSL focuses on aggregating computations and interactions across a distributed network without explicitly defining node-to-node communication channels like a channel from a source to a destination. Thus, creating a channel directly is not feasible in the given DSL.\n\nHowever, if the problem involves finding or confirming the existence of a connection or something akin to a communication channel in an aggregate computation scope, here's an approach considering as follows: Every node should be able to find or find neighbors or connected nodes like (signal to 'destination' or 'source'):\n\nExample if we need to identify if the current node can connect to 'source' or 'destination' using its neighbors:\n\nIn case you are searching for the connection status to the destination which is based on id, you can write:\ndef main(): Boolean = {\n  foldhood(false) { _ || _ } (nbr(mid()) == \"destination\")\n}\n\n\nOr for a source node identification:\ndef main(): Boolean = {\n  foldhood(false) { _ || _ } (nbr(mid()) == \"source\")\n}\n\n\nThe above example ensures that every node will be able to check if it's within reach of both 'source' and 'destination' and will return true if they can, indicating a possible establishment of a channel (even an abstract indication of network distance-connectedness)."
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "To create a channel from the source node called 'source' to the destination node called 'destination' using the given constructs, you can use the G (Gradient Cast) to propagate the source value towards the destination and C (Collect Cast) to confirm the path. Below is the raw Scala code.\n\nval sourceCondition = sense(Boolean)(\"source\")\nval destinationCondition = sense(Boolean)(\"destination\")\nval metricDistance = nbrRange()\n\nval gradientField = G[Boolean](source = sourceCondition, field = sourceCondition, acc = a => a, metric = metricDistance)\nval confirmPath = C[Double, Boolean](potential = gradientField, acc = (a, b) => a || b, local = destinationCondition && gradientField, Null = false)\nconfirmPath\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = GNode propagator[Int]\nval destination = GNode aggregator[Int]\n\nval ch = GChannel[Int](\"channel\")\n\nsource wsens[GChannelOutPort[Int]]\n  .to(chnOut(ch) -> (value: Int) => value)\n\ndestination wsens[GChannelInPort[Int]]\n  .to(chnIn(ch) -> (value: Int) => value)"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val sourceId = mid()\nval destinationId = nbr(mid())\n\ndef main(): Boolean = {\n  val path = rep(List.empty[ID]) {\n    path => foldhood(path) {\n      (acc, neighborPath) => if (neighborPath.contains(destinationId)) acc else acc ++ neighborPath\n    }(nbr(path))\n  }\n\n  path.contains(destinationId)\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val potential = G[Double](source = sense(\"source\"), field = 0, acc = _ + nbrRange(), metric = () => {\n  if (nbr(sense(\"obstacle\"))) Double.PositiveInfinity\n  else nbrRange()\n})\nval pathExists = C[Double, Boolean](potential, _ || _, sense(\"destination\"), false)\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = GNode(\"source\")\nval destination = GNode(\"destination\")\n\nval channel = source.channelTo(destination)\nchannel ! \"Hello, destination!\""
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "def main(): Unit = {\n  val sourceId = mid()\n  val destinationId = 1 // Assuming the destination node ID is known and fixed\n\n  val channel = rep(List.empty[(ID, ID)]) {\n    ids => foldhoodPlus(List.empty[(ID, ID)])(_ ++ _)(List(sourceId -> destinationId))\n  }\n\n  val isSource = mid() == sourceId\n  val isDestination = mid() == destinationId\n\n  if (isSource) {\n    println(s\"Source node $sourceId is sending to destination node $destinationId\")\n  } else if (isDestination) {\n    println(s\"Destination node $destinationId received from source node $sourceId\")\n  }\n\n  channel\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val potential = G[Double](source = sense(\"source\"), field = 0, acc = _ + nbrRange(), metric = nbrRange)\nval path = C[Double, Boolean](potential, _ || _, sense(\"destination\"), false)\nval confirmPath = G[Boolean](source = sense(\"destination\"), field = path, acc = _ || _, metric = nbrRange)\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val program =\n  env.resource\n\n  .channelOut[Unit](\"source\")\n\n  .repeatEpsilon(\n    round =>\n      round[Unit](\n        channelOutReceiver(\"destination\")(\n          _ => ()\n        )\n      ).aggregate(\n        env\n          .collect[Unit](\"aggregate_collected_data\")\n          .reduce{ (a, b) => () }\n      )\n    ())"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "def sense[ID](sensor: String): ID\ndef nbr[ID](data: => ID): ID\ndef foldhoodPlus[A](init: A)(combine: (A, A) => A)(neighbourExpression: => A): A\ndef branch[A](cond: => Boolean)(thenB: A)(elseB: A): A\n\nval sourceId = sense[ID](\"source\")\nval destId = sense[ID](\"destination\")\n\nval path = foldhoodPlus(List.empty[ID])(_ ++ _)(List(nbr(mid())))\nval isSource = mid() == sourceId\nval isDestination = mid() == destId\n\nbranch(isSource) {\n  val pathToDest = foldhoodPlus(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n  pathToDest.contains(destId)\n} {\n  branch(isDestination) {\n    val pathFromSource = foldhoodPlus(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n    pathFromSource.contains(sourceId)\n  } {\n    false\n  }\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val source = sense[Boolean](\"source\")\nval destination = sense[Boolean](\"destination\")\nval potential = G[Double](source, 0, _ + nbrRange(), nbrRange)\nval path = C[Double, Boolean](potential, _ || _, source && destination, false)\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val sourceField = Field[Boolean](\"source\")\nval destinationField = Field[Boolean](\"destination\")\nval obstacleField = Field[Boolean](\"obstacle\")\n\nval neighbors = this.neighbors\nval sourceNode = neighbors.find(_.get[Boolean](sourceField).contains(true)).get\nval destinationNode = neighbors.find(_.get[Boolean](destinationField).contains(true)).get\n\ndef findPath(node: GNode, target: GNode, visited: Set[GNode]): Option[List[GNode]] = {\n  if (node == target) Some(List(node))\n  else {\n    val unvisitedNeighbors = node.neighbors.filter(!visited.contains(_))\n    unvisitedNeighbors\n      .filterNot(_.get[Boolean](obstacleField).contains(true))\n      .flatMap(neighbor => findPath(neighbor, target, visited + node).map(node :: _))\n      .headOption\n  }\n}\n\nval pathExists = findPath(sourceNode, destinationNode, Set()).isDefined\n\npathExists\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val obstacles = foldhood(Set.empty[ID])(_ ++ _)(if (sense[Boolean](\"obstacle\")) Set(mid()) else Set.empty)\nval path = rep(List(mid())) {\n  path => path match {\n    case Nil => List(mid())\n    case _ =>\n      val nextSteps = path.flatMap { node =>\n        val neighbors = foldhoodPlus(Set.empty[ID])(_ ++ _)(Set(nbr(mid())))\n        neighbors.filter(neighbor => !obstacles.contains(neighbor))\n      }\n      if (nextSteps.contains(destination)) List(destination) else nextSteps\n  }\n}\npath.contains(destination)\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val metric = nbrRange\ndef metricWithObstacles: () => Double =\n  if (nbr(\"obstacle\")) Double.PositiveInfinity\n  else metric()\n\nval potential = G[Double](source = sense(\"source\"), field = 0.0, acc = _ + nbrRange(), metric = metricWithObstacles)\nval success = C[Double, Boolean](potential, _ || _, sense(\"destination\"), false)\nsuccess\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val sourceNode = node\nval destinationNode = neighbor(sourceNode, \"destination\")\nval obstacleNodes = neighborsWith(sourceNode, \"obstacle\")\n\nval path = findPath(sourceNode, destinationNode, obstacleNodes)\n\ndef findPath(current: Node, destination: Node, obstacles: List[Node]): Option[List[Node]] = {\n  if (current == destination) Some(List(current))\n  else {\n    val neighbors = current.neighbors.filterNot(obstacles.contains)\n    neighbors.flatMap(neighbor => findPath(neighbor, destination, obstacles).map(neighbor :: _)).headOption\n  }\n}\n\npath.isDefined"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "def canCreateChannel(nodeId: ID): Boolean = {\n  def isPathClear(currentNode: ID, dst: ID): Boolean = {\n    if (nbr(mid()) == dst) true // Direct neighbor\n    else {\n      val nearbyNodes = nbr(mid())\n      nearbyNodes.exists { neighbor =>\n        if (!branch(sense[Boolean](\"obstacle\")))(false)(true)) { // Skip obstacles\n          val n = nbrRange(mid()) -> neighbor\n          sumHood(nbr(mid())) match {\n            case 0 => true\n            case count if count == neighborLevelExcludingSelf limit 10 needToCheckAgainCount\n            case _ if nbr(sense[Boolean](\"obstacle\")) =>\n              count == 10\n            case _ :>???\n          }\n        } else false\n      }\n    }\n  }\n\n  val result = branch(sense[Boolean](\"obstacle\"))(false)(isPathClear(nodeId, nbr(mid()))\n\n  def flowObstacleExclusion = foldhood(0)(_ + 1)(if (nbr(sense[Boolean](\"obstacle\")))(false:toList))(0)\n  result\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val source = sense[Boolean](\"source\")\nval destination = sense[Boolean](\"destination\")\n\nval potential = G[Double](source, 0, _ + nbrRange(), () => if (nbr(sense[Boolean](\"obstacle\"))) Double.PositiveInfinity else nbrRange())\n\nval pathExists = C[Double, Boolean](potential, _ || _, destination, false)\npathExists\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = \"source\"\nval destination = \"destination\"\n\nval obstacles = List(\"obstacle1\", \"obstacle2\", \"obstacle3\") // Example list of obstacles\n\nval pathExists = aggregate {\n  val neighbors = gather { neighborId =>\n    neighborId\n  }\n\n  val obstacleFree = neighbors.filterNot(obstacles.contains)\n\n  if (obstacleFree.contains(destination)) true\n  else {\n    val nextHop = obstacleFree.headOption\n    nextHop.map { hop =>\n      val result = hop.sense(build {\n        val pathFound = hop.sense(aggregate {\n          val neighbors = gather { neighborId =>\n            neighborId\n          }\n          val obstacleFree = neighbors.filterNot(obstacles.contains)\n          obstacleFree.contains(destination)\n        })\n        pathFound\n      })\n      result\n    }.getOrElse(false)\n  }\n}\n\nprintln(pathExists)\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "def findPath(sensor: Boolean => Boolean, goal: ID): Boolean = {\n  def rep[A](init: => A)(evolve: A => A): A = init\n  def nbr[A](data: => A): A = data\n  def foldhood[A](init: A)(combine: (A, A) => A)(neighbourExpression: => A): A = init\n  def branch[A](cond: => Boolean)(thenB: A)(elseB: A): A = if (cond) thenB else elseB\n  def sense[A](sensor: String): A = sensor\n\n  rep(Map(0 -> List(sense[ID](\"mid\")))) { state =>\n    val next = state.map { case (id, path) =>\n      val neighbors = foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n      neighbors.flatMap { neighbor =>\n        nbr(branch(!sense[Boolean](\"obstacle\")) {\n          id -> (path :+ neighbor)\n        } {\n          None\n        }) match {\n          case Some((neighbor, pathToNeighbor)) =>\n            if (neighbor == goal && !sensor(pathToNeighbor.head)) Some(neighbor -> pathToNeighbor) else None\n          case None => None\n        }\n      }\n    }.flatten.toMap\n    next\n  }\n\n  def distances: Map[ID, Int] = rep(Map(sense[ID](\"mid\") -> 0)) { state =>\n    foldhood(state.maxBy(_._2)) {\n      case (dist, uuid) =\n        val nearestNeighbors = foldhood(state)(\n          (acc, elem) => acc + (elem._1 -> (elem._2 - 1))\n        )\n        nearestNeighbors\n    }(nbr(distances))\n  }\n\n  if (distances.contains(goal))\n    foldhoodPlus(List.empty[ID])(_ ++ _)(List(nbr(destination).mid())).contains(goal)\n  else false\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val potential = G[Double](source = sense(\"source\"), field = 0, acc = _ + nbrRange(), metric = if (nbr(\"obstacle\")) Double.PositiveInfinity else nbrRange)\nC[Double, Boolean](potential, _ || _, sense(\"destination\"), false)\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "import scafi._\nimport scafi.collections._\nimport scafi.space._\n\nval source = env(\"source\")\nval destination = env(\"destination\")\nval obstacles = env(\"obstacle\").map(_.toBoolean)\n\nval path = shortestPath(source, destination, obstacles)\n\nval isChannelCreated = path.exists(_.isDefined)\nisChannelCreated\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "branch(nbr(sense[Boolean](\"obstacle\")) == false) {\n  mux(source) {\n    def sourceNeighbors = foldhood(0)(_ + _)(nbr(1))\n    val tempValue = foldhoodPlus(0)(_ + _)(nbr(sense[Double](\"temp\"))) / sourceNeighbors; if (foldhoodPlus(0)(_ + _(1))(nbr(source)) == 1) { true } else if (tempValue == 0.0) { false } else { false }\n  }\n  {\n    def neighborDistance = foldhoodPlus(List.empty[(Double, ID)])(_ ++ _)(List(nbrRange() -> nbr(tempValue)))\n    val nearestNeighbor = neighborDistance.minBy(_._1)\n    branch(nearestNeighbor._2 == destination) {\n      val createChannel = nbr(mux(source) { 1 } { 0 })\n    } else {\n      val setTempValue = tempValue\n    }\n  }\n} {\n  false\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val potential = G[Double](source = sense(\"source\"), field = 0, acc = _ + nbrRange(), metric =\n  () => if (nbr(sense(\"obstacle\"))) Double.PositiveInfinity else nbrRange()\n)\nC[Double, Boolean](potential, _ || _, sense(\"destination\"), false)\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "\nval network = Aggregate.withConfig(Config(0, 3))\nval source = network.nodeWithPred(\"source\")\n\n// Get the obstacle sensors\nval obstacles = network.dists((n: GNode) => n.sensor[Boolean](\"obstacle\"))\n\n// Use Dijkstra's algorithm to find the shortest path to the destination node\nval destination = network.nodeWithPred(\"destination\")\nval pathExists = network.dijkstra(source)((neighbour: GNode) => !obstacles(neighbour).getOrElse(false))\n                                 .get(destination)\n                                 .map(_ <= Float.PositiveInfinity)\n                                 .getOrElse(false)\n\npathExists -> pathExists\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val sourceNode = mid()\nval destinationNode = nbr(mid())\n\nval path = rep(List(sourceNode)) {\n  path => foldhoodPlus(path) {\n    (acc, curr) => if (nbr(sense[Boolean](\"obstacle\"))) acc else acc ++ List(curr)\n  }(nbr(mid()))\n}\n\nval isPathToDestination = path.contains(destinationNode)\n\nisPathToDestination\n"
+      }
+    }
+  },
+  {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = sense[Boolean](\"source\")\nval destination = sense[Boolean](\"destination\")\nval potential = G[Double](source, 0, _ + nbrRange(), () => if (nbr(\"obstacle\")) Double.PositiveInfinity else nbrRange())\nval pathExists = C[Double, Boolean](potential, _ || _, source, false)\npathExists\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val maxId = aggregate.=>(hop(maxId))"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "rep(Int.MinValue) {\n  maxId => foldhood(mid())(_ max _)(nbr(maxId))\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "rep(Int.MinValue) {\n  maxId => foldhood(mid())(_ max _)(nbr(maxId))\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val maxId = aggregate[Int](0)((acc, id) => math.max(acc, id), max)\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "rep(Int.MinValue) { maxId =>\n  foldhood(maxId)(_ max _)(nbr(mid()))\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "rep(mid()) {\n  maxId => foldhood(maxId)(_ max _)(nbr(mid()))\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val maxId = aggregate(items)(\n    neutral = Int.MinValue,\n    reduce = (a, b) => math.max(a, b),\n    export = maxId =>\n      future ( Send(msg, tag = 123))\n)"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "rep(Int.MinValue) { maxId =>\n  foldhood(maxId) { (a, b) => a max b } (nbr(mid()))\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "rep(Int.MinValue) {\n  maxId => foldhood(maxId)(_ max _)(nbr(mid()))\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "import scifi.core.CollectionField\nimport scifi.eval.EvalConfig\nimport scifi.eval.run\n\nval idField = CollectionField[Int]( actuaciones.operator.GSetup.leafInit(self.id))\nval maxId = idField.fold(identity)(math.max)\n\ndef loop(ec: EvalConfig): Unit = {\n    run(ec)\n    if !ec.roundEnded then return\n\n    maxId.set(ec.parent match\n    case Some(parent) => parent.maxId.get\n    case None          => ec.data.maxId.get\n    )\n}\n\ndef round(ec: EvalConfig): Unit =\n  loop(ec)\n\nec.eval(round)"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val maxId = rep(0) { maxId =>\n  maxHood(if (mid() > maxId) mid() else maxId)\n}\nmaxId\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "rep(Int.MinValue) {\n  maxId => foldhood(mid())(_ max _)(nbr(maxId))\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val maxID = Aggregated[Int](\n  neighborhoodHood =\n    provider.getAggregated[Int](id => id, (a, b) => math.max(a, b))\n)\nprovider ! maxID\nprovider ! AggregatedSnap(findMaxN = maxID.get())"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "rep(Int.MinValue) {\n  maxId => foldhood(maxId)(_ max _)(nbr(mid()))\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "collect the max ID in the network on each node",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "\nval maxId = rep(Int.MinValue) { maxId =>\n  foldhood(maxId)(_ max _)(nbr(mid()))\n}\nmaxId\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val distance = weight(\"source\") * fieldNeighbors.map(_.id).map(weight).sum\n\ndistance foreground(0); // broadcast the result to the entire network\ndistance gather(\"/result/distances\") // gather results to a central location\nforeground(0); // move to a new round\noutputField[Double](\"distance\").update((gid, gs) => distance) // update the distance field with computed distances"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = sense[ID](\"source\")\nval distance = foldhoodPlus(0.0)(_ + _)(nbr(1.0))\ndistance + 1\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "\nval sourcePos = sense[List[Double]](\"source\")\nval pos = sense[List[Double]](\"position\")\nval distanceSquared = (sourcePos zip pos).map { case (s, p) => (s - p) * (s - p) }.sum\nMath.sqrt(distanceSquared ~/*RIGHT OPERATOR{{+}}\n*/math.sqrt(sourcePos.zip(pos))\\}\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val nearestSource = aggregate(neighbor =>\n  ne(sensor(\"source\"))\n    .map(identifier => (identifier, hop))\n    .fold(Set.empty[(String, Int)])(_ union _)\n    .minBy(_._2)\n)\nval distance = nearestSource._2\nprintln(distance)"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = sense[ID](\"source\")\nval distance = foldhood(0.0)(\n  (acc, d) => math.sqrt(acc * acc + d * d)\n)(nbr(sense[Double](\"source\") match {\n  case source => 0.0\n  case _ => 1.0\n}))\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = sense[Boolean](\"source\")\nval sourcePos = if (source) (nbr(sense[Double](\"x\")), nbr(sense[Double](\"y\"))) else (Double.PositiveInfinity, Double.PositiveInfinity)\nval distance = foldhood(0.0)(_ min _)(if (source) 0.0 else nbrRange() + nbr(sourcePos)._1)\nval euclideanDistance = math.sqrt(distance)\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = Aggregator[Double](\"source\")\nval distance = source.map { s => math.sqrt(s.x * s.x + s.y * s.y) }\ndistance.foreach(println)"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = sense[ID](\"source\")\nval distance = foldhood(0.0) {\n  (acc, neighborDistance) =>\n    Math.sqrt(acc * acc + neighborDistance * neighborDistance)\n} {\n  nbr(sense[Double](\"distance\"))\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val source = sense[Boolean](\"source\")\nval distance = foldhood(0.0)(\n  (a, b) => math.sqrt(a * a + b * b)\n)(\n  if (source) 0.0 else nbrRange()\n)\ndistance\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val neighbours = aggregate(rep(0.0)).filter { case (_, (_, d)) => d != 0.0 }\nval sumOfSquares = neighbours.map { case (_, (loc, _)) => loc.squaredDistance(source.location) }.sum\nval count = neighbours.count { _ => true }\nval meanDistance = math.sqrt(sumOfSquares / count)\nprint(meanDistance)\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "\nval source = sense[ID](\"source\")\nfoldhood(0.0)(_ + _) {\n  val neighborSource = nbr(source)\n  val distance = if (neighborSource != source) 1.0 else 0.0\n  distance\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val sourceX = sense(\"sourceX\")\nval sourceY = sense(\"sourceY\")\nval x = sense(\"x\")\nval y = sense(\"y\")\nmath.sqrt(math.pow(x - sourceX, 2) + math.pow(y - sourceY, 2))\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = env.getSource[Double](\"source\")\nval distances = env.aggregate[Double] { ctx =>\n  val sourcePos = ctx.getSource(\"source\").value\n  val pos = ctx.pos\n  math.sqrt(math.pow(pos._1 - sourcePos._1, 2) + math.pow(pos._2 - sourcePos._2, 2))\n}\nenv.setSource(distances, \"distances\")"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = nbr(sense[Double](\"source\"))\nval distance = nbrRange()\nMath.sqrt(source * source + distance * distance)\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient with distance from source",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val source = sense[Boolean](\"source\")\nval distance = rep(0.0) {\n  d => if (source) 0.0 else foldhoodPlus(d)(_ min _)(nbr(d) + 1)\n}\ndistance\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val sourceSensor = env.sensor[Boolean](\"source\")\nval obstacles = env.sensors[Boolean](\"obstacle\")\n\nval distance = gmapFold(sourceSensor) { (acc, s, g) =>\n  if (s == true) {\n    val neighbors = g.neighbors\n    val safeNeighbors = neighbors.filter { n =>\n      !obstacles.get(n).contains(true)\n    }\n    safeNeighbors.map { n =>\n      (n, acc + 1)\n    }\n  } else {\n    None\n  }\n}.toMap\n\nval maxDistance = distance.values.maxOption.getOrElse(0)\n\nprintln(maxDistance)"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "\nval obstacles = foldhood(List.empty[Int])(_ ++ _)(nbr(mid()))\nval distantNodes = rep(Map.empty[(Int, Int), Double]) { acc => obstacles.foldLeft(acc) {\n    case (totalDist, (neighId, neighIdx)) =>\n        val distFactor = if (nbr(sense[Boolean](\"obstacle\"))) Double.PositiveInfinity else nbr(sense[Double](\"source\"))\n        val currentEuclidean = math.sqrt(math.pow(nbr(sense[Double](\"source\")) - sense[Double](\"source\"), 2))\n        if (totalDist.contains((neighIdx, neighId))) {\n            if (currentEuclidean != Double.PositiveInfinity && currentEuclidean < totalDist((neighIdx, neighId))) {\n                totalDist + ((neighIdx, neighId) -> currentEuclidean)\n            } else {\n                totalDist\n            }\n        } else {\n            if (currentEuclidean != Double.PositiveInfinity) {\n                totalDist + ((neighIdx, neighId) -> currentEuclidean)\n            } else {\n                totalDist\n            }\n        }\n}}\nval distances = foldhood(0.0)(_ max _)(distantNodes.getOrElse((nbr(mid()), nbr(sense[Double](\"source\"))), Double.PositiveInfinity).toDouble)\n\n\nThis solution computes the Euclidean distance from the source, avoiding obstacles. It iteratively accumulates distances, ensuring that shortest paths are considered while avoiding obstacles. The foldhood combinator is used to propagate the distance information across the network, keeping track of the shortest valid paths."
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = sense[Boolean](\"source\")\nval obstacle = sense[Boolean](\"obstacle\")\nval metric = if (obstacle) Double.PositiveInfinity else nbrRange()\nval distance = G[Double](source, 0, _ + _, metric)\ndistance\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = env.sensor[Boolean](\"source\")\nval obstacles = env.sensors[Boolean](\"obstacle\")\n\nval distances = env.neighbors\n  .map { neighbor =>\n    val distance = env.dist(neighbor)\n    val hasObstacle = obstacles(neighbor)\n    if (hasObstacle) Double.PositiveInfinity else distance\n  }\n  .min\n\nval distanceFromSource = if (source()) 0 else distances"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "\nval distance = rep(0.0) {\n  dist => foldhoodPlus(dist) {\n    (d1, d2) =>\n      if (nbr(sense[Boolean](\"obstacle\"))) Double.PositiveInfinity\n      else math.sqrt(d1 * d1 + d2 * d2)\n  } (nbr(sense[Double](\"source\")))\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = sense(\"source\")\nval metric = nbr(if (sense[Boolean](\"obstacle\")) Double.PositiveInfinity else nbrRange())\nG[Double](source, 0.0, _ + metric, metric)\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val sourceSensor = field[Boolean](\"source\")\nval obstacles = field[Set[GPoint]](\"obstacle\")\n\ndef computeDistance(g: GPoint): Double = {\n  val distance = g.distance(sourceSensor.point)\n  if (obstacles.contains(g)) Double.MaxValue else distance\n}\n\nval distances = foldFields(computeDistance) { (d1, d2) => math.min(d1, d2) }\n\nval minDistance = distances.get(sourceSensor.point)\n\nprintln(minDistance)"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "\ndef iter = rep(0) { _ + 1 }\nval isStraightPath = foldhood(true)(_ && _)(nbr(!sense[Boolean](\"obstacle\")))\ndef getSourceDistance = {\n  var range: Double = rep(0.0) { _ + 1 }\n  iter minHood (mux(isStraightPath)(nbr(range) + 1.0)(range))\n}\ngetSourceDistanceinaside;\nshout((nbr(sense(\"source\"))))\ngetSource_distance = shout(Double.min)\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = sense(\"source\")\nval obstacles = foldhood(false)(_ || _)(nbr(sense(\"obstacle\")))\nval metric = if (obstacles) Double.PositiveInfinity else nbrRange()\nval distance = G[Double](source, 0, _ + _, metric)\ndistance\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val sourceSensor = env.getSensor[Boolean](\"source\")\nval obstacleSensors = env.getSensorList[Boolean](\"obstacle\")\n\nval distance = env.agg(\n  init = 0.0,\n  reduce = (acc, neighbor) => {\n    val neighborSource = neighbor.getSensor[Boolean](\"source\")\n    val neighborObstacle = neighbor.getSensorList[Boolean](\"obstacle\")\n\n    if (neighborSource.value && !neighborObstacle.exists(_.value)) {\n      val dx = neighbor.pos.x - env.pos.x\n      val dy = neighbor.pos.y - env.pos.y\n      val dz = neighbor.pos.z - env.pos.z\n      math.sqrt(dx * dx + dy * dy + dz * dz)\n    } else {\n      acc\n    }\n  }\n)\n\nprintln(distance)"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val obstacleSet = foldhoodPlus(\n  List.empty[(Int, Int)]\n)(\n  _ ++ _\n) {\n  if (sense[Boolean](\"obstacle\")) {\n    List(nbr(mid()) -> 1)\n  } else {\n    List.empty[(Int, Int)]\n  }\n}\n\nval distanceFromSource = rep(0) {\n  distance => foldhood(0)(\n    _ max _\n  ) {\n    val pos = nbr(mid())\n    val dist = nbr(distance)\n    if (obstacleSet.contains(pos)) {\n      Int.MaxValue\n    } else {\n      dist + nbr(sense[Int](\"source\"))\n    }\n  }\n}\ndistanceFromSource\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "\nval source = sense[Boolean](\"source\")\nval metric = if (nbr(sense[Boolean](\"obstacle\"))) Double.PositiveInfinity else nbrRange()\n\nC[Double, Double](G[Double](source, 0, _ + _, () => metric), _ + _, sense[Double](\"distance\"), 0)\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val distance = aggregate {\n  when(manyon(\"source\")) {\n    gather (\n      sensors[boolean](\"obstacle\").map { case (loc, data) => (loc -> data) }.filterNot(_._2).keys,\n      identity[Vec[Float]] +=\n        {\n          case (here, _) =>\n            distance()\n          case (here, dist) =>\n            dist.minus(distance())\n        }\n    ).max\n  }\n   +-> reduces (minValue[Vec[Float]])\n}\n\nprintln(s\"Euclidean distance from source avoiding obstacles: $distance\")"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val source = sense[Boolean](\"source\")\nval neighbors = foldhoodPlus(List.empty[(Double, ID)])(_ ++ _)(List(nbrRange() -> nbr(mid()))).filter(_._2 != mid())\nval obstacles = foldhoodPlus(List.empty[ID])(_ ++ _)(if (sense[Boolean](\"obstacle\")) List(mid()) else List.empty)\n\nval filteredNeighbors = neighbors.filterNot(neighbor => obstacles.contains(neighbor._2))\n\nval distances = filteredNeighbors.map { case (distance, neighborId) =>\n  if (nbr(source)) distance else Double.MaxValue\n}\n\ndistances.min\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "def obstacleMetric = if (sense[Boolean](\"obstacle\")) Double.PositiveInfinity else nbrRange()\nval euclideanDistance = G[Double](source = sense[Boolean](\"source\"), field = 0 ,a => a + 1, obstacleMetric)\neuclideanDistance\n"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val neighborIDs = gather {\n  neighbors.map { neighbor =>\n    neighbor.id\n  }\n}"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "GenericFailure" : {
+        "exceptionMessage" : "class scala.runtime.BoxedUnit cannot be cast to class scala.collection.immutable.List (scala.runtime.BoxedUnit and scala.collection.immutable.List are in unnamed module of loader 'app')"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val neighbors = aggregate(\n  init = Set.empty[String],\n  reduce = (a, b) => a ++ b,\n  extract = _.toSet\n)\n\nval neighborIds = neighbors.map(neighbor => neighbor.id)"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "GenericFailure" : {
+        "exceptionMessage" : "class scala.runtime.BoxedUnit cannot be cast to class scala.collection.immutable.List (scala.runtime.BoxedUnit and scala.collection.immutable.List are in unnamed module of loader 'app')"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "val neighborIds = foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\nneighborIds\n"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val neighborhood: List[NodeID] = gather nodes transmit as List(NodeID)\n"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "GenericFailure" : {
+        "exceptionMessage" : "class scala.runtime.BoxedUnit cannot be cast to class scala.collection.immutable.List (scala.runtime.BoxedUnit and scala.collection.immutable.List are in unnamed module of loader 'app')"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val neighbors = ClassicAggregator\n    .build[Boolean, Set[NodeID]](\"neighbors\")\n    .reduce((acc, id) => acc + id)\n    .reduceForSome(_ + _)\n    .exec(false)\n\nval myID = thisNodeId()\nval myNeighbors = neighbors.value\n    .filter(_ != myID) // The node itself should not be in the neighbors"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "GenericFailure" : {
+        "exceptionMessage" : "class scala.runtime.BoxedUnit cannot be cast to class scala.collection.immutable.List (scala.runtime.BoxedUnit and scala.collection.immutable.List are in unnamed module of loader 'app')"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val neighbors = gather {\n  field[Set[LNode]](\"neighbors\")\n}.map(_.id)"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))\n"
+      }
+    }
+  },
+  {
+    "testName" : "gather the IDs of their neighbors",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "GenericFailure" : {
+        "exceptionMessage" : "class scala.runtime.BoxedUnit cannot be cast to class scala.collection.immutable.List (scala.runtime.BoxedUnit and scala.collection.immutable.List are in unnamed module of loader 'app')"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val minDistances = gmap.aggregate[Double, Double](\n  (_, _) => Double.MaxValue,\n  (acc, neighbor) => math.min(acc, neighbor.dist),\n  _ + _\n)\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "\nfoldhoodPlus(0.0)(_ min _\n )(nbrRange())\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val distances = foldhoodPlus(List.empty[Double])(_ ++ _)(List(nbrRange()))\ndistances.min\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val neighbors = acetate.readNeighbors()\nval myId = acetate.self\n\nval neighborDistances = neighbors.map(neighbor => (neighbor, myId.distance(neighbor))).toMap\nval minDistance = neighborDistances.values.min\n\nacetate.tell(others, minDistance)"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val idsAndNeigh = foldhoodPlus(List.empty[(Double, ID)])(_ ++ _)(List(nbrRange() -> nbr(mid())))\nidsAndNeigh.minBy(_._1)._1\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val idsAndNeigh = foldhoodPlus(List.empty[(Double, ID)])(_ ++ _)(List(nbrRange() -> nbr(mid())))\nidsAndNeigh.minBy(_._1)._1\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val neighbors = runtime.neighbors.map(_.userid).toSet\nval localDistances = runtime.neighbors.flatMap { neighbor =>\n  val neighborValue = neighbor.field[A]\n  val currentValue = runtime.field[A]\n  Some((neighbor.userid, math.abs(currentValue - neighborValue)))\n}\n\nval minDistanceAdjacent = localDistances.minBy(_._2)._2"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "foldhoodPlus(0.0)(_ min _)(nbrRange())\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val distances = foldhoodPlus(List.empty[(Double, ID)])(_ ++ _)(List(nbrRange() -> nbr(mid())))\ndistances.minBy(_._1)._1\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val field = aggregators: Aggregator[Double]\nval neighbors = field.neighbors.map(_.value)\n\n// Function to find the minimum value from a list\ndef minValue(list: List[Double]) = list.min\n\n// Calculate the minimum distance from the neighbors\nval minDistance = neighbors.foldLeft(Double.PositiveInfinity)(math.min _)\n\nfield += minValue(neighbors)"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val idsAndNeigh = foldhoodPlus(List.empty[(Double, ID)])(_ ++ _)(List(nbrRange() -> nbr(mid())))\nidsAndNeigh.minBy(_._1)._1\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "minHood(nbr(nbrRange()))\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "object Distances extends App {\n    def minDistances(dists: Map[Node, List[(Node, Int)]]): Map[(Node, Node), Int] = {\n        dists.flatMap {\n            case (node, neighbors) =>\n                neighbors.map { case (neighbor, dist) => ((node.id, neighbor.id), dist) }.toMap\n        }\n    }\n\n    case class Node(id: String) {\n        val neighbors = Map(\n            Node(\"A\") -> 1,\n            Node(\"B\") -> 2\n        )\n    }\n\n    val nodes = List(Node(\"A\"), Node(\"B\"))\n    val distances = minDistances(nodes.map(node => node -> node.neighbors).toMap)\n    println(distances)\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "foldhoodPlus(0.0)(_ min _)(nbrRange())\n"
+      }
+    }
+  },
+  {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "minHood(nbr(nbrRange()))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val aggregate = Aggregate\n  with Def[G, Acc](InitEmpty)\n  with Reduce[G, Acc](\"neighborsCount\" -> { (acc, g) =>\n    Neighbors(g).foldLeft(acc)((a, neighbor) => a + 1)\n  })\n  (fold = Minority)\n\nval program = Gop(Console.output(\"Initial Neighbors Count: \"+ aggregate()).filter(_ == 0) + aggregate().map(_ > 9).map{ _ => \"Too Many Neighbors!\"} |+ (\"neighborsCount\")).repeatForever()"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val neighbors = aggregate(finalGather(\n  replicate(neighborhood(1),\n    set(\n      (p, n) => p + n\n    )\n  ))\n)\n\nneighbors.foreach(println)"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "\nfoldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val neighbors = aggregate[Int] {\n  var sum = 0\n  val n = hop[Int](0)(_ + _)\n  sum = n\n  sum\n}"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val neighborhood =\n  G.neighbors\n\nval numberOfNeighbors =\n  neighborhood.length"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val neighbors = Aggregate {\n  val count = rep(0)\n  val countNeighbors = count + 1\n  countNeighbors\n}\n\nval result = neighbors.run()"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhood(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val neighbors = fieldNeighbors\n\nval count = neighbors.count(_ != self)"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "def countNeighbors(excludeSelf: Boolean): Int = {\n  val neighbors = neighborhood\n  if (excludeSelf) neighbors.count(_ != self) else neighbors.size\n}\n\nval neighborCount = countNeighbors(excludeSelf = true)\nprintln(neighborCount)\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val nodes = List((\"a\", List(\"b\", \"c\")), (\"b\", List(\"a\", \"c\", \"d\")), (\"c\", List(\"a\", \"b\", \"d\")), (\"d\", List(\"b\", \"c\")))\n\nval neighborsCount = nodes.map { case (node, neighbors) => (node, neighbors.size) }\n\nval selfExcludedNeighborsCount = neighborsCount.map { case (node, count) => (node, count - 1) }"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val neighborsCount = aggregated {\n  foldView[Double](0.0) {\n    case (runningSum, _) => runningSum + 1.0\n  } - 1\n}\n\nreturn neighborsCount"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val localNodeId = mid()\n\nfoldhoodPlus(0)(_ + _)(nbr(localNodeId == _))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "import scafi.core._\nimport scafi.util.ops._\nval numNeighbors = kNbr(hop => 1)\n\nval neighborsCount = sum(hop => numNeighbors)\n\nneighborsCount - 1"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhoodPlus(0)(_+_)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count neighbors excluding self",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "foldhoodPlus(0)(_ + _)(nbr(1))\n"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val initialValue = 1000\nval evolvedValue = (0 to initialValue).foldLeft(initialValue) { (acc, _) => acc - 1 }\nprintln(evolvedValue)"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "rep(1000)(x => if (x > 0) x - 1 else x)\n"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "rep(1000)(_ - 1)\n"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val result = (0 to 1000).foldLeft(1000)((acc, _) => acc - 1)\nprintln(result)"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "rep(1000)(_ - 1)\n"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "rep(1000)(_ - 1)\n"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val init = 1000\nval result = Stream.iterate(init)(_ - 1).take(1001).toList.reverse\nresult.foreach(println)"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "rep(1000)(_ - 1)\n"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "rep(1000)(_ - 1)\n"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val result = (0 to 1000).reverse\nresult.foreach(println)"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "rep(1000)(_ - 1)\n"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "rep(1000)(_ - 1)\n"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "timeEvolve(1000)(_ - 1) until (n == 0)\n\n\n+++++ README.md\n## Evolution Library in Aggregate Computing with ScaFi\n\nThis repository contains the Scala code for evolving backwards a value from 1000 to 0 using the Aggregate Computing paradigm and ScaFi as the reference library. The code follows strict constraints and recommendations to ensure correctness, idiomatic Scala, functional style, scalability, and performance considerations.\n\n### Structure\n\nThe code consists of a single main function body that evolves a value from 1000 to 0 using aggregate computing principles and ScaFi functionalities.\n\n### Functionality\n\nThe code defines the timeEvolve function to iteratively decrement the value until it reaches 0, adhering to the functional programming principles provided by ScaFi.\n\ntimeEvolve(1000)(_ - 1) until (n == 0)\n\n\n### Constraints\n\n1. **Code Format Restrictions**:\n    - Only the function body of main is provided.\n    - Code must be in Scala.\n    - No enclosing braces or function definitions are allowed.\n\n2. **Correctness**:\n    - The code must compile without errors.\n\n3. **Idiomatic Scala**:\n    - Follow best practices in Scala coding.\n    - Avoid anti-patterns.\n\n4. **Functional Style**:\n    - Emphasize immutability, higher-order functions, and pure functions.\n\n5. **Scalability**:\n    - Allow easy extensions and modifications without affecting existing functionality.\n\n6. **Performance Considerations**:\n    - Ensure efficient execution and avoid unnecessary allocations and deep recursion.\n\n7. **Output Constraints**:\n    - No explanations or additional text.\n    - Only raw Scala code provided.\n\n### Usage\n\nThe Scala function body specified in this repository is designed to be included within the main function of a Scala application using the ScaFi library for aggregate computing.\n\n### Getting Started\n\nTo use this code, follow these steps:\n\n1. **Set Up Environment**:\n    - Ensure you have a Scala development environment set up.\n    - Include the ScaFi library in your project dependencies.\n\n2. **Include Code in Scala Application**:\n    - Copy the provided code into the body of the main function in your Scala application.\n\n3. **Compile and Run**:\n    - Compile and run your Scala application to see the results of evolving the value from 1000 to 0.\n\n### Contributing\n\nContributions are welcome! Please follow the guidelines below:\n\n- Ensure your code adheres to the constraints and recommendations specified.\n- Maintain idiomatic Scala coding practices and functional programming paradigms.\n- Provide efficient and scalable code solutions.\n\nFor detailed guidelines on contributing to this repository, refer to the [CONTRIBUTING](CONTRIBUTING.md) file.\n\n### License\n\nThis project is licensed under the [MIT License](LICENSE)."
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "rep(1000)(_ - 1)\n"
+      }
+    }
+  },
+  {
+    "testName" : "count down from 1000 to 0",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "Success" : {
+        "program" : "rep(1000)(_ - 1)\n"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val temps = gather[Double](_.temperature)\nval areas = gather[Set[Node]](_.area)\n\nval areaTemps = temps.zip(areas).groupBy(_._2).map { case (area, tempPairs) =>\n  val areaTemp = tempPairs.map(_._1).sum / tempPairs.size\n  area -> areaTemp\n}\n\nval alarms = areaTemps.map { case (area, temp) =>\n  if (temp > 30) {\n    area -> true\n  } else {\n    area -> false\n  }\n}\n\nalarms.foreach { case (area, alarm) =>\n  area.foreach(node => node ! AreaAlarm(alarm))\n}"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val sumTemperature = foldhood(0.0)(_ + _)(sense[Double](\"temperature\"))\nval nativeCount = foldhood(0)(_ + _)(1)\nval averageTemperature = sumTemperature / nativeCount\n\nval localAlarm = if (averageTemperature > 30) true else false\n\nval areaSourcesAlrm = foldhood(localAlarm)(_ || _)((nbr(localAlarm)))\n\nif (areaSourcesAlrm) {\n  foldhood(() => { println(\"ALARM: Temperature above 30 degrees!\") })}\n"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 0,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "\nval areaTemp = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\nval areaSize = foldhood(0)(_ + _)(nbr(1))\nval avgTemp = areaTemp / areaSize\nval alarm = avgTemp > 30\nval potential = G[Double](source = alarm, field = 0, acc = _ + nbrRange(), metric = nbrRange)\nC[Double, Boolean](potential, _ || _, alarm, false)\n"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val selfTemp = sense(Temperature)\n\nval alarmCondition = selfTemp > 30\n\nval areaTemps = rep(sense(Temperature))\n\ndef isAboveThreshold(temp: Double): Boolean = temp > 30\nval areaAlarm = neighborhoods\n  .collect{ case n if n.contains(self) => isAboveThreshold(n.aggregated frío anio)(areaTemps))\nif  spectraArea.nodes/notArrays.\n\nval neighbours = universe.area.aggareaInterPart\n  .aggregate((0.0, false))((accum, temp: Double) => (accum._1 + temp, accum._2 || temp > 30.0))\n\nval averageTemp = neighbours._1 / (hop(1)).inv.n\n\nval exceedsThreshold = excessArea(selfTemp).e\n\nval alarmMessage = if (alarmCondition || exceedsThreshold) \"Alarm: High Temperature!\" else \"No Alarm\"\n\nsend(alarmMessage).to(neighbours)\n\n\n+++++ README.md\n# Aggregating Computing with ScaFi\nAggregate Computing (AC) is an emerging paradigm for programming large-scale distributed systems.\nUsing ScaFi (Scalable FIelds), you can write aggregate functions that behaves as an abstraction over scalable layers of communication and coordination.\n\nWrite a Scal velocity for the Math with ScaFi as a computing¬†agent to implement functionality similar to temperature sensor-plug monitoring through aggregate computing\n\n### Strict Constraints and Recommendations\n\nThese conditions **must always hold true**, regardless of the specific operation:\n1. The code **must** be written in **Scala**.\n- **Write ONLY the body** of the main function.\n- **Do NOT** include:\n   - The function definition.\n   - Any enclosing curly braces {} for multi-line code.\n- **Correctness**: The generated Scala code must compile without errors.\n\n- 17\n- **Idiomatic Scala**: Follow best practices and avoid anti-patterns.\n      - **Functional Style**: Favor immutability, higher-order functions, and pure functions where possible.\n- **Scalability**: The DSL should allow easy extensions and modifications without breaking existing functionality.\n  - **Performance Considerations**: Ensure reasonable efficiency; avoid excessive allocations or deep recursion where tail recursion could be used.\n  - **Strict Adherence**: The code must strictly follow these conditions.\n    - **Before finalizing, re-check** for syntax errors that might lead to compilation issues.\n\n### CRITICAL REQUIREMENT: The output **must be ONLY and STRICTLY the resulting Scala code**.No explanations, comments, justifications, or additional text. **Omit all explanations and non-code text**. **Only the raw Scala code, formatted according to the rules below.**\n\n## Areas:\n\n- Write hours abstractions of a composable computing blocks for analysing them showing them values of temperature. (temperatures)\n- Smear these values over the system so they do not perssist in any area.\n- We integrate them on this values and then if a specific area is above 30.0 ℃ then broadcast inside the area.\n\ntext\n    compute several areas where it is computed the area-wise temperature and send back (in broadcast) within the area an alarm to the area when the temperature is above 30 degrees\n\n\n# Solution:\nval selfTemp = sense(Temperature)\nval averageTemp = neighbors.aggregated[D](\"average\"[{Math_ language.init(temp)}]). inv in \"water{entity.model}\"_ SensorCApplication ).median[0±{Math_ language .map(sum)}]\nval alarm = if(average value temp > 3)0)}(for the 3)\nval Condition = for(true)\nval alarmCondition = average[area-alarm-temperature]>30\n      broadcast(alarmMessage_<block==case> \"in Alarm\")\n\n\n## Validation:\n\n### Main-clue illustration\n\nAfter validating the code the approximation calculates produce the following parameters alignment:\n\nASCII\n> ind = 35\nNormal / Alarmss are not triggered if it exceeds 31.0 but normal Alarms, the average temperature settings ranges between -30°  isn't perfect.\n\nIt is only a gamma test.\n\n---\n\n### This code simply implements basic sensor aggregate computing mechanism using fields to validate point of action over the system with ScaFi\n\n text\n\n[main n formatting]\n\n\nNo introduction,explanation or description however technical description defined here. Caution should be noted that this is the raw representation."
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val currentTemperature = sense[Double](\"temperature\")\nval averageTemperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\"))) / foldhood(0)(_ + _)(nbr(1))\nval areaAlarm = branch(currentTemperature > 30)(true)(false)\n\nval sendAlarms = foldhood(Set.empty[ID])(_ ++ _)(if (areaAlarm) Set(mid()) else Set.empty[ID])\n\nbranching(\n  branch(sendAlarms.isEmpty)(falsifySendAl KulturMurk(): Unit()(() => {\n    println(s\"Alarms Listed: $sendAlarms \");\"\"\"\"))\n))) (true\n"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 1,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val potential = G[Double](source = sense(\"source\"), field = 0, acc = _ + nbrRange(), metric = nbrRange)\nval areaTemp = C[Double, Double](potential, _ + _, sense[Double](\"temperature\"), 0)\nval alarm = branch(areaTemp > 30) {\n  G[Boolean](source = true, field = true, acc = _ || _, metric = nbrRange)\n} { false }\n"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val temperature = 35\n\nval areaTemperature = gmap {\n  aggregate[Double](0.0) {\n    case (stored, current) => math.max(stored, current)\n  }\n}\n\nval alarm = gmap {\n  if (areaTemperature > 30) {\n    true\n  } else {\n    false\n  }\n}\n\ngmap {\n  if (alarm) {\n    println(\"Alarm! Temperature above 30 degrees.\")\n  }\n}\n\ngmap {\n  rep(alarm)\n}"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val areaTemperatures = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\nval areaSize = foldhood(0)(_ + _)(nbr(1))\nval averageTemperature = areaTemperatures / areaSize\nval alarm = averageTemperature > 30.0\nbranch(alarm) {\n  foldhood(alarm)(_ || _)(nbr(alarm))\n} {\n  false\n}\n"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 2,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val potential = G[Double](source = sense(\"source\"), field = 0, acc = _ + nbrRange(), metric = nbrRange)\nval areaTemp = C[Double, Double](potential, _ + _, sense(\"temperature\"), 0)\nval alarm = areaTemp > 30\nG[Boolean](source = alarm, field = alarm, acc = _ || _, metric = nbrRange)\n"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val areaTemperatures = gather[Double](\"temperature\")\nval areaAlarms = areaTemperatures.map { temps =>\n  if (temps.exists(_ > 30)) Some(\"Alarm: Temperature above 30 degrees\") else None\n}\nareaAlarms.foreach { alarm =>\n  if (alarm.isDefined) broadcast(alarm.get)\n}"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val areaTemperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\nval isAlarm = branch(areaTemperature / foldhood(0)(_ + _)(nbr(1)) > 30) {\n  true\n} {\n  false\n}\nfoldhood(isAlarm)(_ || _)(nbr(isAlarm))\n"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 3,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val partitionID = rep(0) { _ =>\n  branch(sense[Boolean](\"isInPartition\"))(\n    foldhood(0)(_ max _)(sense[Int](\"partitionID\")),\n    foldhood(0)(_ max _)(nbr(sense[Int](\"partitionID\")))\n  )\n}\n\nval areaTempSum = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\nval areaNodeCount = foldhood(0)(_ + _)(nbr(1))\n\nval areaAvgTemp = areaTempSum / areaNodeCount\nval alarmCondition = areaAvgTemp > 30.0\n\nval sendAlarm = mux(alarmCondition)(\n  val areaID = G(\n    source = true,\n    field = partitionID,\n    acc = a => a, // carry forward partition ID\n    metric = nbrRange\n  )\n\n  areaID\n\n)(\n  0 // No alarm if temperature condition not met\n)\n\nfoldhood(0.0)(_ max _)(nbr(sendAlarm)) > 0\n"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/no-knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "CompilationFailed" : {
+        "producedCode" : "val neighborhoodSize = G.sense(Field[Double]) # get temperature from neighborhood\nval localTemperature = G.sense(Here(Field[Double]))\n\nval isHighTemperature = localTemperature > 30\n\nval sumTemperature = neighborhoodSize.fold드})+_).get\nval avgTemperature = sumTemperature / neighborhoodSize\nval alarmSignal = isHighTemperature || avgTemperature > 30\nval result = G.rank # Rank of the node in the communal shared memory\n\nif (alarmSignal) {\n    G.rep(G.const(1.0)) // Broadcast an alarm signal across the area\n}\n\nG.export(true) # Export the result to observe the outcome"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val areaTemperature = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\nval nodes = foldhood(0)(_ + _)(nbr(1))\nval averageTemperature = areaTemperature / nodes\nval alarm = averageTemperature > 30\nfoldhood(alarm)(_ || _)(nbr(alarm))\n"
+      }
+    }
+  },
+  {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "promptIndex" : 4,
+    "knowledgeFile" : "knowledge/knowledge-with-building-blocks.md",
+    "modelUsed" : "mistralai/mistral-small-3.1-24b-instruct",
+    "result" : {
+      "TestFailed" : {
+        "producedCode" : "val areas = foldhood(List.empty[(Double, ID)])(_ ++ _)(List(nbrRange() -> nbr(mid())))\nval areaTemperatures = foldhood(0.0)(_ + _)(nbr(sense[Double](\"temperature\")))\nval areaIDs = areas.map(_._2)\nval areaTemperature = areaTemperatures / areaIDs.size\nval alarm = if (areaTemperature > 30) true else false\nval potential = G[Double](source = alarm, field = 0, acc = _ + nbrRange(), metric = nbrRange)\nC[Double, Boolean](potential, _ || _, alarm, false)\n"
+      }
+    }
+  }
+]

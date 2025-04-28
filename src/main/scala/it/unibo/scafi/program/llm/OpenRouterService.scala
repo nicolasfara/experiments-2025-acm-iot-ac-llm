@@ -35,12 +35,9 @@ class OpenRouterService(openRouterModel: Model) extends CodeGeneratorService:
 
         override def onCompleteResponse(completeResponse: ChatResponse): Unit =
           val cleaned = StringUtils.refineOutput(completeResponse.aiMessage().text())
-          println(s"OR CA ${this.toString}: \n$cleaned")
           promise.success(cleaned)
 
-        override def onError(error: Throwable): Unit =
-          println(s"OR ERR ${this.toString}: \n$error")
-          promise.failure(error),
+        override def onError(error: Throwable): Unit = promise.failure(error)
     )
     promise.future
   end generateRaw

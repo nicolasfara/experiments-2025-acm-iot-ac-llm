@@ -37,12 +37,9 @@ class GeminiService(model: Model) extends CodeGeneratorService:
 
         override def onCompleteResponse(completeResponse: ChatResponse): Unit =
           val cleaned = StringUtils.refineOutput(completeResponse.aiMessage().text())
-          println(s"LC CA ${model.codeName}: \n$cleaned")
           promise.success(cleaned)
 
-        override def onError(error: Throwable): Unit =
-          println(s"LC ERR ${model.codeName}: \n$error")
-          promise.failure(error),
+        override def onError(error: Throwable): Unit = promise.failure(error),
     )
     promise.future
   end generateRaw

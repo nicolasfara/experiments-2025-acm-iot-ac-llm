@@ -1,0 +1,65 @@
+{
+  "create a channel from the source node to the destination node" : {
+    "testName" : "create a channel from the source node to the destination node",
+    "succeeded" : 1,
+    "nonCompiling" : 58,
+    "failed" : 16,
+    "genericErrors" : 0
+  },
+  "SCR where temperature is above 30 degrees within the area" : {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "succeeded" : 1,
+    "nonCompiling" : 58,
+    "failed" : 16,
+    "genericErrors" : 0
+  },
+  "count neighbors" : {
+    "testName" : "count neighbors",
+    "succeeded" : 7,
+    "nonCompiling" : 57,
+    "failed" : 11,
+    "genericErrors" : 0
+  },
+  "collect the max ID in the network on each node" : {
+    "testName" : "collect the max ID in the network on each node",
+    "succeeded" : 4,
+    "nonCompiling" : 48,
+    "failed" : 23,
+    "genericErrors" : 0
+  },
+  "calculate the gradient with distance from source" : {
+    "testName" : "calculate the gradient with distance from source",
+    "succeeded" : 0,
+    "nonCompiling" : 68,
+    "failed" : 7,
+    "genericErrors" : 0
+  },
+  "calculate the gradient (with obstacles) with distance from source" : {
+    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "succeeded" : 0,
+    "nonCompiling" : 68,
+    "failed" : 7,
+    "genericErrors" : 0
+  },
+  "count neighbors excluding self" : {
+    "testName" : "count neighbors excluding self",
+    "succeeded" : 12,
+    "nonCompiling" : 54,
+    "failed" : 9,
+    "genericErrors" : 0
+  },
+  "create a channel (with obstacles) from the source node to the destination node" : {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "succeeded" : 0,
+    "nonCompiling" : 70,
+    "failed" : 5,
+    "genericErrors" : 0
+  },
+  "count down from 1000 to 0" : {
+    "testName" : "count down from 1000 to 0",
+    "succeeded" : 14,
+    "nonCompiling" : 48,
+    "failed" : 13,
+    "genericErrors" : 0
+  }
+}

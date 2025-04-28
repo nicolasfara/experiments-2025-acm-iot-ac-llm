@@ -1,0 +1,335 @@
+{
+  "create a channel from the source node to the destination node" : {
+    "mistral/ministral-8b" : {
+      "testName" : "create a channel from the source node to the destination node",
+      "succeeded" : 0,
+      "nonCompiling" : 11,
+      "failed" : 4,
+      "genericErrors" : 0
+    },
+    "mistralai/mistral-small-3.1-24b-instruct" : {
+      "testName" : "create a channel from the source node to the destination node",
+      "succeeded" : 1,
+      "nonCompiling" : 13,
+      "failed" : 1,
+      "genericErrors" : 0
+    },
+    "google/gemma-3-4b-it" : {
+      "testName" : "create a channel from the source node to the destination node",
+      "succeeded" : 0,
+      "nonCompiling" : 9,
+      "failed" : 6,
+      "genericErrors" : 0
+    },
+    "google/gemma-3-12b-it" : {
+      "testName" : "create a channel from the source node to the destination node",
+      "succeeded" : 0,
+      "nonCompiling" : 10,
+      "failed" : 5,
+      "genericErrors" : 0
+    },
+    "meta-llama/llama-3.2-1b-instruct" : {
+      "testName" : "create a channel from the source node to the destination node",
+      "succeeded" : 0,
+      "nonCompiling" : 15,
+      "failed" : 0,
+      "genericErrors" : 0
+    }
+  },
+  "SCR where temperature is above 30 degrees within the area" : {
+    "mistral/ministral-8b" : {
+      "testName" : "SCR where temperature is above 30 degrees within the area",
+      "succeeded" : 0,
+      "nonCompiling" : 14,
+      "failed" : 1,
+      "genericErrors" : 0
+    },
+    "mistralai/mistral-small-3.1-24b-instruct" : {
+      "testName" : "SCR where temperature is above 30 degrees within the area",
+      "succeeded" : 1,
+      "nonCompiling" : 9,
+      "failed" : 5,
+      "genericErrors" : 0
+    },
+    "google/gemma-3-4b-it" : {
+      "testName" : "SCR where temperature is above 30 degrees within the area",
+      "succeeded" : 0,
+      "nonCompiling" : 8,
+      "failed" : 7,
+      "genericErrors" : 0
+    },
+    "google/gemma-3-12b-it" : {
+      "testName" : "SCR where temperature is above 30 degrees within the area",
+      "succeeded" : 0,
+      "nonCompiling" : 8,
+      "failed" : 7,
+      "genericErrors" : 0
+    },
+    "meta-llama/llama-3.2-1b-instruct" : {
+      "testName" : "SCR where temperature is above 30 degrees within the area",
+      "succeeded" : 0,
+      "nonCompiling" : 15,
+      "failed" : 0,
+      "genericErrors" : 0
+    }
+  },
+  "gather the IDs of their neighbors" : {
+    "mistral/ministral-8b" : {
+      "testName" : "gather the IDs of their neighbors",
+      "succeeded" : 0,
+      "nonCompiling" : 14,
+      "failed" : 0,
+      "genericErrors" : 1
+    },
+    "mistralai/mistral-small-3.1-24b-instruct" : {
+      "testName" : "gather the IDs of their neighbors",
+      "succeeded" : 6,
+      "nonCompiling" : 6,
+      "failed" : 0,
+      "genericErrors" : 3
+    },
+    "google/gemma-3-4b-it" : {
+      "testName" : "gather the IDs of their neighbors",
+      "succeeded" : 0,
+      "nonCompiling" : 12,
+      "failed" : 0,
+      "genericErrors" : 3
+    },
+    "google/gemma-3-12b-it" : {
+      "testName" : "gather the IDs of their neighbors",
+      "succeeded" : 0,
+      "nonCompiling" : 12,
+      "failed" : 0,
+      "genericErrors" : 3
+    },
+    "meta-llama/llama-3.2-1b-instruct" : {
+      "testName" : "gather the IDs of their neighbors",
+      "succeeded" : 0,
+      "nonCompiling" : 15,
+      "failed" : 0,
+      "genericErrors" : 0
+    }
+  },
+  "collect the max ID in the network on each node" : {
+    "mistral/ministral-8b" : {
+      "testName" : "collect the max ID in the network on each node",
+      "succeeded" : 0,
+      "nonCompiling" : 8,
+      "failed" : 7,
+      "genericErrors" : 0
+    },
+    "mistralai/mistral-small-3.1-24b-instruct" : {
+      "testName" : "collect the max ID in the network on each node",
+      "succeeded" : 2,
+      "nonCompiling" : 9,
+      "failed" : 4,
+      "genericErrors" : 0
+    },
+    "google/gemma-3-4b-it" : {
+      "testName" : "collect the max ID in the network on each node",
+      "succeeded" : 0,
+      "nonCompiling" : 7,
+      "failed" : 8,
+      "genericErrors" : 0
+    },
+    "google/gemma-3-12b-it" : {
+      "testName" : "collect the max ID in the network on each node",
+      "succeeded" : 2,
+      "nonCompiling" : 8,
+      "failed" : 5,
+      "genericErrors" : 0
+    },
+    "meta-llama/llama-3.2-1b-instruct" : {
+      "testName" : "collect the max ID in the network on each node",
+      "succeeded" : 0,
+      "nonCompiling" : 14,
+      "failed" : 1,
+      "genericErrors" : 0
+    }
+  },
+  "calculate the gradient with distance from source" : {
+    "mistral/ministral-8b" : {
+      "testName" : "calculate the gradient with distance from source",
+      "succeeded" : 0,
+      "nonCompiling" : 7,
+      "failed" : 8,
+      "genericErrors" : 0
+    },
+    "mistralai/mistral-small-3.1-24b-instruct" : {
+      "testName" : "calculate the gradient with distance from source",
+      "succeeded" : 0,
+      "nonCompiling" : 13,
+      "failed" : 2,
+      "genericErrors" : 0
+    },
+    "google/gemma-3-4b-it" : {
+      "testName" : "calculate the gradient with distance from source",
+      "succeeded" : 0,
+      "nonCompiling" : 8,
+      "failed" : 7,
+      "genericErrors" : 0
+    },
+    "google/gemma-3-12b-it" : {
+      "testName" : "calculate the gradient with distance from source",
+      "succeeded" : 0,
+      "nonCompiling" : 14,
+      "failed" : 1,
+      "genericErrors" : 0
+    },
+    "meta-llama/llama-3.2-1b-instruct" : {
+      "testName" : "calculate the gradient with distance from source",
+      "succeeded" : 0,
+      "nonCompiling" : 13,
+      "failed" : 2,
+      "genericErrors" : 0
+    }
+  },
+  "calculate the gradient (with obstacles) with distance from source" : {
+    "mistral/ministral-8b" : {
+      "testName" : "calculate the gradient (with obstacles) with distance from source",
+      "succeeded" : 0,
+      "nonCompiling" : 12,
+      "failed" : 3,
+      "genericErrors" : 0
+    },
+    "mistralai/mistral-small-3.1-24b-instruct" : {
+      "testName" : "calculate the gradient (with obstacles) with distance from source",
+      "succeeded" : 0,
+      "nonCompiling" : 13,
+      "failed" : 2,
+      "genericErrors" : 0
+    },
+    "google/gemma-3-4b-it" : {
+      "testName" : "calculate the gradient (with obstacles) with distance from source",
+      "succeeded" : 0,
+      "nonCompiling" : 9,
+      "failed" : 6,
+      "genericErrors" : 0
+    },
+    "google/gemma-3-12b-it" : {
+      "testName" : "calculate the gradient (with obstacles) with distance from source",
+      "succeeded" : 0,
+      "nonCompiling" : 10,
+      "failed" : 5,
+      "genericErrors" : 0
+    },
+    "meta-llama/llama-3.2-1b-instruct" : {
+      "testName" : "calculate the gradient (with obstacles) with distance from source",
+      "succeeded" : 0,
+      "nonCompiling" : 15,
+      "failed" : 0,
+      "genericErrors" : 0
+    }
+  },
+  "count neighbors excluding self" : {
+    "mistral/ministral-8b" : {
+      "testName" : "count neighbors excluding self",
+      "succeeded" : 0,
+      "nonCompiling" : 3,
+      "failed" : 12,
+      "genericErrors" : 0
+    },
+    "mistralai/mistral-small-3.1-24b-instruct" : {
+      "testName" : "count neighbors excluding self",
+      "succeeded" : 9,
+      "nonCompiling" : 5,
+      "failed" : 1,
+      "genericErrors" : 0
+    },
+    "google/gemma-3-4b-it" : {
+      "testName" : "count neighbors excluding self",
+      "succeeded" : 0,
+      "nonCompiling" : 3,
+      "failed" : 12,
+      "genericErrors" : 0
+    },
+    "google/gemma-3-12b-it" : {
+      "testName" : "count neighbors excluding self",
+      "succeeded" : 10,
+      "nonCompiling" : 3,
+      "failed" : 2,
+      "genericErrors" : 0
+    },
+    "meta-llama/llama-3.2-1b-instruct" : {
+      "testName" : "count neighbors excluding self",
+      "succeeded" : 0,
+      "nonCompiling" : 14,
+      "failed" : 1,
+      "genericErrors" : 0
+    }
+  },
+  "create a channel (with obstacles) from the source node to the destination node" : {
+    "mistral/ministral-8b" : {
+      "testName" : "create a channel (with obstacles) from the source node to the destination node",
+      "succeeded" : 0,
+      "nonCompiling" : 15,
+      "failed" : 0,
+      "genericErrors" : 0
+    },
+    "mistralai/mistral-small-3.1-24b-instruct" : {
+      "testName" : "create a channel (with obstacles) from the source node to the destination node",
+      "succeeded" : 0,
+      "nonCompiling" : 14,
+      "failed" : 1,
+      "genericErrors" : 0
+    },
+    "google/gemma-3-4b-it" : {
+      "testName" : "create a channel (with obstacles) from the source node to the destination node",
+      "succeeded" : 0,
+      "nonCompiling" : 11,
+      "failed" : 4,
+      "genericErrors" : 0
+    },
+    "google/gemma-3-12b-it" : {
+      "testName" : "create a channel (with obstacles) from the source node to the destination node",
+      "succeeded" : 0,
+      "nonCompiling" : 13,
+      "failed" : 2,
+      "genericErrors" : 0
+    },
+    "meta-llama/llama-3.2-1b-instruct" : {
+      "testName" : "create a channel (with obstacles) from the source node to the destination node",
+      "succeeded" : 0,
+      "nonCompiling" : 15,
+      "failed" : 0,
+      "genericErrors" : 0
+    }
+  },
+  "count down from 1000 to 0" : {
+    "mistral/ministral-8b" : {
+      "testName" : "count down from 1000 to 0",
+      "succeeded" : 0,
+      "nonCompiling" : 5,
+      "failed" : 10,
+      "genericErrors" : 0
+    },
+    "mistralai/mistral-small-3.1-24b-instruct" : {
+      "testName" : "count down from 1000 to 0",
+      "succeeded" : 10,
+      "nonCompiling" : 3,
+      "failed" : 2,
+      "genericErrors" : 0
+    },
+    "google/gemma-3-4b-it" : {
+      "testName" : "count down from 1000 to 0",
+      "succeeded" : 0,
+      "nonCompiling" : 2,
+      "failed" : 13,
+      "genericErrors" : 0
+    },
+    "google/gemma-3-12b-it" : {
+      "testName" : "count down from 1000 to 0",
+      "succeeded" : 9,
+      "nonCompiling" : 3,
+      "failed" : 3,
+      "genericErrors" : 0
+    },
+    "meta-llama/llama-3.2-1b-instruct" : {
+      "testName" : "count down from 1000 to 0",
+      "succeeded" : 0,
+      "nonCompiling" : 13,
+      "failed" : 2,
+      "genericErrors" : 0
+    }
+  }
+}
