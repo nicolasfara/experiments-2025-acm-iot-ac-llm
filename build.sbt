@@ -27,6 +27,8 @@ ThisBuild / developers := List(
 ThisBuild / fork := true
 //ThisBuild / testOptions += Tests.Argument(TestFrameworks.ScalaTest, "-h", "target/test-reports")
 
+val langchain4jVersion = "1.0.0-beta3"
+val circeVersion = "0.14.10"
 lazy val root = project
   .in(file("."))
   .settings(
@@ -43,22 +45,23 @@ lazy val root = project
       "it.unibo.scafi" %% "scafi-simulator" % "1.6.0",
       "org.scala-lang" %% "scala3-compiler" % scala3Version,
       "com.lihaoyi" %% "requests" % "0.9.0",
-      "io.circe" %% "circe-core" % "0.14.10",
-      "io.circe" %% "circe-generic" % "0.14.10",
-      "io.circe" %% "circe-parser" % "0.14.10",
+      "io.circe" %% "circe-core" % circeVersion,
+      "io.circe" %% "circe-generic" % circeVersion,
+      "io.circe" %% "circe-parser" % circeVersion,
       "com.softwaremill.retry" %% "retry" % "0.3.6",
-      "io.github.ollama4j" % "ollama4j" % "1.0.93",
+      "io.github.ollama4j" % "ollama4j" % "1.0.100",
       "com.lihaoyi" %% "os-lib" % "0.11.4",
-      "dev.langchain4j" % "langchain4j-google-ai-gemini" % "1.0.0-beta2",
-      "dev.langchain4j" % "langchain4j-easy-rag" % "1.0.0-beta2",
-      "dev.langchain4j" % "langchain4j-embeddings-all-minilm-l6-v2" % "1.0.0-beta2",
-      "dev.langchain4j" % "langchain4j-embeddings-all-minilm-l6-v2-q" % "1.0.0-beta2",
-      "dev.langchain4j" % "langchain4j-embeddings-bge-small-en-v15" % "1.0.0-beta2",
-      "dev.langchain4j" % "langchain4j-open-ai" % "1.0.0-beta2",
-      "dev.langchain4j" % "langchain4j-ollama" % "1.0.0-beta2",
-      "dev.langchain4j" % "langchain4j-github-models" % "1.0.0-beta2",
-      "dev.langchain4j" % "langchain4j-local-ai" % "1.0.0-beta2",
-      "dev.langchain4j" % "langchain4j-community-xinference" % "1.0.0-beta2",
+      "dev.langchain4j" % "langchain4j-google-ai-gemini" % langchain4jVersion,
+      "dev.langchain4j" % "langchain4j-embeddings-all-minilm-l6-v2" % langchain4jVersion,
+      "dev.langchain4j" % "langchain4j-embeddings-all-minilm-l6-v2-q" % langchain4jVersion,
+      "dev.langchain4j" % "langchain4j-embeddings-bge-small-en-v15" % langchain4jVersion,
+      "dev.langchain4j" % "langchain4j-open-ai" % langchain4jVersion,
+      "dev.langchain4j" % "langchain4j-ollama" % langchain4jVersion,
+      "dev.langchain4j" % "langchain4j-github-models" % langchain4jVersion,
+      "dev.langchain4j" % "langchain4j-local-ai" % langchain4jVersion,
+      "dev.langchain4j" % "langchain4j-community-xinference" % langchain4jVersion,
+      "org.slf4j"       % "slf4j-api"      % "2.0.17",
+      "ch.qos.logback"  % "logback-classic" % "1.5.18"
     ),
     scalacOptions ++= Seq(
       "-Werror",

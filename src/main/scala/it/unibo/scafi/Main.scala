@@ -1,16 +1,16 @@
 package it.unibo.scafi
 
-import java.nio.file.{ Files, Path }
-import scala.concurrent.duration.DurationInt
-import scala.concurrent.{ Await, ExecutionContext, Future }
+import java.nio.file.{Files, Path}
+import scala.concurrent.duration.{DurationInt, FiniteDuration}
+import scala.concurrent.{Await, ExecutionContext, Future}
 import scala.concurrent.ExecutionContext.Implicits.global
 import io.circe.*
 import io.circe.generic.auto.*
 import io.circe.syntax.*
-import it.unibo.scafi.program.{ ChannelTest, SCRTest }
-import it.unibo.scafi.test.{ toStatisticsPerModel, toStatisticsPerTest, AbstractScafiProgramTest, SingleTestResult }
+import it.unibo.scafi.program.{ChannelTest, SCRTest}
+import it.unibo.scafi.test.{AbstractScafiProgramTest, SingleTestResult, toStatisticsPerModel, toStatisticsPerTest}
 
-import java.util.concurrent.ScheduledThreadPoolExecutor
+import java.util.concurrent.{ScheduledThreadPoolExecutor, TimeUnit}
 
 @main def main(): Unit =
   require(System.getenv("GEMINI_API_KEY") != null, "GEMINI_API_KEY environment variable must be set")
@@ -24,33 +24,34 @@ import java.util.concurrent.ScheduledThreadPoolExecutor
 
 //  val tests = List(ChannelTest(), SCRTest())
 
-//  def delay(duration: FiniteDuration)(using ec: ExecutionContext): Future[Unit] =
-//    val promise = scala.concurrent.Promise[Unit]()
-//    scheduler.schedule(
-//      new Runnable:
-//        def run(): Unit = promise.success(())
-//      ,
-//      duration.toMillis,
-//      TimeUnit.MILLISECONDS,
-//    )
-//    promise.future
+  def delay(duration: FiniteDuration)(using ec: ExecutionContext): Future[Unit] =
+    val promise = scala.concurrent.Promise[Unit]()
+    scheduler.schedule(
+      new Runnable:
+        def run(): Unit = promise.success(())
+      ,
+      duration.toMillis,
+      TimeUnit.MILLISECONDS,
+    )
+    promise.future
 
-//  def runScafiTestsSequentially(
-//      tests: List[AbstractScafiProgramTest],
-//  )(using ExecutionContext): Future[Seq[SingleTestResult]] =
-//    tests.foldLeft(Future.successful(Seq.empty[SingleTestResult])) { (accFuture, test) =>
-//      accFuture.flatMap { acc =>
-//        for
-////          _ <- delay(1.seconds) // Delay between tests for avoiding rate limits
-//          results <- Future.sequence(test.executeTest())
-//        yield acc ++ results
-//      }
-//    }
+  def runScafiTestsSequentially(
+      tests: List[AbstractScafiProgramTest],
+  )(using ExecutionContext): Future[Seq[SingleTestResult]] =
+    tests.foldLeft(Future.successful(Seq.empty[SingleTestResult])) { (accFuture, test) =>
+      accFuture.flatMap { acc =>
+        for
+          _ <- delay(1.seconds) // Delay between tests for avoiding rate limits
+          results <- Future.sequence(test.executeTest())
+        yield acc ++ results
+      }
+    }
 //  val limiter = RateLimiter(90, 10.seconds)
-  val allResultsFuture = Future.sequence {
-    tests.map(e => Future.sequence(e.executeTest()))
-  }.map(_.flatten)
-//  val allResultsFuture = runScafiTestsSequentially(tests)
+  
+//  val allResultsFuture = Future.sequence {
+//    tests.map(e => Future.sequence(e.executeTest()))
+//  }.map(_.flatten)
+  val allResultsFuture = runScafiTestsSequentially(tests)
 
   val producesTestResults = Await.result(allResultsFuture, 48.hour)
   val statisticsByModel = producesTestResults.toStatisticsPerModel

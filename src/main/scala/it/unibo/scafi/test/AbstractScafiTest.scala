@@ -1,16 +1,19 @@
 package it.unibo.scafi.test
 
-import scala.concurrent.{ Await, ExecutionContext, Future }
+import scala.concurrent.{Await, ExecutionContext, Future}
 import scala.io.Source
 import scala.util.boundary.break
-import scala.util.{ boundary, Try, Using }
+import scala.util.{Try, Using, boundary}
 import io.circe.generic.auto.*
 import io.circe.parser.*
 import it.unibo.scafi.Prompts
 import it.unibo.scafi.program.llm.*
+import it.unibo.scafi.program.utils.PromptUtils.generatePreamblePrompt
 import it.unibo.scafi.test.FunctionalTestIncarnation.Network
-import it.unibo.scafi.test.ScafiTestResult.{ CompilationFailed, GenericFailure }
-import it.unibo.scafi.test.ScafiTestUtils.{ buildProgram, executeFromString }
+import it.unibo.scafi.test.ScafiTestResult.{CompilationFailed, GenericFailure}
+import it.unibo.scafi.test.ScafiTestUtils.{buildProgram, executeFromString}
+import org.slf4j.LoggerFactory
+
 import scala.concurrent.duration.DurationInt
 
 final case class ScafiProgram(program: String)
@@ -37,11 +40,13 @@ abstract class AbstractScafiProgramTest(
     private val runs: Int = 5,
     private val raw: Boolean = false,
 ):
-
+  private val logger = LoggerFactory.getLogger(this.getClass)
   private lazy val candidatePrompts =
     decode[Prompts](Source.fromResource(promptsFilePath).mkString) match
       case Right(prompts) => prompts
-      case Left(error) => throw new RuntimeException(s"Failed to decode prompts $error")
+      case Left(error) =>
+        logger.error(s"Failed to decode prompts: $error")
+        throw new RuntimeException(s"Failed to decode prompts $error")
 
   private def programSpecification(
       knowledge: String,
@@ -49,7 +54,7 @@ abstract class AbstractScafiProgramTest(
       model: CodeGeneratorService,
   ): ExecutionContext ?=> Future[ScafiProgram] =
     if !raw then model.generateMain(knowledge, promptSpecification).map(ScafiProgram(_))
-    else model.generateRaw(knowledge, "", promptSpecification).map(ScafiProgram(_))
+    else model.generateRaw(knowledge, generatePreamblePrompt(), promptSpecification).map(ScafiProgram(_))
 
   private def executeScafiProgram(
       programUnderTest: ScafiProgram,
@@ -57,15 +62,15 @@ abstract class AbstractScafiProgramTest(
       post: String,
   )(using ExecutionContext): Either[ScafiTestResult, Network] =
     val builtProgram = buildProgram(programUnderTest.program, preamble, post)
-    println(s"Executing program: $testCase")
+    logger.info(s"Starting execution of the test case: `$testCase``")
     val res = Try {
       val f = Future { executeFromString[Network](builtProgram) }
       Await.result(f, 5.seconds)
     }.toEither.left.map(e =>
-      println(e)
+      logger.error(s"Failed to execute test case `$testCase` with error: ${e.getMessage}")
       CompilationFailed(programUnderTest.program),
     )
-    println(s"Program executed successfully: $testCase")
+    logger.info(s"Finalized `$testCase` with result: $res`")
     res
 
   def baselineWorkingProgram(): String
@@ -84,13 +89,13 @@ abstract class AbstractScafiProgramTest(
       val baselineProgram = ScafiProgram(baselineWorkingProgram())
       val baselineResult = executeScafiProgram(baselineProgram, preAction(), postAction())
       if baselineResult.isLeft then
-        println(s"Failed to compile baseline program for $testCase: ${baselineResult.left}")
+        logger.error(s"Failed to compile baseline program for $testCase: ${baselineResult.left}")
         break(Seq())
 
       val baselineNetwork = baselineResult.getOrElse(throw new RuntimeException("Baseline program failed to compile"))
       val baselineTestResult = programTests(baselineProgram.program, baselineNetwork)
       if !baselineTestResult.isInstanceOf[ScafiTestResult.Success] then
-        println(s"Baseline test failed: $baselineTestResult")
+        logger.error(s"Baseline test failed: $baselineTestResult")
         break(Seq())
       // execute LLM tests
       for
@@ -100,6 +105,7 @@ abstract class AbstractScafiProgramTest(
         model <- loaders
       yield Using(Source.fromResource(knowledgeFile))(_.mkString).toEither match
         case Left(error) =>
+          logger.error(s"Failed to load knowledge file $knowledgeFile: ${error.getMessage}")
           Future(SingleTestResult(testCase, n, knowledgeFile, model.toString, GenericFailure(error.getMessage)))
         case Right(knowledge) =>
           programSpecification(knowledge, prompt, model).map: currentProgram =>
@@ -107,8 +113,12 @@ abstract class AbstractScafiProgramTest(
               for producedNetwork <- executeScafiProgram(currentProgram, preAction(), postAction())
               yield programTests(currentProgram.program, producedNetwork)
             val result = outcome match
-              case Right(value) => value
-              case Left(error) => error
-            println("Executed program successfully with model: " + model)
+              case Right(value) =>
+                logger.info(s"Program executed successfully with model $model: $value")
+                value
+              case Left(error) =>
+                logger.error(s"Program execution failed with model $model: $error")
+                error
             SingleTestResult(testCase, n, knowledgeFile, model.toString, result)
+      end for
 end AbstractScafiProgramTest
