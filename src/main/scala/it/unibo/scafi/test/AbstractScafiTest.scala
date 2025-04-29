@@ -20,19 +20,18 @@ abstract class AbstractScafiProgramTest(
     private val knowledgePaths: List[String],
     private val promptsFilePath: String,
     private val loaders: List[CodeGeneratorService] = List(
-      OpenRouterService(Model.GEMMA_3_4B),
-      OpenRouterService(Model.GEMMA_3_12B),
-//      GeminiService(Model.GEMMA_3_27B),
-//      GeminiService(Model.GEMINI_2_PRO_EXP),
+//      OpenRouterService(Model.GEMMA_3_4B),
+//      OpenRouterService(Model.GEMMA_3_12B),
+//      OpenRouterService(Model.GEMMA_3_27B),
+//      GeminiService(Model.GEMINI_2_PRO),
 //      GeminiService(Model.GEMINI_2_FLASH_EXP),
 //      GeminiService(Model.GEMINI_1_5_FLASH),
 //      OpenRouterService(Model.LLAMA_3_3_70B_INSTRUCT),
-      OpenRouterService(Model.LLAMA_4_SCOUT),
-//      OpenRouterService(Model.LLAMA_3_2_1B_INSTRUCT), <- REMOVE FROM THE LIST: TOO SMALL
-      OpenRouterService(Model.MISTRAL_SMALL_3_1_24B),
-      OpenRouterService(Model.MISTRAL_8B),
+//      OpenRouterService(Model.LLAMA_4_SCOUT),
+//      OpenRouterService(Model.MISTRAL_SMALL_3_1_24B),
+//      OpenRouterService(Model.MISTRAL_8B),
 //      OpenRouterService(Model.QWEN_2_5_CODER_32B),
-//      OpenRouterService(Model.DEEPSEEK_R1),
+      OpenRouterService(Model.DEEPSEEK_R1),
 //      OpenRouterService(Model.GPT_4_1_MINI),
     ),
     private val runs: Int = 5,
@@ -69,11 +68,12 @@ abstract class AbstractScafiProgramTest(
            |
            |Generated program:
            |${programUnderTest.program}
-           |""".stripMargin
+           |""".stripMargin,
       )
       CompilationFailed("<redacted for size reasons, see logs>")
     logger.info(s"Finalized `$testCase`")
     res
+  end executeScafiProgram
 
   def baselineWorkingProgram(): String
 

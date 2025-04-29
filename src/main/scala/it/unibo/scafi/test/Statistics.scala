@@ -13,7 +13,7 @@ type ModelName = String
 type StatisticsPerModel = Map[TestName, Map[ModelName, StatisticResultPerTest]]
 type StatisticsPerTest = Map[TestName, StatisticResultPerTest]
 
-extension (results: Seq[SingleTestResult])
+extension (results: List[SingleTestResult])
   private def calculateStatistics(res: Seq[SingleTestResult], testName: String): StatisticResultPerTest =
     StatisticResultPerTest(
       testName = testName,
@@ -23,21 +23,43 @@ extension (results: Seq[SingleTestResult])
       genericErrors = res.count(_.result.isInstanceOf[ScafiTestResult.GenericFailure]),
     )
 
-  def toStatisticsPerModel: StatisticsPerModel =
+  def toResultsPerModel: Map[ModelName, List[StatisticResultPerTest]] =
     results
-      .groupBy(_.testName)
-      .map { case (testName, results) =>
-        testName -> results
-          .groupBy(_.modelUsed)
-          .map { case (modelUsed, results) =>
-            modelUsed -> calculateStatistics(results, testName)
+      .groupBy(_.modelUsed)
+      .map { case (modelUsed, results) =>
+        modelUsed -> results
+          .groupBy(_.testName)
+          .map { case (testName, results) =>
+            calculateStatistics(results, testName)
           }
+          .toList
       }
 
-  def toStatisticsPerTest: StatisticsPerTest =
-    results
-      .groupBy(_.testName)
-      .map { case (testName, results) =>
-        testName -> calculateStatistics(results, testName)
-      }
-end extension
+//extension (results: Seq[SingleTestResult])
+//  private def calculateStatistics(res: Seq[SingleTestResult], testName: String): StatisticResultPerTest =
+//    StatisticResultPerTest(
+//      testName = testName,
+//      succeeded = res.count(_.result.isInstanceOf[ScafiTestResult.Success]),
+//      nonCompiling = res.count(_.result.isInstanceOf[ScafiTestResult.CompilationFailed]),
+//      failed = res.count(_.result.isInstanceOf[ScafiTestResult.TestFailed]),
+//      genericErrors = res.count(_.result.isInstanceOf[ScafiTestResult.GenericFailure]),
+//    )
+//
+//  def toStatisticsPerModel: StatisticsPerModel =
+//    results
+//      .groupBy(_.testName)
+//      .map { case (testName, results) =>
+//        testName -> results
+//          .groupBy(_.modelUsed)
+//          .map { case (modelUsed, results) =>
+//            modelUsed -> calculateStatistics(results, testName)
+//          }
+//      }
+//
+//  def toStatisticsPerTest: StatisticsPerTest =
+//    results
+//      .groupBy(_.testName)
+//      .map { case (testName, results) =>
+//        testName -> calculateStatistics(results, testName)
+//      }
+//end extension
