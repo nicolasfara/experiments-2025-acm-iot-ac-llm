@@ -1,0 +1,79 @@
+{
+  "create a channel from the source node to the destination node" : {
+    "testName" : "create a channel from the source node to the destination node",
+    "succeeded" : 1,
+    "nonCompiling" : 54,
+    "failed" : 20,
+    "genericErrors" : 0
+  },
+  "collect the max ID in the network on each node" : {
+    "testName" : "collect the max ID in the network on each node",
+    "succeeded" : 3,
+    "nonCompiling" : 23,
+    "failed" : 49,
+    "genericErrors" : 0
+  },
+  "calculate the gradient with distance from source" : {
+    "testName" : "calculate the gradient with distance from source",
+    "succeeded" : 0,
+    "nonCompiling" : 47,
+    "failed" : 28,
+    "genericErrors" : 0
+  },
+  "calculate the gradient (with obstacles) with distance from source" : {
+    "testName" : "calculate the gradient (with obstacles) with distance from source",
+    "succeeded" : 0,
+    "nonCompiling" : 57,
+    "failed" : 18,
+    "genericErrors" : 0
+  },
+  "count neighbors excluding self" : {
+    "testName" : "count neighbors excluding self",
+    "succeeded" : 29,
+    "nonCompiling" : 23,
+    "failed" : 23,
+    "genericErrors" : 0
+  },
+  "create a channel (with obstacles) from the source node to the destination node" : {
+    "testName" : "create a channel (with obstacles) from the source node to the destination node",
+    "succeeded" : 0,
+    "nonCompiling" : 61,
+    "failed" : 14,
+    "genericErrors" : 0
+  },
+  "count down from 1000 to 0" : {
+    "testName" : "count down from 1000 to 0",
+    "succeeded" : 31,
+    "nonCompiling" : 16,
+    "failed" : 28,
+    "genericErrors" : 0
+  },
+  "SCR where temperature is above 30 degrees within the area" : {
+    "testName" : "SCR where temperature is above 30 degrees within the area",
+    "succeeded" : 0,
+    "nonCompiling" : 48,
+    "failed" : 27,
+    "genericErrors" : 0
+  },
+  "calculate the min distance from neighbors, in a grid" : {
+    "testName" : "calculate the min distance from neighbors, in a grid",
+    "succeeded" : 1,
+    "nonCompiling" : 32,
+    "failed" : 42,
+    "genericErrors" : 0
+  },
+  "count neighbors" : {
+    "testName" : "count neighbors",
+    "succeeded" : 27,
+    "nonCompiling" : 23,
+    "failed" : 25,
+    "genericErrors" : 0
+  },
+  "gather the IDs of their neighbors" : {
+    "testName" : "gather the IDs of their neighbors",
+    "succeeded" : 15,
+    "nonCompiling" : 47,
+    "failed" : 1,
+    "genericErrors" : 12
+  }
+}

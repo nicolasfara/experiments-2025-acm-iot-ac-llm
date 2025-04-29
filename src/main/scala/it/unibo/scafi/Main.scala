@@ -9,6 +9,7 @@ import io.circe.generic.auto.*
 import io.circe.syntax.*
 import it.unibo.scafi.program.{ChannelTest, SCRTest}
 import it.unibo.scafi.test.{AbstractScafiProgramTest, SingleTestResult, toStatisticsPerModel, toStatisticsPerTest}
+import org.slf4j.LoggerFactory
 
 import java.util.concurrent.{ScheduledThreadPoolExecutor, TimeUnit}
 
@@ -17,6 +18,7 @@ import java.util.concurrent.{ScheduledThreadPoolExecutor, TimeUnit}
   require(System.getenv("OPENROUTER_API_KEY") != null, "OPENROUTER_API_KEY environment variable must be set")
 //  require(System.getenv("GITHUB_TOKEN") != null, "GITHUB_TOKEN environment variable must be set")
 
+  val logger = LoggerFactory.getLogger("Main")
   val scheduler = new ScheduledThreadPoolExecutor(1)
 
   val tests = program.listPrograms()
@@ -47,13 +49,14 @@ import java.util.concurrent.{ScheduledThreadPoolExecutor, TimeUnit}
       }
     }
 //  val limiter = RateLimiter(90, 10.seconds)
-  
+
 //  val allResultsFuture = Future.sequence {
 //    tests.map(e => Future.sequence(e.executeTest()))
 //  }.map(_.flatten)
   val allResultsFuture = runScafiTestsSequentially(tests)
 
   val producesTestResults = Await.result(allResultsFuture, 48.hour)
+  logger.info(s"Test results: $producesTestResults")
   val statisticsByModel = producesTestResults.toStatisticsPerModel
   val statisticByModelSerialized = statisticsByModel.asJson.toString
   val overallStatistics = producesTestResults.toStatisticsPerTest
@@ -74,7 +77,7 @@ import java.util.concurrent.{ScheduledThreadPoolExecutor, TimeUnit}
   println(s"Results written to $destination")
   println(s"Statistics by model: $statisticsByModel")
   println(s"Overall statistics: $overallStatistics")
-  scheduler.shutdown()
+  val _ = scheduler.shutdownNow()
 //  val terminatingResult = executor.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS)
 //  println(s"All tasks completed: $terminatingResult")
 end main

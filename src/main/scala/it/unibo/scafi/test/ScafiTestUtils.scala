@@ -2,6 +2,9 @@ package it.unibo.scafi.test
 
 import it.unibo.scafi.test.FunctionalTestIncarnation.*
 
+import java.util.concurrent.{Callable, Executors, TimeUnit}
+import scala.concurrent.duration.DurationInt
+
 object ScafiTestUtils:
 
   @SuppressWarnings(Array("scalafix:DisableSyntax.null"))
@@ -95,9 +98,15 @@ object ScafiTestUtils:
 
   @SuppressWarnings(Array("scalafix:DisableSyntax.asInstanceOf"))
   def executeFromString[Result](program: String): Result =
-    dotty.tools.repl
-      .ScriptEngine()
-      .eval(program)
-      .asInstanceOf[Result]
+    val executor = Executors.newSingleThreadExecutor()
+    try
+      val task: Callable[Result] = () =>
+        dotty.tools.repl
+          .ScriptEngine()
+          .eval(program)
+          .asInstanceOf[Result]
+      val future = executor.submit(task)
+      future.get(5.seconds.toSeconds, TimeUnit.SECONDS)
+    finally executor.shutdown()
   end executeFromString
 end ScafiTestUtils

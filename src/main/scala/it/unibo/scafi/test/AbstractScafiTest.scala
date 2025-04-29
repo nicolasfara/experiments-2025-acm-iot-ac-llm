@@ -1,20 +1,18 @@
 package it.unibo.scafi.test
 
-import scala.concurrent.{Await, ExecutionContext, Future}
+import scala.concurrent.{ ExecutionContext, Future }
 import scala.io.Source
 import scala.util.boundary.break
-import scala.util.{Try, Using, boundary}
+import scala.util.{ boundary, Try, Using }
 import io.circe.generic.auto.*
 import io.circe.parser.*
 import it.unibo.scafi.Prompts
 import it.unibo.scafi.program.llm.*
 import it.unibo.scafi.program.utils.PromptUtils.generatePreamblePrompt
 import it.unibo.scafi.test.FunctionalTestIncarnation.Network
-import it.unibo.scafi.test.ScafiTestResult.{CompilationFailed, GenericFailure}
-import it.unibo.scafi.test.ScafiTestUtils.{buildProgram, executeFromString}
+import it.unibo.scafi.test.ScafiTestResult.{ CompilationFailed, GenericFailure }
+import it.unibo.scafi.test.ScafiTestUtils.{ buildProgram, executeFromString }
 import org.slf4j.LoggerFactory
-
-import scala.concurrent.duration.DurationInt
 
 final case class ScafiProgram(program: String)
 
@@ -29,8 +27,8 @@ abstract class AbstractScafiProgramTest(
 //      GeminiService(Model.GEMINI_2_FLASH_EXP),
 //      GeminiService(Model.GEMINI_1_5_FLASH),
 //      OpenRouterService(Model.LLAMA_3_3_70B_INSTRUCT),
-//      OpenRouterService(Model.LLAMA_4_SCOUT),
-      OpenRouterService(Model.LLAMA_3_2_1B_INSTRUCT),
+      OpenRouterService(Model.LLAMA_4_SCOUT),
+//      OpenRouterService(Model.LLAMA_3_2_1B_INSTRUCT), <- REMOVE FROM THE LIST: TOO SMALL
       OpenRouterService(Model.MISTRAL_SMALL_3_1_24B),
       OpenRouterService(Model.MISTRAL_8B),
 //      OpenRouterService(Model.QWEN_2_5_CODER_32B),
@@ -63,14 +61,18 @@ abstract class AbstractScafiProgramTest(
   )(using ExecutionContext): Either[ScafiTestResult, Network] =
     val builtProgram = buildProgram(programUnderTest.program, preamble, post)
     logger.info(s"Starting execution of the test case: `$testCase``")
-    val res = Try {
-      val f = Future { executeFromString[Network](builtProgram) }
-      Await.result(f, 5.seconds)
-    }.toEither.left.map(e =>
-      logger.error(s"Failed to execute test case `$testCase` with error: ${e.getMessage}")
-      CompilationFailed(programUnderTest.program),
-    )
-    logger.info(s"Finalized `$testCase` with result: $res`")
+    val res = Try:
+      executeFromString[Network](builtProgram)
+    .toEither.left.map: e =>
+      logger.error(
+        s"""Failed to execute test case `$testCase` with error: ${e.getMessage}
+           |
+           |Generated program:
+           |${programUnderTest.program}
+           |""".stripMargin
+      )
+      CompilationFailed("<redacted for size reasons, see logs>")
+    logger.info(s"Finalized `$testCase`")
     res
 
   def baselineWorkingProgram(): String
@@ -119,6 +121,7 @@ abstract class AbstractScafiProgramTest(
               case Left(error) =>
                 logger.error(s"Program execution failed with model $model: $error")
                 error
+            logger.info(s"Test case `$testCase` with model `$model` completed")
             SingleTestResult(testCase, n, knowledgeFile, model.toString, result)
       end for
 end AbstractScafiProgramTest
