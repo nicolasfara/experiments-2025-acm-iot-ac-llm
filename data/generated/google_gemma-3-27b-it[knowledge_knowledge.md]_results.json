@@ -2,8 +2,8 @@
   {
     "testName" : "create a channel from the source node to the destination node",
     "succeeded" : 0,
-    "nonCompiling" : 3,
-    "failed" : 17,
+    "nonCompiling" : 4,
+    "failed" : 16,
     "genericErrors" : 0
   },
   {
@@ -23,8 +23,8 @@
   {
     "testName" : "calculate the gradient (with obstacles) with distance from source",
     "succeeded" : 0,
-    "nonCompiling" : 15,
-    "failed" : 5,
+    "nonCompiling" : 19,
+    "failed" : 1,
     "genericErrors" : 0
   },
   {
@@ -37,8 +37,8 @@
   {
     "testName" : "create a channel (with obstacles) from the source node to the destination node",
     "succeeded" : 0,
-    "nonCompiling" : 18,
-    "failed" : 2,
+    "nonCompiling" : 19,
+    "failed" : 1,
     "genericErrors" : 0
   },
   {
@@ -51,21 +51,21 @@
   {
     "testName" : "SCR where temperature is above 30 degrees within the area",
     "succeeded" : 0,
-    "nonCompiling" : 5,
-    "failed" : 15,
+    "nonCompiling" : 6,
+    "failed" : 14,
     "genericErrors" : 0
   },
   {
     "testName" : "calculate the min distance from neighbors, in a grid",
     "succeeded" : 0,
-    "nonCompiling" : 1,
-    "failed" : 19,
+    "nonCompiling" : 0,
+    "failed" : 20,
     "genericErrors" : 0
   },
   {
     "testName" : "count neighbors",
-    "succeeded" : 20,
-    "nonCompiling" : 0,
+    "succeeded" : 19,
+    "nonCompiling" : 1,
     "failed" : 0,
     "genericErrors" : 0
   },

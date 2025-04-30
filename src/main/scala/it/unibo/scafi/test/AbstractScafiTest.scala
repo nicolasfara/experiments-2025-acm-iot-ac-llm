@@ -22,8 +22,8 @@ abstract class AbstractScafiProgramTest(
     private val loaders: List[CodeGeneratorService] = List(
 //      OpenRouterService(Model.GEMMA_3_4B),
 //      OpenRouterService(Model.GEMMA_3_12B),
-      OpenRouterService(Model.GEMMA_3_27B),
-//      GeminiService(Model.GEMINI_2_5_PRO),
+//      OpenRouterService(Model.GEMMA_3_27B),
+      GeminiService(Model.GEMINI_2_5_PRO),
 //      GeminiService(Model.GEMINI_2_FLASH_EXP),
 //      GeminiService(Model.GEMINI_1_5_FLASH),
 //      OpenRouterService(Model.LLAMA_3_3_70B_INSTRUCT),
@@ -34,7 +34,7 @@ abstract class AbstractScafiProgramTest(
 //      OpenRouterService(Model.DEEPSEEK_R1),
 //      OpenRouterService(Model.GPT_4_1_MINI),
     ),
-    private val runs: Int = 5,
+    private val runs: Int = 20,
 ):
   private val logger = LoggerFactory.getLogger(this.getClass)
   private lazy val candidatePrompts =

@@ -6,7 +6,7 @@ import dev.langchain4j.model.openai.OpenAiStreamingChatModel
 import it.unibo.scafi.program.utils.{PromptUtils, StringUtils}
 import org.slf4j.LoggerFactory
 
-import java.time.Duration.ofSeconds
+import java.time.Duration.ofMinutes
 
 class OpenRouterService(openRouterModel: Model) extends CodeGeneratorService:
   private val logger = LoggerFactory.getLogger(this.getClass)
@@ -16,7 +16,7 @@ class OpenRouterService(openRouterModel: Model) extends CodeGeneratorService:
     .baseUrl(url)
     .apiKey(System.getenv("OPENROUTER_API_KEY"))
     .modelName(openRouterModel.codeName)
-    .timeout(ofSeconds(120))
+    .timeout(ofMinutes(60))
     .build()
 
   override def generateRaw(

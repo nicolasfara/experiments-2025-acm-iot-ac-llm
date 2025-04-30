@@ -18,7 +18,7 @@ enum Model(val codeName: String):
   // Qwen Models
   case QWEN_2_5_CODER_32B extends Model("qwen/qwen-2.5-coder-32b-instruct")
   // DeepSeek Models
-  case DEEPSEEK_R1 extends Model("deepseek/deepseek-r1")
+  case DEEPSEEK_R1 extends Model("deepseek/deepseek-r1-zero:free")
   // OpenAI Models
   case GPT_4_1_MINI extends Model("openai/gpt-4.1-mini")
 end Model
