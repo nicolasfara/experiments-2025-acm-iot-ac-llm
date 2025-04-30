@@ -22,9 +22,9 @@
   },
   {
     "testName" : "calculate the gradient (with obstacles) with distance from source",
-    "succeeded" : 0,
-    "nonCompiling" : 4,
-    "failed" : 1,
+    "succeeded" : 1,
+    "nonCompiling" : 2,
+    "failed" : 2,
     "genericErrors" : 0
   },
   {
@@ -50,16 +50,16 @@
   },
   {
     "testName" : "SCR where temperature is above 30 degrees within the area",
-    "succeeded" : 1,
-    "nonCompiling" : 1,
+    "succeeded" : 0,
+    "nonCompiling" : 2,
     "failed" : 3,
     "genericErrors" : 0
   },
   {
     "testName" : "calculate the min distance from neighbors, in a grid",
-    "succeeded" : 2,
-    "nonCompiling" : 1,
-    "failed" : 2,
+    "succeeded" : 1,
+    "nonCompiling" : 3,
+    "failed" : 1,
     "genericErrors" : 0
   },
   {
@@ -71,9 +71,9 @@
   },
   {
     "testName" : "gather the IDs of their neighbors",
-    "succeeded" : 0,
-    "nonCompiling" : 4,
+    "succeeded" : 1,
+    "nonCompiling" : 2,
     "failed" : 1,
-    "genericErrors" : 0
+    "genericErrors" : 1
   }
 ]

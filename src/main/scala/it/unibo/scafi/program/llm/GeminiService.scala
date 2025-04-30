@@ -11,7 +11,6 @@ class GeminiService(model: Model) extends CodeGeneratorService:
     .builder()
     .maxRetries(10)
     .apiKey(System.getenv("GEMINI_API_KEY"))
-    .temperature(0.5)
     .timeout(java.time.Duration.ofMinutes(10))
     .modelName(model.codeName)
     .build()

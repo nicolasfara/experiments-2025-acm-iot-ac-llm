@@ -23,7 +23,7 @@ abstract class AbstractScafiProgramTest(
 //      OpenRouterService(Model.GEMMA_3_4B),
 //      OpenRouterService(Model.GEMMA_3_12B),
       OpenRouterService(Model.GEMMA_3_27B),
-//      GeminiService(Model.GEMINI_2_PRO),
+//      GeminiService(Model.GEMINI_2_5_PRO),
 //      GeminiService(Model.GEMINI_2_FLASH_EXP),
 //      GeminiService(Model.GEMINI_1_5_FLASH),
 //      OpenRouterService(Model.LLAMA_3_3_70B_INSTRUCT),
@@ -35,7 +35,6 @@ abstract class AbstractScafiProgramTest(
 //      OpenRouterService(Model.GPT_4_1_MINI),
     ),
     private val runs: Int = 5,
-    private val raw: Boolean = false,
 ):
   private val logger = LoggerFactory.getLogger(this.getClass)
   private lazy val candidatePrompts =
@@ -50,8 +49,7 @@ abstract class AbstractScafiProgramTest(
       promptSpecification: String,
       model: CodeGeneratorService,
   ): ExecutionContext ?=> Future[ScafiProgram] =
-    if !raw then model.generateMain(knowledge, promptSpecification).map(ScafiProgram(_))
-    else model.generateRaw(knowledge, generatePreamblePrompt(), promptSpecification).map(ScafiProgram(_))
+    model.generateRaw(knowledge, generatePreamblePrompt(), promptSpecification).map(ScafiProgram(_))
 
   private def executeScafiProgram(
       programUnderTest: ScafiProgram,
