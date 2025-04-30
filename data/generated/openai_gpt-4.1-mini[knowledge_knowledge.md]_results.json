@@ -2,34 +2,34 @@
   {
     "testName" : "create a channel from the source node to the destination node",
     "succeeded" : 0,
-    "nonCompiling" : 3,
-    "failed" : 2,
+    "nonCompiling" : 17,
+    "failed" : 3,
     "genericErrors" : 0
   },
   {
     "testName" : "collect the max ID in the network on each node",
-    "succeeded" : 5,
+    "succeeded" : 20,
     "nonCompiling" : 0,
     "failed" : 0,
     "genericErrors" : 0
   },
   {
     "testName" : "calculate the gradient with distance from source",
-    "succeeded" : 5,
-    "nonCompiling" : 0,
-    "failed" : 0,
+    "succeeded" : 17,
+    "nonCompiling" : 2,
+    "failed" : 1,
     "genericErrors" : 0
   },
   {
     "testName" : "calculate the gradient (with obstacles) with distance from source",
-    "succeeded" : 0,
-    "nonCompiling" : 1,
-    "failed" : 4,
+    "succeeded" : 8,
+    "nonCompiling" : 4,
+    "failed" : 8,
     "genericErrors" : 0
   },
   {
     "testName" : "count neighbors excluding self",
-    "succeeded" : 5,
+    "succeeded" : 20,
     "nonCompiling" : 0,
     "failed" : 0,
     "genericErrors" : 0
@@ -37,13 +37,13 @@
   {
     "testName" : "create a channel (with obstacles) from the source node to the destination node",
     "succeeded" : 0,
-    "nonCompiling" : 2,
-    "failed" : 3,
+    "nonCompiling" : 7,
+    "failed" : 13,
     "genericErrors" : 0
   },
   {
     "testName" : "count down from 1000 to 0",
-    "succeeded" : 5,
+    "succeeded" : 20,
     "nonCompiling" : 0,
     "failed" : 0,
     "genericErrors" : 0
@@ -51,29 +51,29 @@
   {
     "testName" : "SCR where temperature is above 30 degrees within the area",
     "succeeded" : 0,
-    "nonCompiling" : 2,
-    "failed" : 3,
+    "nonCompiling" : 7,
+    "failed" : 13,
     "genericErrors" : 0
   },
   {
     "testName" : "calculate the min distance from neighbors, in a grid",
     "succeeded" : 0,
     "nonCompiling" : 0,
-    "failed" : 5,
+    "failed" : 20,
     "genericErrors" : 0
   },
   {
     "testName" : "count neighbors",
-    "succeeded" : 5,
+    "succeeded" : 20,
     "nonCompiling" : 0,
     "failed" : 0,
     "genericErrors" : 0
   },
   {
     "testName" : "gather the IDs of their neighbors",
-    "succeeded" : 1,
-    "nonCompiling" : 1,
-    "failed" : 3,
+    "succeeded" : 2,
+    "nonCompiling" : 0,
+    "failed" : 18,
     "genericErrors" : 0
   }
 ]
