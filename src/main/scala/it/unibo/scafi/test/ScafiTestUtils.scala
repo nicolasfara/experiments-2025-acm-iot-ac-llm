@@ -1,12 +1,11 @@
 package it.unibo.scafi.test
 
+import cats.effect.IO
 import it.unibo.scafi.test.FunctionalTestIncarnation.*
 
-import java.util.concurrent.{Callable, Executors, TimeUnit}
-import scala.concurrent.duration.DurationInt
+import java.util.concurrent.{ Callable, Executors, TimeUnit }
 
 object ScafiTestUtils:
-
   @SuppressWarnings(Array("scalafix:DisableSyntax.null"))
   def runProgram(exp: => Any, ntimes: Int = 500)(net: Network & SimulatorOps)(using
       node: AggregateInterpreter,
@@ -97,16 +96,18 @@ object ScafiTestUtils:
        |""".stripMargin
 
   @SuppressWarnings(Array("scalafix:DisableSyntax.asInstanceOf"))
-  def executeFromString[Result](program: String): Result =
-    val executor = Executors.newSingleThreadExecutor()
-    try
-      val task: Callable[Result] = () =>
-        dotty.tools.repl
-          .ScriptEngine()
-          .eval(program)
-          .asInstanceOf[Result]
-      val future = executor.submit(task)
-      future.get(5.seconds.toSeconds, TimeUnit.SECONDS)
-    finally executor.shutdown()
-  end executeFromString
+  def executeFromString[Result](program: String): IO[Result] = IO.async: cb =>
+    IO:
+      val executor = Executors.newSingleThreadScheduledExecutor()
+      try
+        val callable: Callable[Result] = () =>
+          dotty.tools.repl
+            .ScriptEngine()
+            .eval(program)
+            .asInstanceOf[Result]
+        val future = executor.submit(callable)
+        cb(Right(future.get(5, TimeUnit.SECONDS)))
+      catch case _: Throwable => cb(Left(ScafiCompilationException()))
+      finally executor.shutdown()
+      Some(IO(executor.shutdown()))
 end ScafiTestUtils

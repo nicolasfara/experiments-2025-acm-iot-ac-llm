@@ -1,9 +1,10 @@
 package it.unibo.scafi.program.llm
 
-import scala.concurrent.{ExecutionContext, Future, Promise}
-import dev.langchain4j.model.chat.response.{ChatResponse, StreamingChatResponseHandler}
+import cats.effect.IO
+
+import dev.langchain4j.model.chat.response.{ ChatResponse, StreamingChatResponseHandler }
 import dev.langchain4j.model.openai.OpenAiStreamingChatModel
-import it.unibo.scafi.program.utils.{PromptUtils, StringUtils}
+import it.unibo.scafi.program.utils.{ PromptUtils, StringUtils }
 import org.slf4j.LoggerFactory
 
 import java.time.Duration.ofMinutes
@@ -23,34 +24,32 @@ class OpenRouterService(openRouterModel: Model) extends CodeGeneratorService:
       localKnowledge: String,
       preamble: String,
       prompt: String,
-  ): ExecutionContext ?=> Future[String] =
-    val promise = Promise[String]()
+  ): IO[String] = IO.async: cb =>
     val fullPrompt = s"""$localKnowledge
-    |
-    |$preamble
-    |
-    |$prompt
-    |""".stripMargin
+      |
+      |$preamble
+      |
+      |$prompt
+      |""".stripMargin
+    IO:
+      model.chat(
+        fullPrompt,
+        new StreamingChatResponseHandler:
+          override def onPartialResponse(partialResponse: String): Unit = ()
 
-    model.chat(
-      fullPrompt,
-      new StreamingChatResponseHandler():
-        override def onPartialResponse(partialResponse: String): Unit =
-          logger.debug(s"Received partial response from model ${openRouterModel.codeName}")
+          override def onCompleteResponse(completeResponse: ChatResponse): Unit =
+            logger.debug(s"Received complete response from model ${openRouterModel.codeName}")
+            val cleaned = StringUtils.refineOutput(completeResponse.aiMessage().text())
+            cb(Right(cleaned))
 
-        override def onCompleteResponse(completeResponse: ChatResponse): Unit =
-          logger.debug(s"Received complete response from model ${openRouterModel.codeName}")
-          val cleaned = StringUtils.refineOutput(completeResponse.aiMessage().text())
-          promise.success(cleaned)
-
-        override def onError(error: Throwable): Unit =
-          logger.error(s"Error while generating code with model ${openRouterModel.codeName}", error)
-          promise.failure(error),
-    )
-    promise.future
+          override def onError(error: Throwable): Unit =
+            logger.error(s"Error while generating code with model ${openRouterModel.codeName}", error)
+            cb(Left(error)),
+      )
+      Some(IO.unit) // Find a way to interrupt the model inside this IO...
   end generateRaw
 
-  override def generateMain(localKnowledge: String, prompt: String): ExecutionContext ?=> Future[String] =
+  override def generateMain(localKnowledge: String, prompt: String): IO[String] =
     generateRaw(localKnowledge, PromptUtils.generatePreamblePrompt(), prompt)
 
   override def toString: String = openRouterModel.codeName

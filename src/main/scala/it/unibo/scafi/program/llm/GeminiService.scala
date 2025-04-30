@@ -1,10 +1,10 @@
 package it.unibo.scafi.program.llm
 
-import scala.concurrent.{ ExecutionContext, Future, Promise }
+import cats.effect.IO
 
 import dev.langchain4j.model.chat.response.{ ChatResponse, StreamingChatResponseHandler }
 import dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel
-import it.unibo.scafi.program.utils.StringUtils
+import it.unibo.scafi.program.utils.{ PromptUtils, StringUtils }
 
 class GeminiService(model: Model) extends CodeGeneratorService:
   private val langchainModel = GoogleAiGeminiStreamingChatModel
@@ -19,33 +19,31 @@ class GeminiService(model: Model) extends CodeGeneratorService:
       localKnowledge: String,
       preamble: String,
       prompt: String,
-  ): ExecutionContext ?=> Future[String] =
-    val promise = Promise[String]()
+  ): IO[String] = IO.async: cb =>
     val fullPrompt = s"""$localKnowledge
       |
       |$preamble
       |
       |$prompt
       |""".stripMargin
+    IO:
+      langchainModel.chat(
+        fullPrompt,
+        new StreamingChatResponseHandler():
+          override def onPartialResponse(partialResponse: String): Unit = ()
 
-    langchainModel.chat(
-      fullPrompt,
-      new StreamingChatResponseHandler():
-        override def onPartialResponse(partialResponse: String): Unit = ()
-        //        println(s"LC PR ${langChainModel.toString}: \n$partialResponse")
+          override def onCompleteResponse(completeResponse: ChatResponse): Unit =
+            val cleaned = StringUtils.refineOutput(completeResponse.aiMessage().text())
+            cb(Right(cleaned))
 
-        override def onCompleteResponse(completeResponse: ChatResponse): Unit =
-          val cleaned = StringUtils.refineOutput(completeResponse.aiMessage().text())
-          promise.success(cleaned)
-
-        override def onError(error: Throwable): Unit = promise.failure(error),
-    )
-    promise.future
+          override def onError(error: Throwable): Unit =
+            cb(Left(error)),
+      )
+      None // Try a way to cancel the model execution
   end generateRaw
 
-  override def generateMain(localKnowledge: String, prompt: String): ExecutionContext ?=> Future[String] =
-//    generateRaw(localKnowledge, PromptUtils.generatePreamblePrompt(), prompt)
-    generateRaw(localKnowledge, "", prompt)
+  override def generateMain(localKnowledge: String, prompt: String): IO[String] =
+    generateRaw(localKnowledge, PromptUtils.generatePreamblePrompt(), prompt)
 
   override def toString: String = model.codeName
 end GeminiService

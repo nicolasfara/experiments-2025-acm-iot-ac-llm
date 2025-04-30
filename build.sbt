@@ -62,7 +62,9 @@ lazy val root = project
       "dev.langchain4j" % "langchain4j-community-xinference" % langchain4jVersion,
       "org.slf4j"       % "slf4j-api"      % "2.0.17",
       "ch.qos.logback"  % "logback-classic" % "1.5.18",
-      "org.typelevel" %% "cats-effect" % "3.6.1"
+      "org.typelevel" %% "cats-effect" % "3.6.1",
+      "org.typelevel" %% "log4cats-core"    % "2.7.0",  // Only if you want to Support Any Backend
+      "org.typelevel" %% "log4cats-slf4j"   % "2.7.0",  // Direct Slf4j Support - Recommended
     ),
     scalacOptions ++= Seq(
       "-Werror",
@@ -71,7 +73,7 @@ lazy val root = project
       "-Wnonunit-statement",
       //  "-Yexplicit-nulls",
       "-Wsafe-init",
-      "-Ycheck-reentrant",
+//      "-Ycheck-reentrant",
       "-Xcheck-macros",
       "-rewrite",
       "-indent",
