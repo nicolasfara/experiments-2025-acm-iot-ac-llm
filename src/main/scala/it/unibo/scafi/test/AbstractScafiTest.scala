@@ -22,7 +22,7 @@ abstract class AbstractScafiProgramTest(
     private val loaders: List[CodeGeneratorService] = List(
 //      OpenRouterService(Model.GEMMA_3_4B),
 //      OpenRouterService(Model.GEMMA_3_12B),
-//      OpenRouterService(Model.GEMMA_3_27B),
+      OpenRouterService(Model.GEMMA_3_27B),
 //      GeminiService(Model.GEMINI_2_PRO),
 //      GeminiService(Model.GEMINI_2_FLASH_EXP),
 //      GeminiService(Model.GEMINI_1_5_FLASH),
@@ -31,7 +31,7 @@ abstract class AbstractScafiProgramTest(
 //      OpenRouterService(Model.MISTRAL_SMALL_3_1_24B),
 //      OpenRouterService(Model.MISTRAL_8B),
 //      OpenRouterService(Model.QWEN_2_5_CODER_32B),
-      OpenRouterService(Model.DEEPSEEK_R1),
+//      OpenRouterService(Model.DEEPSEEK_R1),
 //      OpenRouterService(Model.GPT_4_1_MINI),
     ),
     private val runs: Int = 5,

@@ -7,7 +7,7 @@ import io.circe.*
 import io.circe.generic.auto.*
 import io.circe.syntax.*
 import it.unibo.scafi.program.{ ChannelTest, SCRTest }
-import it.unibo.scafi.test.{ toResultsPerModel, AbstractScafiProgramTest }
+import it.unibo.scafi.test.{ toResultsPerModelAndKnowledge, AbstractScafiProgramTest }
 import org.slf4j.LoggerFactory
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -28,13 +28,14 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
   val producesTestResults = Await.result(allResultsFuture, 2.hour)
   logger.info(s"Test completed with ${producesTestResults.size} results")
-  val resultsPerModel = producesTestResults.toResultsPerModel
+  val resultsPerModel = producesTestResults.toResultsPerModelAndKnowledge
 
   val destinationPath = Path.of("data", "generated")
-  for (modelName, results) <- resultsPerModel
+  for ((modelName, knowledgeFile), results) <- resultsPerModel
   do
     val serializedResults = results.asJson.toString
-    val file = destinationPath.resolve(s"${modelName.replaceAll("/", "_")}_results.json")
+    val file =
+      destinationPath.resolve(s"${modelName.replaceAll("/", "_")}[${knowledgeFile.replaceAll("/", "_")}]_results.json")
     Files.write(file, serializedResults.getBytes)
 
 //  val statisticsByModel = producesTestResults.toStatisticsPerModel

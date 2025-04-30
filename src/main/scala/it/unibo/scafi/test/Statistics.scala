@@ -23,17 +23,17 @@ extension (results: List[SingleTestResult])
       genericErrors = res.count(_.result.isInstanceOf[ScafiTestResult.GenericFailure]),
     )
 
-  def toResultsPerModel: Map[ModelName, List[StatisticResultPerTest]] =
+  def toResultsPerModelAndKnowledge: Map[(ModelName, String), List[StatisticResultPerTest]] =
     results
-      .groupBy(_.modelUsed)
-      .map { case (modelUsed, results) =>
-        modelUsed -> results
-          .groupBy(_.testName)
-          .map { case (testName, results) =>
-            calculateStatistics(results, testName)
-          }
-          .toList
-      }
+        .groupBy(r => (r.modelUsed, r.knowledgeFile))
+        .map { case ((modelUsed, knowledgeFile), results) =>
+            (modelUsed, knowledgeFile) -> results
+            .groupBy(_.testName)
+            .map { case (testName, results) =>
+                calculateStatistics(results, testName)
+            }
+            .toList
+        }
 
 //extension (results: Seq[SingleTestResult])
 //  private def calculateStatistics(res: Seq[SingleTestResult], testName: String): StatisticResultPerTest =

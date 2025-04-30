@@ -61,7 +61,8 @@ lazy val root = project
       "dev.langchain4j" % "langchain4j-local-ai" % langchain4jVersion,
       "dev.langchain4j" % "langchain4j-community-xinference" % langchain4jVersion,
       "org.slf4j"       % "slf4j-api"      % "2.0.17",
-      "ch.qos.logback"  % "logback-classic" % "1.5.18"
+      "ch.qos.logback"  % "logback-classic" % "1.5.18",
+      "org.typelevel" %% "cats-effect" % "3.6.1"
     ),
     scalacOptions ++= Seq(
       "-Werror",
