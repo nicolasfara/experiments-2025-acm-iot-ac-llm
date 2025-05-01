@@ -160,9 +160,9 @@ if __name__ == '__main__':
         "SCR where temperature is above 30 degrees within the area": "SCR Temperature Above 30",
     })
     dataset = rename_index_values(dataset, "model", {
-        "google_gemma-3-4b-it": "2.0 Pro Exp",
-        "google_gemma-3-12b-it": "2.0 Flash Exp",
-        "google_gemma-3-27b-it": "1.5 Flash",
+        "google_gemma-3-4b-it": "Gemma 3.4B Instruct",
+        "google_gemma-3-12b-it": "Gemma 3.12B Instruct",
+        "google_gemma-3-27b-it": "Gemma 3.27B Instruct",
         "gemini-2.5-pro-preview-03-25": "Gemini 2.5 Pro",
         "gemini-2.0-flash-001": "Gemini 2.0 Flash Exp",
         "gemini-1.5-flash": "Gemini 1.5 Flash",
