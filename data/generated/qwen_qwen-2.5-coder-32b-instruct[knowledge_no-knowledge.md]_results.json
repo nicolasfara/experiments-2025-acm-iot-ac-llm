@@ -23,15 +23,15 @@
   {
     "testName" : "calculate the gradient (with obstacles) with distance from source",
     "succeeded" : 0,
-    "nonCompiling" : 19,
-    "failed" : 1,
+    "nonCompiling" : 20,
+    "failed" : 0,
     "genericErrors" : 0
   },
   {
     "testName" : "count neighbors excluding self",
     "succeeded" : 0,
-    "nonCompiling" : 19,
-    "failed" : 1,
+    "nonCompiling" : 16,
+    "failed" : 4,
     "genericErrors" : 0
   },
   {
@@ -44,8 +44,8 @@
   {
     "testName" : "count down from 1000 to 0",
     "succeeded" : 0,
-    "nonCompiling" : 20,
-    "failed" : 0,
+    "nonCompiling" : 17,
+    "failed" : 3,
     "genericErrors" : 0
   },
   {
@@ -65,8 +65,8 @@
   {
     "testName" : "count neighbors",
     "succeeded" : 0,
-    "nonCompiling" : 17,
-    "failed" : 3,
+    "nonCompiling" : 19,
+    "failed" : 1,
     "genericErrors" : 0
   },
   {
