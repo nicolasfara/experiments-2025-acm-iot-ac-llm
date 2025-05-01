@@ -2,29 +2,29 @@
   {
     "testName" : "create a channel from the source node to the destination node",
     "succeeded" : 0,
-    "nonCompiling" : 20,
-    "failed" : 0,
+    "nonCompiling" : 19,
+    "failed" : 1,
     "genericErrors" : 0
   },
   {
     "testName" : "collect the max ID in the network on each node",
-    "succeeded" : 3,
-    "nonCompiling" : 4,
-    "failed" : 13,
+    "succeeded" : 4,
+    "nonCompiling" : 5,
+    "failed" : 11,
     "genericErrors" : 0
   },
   {
     "testName" : "calculate the gradient with distance from source",
     "succeeded" : 0,
-    "nonCompiling" : 12,
-    "failed" : 8,
+    "nonCompiling" : 14,
+    "failed" : 6,
     "genericErrors" : 0
   },
   {
     "testName" : "calculate the gradient (with obstacles) with distance from source",
     "succeeded" : 0,
-    "nonCompiling" : 11,
-    "failed" : 9,
+    "nonCompiling" : 6,
+    "failed" : 14,
     "genericErrors" : 0
   },
   {
@@ -37,8 +37,8 @@
   {
     "testName" : "create a channel (with obstacles) from the source node to the destination node",
     "succeeded" : 0,
-    "nonCompiling" : 8,
-    "failed" : 12,
+    "nonCompiling" : 18,
+    "failed" : 2,
     "genericErrors" : 0
   },
   {
@@ -50,29 +50,29 @@
   },
   {
     "testName" : "SCR where temperature is above 30 degrees within the area",
-    "succeeded" : 0,
-    "nonCompiling" : 14,
-    "failed" : 6,
+    "succeeded" : 2,
+    "nonCompiling" : 11,
+    "failed" : 7,
     "genericErrors" : 0
   },
   {
     "testName" : "calculate the min distance from neighbors, in a grid",
-    "succeeded" : 9,
-    "nonCompiling" : 7,
-    "failed" : 4,
+    "succeeded" : 14,
+    "nonCompiling" : 5,
+    "failed" : 1,
     "genericErrors" : 0
   },
   {
     "testName" : "count neighbors",
-    "succeeded" : 19,
-    "nonCompiling" : 1,
+    "succeeded" : 20,
+    "nonCompiling" : 0,
     "failed" : 0,
     "genericErrors" : 0
   },
   {
     "testName" : "gather the IDs of their neighbors",
-    "succeeded" : 1,
-    "nonCompiling" : 18,
+    "succeeded" : 6,
+    "nonCompiling" : 13,
     "failed" : 1,
     "genericErrors" : 0
   }

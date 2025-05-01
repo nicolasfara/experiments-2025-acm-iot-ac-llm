@@ -13,3 +13,5 @@ final case class SingleTestResult(
     modelUsed: String,
     result: ScafiTestResult,
 )
+
+case class ScafiCompilationException(message: String = "Compilation failed") extends Throwable

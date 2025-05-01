@@ -2,35 +2,35 @@
   {
     "testName" : "create a channel from the source node to the destination node",
     "succeeded" : 1,
-    "nonCompiling" : 18,
-    "failed" : 1,
+    "nonCompiling" : 19,
+    "failed" : 0,
     "genericErrors" : 0
   },
   {
     "testName" : "collect the max ID in the network on each node",
     "succeeded" : 0,
-    "nonCompiling" : 0,
-    "failed" : 20,
+    "nonCompiling" : 1,
+    "failed" : 19,
     "genericErrors" : 0
   },
   {
     "testName" : "calculate the gradient with distance from source",
-    "succeeded" : 1,
-    "nonCompiling" : 11,
-    "failed" : 8,
+    "succeeded" : 3,
+    "nonCompiling" : 15,
+    "failed" : 2,
     "genericErrors" : 0
   },
   {
     "testName" : "calculate the gradient (with obstacles) with distance from source",
     "succeeded" : 0,
-    "nonCompiling" : 16,
-    "failed" : 4,
+    "nonCompiling" : 14,
+    "failed" : 6,
     "genericErrors" : 0
   },
   {
     "testName" : "count neighbors excluding self",
-    "succeeded" : 19,
-    "nonCompiling" : 1,
+    "succeeded" : 20,
+    "nonCompiling" : 0,
     "failed" : 0,
     "genericErrors" : 0
   },
@@ -50,30 +50,30 @@
   },
   {
     "testName" : "SCR where temperature is above 30 degrees within the area",
-    "succeeded" : 2,
+    "succeeded" : 0,
     "nonCompiling" : 12,
-    "failed" : 6,
+    "failed" : 8,
     "genericErrors" : 0
   },
   {
     "testName" : "calculate the min distance from neighbors, in a grid",
-    "succeeded" : 0,
-    "nonCompiling" : 1,
-    "failed" : 19,
+    "succeeded" : 6,
+    "nonCompiling" : 2,
+    "failed" : 12,
     "genericErrors" : 0
   },
   {
     "testName" : "count neighbors",
-    "succeeded" : 19,
-    "nonCompiling" : 0,
-    "failed" : 1,
+    "succeeded" : 18,
+    "nonCompiling" : 2,
+    "failed" : 0,
     "genericErrors" : 0
   },
   {
     "testName" : "gather the IDs of their neighbors",
-    "succeeded" : 7,
-    "nonCompiling" : 9,
-    "failed" : 2,
+    "succeeded" : 6,
+    "nonCompiling" : 11,
+    "failed" : 1,
     "genericErrors" : 2
   }
 ]
