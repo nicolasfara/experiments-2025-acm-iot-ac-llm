@@ -30,7 +30,7 @@ abstract class AbstractScafiProgramTest(
 //      OpenRouterService(Model.MISTRAL_SMALL_3_1_24B),
 //      OpenRouterService(Model.MISTRAL_8B),
 //      OpenRouterService(Model.QWEN_2_5_CODER_32B),
-//      OpenRouterService(Model.DEEPSEEK_R1),
+      OpenRouterService(Model.DEEPSEEK_R1),
 //      OpenRouterService(Model.GPT_4_1_MINI),
     ),
     private val runs: Int = 20,
@@ -88,6 +88,8 @@ abstract class AbstractScafiProgramTest(
     val baselineProgram = ScafiProgram(baselineWorkingProgram())
     val baselineResult = executeScafiProgram(baselineProgram, preAction(), postAction())
       .map(programTests(baselineProgram.program, _))
+      .recover:
+        case _: ScafiCompilationException => ScafiTestResult.CompilationFailed(baselineProgram.program)
       .map(SingleTestResult(testCase, 0, "baseline", "baseline", _))
     val otherTests = for
       n <- 0 until runs
@@ -98,8 +100,10 @@ abstract class AbstractScafiProgramTest(
       for
         knowledge <- readFile(knowledgeSource)
         program <- programSpecification(knowledge, prompt, model)
-        producedNetwork <- executeScafiProgram(program, preAction(), postAction())
-        testResult = programTests(program.program, producedNetwork)
+        testResult <- executeScafiProgram(program, preAction(), postAction())
+          .map(programTests(program.program, _))
+          .recover:
+            case _: ScafiCompilationException => ScafiTestResult.CompilationFailed(baselineProgram.program)
       yield SingleTestResult(testCase, n, knowledgeFile, model.toString, testResult)
     }
     baselineResult +: otherTests
