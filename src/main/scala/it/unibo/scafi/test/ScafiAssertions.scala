@@ -1,7 +1,7 @@
 package it.unibo.scafi.test
 
-import it.unibo.scafi.test.FunctionalTestIncarnation.{ID, Network}
-import it.unibo.scafi.test.ScafiTestResult.{Success, TestFailed}
+import it.unibo.scafi.test.FunctionalTestIncarnation.{ ID, Network }
+import it.unibo.scafi.test.ScafiTestResult.{ Success, TestFailed }
 
 import scala.util.Try
 
@@ -29,10 +29,10 @@ object ScafiAssertions:
       if res then Success(program)
       else TestFailed(program)
     .toEither
-    .fold(
-      e => ScafiTestResult.GenericFailure(e.getMessage),
-      identity,
-    )
+      .fold(
+        e => ScafiTestResult.GenericFailure(e.getMessage),
+        identity,
+      )
   end assertNetworkValues
 
   def assertNetworkValuesWithPredicate[T](
@@ -50,9 +50,9 @@ object ScafiAssertions:
       if res then Success(program)
       else TestFailed(program)
     .toEither
-    .fold(
-      e => ScafiTestResult.GenericFailure(e.getMessage),
-      identity,
-    )
+      .fold(
+        e => ScafiTestResult.GenericFailure(e.getMessage),
+        identity,
+      )
   end assertNetworkValuesWithPredicate
 end ScafiAssertions

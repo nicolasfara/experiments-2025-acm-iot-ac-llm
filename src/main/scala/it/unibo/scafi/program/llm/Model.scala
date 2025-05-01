@@ -2,9 +2,9 @@ package it.unibo.scafi.program.llm
 
 enum Model(val codeName: String):
   // Google Models
-  case GEMMA_3_4B extends Model("google/gemma-3-4b-it") //"gemma-3-4b-it")
-  case GEMMA_3_12B extends Model("google/gemma-3-12b-it") //gemma-3-12b-it")
-  case GEMMA_3_27B extends Model("google/gemma-3-27b-it") //gemma-3-27b-it")
+  case GEMMA_3_4B extends Model("google/gemma-3-4b-it") // "gemma-3-4b-it")
+  case GEMMA_3_12B extends Model("google/gemma-3-12b-it") // gemma-3-12b-it")
+  case GEMMA_3_27B extends Model("google/gemma-3-27b-it") // gemma-3-27b-it")
   case GEMINI_2_5_PRO extends Model("gemini-2.5-pro-preview-03-25")
   case GEMINI_2_FLASH extends Model("gemini-2.0-flash-001")
   case GEMINI_1_5_FLASH extends Model("gemini-1.5-flash")

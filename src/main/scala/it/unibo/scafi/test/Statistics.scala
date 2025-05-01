@@ -25,15 +25,16 @@ extension (results: List[SingleTestResult])
 
   def toResultsPerModelAndKnowledge: Map[(ModelName, String), List[StatisticResultPerTest]] =
     results
-        .groupBy(r => (r.modelUsed, r.knowledgeFile))
-        .map { case ((modelUsed, knowledgeFile), results) =>
-            (modelUsed, knowledgeFile) -> results
-            .groupBy(_.testName)
-            .map { case (testName, results) =>
-                calculateStatistics(results, testName)
-            }
-            .toList
-        }
+      .groupBy(r => (r.modelUsed, r.knowledgeFile))
+      .map { case ((modelUsed, knowledgeFile), results) =>
+        (modelUsed, knowledgeFile) -> results
+          .groupBy(_.testName)
+          .map { case (testName, results) =>
+            calculateStatistics(results, testName)
+          }
+          .toList
+      }
+end extension
 
 //extension (results: Seq[SingleTestResult])
 //  private def calculateStatistics(res: Seq[SingleTestResult], testName: String): StatisticResultPerTest =
