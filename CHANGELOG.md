@@ -1,3 +1,41 @@
+## 1.0.0 (2025-05-01)
+
+### Features
+
+* add gemini factory ([2617801](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/261780101628f66de42aafa592470018187a369b))
+* add gemini service ([21ddabd](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/21ddabddb98e9e16f36817f6557ebdaeda08f53f))
+* add logging capabilities to the experiment ([7405d22](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/7405d22168434495dc83759eee24a67ae9a288a6))
+* add Ollama service ([9452b59](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/9452b592998fa4c901fdd7465798ada7f4066834))
+* channel with obstacle ([13a04e2](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/13a04e299a3823834bea9a50bf5d71388dd54580))
+* first working experiments for the channel ([1f9d04d](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/1f9d04d12c2f7d23f51a7de64fcb82811c767bf1))
+* integrate all the test cases into the appropriate package ([b66038f](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/b66038f8559433d505530e032245fd995c7f1574))
+* parametrize knowledge to inject in queries ([1be3d68](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/1be3d6803ec88b76dd987d6200ce3427230dff6b))
+* switch to cats-effect ([8b01237](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/8b01237269fadb0e03fef34d5a4fc91fc992f451))
+* try to add the knowledge with G information ([dfa6a22](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/dfa6a22c69ed272a09dd8c72a712fc09d8264b75))
+* try to make the findParent work (with long description, uhm) ([f86a7d3](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/f86a7d3ba73cf37752c643dfb1f059d101a16db3))
+
+### Bug Fixes
+
+* minor and fulle test execution ([7350178](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/735017871e4da9bc333935e0ea6295840f33838c))
+* remove unused imports ([16e7f9f](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/16e7f9f728763fbe816f483ea57c19e204087bc0))
+
+### Tests
+
+* add channel program ([27d3de4](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/27d3de43e098320bd17894091fa9ad9762e16729))
+* minors on test ([6d499a7](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/6d499a738da61a20effb3e7d0a7a4166d96ceae5))
+
+### Build and continuous integration
+
+* add circe dependencies ([69b8dc8](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/69b8dc830b375b25dc329f8c26a8419321bac679))
+* add retry library ([5cb1374](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/5cb1374a52878c5a8d4ad5dbd7f4b9597a254beb))
+* move fork at top-level setting ([158aaa1](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/158aaa16b143c485bd71f74bf74833e2fc9c4f73))
+
+### Refactoring
+
+* remove ProgramLoder trait ([6e659eb](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/6e659eb6b9051f84f8703d6490d632b9c5ad4101))
+* rewrite gemini provider implementation ([bbaadca](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/bbaadca1817fc515b3eb04b9f47290dc6aabcd32))
+* use new strategy for loading prompts from file ([89b1e70](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/89b1e705e94283b3b97bf25977b1c3254a0dc328))
+
 ## [1.1.1](https://github.com/nicolasfara/Template-for-Scala-Multiplatform-Projects/compare/v1.1.0...v1.1.1) (2024-12-10)
 
 ### Dependency updates
