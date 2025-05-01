@@ -1,7 +1,6 @@
 val scala3Version = "3.6.2"
 val scala2Version = "2.13.16"
 
-
 ThisBuild / organization := "it.nicolasfarabegoli"
 ThisBuild / sonatypeCredentialHost := "s01.oss.sonatype.org"
 ThisBuild / homepage := Some(
@@ -22,8 +21,8 @@ ThisBuild / developers := List(
   )
 )
 //ThisBuild / coverageEnabled := true
-//ThisBuild / semanticdbEnabled := true
-//ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
+ThisBuild / semanticdbEnabled := true
+ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 ThisBuild / fork := true
 //ThisBuild / testOptions += Tests.Argument(TestFrameworks.ScalaTest, "-h", "target/test-reports")
 

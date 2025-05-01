@@ -1,12 +1,11 @@
 package it.unibo.scafi.test
 
+import java.util.concurrent.{ Callable, Executors, TimeUnit }
+
 import cats.effect.IO
 import it.unibo.scafi.test.FunctionalTestIncarnation.*
 
-import java.util.concurrent.{ Callable, Executors, TimeUnit }
-
 object ScafiTestUtils:
-  @SuppressWarnings(Array("scalafix:DisableSyntax.null"))
   def runProgram(exp: => Any, ntimes: Int = 500)(net: Network & SimulatorOps)(using
       node: AggregateInterpreter,
   ): (Network, Seq[ID]) =
@@ -95,7 +94,6 @@ object ScafiTestUtils:
        |
        |""".stripMargin
 
-  @SuppressWarnings(Array("scalafix:DisableSyntax.asInstanceOf"))
   def executeFromString[Result](program: String): IO[Result] = IO.async: cb =>
     IO:
       val executor = Executors.newSingleThreadScheduledExecutor()

@@ -1,7 +1,6 @@
 package it.unibo.scafi.program.llm
 
 import cats.effect.IO
-
 import dev.langchain4j.model.chat.response.{ ChatResponse, StreamingChatResponseHandler }
 import dev.langchain4j.model.googleai.GoogleAiGeminiStreamingChatModel
 import it.unibo.scafi.program.utils.{ PromptUtils, StringUtils }

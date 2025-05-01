@@ -1,6 +1,7 @@
 package it.unibo.scafi.test
 
 import scala.io.{ BufferedSource, Source }
+
 import io.circe.generic.auto.*
 import io.circe.parser.*
 import it.unibo.scafi.Prompts
@@ -102,7 +103,7 @@ abstract class AbstractScafiProgramTest(
       for
         _ <- logger.info(s"Starting test for `$testCase`@$n with `$knowledgeFile` and `$model`")
         knowledge <- readFile(knowledgeSource)
-        _ <- logger.info(s"Knowledge loaded successfully")
+        _ <- logger.info("Knowledge loaded successfully")
         program <- programSpecification(knowledge, prompt, model)
         testResult <- executeScafiProgram(program, preAction(), postAction())
           .map(programTests(program.program, _))

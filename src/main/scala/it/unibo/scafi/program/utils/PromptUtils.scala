@@ -28,7 +28,7 @@ object PromptUtils:
         These conditions **must always hold true**, regardless of the specific operation: \n Conditions: \n ${customPreamble}"""
 
   def generatePreamblePrompt(): String =
-    s"""### Strict Constraints and Recommendations
+    """### Strict Constraints and Recommendations
     These conditions **must always hold true**, regardless of the specific operation:
     - **Code Format Restrictions**:
       - The solution **must** be written in **Scala**.

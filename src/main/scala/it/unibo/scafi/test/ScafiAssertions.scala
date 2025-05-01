@@ -1,9 +1,9 @@
 package it.unibo.scafi.test
 
+import scala.util.Try
+
 import it.unibo.scafi.test.FunctionalTestIncarnation.{ ID, Network }
 import it.unibo.scafi.test.ScafiTestResult.{ Success, TestFailed }
-
-import scala.util.Try
 
 object ScafiAssertions:
   /**

@@ -1,12 +1,12 @@
 package it.unibo.scafi.program.llm
 
+import java.time.Duration.ofSeconds
+
 import cats.effect.IO
 import dev.langchain4j.model.chat.response.{ ChatResponse, StreamingChatResponseHandler }
 import dev.langchain4j.model.openai.OpenAiStreamingChatModel
 import it.unibo.scafi.program.utils.{ PromptUtils, StringUtils }
 import org.slf4j.LoggerFactory
-
-import java.time.Duration.ofSeconds
 
 class OpenRouterService(openRouterModel: Model) extends CodeGeneratorService:
   private val logger = LoggerFactory.getLogger(this.getClass)
