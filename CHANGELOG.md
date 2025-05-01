@@ -1,3 +1,21 @@
+## [1.1.2](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/compare/v1.1.1...v1.1.2) (2025-05-01)
+
+### Bug Fixes
+
+* fix gemma's models names ([e505e3e](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/e505e3e7f37ea9d98dbb264e977a8086ae6eb21b))
+
+### Build and continuous integration
+
+* check styling rules ([23f4cb1](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/23f4cb152af4728608d94762d0a14f7fd5f9ad3e))
+
+### Style improvements
+
+* reformat code ([75b185d](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/75b185d0d0b4b965ec27147b872d9a4bd98ae301))
+
+### Refactoring
+
+* minor code refactor ([a5dec9b](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/a5dec9bb72de5afef7a3c5afdc5e34949df9645f))
+
 ## [1.1.1](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/compare/v1.1.0...v1.1.1) (2025-05-01)
 
 ### Bug Fixes
