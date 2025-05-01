@@ -1,3 +1,9 @@
+## [1.1.1](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/compare/v1.1.0...v1.1.1) (2025-05-01)
+
+### Bug Fixes
+
+* minors in generated data ([994bcb1](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/994bcb18d5015ab4a04515703701e1687925836b))
+
 ## [1.1.0](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/compare/v1.0.0...v1.1.0) (2025-05-01)
 
 ### Features
