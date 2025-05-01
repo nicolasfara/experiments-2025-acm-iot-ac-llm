@@ -92,6 +92,14 @@ def calculate_pass_at_k_table(df, k_values):
     Returns:
         pd.DataFrame: DataFrame with pass@k values for each combination.
     """
+    custom_knowledge_order = ["No Knowledge", "Basic Knowledge", "Knowledge with Building Blocks"]
+    custom_test_order = [
+        "Count Down", "Neighbors Count", "Neighbors Count Excluding Self",
+        "Gather Neighbors IDs", "Calculate Min Distance Neighbors",
+        "Collect Max ID", "Calculate Gradient", "Calculate Gradient (Obstacles)",
+        "Create Channel", "Create Channel (Obstacles)", "SCR Temperature Above 30"
+    ]
+
     results = []
     for (model, knowledge, testName), group in df.groupby(level=["model", "knowledge", "testName"]):
         print(f"Processing {model}, {knowledge}, {testName}")
@@ -113,7 +121,26 @@ def calculate_pass_at_k_table(df, k_values):
 
         results.append(row)
 
-    return pd.DataFrame(results)
+    result_df = pd.DataFrame(results)
+
+    # Apply custom categorical ordering to the 'knowledge' column
+    result_df["knowledge"] = pd.Categorical(
+        result_df["knowledge"],
+        categories=custom_knowledge_order,
+        ordered=True
+    )
+    # Apply custom categorical ordering to the 'testName' column
+    result_df["testName"] = pd.Categorical(
+        result_df["testName"],
+        categories=custom_test_order,
+        ordered=True
+    )
+
+    # Optional: sort by model, knowledge (in custom order), and testName
+    result_df.sort_values(by=["model", "knowledge", "testName"], inplace=True)
+
+    return result_df
+
 
 if __name__ == '__main__':
     generated_path = "./data/generated"
@@ -156,5 +183,8 @@ if __name__ == '__main__':
 
     k_values = [1, 5, 10]
     pass_at_k_table = calculate_pass_at_k_table(dataset, k_values)
+    # Format double values to 4 decimal places
+    for k in k_values:
+        pass_at_k_table[f"pass@{k}"] = pass_at_k_table[f"pass@{k}"].apply(lambda x: f"{x:.4f}")
     # Save the pass@k table to a CSV file
     pass_at_k_table.to_csv(Path(statistics_path) / "pass_at_k_table.csv")
