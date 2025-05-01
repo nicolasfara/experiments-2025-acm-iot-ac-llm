@@ -1,8 +1,9 @@
 package it.unibo.scafi
 
-import cats.effect.{IO, IOApp}
+import cats.effect.{ IO, IOApp }
+import it.unibo.scafi.program.ChannelTest
 
-import java.nio.file.{Files, Path}
+import java.nio.file.{ Files, Path }
 
 //import java.nio.file.{ Files, Path }
 //import scala.concurrent.duration.DurationInt
@@ -15,7 +16,6 @@ import io.circe.syntax.*
 //import org.slf4j.LoggerFactory
 //
 //import scala.concurrent.ExecutionContext.Implicits.global
-
 
 import it.unibo.scafi.test.toResultsPerModelAndKnowledge
 
@@ -30,9 +30,10 @@ object MyApp extends IOApp.Simple:
   override def run: IO[Unit] =
     val tests = program.listPrograms()
     assert(tests.size == 11)
-    
+//    val tests = List(ChannelTest())
+
     val a = tests.map(_.executeTest())
-    val b = a.flatten.parSequence
+    val b = a.flatten.sequence
     b.flatMap(producesTestResults =>
       IO:
         val resultsPerModel = producesTestResults.toResultsPerModelAndKnowledge
@@ -41,9 +42,12 @@ object MyApp extends IOApp.Simple:
         do
           val serializedResults = results.asJson.toString
           val file =
-            destinationPath.resolve(s"${modelName.replaceAll("/", "_")}[${knowledgeFile.replaceAll("/", "_")}]_results.json")
-          Files.write(file, serializedResults.getBytes)
+            destinationPath.resolve(
+              s"${modelName.replaceAll("/", "_")}[${knowledgeFile.replaceAll("/", "_")}]_results.json",
+            )
+          Files.write(file, serializedResults.getBytes),
     )
+  end run
 
   //
 //  val allResultsFuture = Future.sequence {
@@ -62,4 +66,3 @@ object MyApp extends IOApp.Simple:
 //      destinationPath.resolve(s"${modelName.replaceAll("/", "_")}[${knowledgeFile.replaceAll("/", "_")}]_results.json")
 //    Files.write(file, serializedResults.getBytes)
 end MyApp
-

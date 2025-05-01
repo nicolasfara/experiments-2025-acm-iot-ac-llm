@@ -23,7 +23,7 @@ abstract class AbstractScafiProgramTest(
 //      OpenRouterService(Model.GEMMA_3_12B),
 //      OpenRouterService(Model.GEMMA_3_27B),
 //      GeminiService(Model.GEMINI_2_5_PRO),
-//      GeminiService(Model.GEMINI_2_FLASH_EXP),
+//      GeminiService(Model.GEMINI_2_FLASH),
 //      GeminiService(Model.GEMINI_1_5_FLASH),
 //      OpenRouterService(Model.LLAMA_3_3_70B_INSTRUCT),
 //      OpenRouterService(Model.LLAMA_4_SCOUT),
@@ -59,11 +59,7 @@ abstract class AbstractScafiProgramTest(
       post: String,
   ): IO[Network] =
     val builtProgram = buildProgram(programUnderTest.program, preamble, post)
-    for
-      _ <- logger.info(s"Start executing program")
-      result <- executeFromString[Network](builtProgram)
-      _ <- logger.info("Program execution terminated")
-    yield result
+    executeFromString[Network](builtProgram)
 
   def baselineWorkingProgram(): String
 
@@ -77,20 +73,26 @@ abstract class AbstractScafiProgramTest(
 
   def getSource(fileName: String): IO[BufferedSource] = IO(Source.fromResource(fileName))
 
-  def readFile(src: Source): IO[String] = IO(src.getLines.mkString) <* IO("Processing completed")
+  def readFile(src: Source): IO[String] = IO(src.getLines.mkString)
 
-  def closeSource(src: Source): IO[Unit] = IO(src.close) <* IO("Source closed successfully")
+  def closeSource(src: Source): IO[Unit] = IO(src.close)
 
   private def openKnowledgeFile(file: String): Resource[IO, BufferedSource] =
     Resource.make(getSource(file))(f => closeSource(f))
 
   def executeTest(): Seq[IO[SingleTestResult]] =
     val baselineProgram = ScafiProgram(baselineWorkingProgram())
-    val baselineResult = executeScafiProgram(baselineProgram, preAction(), postAction())
-      .map(programTests(baselineProgram.program, _))
-      .recover:
-        case _: ScafiCompilationException => ScafiTestResult.CompilationFailed(baselineProgram.program)
-      .map(SingleTestResult(testCase, 0, "baseline", "baseline", _))
+    val baselineResult =
+      logger.info(s"Starting baseline program execution: $testCase") >>
+        executeScafiProgram(baselineProgram, preAction(), postAction())
+          .map(programTests(baselineProgram.program, _))
+          .onError:
+            case _: ScafiCompilationException =>
+              logger.error(s"Failed to compile baseline program: ${baselineProgram.program}")
+          .recover:
+            case _: ScafiCompilationException => ScafiTestResult.CompilationFailed(baselineProgram.program)
+          .map(SingleTestResult(testCase, 0, "baseline", "baseline", _)) <*
+        logger.info(s"Baseline program execution completed: $testCase")
     val otherTests = for
       n <- 0 until runs
       prompt <- candidatePrompts.prompts
@@ -98,12 +100,18 @@ abstract class AbstractScafiProgramTest(
       model <- loaders
     yield openKnowledgeFile(knowledgeFile).use { knowledgeSource =>
       for
+        _ <- logger.info(s"Starting test for `$testCase`@$n with `$knowledgeFile` and `$model`")
         knowledge <- readFile(knowledgeSource)
+        _ <- logger.info(s"Knowledge loaded successfully")
         program <- programSpecification(knowledge, prompt, model)
         testResult <- executeScafiProgram(program, preAction(), postAction())
           .map(programTests(program.program, _))
+          .onError:
+            case _: ScafiCompilationException =>
+              logger.error(s"Failed to compile@$n with `$knowledgeFile` and `$model`: ${program.program}")
           .recover:
             case _: ScafiCompilationException => ScafiTestResult.CompilationFailed(baselineProgram.program)
+        _ <- logger.info(s"Test for `$testCase`@$n with `$knowledgeFile` and `$model` completed")
       yield SingleTestResult(testCase, n, knowledgeFile, model.toString, testResult)
     }
     baselineResult +: otherTests
