@@ -1,3 +1,9 @@
+## [1.1.0](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/compare/v1.0.0...v1.1.0) (2025-05-01)
+
+### Features
+
+* implement pass@k metric and export CSV table with results ([96db598](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/96db59828c29f25bc73e301e73a5133118b91ed7))
+
 ## 1.0.0 (2025-05-01)
 
 ### Features
