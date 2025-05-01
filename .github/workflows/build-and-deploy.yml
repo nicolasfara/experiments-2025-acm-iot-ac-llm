@@ -21,7 +21,7 @@ jobs:
       - uses: nicolasfara/build-check-deploy-sbt-action@1.0.19
         with:
           should-run-codecov: ${{ runner.os == 'Linux' }}
-          check-command: true
+          check-command: sbt +compile
           should-deploy: false
           maven-central-username: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
