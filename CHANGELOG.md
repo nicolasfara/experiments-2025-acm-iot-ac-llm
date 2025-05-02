@@ -1,3 +1,14 @@
+## [1.2.0](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/compare/v1.1.2...v1.2.0) (2025-05-02)
+
+### Features
+
+* add claude sonnet. [@cric96](https://github.com/cric96) skill issue ([4b9023d](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/4b9023d67985864cfff476001af53cfccc294d36))
+* update script data ([292f262](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/292f262f26f64b931d0f5b47c38e23fcc84381f0))
+
+### Style improvements
+
+* reformat code ([df3ff27](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/df3ff27360436aa7ec2ac62ebb1ae83bf0a7d29f))
+
 ## [1.1.2](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/compare/v1.1.1...v1.1.2) (2025-05-01)
 
 ### Bug Fixes
