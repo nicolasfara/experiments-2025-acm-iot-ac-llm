@@ -1,10 +1,10 @@
 package it.unibo.scafi.program.llm
 
-import cats.effect.{ IO, Resource }
-import it.unibo.scafi.program.utils.PromptUtils.generatePreamblePrompt
-
 import scala.collection.mutable
 import scala.io.{ BufferedSource, Source }
+
+import cats.effect.{ IO, Resource }
+import it.unibo.scafi.program.utils.PromptUtils.generatePreamblePrompt
 
 class ClaudeSonnet extends CodeGeneratorService:
   private val candidateKnowledgeFileNames = List(
