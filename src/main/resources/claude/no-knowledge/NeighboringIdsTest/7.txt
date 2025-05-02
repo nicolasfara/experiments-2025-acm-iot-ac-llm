@@ -1,0 +1,2 @@
+val neighbors = includingSelf.getNeighborhood()
+val result = neighbors.toList

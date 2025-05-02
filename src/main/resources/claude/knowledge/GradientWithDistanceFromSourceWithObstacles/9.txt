@@ -1,0 +1,16 @@
+rep((Double.MaxValue, false)) { case (dist, src) =>
+  val newSrc = sense[Boolean]("source")
+  val obstacle = sense[Boolean]("obstacle")
+  val isSource = src || newSrc
+  val minDist = if (isSource) 0.0 else {
+    val nbrDist = foldhoodPlus(Double.MaxValue)(_ min _) {
+      mux(!nbr(obstacle)) {
+        nbr(dist) + nbrRange()
+      } {
+        Double.MaxValue
+      }
+    }
+    nbrDist
+  }
+  (minDist, isSource)
+}._1

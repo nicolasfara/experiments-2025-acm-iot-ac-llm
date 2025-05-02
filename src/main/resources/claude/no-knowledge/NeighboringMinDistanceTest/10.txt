@@ -1,0 +1,1 @@
+val res = branch(mid() == source) { 0 } { foldhood(Double.PositiveInfinity)(_ min _) { nbr { 1 } + nbr(distanceToSource) } }

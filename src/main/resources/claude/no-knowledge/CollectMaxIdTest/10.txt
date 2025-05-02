@@ -1,0 +1,3 @@
+val result = rep(mid()){ v => 
+  max(nbr(v), mid()) 
+}

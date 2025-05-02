@@ -1,0 +1,4 @@
+import scala.collection.immutable.Map
+
+val neighbors = includingSelf.getNeighborhood()
+neighbors.toList

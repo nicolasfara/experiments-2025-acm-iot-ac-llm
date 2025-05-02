@@ -1,0 +1,8 @@
+val potential = G[Double](
+  source = sense[Boolean]("source"),
+  field = 0.0,
+  acc = _ + nbrRange(),
+  metric = () => mux(nbr(sense[Boolean]("obstacle")))(Double.PositiveInfinity)(nbrRange())
+)
+
+potential

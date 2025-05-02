@@ -1,0 +1,21 @@
+rep((false, Double.MinValue)) { case (_, maxTemp) =>
+  val myTemp = sense[Double]("temperature")
+  val areaId = sense[Int]("areaId")
+  
+  val areaTemps = foldhood(Map.empty[Int, List[Double]])(_ ++ _) {
+    val temp = nbr(myTemp)
+    val area = nbr(areaId)
+    Map(area -> List(temp))
+  }
+  
+  val areaAvgs = areaTemps.map { case (area, temps) => 
+    area -> (temps.sum / temps.size)
+  }
+  
+  val myAreaAvg = areaAvgs.getOrElse(areaId, 0.0)
+  val isAlarm = myAreaAvg > 30.0
+  
+  val maxTempSeen = foldhood(myAreaAvg)(_ max _)(nbr(maxTemp))
+  
+  (isAlarm, maxTempSeen)
+}._1

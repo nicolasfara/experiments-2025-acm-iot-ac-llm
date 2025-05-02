@@ -1,0 +1,7 @@
+G[Boolean](sense("source"), true, _ && true, () => {
+  val isObstacle = nbr(sense[Boolean]("obstacle"))
+  if (isObstacle) Double.PositiveInfinity else nbrRange()
+}) && G[Boolean](sense("destination"), true, _ && true, () => {
+  val isObstacle = nbr(sense[Boolean]("obstacle"))
+  if (isObstacle) Double.PositiveInfinity else nbrRange()
+})

@@ -1,0 +1,1 @@
+val ids = foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))

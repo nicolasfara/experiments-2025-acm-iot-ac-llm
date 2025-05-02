@@ -1,0 +1,1 @@
+rep(Double.PositiveInfinity)(min => minHoodPlus(nbr(min + nbrRange())))

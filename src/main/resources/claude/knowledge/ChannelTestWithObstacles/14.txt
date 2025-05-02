@@ -1,0 +1,13 @@
+rep(false) { channel =>
+  mux(sense[Boolean]("source")) {
+    true
+  } {
+    mux(sense[Boolean]("obstacle")) {
+      false
+    } {
+      foldhoodPlus(false)(_ || _) {
+        nbr(channel) && nbrRange() <= 1.0
+      } || sense[Boolean]("destination")
+    }
+  }
+}

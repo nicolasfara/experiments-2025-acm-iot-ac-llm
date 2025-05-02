@@ -1,0 +1,10 @@
+val isSource = sense[Boolean]("source")
+val alarm = rep(false) { current =>
+  val potential = G[Double](isSource, 0.0, _ + nbrRange(), () => nbrRange())
+  val temperature = C[Double, Double](potential, _ + _, sense[Double]("temperature"), 0.0)
+  val count = C[Double, Int](potential, _ + _, 1, 0)
+  val avgTemperature = temperature / count
+  val alarmTriggered = avgTemperature > 30.0
+  G[Boolean](isSource, alarmTriggered, identity, () => nbrRange())
+}
+alarm

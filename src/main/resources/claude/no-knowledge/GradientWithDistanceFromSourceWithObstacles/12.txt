@@ -1,0 +1,12 @@
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+
+val distance = distanceToWithObstacle(source, obstacle)
+
+def distanceToWithObstacle(source: Boolean, obstacle: Boolean): Double = {
+  val potentialField = S(0.0, Double.MaxValue)(
+    source,
+    nbr => if (obstacle) Double.MaxValue else nbr + nbrRange
+  )
+  if (potentialField == Double.MaxValue) Double.MaxValue else potentialField
+}

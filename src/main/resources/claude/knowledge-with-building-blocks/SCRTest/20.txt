@@ -1,0 +1,7 @@
+val sources = S(2.0, nbrRange)
+val potential = G(sources, 0.0, _ + nbrRange(), nbrRange)
+val areaTempSum = C(potential, _ + _, sense[Double]("temperature"), 0.0)
+val areaNodeCount = C(potential, _ + _, 1.0, 0.0)
+val areaAvgTemp = areaTempSum / areaNodeCount
+val alarm = areaAvgTemp > 30.0
+G(sources, alarm, (x: Boolean) => x, nbrRange)

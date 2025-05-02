@@ -1,0 +1,5 @@
+val source = node.has("source")
+val dest = node.has("destination")
+
+val g = classicGradient(source)
+val channel = branch(dest)(0)(g)

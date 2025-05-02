@@ -1,0 +1,13 @@
+{
+  val isSource = sense[Boolean]("source")
+  val isObstacle = sense[Boolean]("obstacle")
+  
+  val sourceDist = G[Double](
+    source = isSource,
+    field = 0.0,
+    acc = d => d + nbrRange(),
+    metric = () => mux(!nbr(isObstacle))(nbrRange())(Double.PositiveInfinity)
+  )
+  
+  sourceDist
+}

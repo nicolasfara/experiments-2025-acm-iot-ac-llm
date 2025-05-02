@@ -1,0 +1,3 @@
+val source = 1000
+val distance = distanceTo(source)
+val result = if (distance == 0) 0 else distance

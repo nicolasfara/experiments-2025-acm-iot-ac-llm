@@ -1,0 +1,9 @@
+val potential = G[Double](sense[Boolean]("source"), 0.0, _ + nbrRange(), () => nbrRange())
+val areaId = G[Int](sense[Boolean]("source"), mid(), identity, () => nbrRange())
+val avgTemp = C[Double, Double](potential, _ + _, sense[Double]("temperature"), 0.0) / C[Double, Int](potential, _ + _, 1, 0)
+val isAlarm = avgTemp > 30.0
+mux(isAlarm) {
+  G[Boolean](areaId == mid(), true, identity, () => nbrRange())
+} {
+  false
+}

@@ -1,0 +1,3 @@
+val max = rep(mid()){ v => 
+  foldhood(v)((x, y) => if (x > y) x else y)(nbr{v})
+}

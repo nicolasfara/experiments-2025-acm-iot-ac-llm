@@ -1,0 +1,2 @@
+val allNodes = includingSelf.getAll[ID](nbr(mid()))
+allNodes.reduce((a, b) => if (a > b) a else b)

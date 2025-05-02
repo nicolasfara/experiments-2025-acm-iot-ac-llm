@@ -1,0 +1,8 @@
+val area = mid() % 3  // Define areas by modulo 3 of node ID
+val areaTemp = rep(0.0) { v =>
+  val areaMembers = foldhood(0)(_ + _)(mux(nbr(area) == area)(1)(0))
+  val areaTempSum = foldhood(0.0)(_ + _)(mux(nbr(area) == area)(nbr(sense[Double]("temperature")))(0.0))
+  areaTempSum / areaMembers
+}
+val alarm = areaTemp > 30
+alarm

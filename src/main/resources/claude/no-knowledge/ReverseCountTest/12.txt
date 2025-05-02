@@ -1,0 +1,8 @@
+val source = S(50, 50)
+val gradient = distanceTo(source)
+val value = if (gradient < 10) 1000 else rep(0)(_ => 0)
+branch(value > 0) {
+  value - 1
+} {
+  0
+}

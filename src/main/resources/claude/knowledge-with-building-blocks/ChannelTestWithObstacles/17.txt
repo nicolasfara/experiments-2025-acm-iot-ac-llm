@@ -1,0 +1,26 @@
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val potentialFromSource = G[Double](
+  source = source,
+  field = 0.0,
+  acc = _ + mux(nbr(obstacle))(Double.PositiveInfinity)(nbr(nbrRange())),
+  metric = () => nbrRange()
+)
+
+val potentialFromDestination = G[Double](
+  source = destination,
+  field = 0.0,
+  acc = _ + mux(nbr(obstacle))(Double.PositiveInfinity)(nbr(nbrRange())),
+  metric = () => nbrRange()
+)
+
+val pathExists = C[Double, Boolean](
+  potential = potentialFromSource,
+  acc = _ || _,
+  local = destination,
+  Null = false
+)
+
+source && pathExists

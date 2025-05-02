@@ -1,0 +1,12 @@
+rep((Double.PositiveInfinity, false)) { case (dist, src) =>
+  mux(sense[Boolean]("source")) {
+    (0.0, true)
+  } {
+    val (nbrDist, nbrSrc) = minHood(nbr((dist, src)))
+    if (nbrSrc) {
+      (nbrRange() + nbrDist, false)
+    } else {
+      (dist, src)
+    }
+  }
+}._1

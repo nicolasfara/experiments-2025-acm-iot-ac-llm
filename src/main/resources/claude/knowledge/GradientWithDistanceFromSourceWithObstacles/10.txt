@@ -1,0 +1,12 @@
+rep((Double.MaxValue, mid())) { case (dist, src) =>
+  mux(sense[Boolean]("source")) {
+    (0.0, mid())
+  } {
+    mux(sense[Boolean]("obstacle")) {
+      (dist, src)
+    } {
+      val (nbrDist, nbrSrc) = minHood(nbr((dist + nbrRange(), src)))
+      (nbrDist, nbrSrc)
+    }
+  }
+}._1

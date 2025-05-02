@@ -1,0 +1,4 @@
+rep(1000) { value =>
+  val newValue = Math.max(0, value - 1)
+  newValue
+}

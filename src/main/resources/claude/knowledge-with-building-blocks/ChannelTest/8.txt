@@ -1,0 +1,7 @@
+val potential = G[Double](sense[Boolean]("source"), 0.0, _ + nbrRange(), () => mux(sense[Boolean]("obstacle"))(Double.PositiveInfinity)(nbrRange()))
+val path = C[Double, Boolean](potential, _ || _, sense[Boolean]("destination"), false)
+branch(sense[Boolean]("source") || sense[Boolean]("destination") || path) {
+  true
+} {
+  false
+}

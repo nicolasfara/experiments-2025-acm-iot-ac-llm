@@ -1,0 +1,6 @@
+val source = 1000
+val result = rep((false, source)){ case (state, value) =>
+  val decrease = value - 1
+  val newValue = if (decrease < 0) 0 else decrease
+  (true, newValue)
+}._2

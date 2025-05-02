@@ -1,0 +1,38 @@
+rep(false) { state =>
+  val isSource = sense[Boolean]("source")
+  val isDestination = sense[Boolean]("destination")
+  val hasObstacle = sense[Boolean]("obstacle")
+  
+  // Compute distance from source, avoiding obstacles
+  val distanceFromSource = G[Double](
+    isSource,
+    0.0,
+    _ + nbrRange(),
+    () => if (nbr(hasObstacle)) Double.PositiveInfinity else nbrRange()
+  )
+  
+  // Compute distance from destination, avoiding obstacles
+  val distanceFromDest = G[Double](
+    isDestination,
+    0.0,
+    _ + nbrRange(),
+    () => if (nbr(hasObstacle)) Double.PositiveInfinity else nbrRange()
+  )
+  
+  // Node is on the path if it's on the shortest path from source to destination
+  val isOnPath = !hasObstacle && 
+                 distanceFromSource + distanceFromDest <= 
+                 G[Double](isSource, 0.0, _ + nbrRange(), () => nbrRange()) + 
+                 G[Double](isDestination, 0.0, _ + nbrRange(), () => nbrRange()) + 0.01
+  
+  // Use collect to confirm path existence
+  val pathExists = C[Double, Boolean](
+    distanceFromSource,
+    _ || _,
+    isDestination && isOnPath,
+    false
+  )
+  
+  // Return true at source if path exists
+  isSource && pathExists
+}

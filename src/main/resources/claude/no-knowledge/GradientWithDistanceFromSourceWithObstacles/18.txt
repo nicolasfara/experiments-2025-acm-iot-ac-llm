@@ -1,0 +1,6 @@
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+
+val potential = distanceTo(source && !obstacle)
+
+node.put("distance", potential)

@@ -1,0 +1,1 @@
+foldhood(List.empty[Int])(_ ++ _)(List(nbr(mid())))

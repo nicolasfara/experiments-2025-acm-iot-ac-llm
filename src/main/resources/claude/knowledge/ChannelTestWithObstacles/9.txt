@@ -1,0 +1,20 @@
+rep(false) { case prev =>
+  val srcId = sense[Boolean]("source")
+  val dstId = sense[Boolean]("destination")
+  val obstacle = sense[Boolean]("obstacle")
+  
+  branch(obstacle) {
+    false
+  } {
+    branch(srcId) {
+      true
+    } {
+      branch(dstId) {
+        prev
+      } {
+        val nbrHasChannel = foldhood(false)(_ || _)(nbr(prev))
+        nbrHasChannel && !obstacle
+      }
+    }
+  }
+}

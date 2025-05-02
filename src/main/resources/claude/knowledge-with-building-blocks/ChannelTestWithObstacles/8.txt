@@ -1,0 +1,32 @@
+rep(false) { channel =>
+  val sourceCond = sense[Boolean]("source")
+  val destCond = sense[Boolean]("destination")
+  val obstacleCond = sense[Boolean]("obstacle")
+  
+  // Create gradient from source, avoiding obstacles
+  val metric = () => {
+    val range = nbrRange()
+    if (nbr(obstacleCond)) Double.PositiveInfinity else range
+  }
+  
+  val sourceGradient = G[Double](sourceCond, 0.0, _ + nbrRange(), metric)
+  
+  // Create gradient from destination, avoiding obstacles
+  val destGradient = G[Double](destCond, 0.0, _ + nbrRange(), metric)
+  
+  // The channel is formed when both gradients are finite
+  val isInChannel = sourceGradient != Double.PositiveInfinity && 
+                    destGradient != Double.PositiveInfinity && 
+                    !obstacleCond
+  
+  // Use collect to verify path exists from source to destination
+  val pathExists = C[Double, Boolean](
+    sourceGradient,
+    _ || _,
+    destCond && isInChannel,
+    false
+  )
+  
+  // Return true if a valid path exists and this node is part of it
+  pathExists && isInChannel
+}

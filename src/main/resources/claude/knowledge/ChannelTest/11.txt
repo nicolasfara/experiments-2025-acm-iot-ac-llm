@@ -1,0 +1,14 @@
+val sourceNode = sense[Boolean]("source")
+val destinationNode = sense[Boolean]("destination")
+
+rep(Double.PositiveInfinity) { dist =>
+  mux(sourceNode) {
+    0.0
+  } {
+    mux(destinationNode) {
+      Double.PositiveInfinity
+    } {
+      minHoodPlus(nbr(dist) + nbrRange())
+    }
+  }
+}

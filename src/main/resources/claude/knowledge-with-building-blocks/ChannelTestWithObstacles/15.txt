@@ -1,0 +1,17 @@
+val sourceCondition = sense[Boolean]("source")
+val destCondition = sense[Boolean]("destination")
+val obstacleCondition = sense[Boolean]("obstacle")
+
+val potential = G[Double](
+  source = destCondition,
+  field = 0.0,
+  acc = _ + mux(!nbr(obstacleCondition))(nbr(nbrRange()))({ Double.PositiveInfinity }),
+  metric = () => nbrRange()
+)
+
+C[Double, Boolean](
+  potential = potential,
+  acc = _ || _,
+  local = sourceCondition,
+  Null = false
+)

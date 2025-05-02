@@ -1,0 +1,13 @@
+import scala.util.Try
+
+val channelWidth = 20
+val src = sense[Boolean]("source")
+val dst = sense[Boolean]("destination")
+
+val distanceFromSource = distanceTo(src)
+val distanceFromDestination = distanceTo(dst)
+
+val potentialField = distanceFromDestination - distanceFromSource
+val channelGradient = abs(distanceFromSource - distanceFromDestination) < channelWidth
+
+node.put("channel", channelGradient)

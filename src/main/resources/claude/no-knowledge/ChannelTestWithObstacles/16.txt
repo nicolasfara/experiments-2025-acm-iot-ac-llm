@@ -1,0 +1,9 @@
+val source = node.get[Boolean]("source")
+val destination = node.get[Boolean]("destination")
+val obstacle = node.get[Boolean]("obstacle")
+
+if (obstacle) { false } else {
+  val target = broadcast(destination, false)
+  val channel = distanceTo(target)
+  source && channel < Double.PositiveInfinity
+}

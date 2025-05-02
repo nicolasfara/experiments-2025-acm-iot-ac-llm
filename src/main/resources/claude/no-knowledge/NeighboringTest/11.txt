@@ -1,0 +1,2 @@
+val neighbors = includingSelf.getNeighbors()
+val result = neighbors.size

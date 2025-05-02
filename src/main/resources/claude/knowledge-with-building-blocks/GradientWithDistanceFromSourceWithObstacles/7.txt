@@ -1,0 +1,8 @@
+val isSource = sense[Boolean]("source")
+val isObstacle = sense[Boolean]("obstacle")
+
+def metric(): Double = {
+  if (nbr(isObstacle)) Double.PositiveInfinity else nbrRange()
+}
+
+G[Double](isSource, 0.0, _ + metric(), () => metric())

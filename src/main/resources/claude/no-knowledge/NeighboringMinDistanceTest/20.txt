@@ -1,0 +1,1 @@
+distanceTo(mid) + minHood(nbr(distanceTo(mid))) + 1

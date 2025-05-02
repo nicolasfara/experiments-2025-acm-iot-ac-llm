@@ -1,0 +1,2 @@
+val neighbors = includingSelf(nbr(mid()) != mid())
+val nNeighbors = neighbors.size - 1

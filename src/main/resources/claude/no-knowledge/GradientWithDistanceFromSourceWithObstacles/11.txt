@@ -1,0 +1,14 @@
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+
+val g = classicGradient(source)
+distanceToWithObstacle(source, obstacle)
+
+def distanceToWithObstacle(source: Boolean, obstacle: Boolean): Double = {
+  val g = gradient(source, obstacleMetric(_, _, obstacle))
+  g
+}
+
+def obstacleMetric(src: Double, dest: Double, obstacle: Boolean): Double = {
+  if (obstacle) Double.PositiveInfinity else nbrRange()
+}

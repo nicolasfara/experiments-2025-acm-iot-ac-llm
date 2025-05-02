@@ -1,0 +1,2 @@
+val neighbors = includingSelf.neighbor(includingSelf.mid()) - includingSelf.mid()
+val count = neighbors.size

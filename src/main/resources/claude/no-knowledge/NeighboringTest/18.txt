@@ -1,0 +1,4 @@
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+
+val neighborsCount = includingSelf.reifyField(nbr(true)).size - 1
+node.put("neighborsCount", neighborsCount)

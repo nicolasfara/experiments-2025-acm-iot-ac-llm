@@ -1,0 +1,6 @@
+val src = sense[Boolean]("source")
+val obst = sense[Boolean]("obstacle")
+
+val g = gradient(src && !obst)
+
+node.put("distance", g)

@@ -1,0 +1,8 @@
+val source = node.get[Boolean]("source")
+val destination = node.get[Boolean]("destination")
+
+val g = classicGradient(source)
+val path = branch(g < Double.PositiveInfinity) {
+  distanceBetween(nbr { mid() }, mid()) + nbr { g }
+} { Double.PositiveInfinity }
+val channel = branch(destination) { g < Double.PositiveInfinity } { path < Double.PositiveInfinity && g < path }

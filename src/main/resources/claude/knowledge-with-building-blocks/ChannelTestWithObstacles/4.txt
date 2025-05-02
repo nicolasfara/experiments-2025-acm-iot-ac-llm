@@ -1,0 +1,4 @@
+val sourcePotential = G[Double](sense[Boolean]("source"), 0.0, _ + nbrRange(), () => mux(nbr(sense[Boolean]("obstacle")))(Double.PositiveInfinity)(nbrRange()))
+val destPotential = G[Double](sense[Boolean]("destination"), 0.0, _ + nbrRange(), () => mux(nbr(sense[Boolean]("obstacle")))(Double.PositiveInfinity)(nbrRange()))
+val channelPath = sourcePotential + destPotential <= G[Double](sense[Boolean]("source"), 0.0, _ + nbrRange(), () => nbrRange()) + G[Double](sense[Boolean]("destination"), 0.0, _ + nbrRange(), () => nbrRange()) + 0.1
+C[Double, Boolean](sourcePotential, _ || _, sense[Boolean]("destination") && channelPath, false)

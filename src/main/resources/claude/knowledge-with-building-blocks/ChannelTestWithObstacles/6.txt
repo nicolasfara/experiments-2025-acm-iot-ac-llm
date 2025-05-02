@@ -1,0 +1,22 @@
+{
+  val sourceField = G[Boolean](
+    source = sense[Boolean]("source"),
+    field = true,
+    acc = _ => true,
+    metric = () => mux(nbr(sense[Boolean]("obstacle")))(Double.PositiveInfinity)(nbrRange())
+  )
+  
+  val potential = G[Double](
+    source = sense[Boolean]("destination"),
+    field = 0.0,
+    acc = _ + nbrRange(),
+    metric = () => mux(nbr(sense[Boolean]("obstacle")))(Double.PositiveInfinity)(nbrRange())
+  )
+  
+  C[Double, Boolean](
+    potential = potential,
+    acc = _ || _,
+    local = sense[Boolean]("source"),
+    Null = false
+  )
+}

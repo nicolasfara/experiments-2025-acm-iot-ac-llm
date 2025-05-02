@@ -1,0 +1,15 @@
+rep((false, mid())) { case (alarm, leader) =>
+  val temp = sense[Double]("temperature")
+  val newLeader = minHood(nbr(mid()))
+  val inMyArea = foldhood(false)(_ || _)(nbr(mid() == leader))
+  val areaTemp = mux(inMyArea) {
+    val temps = sumHood(mux(nbr(inMyArea))(nbr(temp))(0.0))
+    val nodes = sumHood(mux(nbr(inMyArea))(1)(0))
+    temps / nodes
+  } {
+    0.0
+  }
+  val newAlarm = areaTemp > 30.0
+  val broadcastAlarm = foldhood(false)(_ || _)(nbr(mid() == newLeader && newAlarm))
+  (broadcastAlarm, newLeader)
+}._1

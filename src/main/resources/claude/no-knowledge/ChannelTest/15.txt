@@ -1,0 +1,15 @@
+val source = node.get("source")
+val destination = node.get("destination")
+val g = classicGradient(source)
+val path = branch(source) { 0.0 } {
+  mux(destination) { g } {
+    rep(Double.PositiveInfinity) { d =>
+      mux(nbr(destination) && nbr(g) < d) { nbr(g) } { d }
+    }
+  }
+}
+val channel = branch(source || destination) { true } {
+  nbrRange.fold(false)((b, n) => b || 
+    (nbr(path) < path && nbr(g) < g && nbr{nbrRange.indexOf(mid())} == nbrRange.indexOf(nbr{mid()}))
+  )
+}

@@ -1,0 +1,18 @@
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+if (obstacle) {
+  false
+} else {
+  val sourceGrad = gradient(source)
+  val destGrad = gradient(destination)
+  
+  branch(sourceGrad < Double.PositiveInfinity && destGrad < Double.PositiveInfinity) {
+    val channel = distanceBetween(source, destination)
+    val inChannel = channel < 1.0
+    inChannel
+  } {
+    false
+  }
+}

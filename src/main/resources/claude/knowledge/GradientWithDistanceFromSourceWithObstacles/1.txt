@@ -1,0 +1,15 @@
+rep((Double.MaxValue, Double.MaxValue)) { case (dist, nbrDist) =>
+  val source = sense[Boolean]("source")
+  val obstacle = sense[Boolean]("obstacle")
+  
+  mux(obstacle) {
+    (Double.MaxValue, Double.MaxValue)
+  } {
+    mux(source) {
+      (0.0, 0.0)
+    } {
+      val minNbrDist = minHoodPlus(nbr(nbrDist) + nbrRange())
+      (minNbrDist, minNbrDist)
+    }
+  }._1
+}

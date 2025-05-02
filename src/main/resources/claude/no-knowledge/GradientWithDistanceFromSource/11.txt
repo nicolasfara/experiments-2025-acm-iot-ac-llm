@@ -1,0 +1,1 @@
+distanceTo(mux(sense[Boolean]("source")){ nbr{0.0} }{ Double.PositiveInfinity })

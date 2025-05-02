@@ -1,0 +1,32 @@
+// Define constants
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+// Gradient from source
+val sourceGrad = distanceTo(source)
+
+// Gradient from destination
+val destGrad = distanceTo(destination)
+
+// Calculate potential field - higher values mean more preferable paths
+val potential = mux(obstacle) {
+  Double.PositiveInfinity
+} {
+  sourceGrad + destGrad
+}
+
+// Create channel by finding nodes along the optimal path
+val pathWidth = 0.5
+val inChannel = branch(mid(source, destination)) {
+  val optimalPath = broadcast(destination, potential)
+  optimalPath < potential + pathWidth
+} {
+  false
+}
+
+// Check if there's a valid path connecting source to destination
+val channelCreated = broadcast(source, foldhood(false)(_ || _)(nbr(inChannel)))
+
+// Return true if channel was successfully created
+channelCreated

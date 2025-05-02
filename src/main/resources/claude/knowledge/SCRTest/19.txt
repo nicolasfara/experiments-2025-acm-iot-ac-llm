@@ -1,0 +1,22 @@
+val areaId = sense[Int]("areaId")
+val temp = sense[Double]("temperature")
+
+rep(false) { alarm =>
+  val allTemps = foldhood(Map.empty[Int, List[Double]])(_ ++ _)(nbr {
+    Map(areaId -> List(temp))
+  })
+  
+  val groupedTemps = allTemps.foldLeft(Map.empty[Int, List[Double]]) { case (acc, (id, temps)) =>
+    acc + (id -> (acc.getOrElse(id, List()) ++ temps))
+  }
+  
+  val areaAvgTemps = groupedTemps.map { case (id, temps) => 
+    id -> (temps.sum / temps.size)
+  }
+  
+  val alarms = areaAvgTemps.filter(_._2 > 30.0).keySet
+  
+  val newAlarm = alarms.contains(areaId)
+  
+  foldhood(newAlarm)(_ || _)(nbr(newAlarm))
+}

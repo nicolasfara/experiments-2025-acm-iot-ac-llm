@@ -1,0 +1,21 @@
+import scala.util.Random
+
+// Initialize distance map with self = 0, others = infinity
+val source = mid() == 0
+val initial = if (source) 0 else Double.PositiveInfinity
+val distanceMap = rep(Map(mid() -> initial)) { oldMap =>
+  // Get neighbor distances
+  val neighborDistances = includingSelf.nbrsMap(nbr(oldMap.getOrElse(mid(), Double.PositiveInfinity)))
+  
+  // Calculate distances through neighbors
+  val distancesViaNeighbors = neighborDistances.map { case (id, d) =>
+    if (id == mid()) d  // Keep own value
+    else d + nbrRange(id)  // Add edge weight to neighbor's distance
+  }
+  
+  // Update own distance with minimum distance from neighbors
+  oldMap + (mid() -> distancesViaNeighbors.values.min)
+}
+
+// Display the result
+distanceMap(mid())

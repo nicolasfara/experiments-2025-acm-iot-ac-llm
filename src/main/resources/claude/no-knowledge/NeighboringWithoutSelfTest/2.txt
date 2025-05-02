@@ -1,0 +1,2 @@
+val nbrs = includingSelf.nbr(mid())
+val nbrsCount = nbrs.size - 1  // Subtract 1 to exclude self

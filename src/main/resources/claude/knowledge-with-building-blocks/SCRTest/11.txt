@@ -1,0 +1,14 @@
+rep(0.0) { result =>
+  val source = S(3.0, () => nbrRange())
+  val dist = G[Double](source, 0.0, _ + nbrRange(), () => nbrRange())
+  val areaSensor = branch(dist < 3.0) {
+    val nodes = foldhood(0)(_ + _)(nbr(1))
+    val totalTemp = foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature")))
+    val avgTemp = totalTemp / nodes
+    val alarm = avgTemp > 30.0
+    mux(alarm)(true)(false)
+  } {
+    false
+  }
+  areaSensor
+}

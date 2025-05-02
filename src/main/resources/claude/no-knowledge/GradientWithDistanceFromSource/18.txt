@@ -1,0 +1,5 @@
+val source = sense[Boolean]("source")
+val g = classicGradient(source)
+
+AI: val source = sense[Boolean]("source")
+val g = classicGradient(source)

@@ -1,0 +1,43 @@
+val src = sense[Boolean]("source")
+val dst = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+rep(false) { channelStatus =>
+  val potential = rep(Double.PositiveInfinity) { pot =>
+    mux(src) {
+      0.0
+    } {
+      mux(obstacle) {
+        Double.PositiveInfinity
+      } {
+        minHoodPlus(nbr(pot) + nbrRange())
+      }
+    }
+  }
+  
+  val parent = rep(Double.MinValue) { p =>
+    mux(src) {
+      Double.MinValue
+    } {
+      mux(obstacle) {
+        Double.MinValue
+      } {
+        minHoodPlus((nbr(potential) + nbrRange(), nbr(mid())))._2
+      }
+    }
+  }
+  
+  val inPath = rep(false) { inP =>
+    mux(dst) {
+      true
+    } {
+      foldhoodPlus(false)(_ || _)(nbr(parent == mid() && nbr(inP)))
+    }
+  }
+  
+  mux(dst) {
+    potential < Double.PositiveInfinity
+  } {
+    inPath && potential < Double.PositiveInfinity
+  }
+}

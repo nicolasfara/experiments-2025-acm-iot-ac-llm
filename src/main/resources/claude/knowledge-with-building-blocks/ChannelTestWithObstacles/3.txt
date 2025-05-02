@@ -1,0 +1,13 @@
+val potential = G[Double](
+  sense[Boolean]("source"),
+  0.0,
+  _ + (mux(nbr(sense[Boolean]("obstacle")))(Double.PositiveInfinity)(nbr(nbrRange()))),
+  () => nbrRange()
+)
+
+C[Double, Boolean](
+  potential,
+  _ || _,
+  sense[Boolean]("destination"),
+  false
+)

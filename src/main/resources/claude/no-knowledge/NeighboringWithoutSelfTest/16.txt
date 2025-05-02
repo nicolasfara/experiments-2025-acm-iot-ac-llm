@@ -1,0 +1,6 @@
+includeSelf = false
+val localNeighbors = 
+  nbr(mid()) // Get IDs from neighbors
+    .getOrElse(Set.empty) // Default if no response
+    .filterNot(_ == mid()) // Filter out self
+    .size // Count neighbors

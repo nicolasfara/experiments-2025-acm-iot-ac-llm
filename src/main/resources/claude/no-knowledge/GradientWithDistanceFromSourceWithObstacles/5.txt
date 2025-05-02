@@ -1,0 +1,13 @@
+val source = branch(sense[Boolean]("source")) { true } { false }
+val obstacle = sense[Boolean]("obstacle")
+val dist = distanceTo(source, obstacle)
+
+def distanceTo(source: Boolean, obstacle: Boolean): Double =
+  if (source) 0.0
+  else if (obstacle) Double.PositiveInfinity
+  else {
+    excludingSelf.minHoodPlus(nbr(dist) + nbrRange) match {
+      case Some(d) => d
+      case None => Double.PositiveInfinity
+    }
+  }

@@ -1,0 +1,9 @@
+val potential = G[Double](sense[Boolean]("source"), 0.0, _ + nbrRange(), () => nbrRange())
+val areaId = S[Double](10.0, () => nbrRange())
+val averageTemp = C[Double, (Double, Int)](potential, 
+  (a, b) => (a._1 + b._1, a._2 + b._2), 
+  (sense[Double]("temperature"), 1), 
+  (0.0, 0))
+val areaTemp = if (areaId) averageTemp._1 / averageTemp._2 else 0.0
+val alarm = G[Boolean](areaId, areaTemp > 30.0, identity, () => nbrRange())
+alarm

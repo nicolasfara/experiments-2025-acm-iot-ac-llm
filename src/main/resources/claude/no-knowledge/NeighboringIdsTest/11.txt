@@ -1,0 +1,1 @@
+val result = includingSelf.getNeighbors().toSet.map(_.getId)

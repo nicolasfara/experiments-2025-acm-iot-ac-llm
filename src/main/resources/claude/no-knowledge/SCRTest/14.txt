@@ -1,0 +1,22 @@
+val temperature = sense[Double]("temperature")
+val area = sense[Int]("area")
+
+val areaTemperature = aggregateByArea(area, temperature, (temps: Seq[Double]) => temps.sum / temps.size)
+val alarmCondition = areaTemperature > 30.0
+
+broadcast(area, alarmCondition)
+
+def aggregateByArea[V](area: Int, value: V, aggregator: Seq[V] => V): V = {
+  val collected = G(nbr { (area, value) }, identity)
+  val groupedByArea = collected.groupBy(_._1)
+  val valuesInMyArea = groupedByArea.getOrElse(area, Seq.empty).map(_._2)
+  
+  if (valuesInMyArea.isEmpty) value else aggregator(valuesInMyArea)
+}
+
+def broadcast[V](area: Int, value: V): V = {
+  val collected = G(nbr { (area, value) }, identity)
+  val valuesInMyArea = collected.filter(_._1 == area).map(_._2)
+  
+  if (valuesInMyArea.isEmpty) value else valuesInMyArea.head
+}

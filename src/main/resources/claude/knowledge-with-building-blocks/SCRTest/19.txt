@@ -1,0 +1,10 @@
+val potential = G[Double](sense[Boolean]("source"), 0.0, _ + nbrRange(), () => nbrRange())
+val areas = S[Double](3.0, () => nbrRange())
+val areaId = G[Int](areas, mid(), (a: Int) => a, () => nbrRange())
+val areaTemp = C[Double, Double](potential, _ + _, sense[Double]("temperature"), 0.0) / C[Double, Int](potential, _ + _, 1, 0)
+val alarm = G[Boolean](sense[Boolean]("source"), areaTemp > 30.0, (a: Boolean) => a, () => nbrRange())
+branch(areaId == G[Int](sense[Boolean]("source"), mid(), (a: Int) => a, () => nbrRange())) {
+  alarm
+} {
+  false
+}

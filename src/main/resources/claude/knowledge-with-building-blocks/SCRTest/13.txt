@@ -1,0 +1,20 @@
+rep(false) { alarm =>
+  // Divide space into areas with sparse choice leaders
+  val isLeader = S[Double](5.0, nbrRange)
+  
+  // Compute potential from leaders
+  val potential = G[Double](isLeader, 0.0, _ + nbrRange(), nbrRange)
+  
+  // Collect temperatures toward the leader of each area
+  val totalTemp = C[Double, Double](potential, _ + _, sense[Double]("temperature"), 0.0)
+  val nodeCount = C[Double, Double](potential, _ + _, 1.0, 0.0)
+  
+  // Calculate average temperature at leaders
+  val avgTemp = mux(isLeader)(totalTemp / nodeCount)(0.0)
+  
+  // Determine if temperature exceeds threshold
+  val tempAlarm = avgTemp > 30.0
+  
+  // Broadcast alarm from leader to all nodes in the area
+  foldhood(false)(_ || _)(nbr(branch(nbr(potential) == potential)(nbr(mux(nbr(isLeader))(nbr(tempAlarm))(false)))(false)))
+}

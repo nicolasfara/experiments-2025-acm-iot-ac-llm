@@ -1,0 +1,24 @@
+rep(false) { chExists =>
+  val source = sense[Boolean]("source")
+  val destination = sense[Boolean]("destination")
+  val obstacle = sense[Boolean]("obstacle")
+  
+  val g = gradient(source)
+  
+  val channelValue = branch(destination) {
+    mux(!obstacle) {
+      true
+    } {
+      false
+    }
+  } {
+    mux(!obstacle) {
+      val minNeighGrad = minHoodPlus(nbr(g))
+      nbr(chExists) && g == minNeighGrad
+    } {
+      false
+    }
+  }
+  
+  channelValue
+}

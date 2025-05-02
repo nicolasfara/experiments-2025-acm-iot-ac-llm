@@ -1,0 +1,8 @@
+val temperature = sense[Double]("temperature")
+val areaId = sense[Int]("areaId")
+
+val areaTemp = aggregateByKey(areaId, temperature, (temps: Seq[Double]) => temps.sum / temps.size)
+val alarm = branch(areaTemp > 30.0) { 1 } { 0 }
+val alarmBroadcast = broadcast(alarm, areaId)
+
+node.put("alarm", alarmBroadcast)

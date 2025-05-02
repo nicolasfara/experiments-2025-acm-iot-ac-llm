@@ -1,0 +1,18 @@
+rep(0.0) { distance =>
+  val src = sense[Boolean]("source")
+  val dst = sense[Boolean]("destination")
+  val obstacle = sense[Boolean]("obstacle")
+  
+  val dstPotential = G[Double](dst, 0.0, _ + nbrRange(), () => 
+    mux(nbr(obstacle))(Double.PositiveInfinity)(nbrRange()))
+  
+  val srcPotential = G[Double](src, 0.0, _ + nbrRange(), () => 
+    mux(nbr(obstacle))(Double.PositiveInfinity)(nbrRange()))
+  
+  branch(dstPotential < Double.PositiveInfinity && srcPotential < Double.PositiveInfinity) {
+    val isOnPath = G[Boolean](src, false, _ || true, () => dstPotential)
+    if (isOnPath) 1.0 else 0.0
+  } {
+    0.0
+  }
+}

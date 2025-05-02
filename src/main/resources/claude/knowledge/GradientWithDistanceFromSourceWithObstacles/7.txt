@@ -1,0 +1,16 @@
+{
+  val source = sense[Boolean]("source")
+  val obstacle = sense[Boolean]("obstacle")
+  
+  rep(Double.PositiveInfinity) { dist =>
+    mux(obstacle) {
+      Double.PositiveInfinity
+    } {
+      mux(source) {
+        0.0
+      } {
+        minHoodPlus(nbr(dist) + nbrRange())
+      }
+    }
+  }
+}

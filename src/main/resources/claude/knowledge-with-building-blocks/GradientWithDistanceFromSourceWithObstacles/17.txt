@@ -1,0 +1,12 @@
+foldhood(Double.PositiveInfinity)(_ min _)(
+  mux(nbr(sense[Boolean]("obstacle")))(
+    Double.PositiveInfinity
+  )(
+    nbr(
+      rep(Double.PositiveInfinity) { distanceFromSource =>
+        if (sense[Boolean]("source")) 0.0
+        else distanceFromSource
+      }
+    ) + nbrRange()
+  )
+)

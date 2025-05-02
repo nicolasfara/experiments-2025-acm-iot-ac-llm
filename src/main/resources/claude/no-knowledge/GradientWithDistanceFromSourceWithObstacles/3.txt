@@ -1,0 +1,13 @@
+import scala.math.sqrt
+
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+
+val g = classicGradient(source, metric = nbrRange)
+
+// The classic gradient considers Euclidean distance by default.
+// If there are obstacles, we need to adjust the gradient computation.
+val distanceWithObstacles = classicGradient(source, metric = nbrRange, obstacle = obstacle)
+
+// The result is the distance, considering obstacles
+distanceWithObstacles

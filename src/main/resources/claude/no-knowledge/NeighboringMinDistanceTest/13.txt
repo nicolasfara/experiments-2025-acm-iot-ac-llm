@@ -1,0 +1,7 @@
+val source = node(100)
+val g = classicGradient(source)
+val minNeighborGradient = foldhood(Double.PositiveInfinity)((x, y) => Math.min(x, y)) {
+  nbr(g)
+}
+val result = if (g == 0) 0 else minNeighborGradient
+node.put("result", result)

@@ -1,0 +1,1 @@
+val neighbors = foldhoodPlus(0)(_ + _){ 1 }

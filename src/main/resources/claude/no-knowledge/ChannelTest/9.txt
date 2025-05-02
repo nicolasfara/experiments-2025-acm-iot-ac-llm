@@ -1,0 +1,8 @@
+val source = node.get("source")
+val destination = node.get("destination")
+val g = classicGradient(source)
+val channel = branch(g > 0 && !destination) {
+  distanceTo(source)
+} {
+  Double.PositiveInfinity
+}

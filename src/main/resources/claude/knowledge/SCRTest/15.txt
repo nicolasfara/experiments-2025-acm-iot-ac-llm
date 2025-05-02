@@ -1,0 +1,29 @@
+rep(Map.empty[ID, Boolean]) { state =>
+  val myTemp = sense[Double]("temperature")
+  val myId = mid()
+  val myArea = sense[String]("area")
+  
+  // Collect temperatures from nodes in the same area
+  val areaTemps = foldhood(Map.empty[String, List[(ID, Double)]])((m1, m2) => 
+    m1 ++ m2.map { case (area, temps) => 
+      area -> (m1.getOrElse(area, List()) ++ temps)
+    }
+  )(Map(nbr(myArea) -> List((nbr(myId), nbr(myTemp)))))
+  
+  // Calculate average temperature per area
+  val areaAvgTemps = areaTemps.map { case (area, temps) =>
+    val total = temps.map(_._2).sum
+    val count = temps.size
+    area -> (total / count)
+  }
+  
+  // Determine if areas have high temperature (above 30)
+  val areasWithHighTemp = areaAvgTemps.filter(_._2 > 30).keySet
+  
+  // Broadcast alarm to all nodes in areas with high temperature
+  val alarmState = foldhood(Map.empty[ID, Boolean])(_ ++ _)(
+    Map(nbr(myId) -> areasWithHighTemp.contains(nbr(myArea)))
+  )
+  
+  alarmState
+}

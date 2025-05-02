@@ -1,0 +1,14 @@
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val isChannel = rep(source) { channelStatus =>
+  mux(source) {
+    true
+  } {
+    mux(destination) {
+      false
+    } {
+      maxHood(nbr(channelStatus))
+    }
+  }
+}
+isChannel && !source && !destination

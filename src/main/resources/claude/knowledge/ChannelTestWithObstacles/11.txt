@@ -1,0 +1,19 @@
+rep(false) { state =>
+  val srcData = sense[Boolean]("source")
+  val dstData = sense[Boolean]("destination")
+  val isObstacle = sense[Boolean]("obstacle")
+  
+  mux(isObstacle) {
+    false
+  } {
+    mux(srcData) {
+      true
+    } {
+      mux(dstData) {
+        false
+      } {
+        foldhood(false)(_ || _)(nbr(state))
+      }
+    }
+  }
+}

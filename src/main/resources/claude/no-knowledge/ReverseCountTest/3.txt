@@ -1,0 +1,2 @@
+val source = node(0)
+val result = G[Int](source, 1000, (accumulator, _) => if (accumulator <= 0) 0 else accumulator - 1)

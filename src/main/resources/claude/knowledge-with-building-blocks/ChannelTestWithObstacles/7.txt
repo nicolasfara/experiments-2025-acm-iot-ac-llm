@@ -1,0 +1,23 @@
+rep(false) { result =>
+  val srcValue = sense[Boolean]("source")
+  val destValue = sense[Boolean]("destination")
+  val obst = sense[Boolean]("obstacle")
+  
+  // Create a gradient from source, with infinity cost for obstacles
+  val potential = G[Double](
+    srcValue, 
+    0.0, 
+    _ + nbrRange(), 
+    () => if (nbr(obst)) Double.PositiveInfinity else nbrRange()
+  )
+  
+  // Use collect to propagate success signal back from destination
+  val pathExists = C[Double, Boolean](
+    potential,
+    _ || _,
+    destValue,
+    false
+  )
+  
+  pathExists && srcValue
+}

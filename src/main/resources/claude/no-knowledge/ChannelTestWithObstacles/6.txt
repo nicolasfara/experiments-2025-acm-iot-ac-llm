@@ -1,0 +1,22 @@
+val source = node.has("source")
+val destination = node.has("destination")
+val obstacle = node.sense[Boolean]("obstacle")
+
+val path = branch(obstacle) { false } {
+  distanceTo(source) match {
+    case Some(d1) => 
+      distanceTo(destination) match {
+        case Some(d2) => d1 + d2
+        case None => Double.PositiveInfinity
+      }
+    case None => Double.PositiveInfinity
+  }
+}
+
+val pathExists = path != Double.PositiveInfinity && path != false
+
+branch(source) { true } {
+  branch(destination) { true } {
+    pathExists
+  }
+}

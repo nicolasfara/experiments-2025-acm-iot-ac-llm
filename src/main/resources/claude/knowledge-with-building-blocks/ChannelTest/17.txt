@@ -1,0 +1,5 @@
+rep(Double.PositiveInfinity) { distanceToSource =>
+  val amSource = sense[Boolean]("source")
+  val metric = mux(sense[Boolean]("obstacle")) { Double.PositiveInfinity } { nbrRange() }
+  mux(amSource) { 0.0 } { minHood(nbr(distanceToSource) + metric) }
+}

@@ -1,0 +1,1 @@
+rep(1000)(old => if (old > 0) old - 1 else 0)

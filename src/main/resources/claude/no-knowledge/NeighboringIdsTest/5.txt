@@ -1,0 +1,6 @@
+// Gather a list of neighbor IDs
+val neighbors = includingSelf.reifyField(mid())
+  .toMap
+  .keys
+  .filter(_ != mid())
+  .toList

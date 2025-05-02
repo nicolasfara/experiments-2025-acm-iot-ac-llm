@@ -1,0 +1,21 @@
+import scala.collection.mutable.{Map => MMap}
+
+val src = node(0)
+val distMap = MMap[ID, Double]()
+
+val distance = branch(src) {
+  distMap.put(mid(), 0.0)
+  0.0
+} {
+  val nbrsWithDist = excludingSelf.reifyField(nbr { (mid(), nbrRange()) })
+  val distNbrs = nbrsWithDist.filter(_._1 != mid()).map(_._2)
+  if (distNbrs.nonEmpty) {
+    val minDist = distNbrs.min
+    distMap.put(mid(), minDist)
+    minDist
+  } else {
+    Double.PositiveInfinity
+  }
+}
+
+distance

@@ -1,0 +1,2 @@
+G(sense[Boolean]("destination"), 0.0, _ + mux(nbr(sense[Boolean]("obstacle")))(Double.PositiveInfinity)(nbrRange()), () => nbrRange())
+C(G(sense[Boolean]("source"), 0.0, _ + mux(nbr(sense[Boolean]("obstacle")))(Double.PositiveInfinity)(nbrRange()), () => nbrRange()), _ || _, sense[Boolean]("destination"), false)

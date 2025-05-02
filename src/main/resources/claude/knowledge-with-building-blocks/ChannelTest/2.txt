@@ -1,0 +1,18 @@
+rep(false) { chann =>
+  val source = sense[Boolean]("source")
+  val dest = sense[Boolean]("destination")
+  val obst = sense[Boolean]("obstacle")
+  
+  val metric = () => {
+    if (nbr(obst)) Double.PositiveInfinity else nbrRange()
+  }
+  
+  val potential = G[Double](dest, 0.0, _ + nbrRange(), metric)
+  
+  mux(potential != Double.PositiveInfinity) {
+    val pathExists = C[Double, Boolean](potential, _ || _, source, false)
+    source || pathExists || chann
+  } {
+    false
+  }
+}

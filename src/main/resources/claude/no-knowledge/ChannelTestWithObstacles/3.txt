@@ -1,0 +1,18 @@
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val channelCreated = branch(obstacle) {
+  false
+} {
+  distanceTo(source) match {
+    case Some(srcDist) => 
+      distanceTo(destination) match {
+        case Some(destDist) => true
+        case None => false
+      }
+    case None => false
+  }
+}
+
+channelCreated

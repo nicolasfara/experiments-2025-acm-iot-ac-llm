@@ -1,0 +1,8 @@
+val source = node.get[Boolean]("source")
+val destination = node.get[Boolean]("destination")
+val g = classicGradient(source)
+branch(destination) {
+  distanceTo(g)
+} {
+  0.0
+}

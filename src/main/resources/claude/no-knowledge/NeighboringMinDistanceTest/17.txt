@@ -1,0 +1,10 @@
+val source = node(1)
+val result = rep(Double.PositiveInfinity) { distance =>
+  mux(source) {
+    0.0
+  } {
+    foldhoodPlus(Double.PositiveInfinity)(Math.min)(
+      nbr { distance } + nbrRange
+    )
+  }
+}

@@ -1,0 +1,1 @@
+nbr(mid()) match { case id => fold(0)(_ + _)((if (id != mid()) 1 else 0)) }

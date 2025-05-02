@@ -1,0 +1,14 @@
+rep(false) { channelExists =>
+  val isSource = sense[Boolean]("source")
+  val isDestination = sense[Boolean]("destination")
+  val isObstacle = sense[Boolean]("obstacle")
+  
+  if (isObstacle) {
+    false
+  } else if (isSource) {
+    true
+  } else {
+    val nextHopExists = foldhoodPlus(false)(_ || _)(nbr(channelExists))
+    isDestination && nextHopExists || nextHopExists
+  }
+}

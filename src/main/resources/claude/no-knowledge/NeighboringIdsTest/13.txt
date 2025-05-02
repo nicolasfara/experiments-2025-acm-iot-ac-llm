@@ -1,0 +1,1 @@
+val neighbors = includingSelf.getLocalSensing[List[ID]]("NEIGHBORS")

@@ -1,0 +1,14 @@
+val sense = sense[Double]("temperature")
+val grain = 300.0
+
+val area = S(grain, (0, 0))
+val areaId = area.getClass.getName + area.hashCode
+
+val areaTemperature = C[Double, Double](0.0, _ + _, _ / _)(sense, area)
+val alarm = areaTemperature > 30.0
+
+branch(alarm) {
+  broadcast(alarm, true)
+} {
+  broadcast(alarm, false)
+}

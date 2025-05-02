@@ -1,0 +1,5 @@
+val myId = mid()
+val max = rep(myId) { oldMaxId =>
+  val neighborsMax = includingSelf.foldhood(oldMaxId)((a, b) => Math.max(a, b))(nbr { oldMaxId })
+  Math.max(oldMaxId, neighborsMax)
+}

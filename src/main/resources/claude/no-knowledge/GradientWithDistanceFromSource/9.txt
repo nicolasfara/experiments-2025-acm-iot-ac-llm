@@ -1,0 +1,9 @@
+rep(Double.PositiveInfinity) { distance =>
+  mux(sense[Boolean]("source")) {
+    0.0
+  } {
+    foldhood(Double.PositiveInfinity)((x, y) => Math.min(x, y)) {
+      nbr { distance } + nbrRange
+    }
+  }
+}

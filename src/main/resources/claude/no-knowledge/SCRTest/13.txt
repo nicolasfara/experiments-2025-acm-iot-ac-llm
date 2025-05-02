@@ -1,0 +1,18 @@
+val myId = mid()
+val temperature = sense[Double]("temperature")
+
+val potential = distanceTo(node => node.hasData("source", true))
+
+val area = foldhood(Set[ID]())(_ ++ _) {
+  mux(nbr(potential) < 50) { // 50 is the radius of the area
+    Set(nbr(myId))
+  } else {
+    Set.empty[ID]
+  }
+}
+
+val avgTemperature = average(area, temperature)
+
+val alarm = avgTemperature > 30
+
+broadcast(area, alarm)

@@ -1,0 +1,5 @@
+val source = sense[Boolean]("source")
+val g = classicGradient(source)
+val minNbrValue = includingSelf.minHoodSelector(nbr(g))(_ < _)._2
+val result = if (source) 0.0 else minNbrValue + nbrRange()
+result

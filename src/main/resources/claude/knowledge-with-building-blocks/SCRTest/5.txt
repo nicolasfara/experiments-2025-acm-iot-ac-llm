@@ -1,0 +1,15 @@
+{
+  val temperature = sense[Double]("temperature")
+  val areaId = S(3.0, nbrRange) // Leaders become area centers
+  val areaLeaderId = G(areaId, mid(), a => a, nbrRange) // Propagate leader ID
+  val potential = G(areaId, 0.0, _ + nbrRange(), nbrRange) // Distance from leader
+  
+  // Collect temperatures within area
+  val areaTemp = C(potential, _ + _, temperature, 0.0) / C(potential, _ + _, 1.0, 0.0)
+  
+  // Leader computes if alarm should be triggered
+  val alarm = mux(areaId)(areaTemp > 30.0)(false)
+  
+  // Broadcast alarm back to the area
+  G(areaId, alarm, a => a, nbrRange)
+}

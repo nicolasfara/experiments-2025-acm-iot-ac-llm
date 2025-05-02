@@ -1,0 +1,2 @@
+val neighbors = includingSelf.getNeighborhood()
+neighbors.iterator().map(_.getId).toList

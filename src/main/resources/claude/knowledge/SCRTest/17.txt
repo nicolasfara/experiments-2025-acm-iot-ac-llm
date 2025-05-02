@@ -1,0 +1,17 @@
+foldhood(false)(_ || _)(
+  nbr {
+    val myId = mid()
+    val area = myId % 3  // Split nodes into 3 areas based on ID
+    val isInMyArea = nbr(mid() % 3 == area)
+    
+    // Compute number of nodes and total temperature in my area
+    val nodesInArea = foldhood(0)(_ + _)(mux(nbr(isInMyArea))(1)(0))
+    val totalTempInArea = foldhood(0.0)(_ + _)(mux(nbr(isInMyArea))(nbr(sense[Double]("temperature")))(0.0))
+    
+    // Calculate average temperature for the area
+    val avgTemp = if (nodesInArea > 0) totalTempInArea / nodesInArea else 0.0
+    
+    // Trigger alarm if average temperature is above threshold
+    avgTemp > 30.0
+  }
+)

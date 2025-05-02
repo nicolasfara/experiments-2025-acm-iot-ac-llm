@@ -1,0 +1,16 @@
+val area = S(grain = 10.0)
+
+val localTemp = localSensor[Double]("temperature")
+
+val areasWithHighTemp = C[Double, Double](
+  localTemp,
+  _ + _,
+  0.0,
+  (temp, count) => if (count > 0) temp / count else 0.0
+)
+
+val averageTemp = areasWithHighTemp
+
+val alarm = averageTemp > 30.0
+
+broadcast(area, alarm)

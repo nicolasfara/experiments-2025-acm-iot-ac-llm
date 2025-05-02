@@ -1,0 +1,21 @@
+import scala.util.Random
+
+val random = new Random()
+val areaId = node.get[Int]("area")
+val myTemperature = node.get[Double]("temperature", random.nextDouble() * 40)
+
+// Group devices by area
+val neighboursInSameArea = includingSelf.neighborsWithCommonValue[Int]("area", areaId)
+
+// Compute average temperature in the area
+val areaTemperature = average(neighboursInSameArea, myTemperature)
+
+// Check if temperature is above threshold and broadcast alarm within area
+val alarmThreshold = 30.0
+val isAlarmActive = areaTemperature > alarmThreshold
+
+// Broadcast the alarm to all devices in the same area
+val alarm = broadcast(neighboursInSameArea, isAlarmActive)
+
+// Output
+(areaId, myTemperature, areaTemperature, alarm)

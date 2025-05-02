@@ -1,0 +1,4 @@
+G[Double](sense[Boolean]("source"), 0.0, _ + nbrRange(), () => {
+  val isObstacle = sense[Boolean]("obstacle")
+  if (isObstacle) Double.PositiveInfinity else nbrRange()
+})

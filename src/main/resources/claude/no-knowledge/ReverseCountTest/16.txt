@@ -1,0 +1,3 @@
+val source = node(mid = 1000, nbr(0))
+val evolution = rep(0) { v => mux(source > 0)(source - 1)(v) }
+evolution

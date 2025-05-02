@@ -1,0 +1,15 @@
+rep(false) { alarm =>
+  val areaId = sense[Int]("area")
+  val temperature = sense[Double]("temperature")
+  
+  // Compute the average temperature within each area
+  val devicesInArea = foldhood(0)(_ + _)(mux(nbr(areaId) == areaId)(1)(0))
+  val tempSum = foldhood(0.0)(_ + _)(mux(nbr(areaId) == areaId)(nbr(temperature))(0.0))
+  val avgTemp = if (devicesInArea > 0) tempSum / devicesInArea else 0.0
+  
+  // Determine if the area's average temperature is above the threshold
+  val areaAlarm = avgTemp > 30.0
+  
+  // Broadcast the alarm within the area
+  foldhood(false)(_ || _)(mux(nbr(areaId) == areaId)(nbr(areaAlarm))(false))
+}

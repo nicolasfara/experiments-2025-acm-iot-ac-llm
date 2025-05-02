@@ -1,0 +1,3 @@
+rep(Set.empty[ID]) { ids => 
+  ids ++ foldhoodPlus(Set.empty[ID])(_ ++ _)(Set(nbr(mid())))
+}

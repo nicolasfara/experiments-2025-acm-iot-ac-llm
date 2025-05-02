@@ -1,0 +1,25 @@
+rep((0.0, false)) { case (avgTemp, _) =>
+  val areaId = (mid() / 100) % 5
+  val temp = sense[Double]("temperature")
+  val areaData = foldhood(Map.empty[Int, (Double, Int)])(_ ++ _)(nbr {
+    Map(areaId -> (temp, 1))
+  })
+  
+  val areaAggregates = areaData.groupBy(_._1).map { case (id, values) =>
+    val (totalTemp, count) = values.values.foldLeft((0.0, 0)) { case ((t, c), (nodeTemp, nodeCount)) =>
+      (t + nodeTemp, c + nodeCount)
+    }
+    id -> (totalTemp / count, count)
+  }
+  
+  val myAreaAvgTemp = areaAggregates.getOrElse(areaId, (0.0, 0))._1
+  val alarm = myAreaAvgTemp > 30.0
+  
+  val alarmBroadcast = foldhood(Map.empty[Int, Boolean])(_ ++ _)(nbr {
+    Map(areaId -> alarm)
+  })
+  
+  val myAreaAlarm = alarmBroadcast.getOrElse(areaId, false)
+  
+  (myAreaAvgTemp, myAreaAlarm)
+}._2

@@ -1,0 +1,19 @@
+rep(Double.PositiveInfinity) { potential =>
+  val isSource = sense[Boolean]("source")
+  val isDest = sense[Boolean]("destination")
+  val isObstacle = sense[Boolean]("obstacle")
+  
+  mux(isObstacle) {
+    Double.PositiveInfinity
+  } {
+    val metricFn = () => {
+      mux(nbr(isObstacle)) {
+        Double.PositiveInfinity
+      } {
+        nbrRange()
+      }
+    }
+    
+    G[Double](isSource, 0.0, _ + metricFn(), metricFn) < potential
+  }
+}

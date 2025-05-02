@@ -1,0 +1,23 @@
+val source = node[Boolean]("source")
+val destination = node[Boolean]("destination")
+
+val channel = branch(source) {
+  gradient(source) // Create gradient from source
+} {
+  Double.PositiveInfinity
+}
+
+val path = branch(destination) {
+  if (channel < Double.PositiveInfinity) {
+    val path = classicGradient(destination)
+    branch(path < Double.PositiveInfinity) {
+      broadcastAlongGradient(path, channel)
+    } {
+      channel
+    }
+  } else {
+    channel
+  }
+} {
+  channel
+}

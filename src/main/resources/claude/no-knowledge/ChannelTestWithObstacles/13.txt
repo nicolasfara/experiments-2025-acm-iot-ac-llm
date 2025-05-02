@@ -1,0 +1,24 @@
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val channel = branch(obstacle) { 
+  false 
+} {
+  branch(source) {
+    true
+  } {
+    branch(destination) {
+      true
+    } {
+      gradient(source) { nbr => nbrRange() } match {
+        case Double.PositiveInfinity => false
+        case _ => 
+          val distanceToDest = distanceTo(destination)
+          distanceToDest < Double.PositiveInfinity
+      }
+    }
+  }
+}
+
+channel

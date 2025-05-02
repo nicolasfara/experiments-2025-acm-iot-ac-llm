@@ -1,0 +1,5 @@
+val source = 1000
+broadcast(source) { v =>
+  val me = self.getDeviceUID.getId
+  Math.max(0, v - 1)
+}

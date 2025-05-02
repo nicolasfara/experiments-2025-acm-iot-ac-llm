@@ -1,0 +1,6 @@
+val source = node.get("source")
+val destination = node.get("destination")
+val channel = classicGradient(source) + classicGradient(destination)
+val width = 2.0
+val path = branch(channel < width) { 1.0 } { 0.0 }
+node.put("path", path)

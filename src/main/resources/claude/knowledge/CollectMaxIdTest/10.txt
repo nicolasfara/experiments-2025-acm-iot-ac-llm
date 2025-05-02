@@ -1,0 +1,3 @@
+rep(mid()) { curr => 
+  maxHood(nbr(curr))
+}

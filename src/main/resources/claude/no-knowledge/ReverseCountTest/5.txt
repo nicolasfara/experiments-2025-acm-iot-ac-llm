@@ -1,0 +1,10 @@
+val source = node(1000)
+val distance = G[Double](0.0, (value) => {
+  mux(source) {
+    0.0
+  } {
+    minHood(nbr(value) + nbrRange)
+  }
+})
+val maxDistance = rep(distance) { d => Math.max(distance, d) }
+val evolvingValue = maxDistance - distance

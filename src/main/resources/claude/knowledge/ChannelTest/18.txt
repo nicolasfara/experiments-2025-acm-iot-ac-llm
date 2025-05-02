@@ -1,0 +1,15 @@
+val srcId = sense[ID]("source")
+val destId = sense[ID]("destination")
+
+rep((Double.PositiveInfinity, srcId)) { case (dist, parent) =>
+  mux(mid() == srcId) {
+    (0.0, srcId)
+  } {
+    val candidates = minHoodPlus(nbr(dist) + nbrRange() -> nbr(mid()))
+    mux(candidates._1 < dist) {
+      (candidates._1, candidates._2)
+    } {
+      (dist, parent)
+    }
+  }
+}._2 == parent && (mid() == srcId || mid() == destId || parent != mid())

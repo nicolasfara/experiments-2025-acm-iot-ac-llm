@@ -1,0 +1,4 @@
+val source = node(1000)
+rep(source) { value =>
+  mux(value <= 0)(0)(value - 1)
+}

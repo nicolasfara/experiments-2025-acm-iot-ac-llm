@@ -1,0 +1,9 @@
+{
+  val source = sense[Boolean]("source")
+  val obstacle = sense[Boolean]("obstacle")
+  
+  def distance(): Double = nbrRange()
+  def cost(): Double = mux(nbr(obstacle)) { Double.PositiveInfinity } { distance() }
+  
+  G[Double](source, 0.0, _ + cost(), cost)
+}

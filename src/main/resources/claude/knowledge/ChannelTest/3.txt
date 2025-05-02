@@ -1,0 +1,18 @@
+rep((Double.PositiveInfinity, Double.PositiveInfinity)) { case (dist, grad) =>
+  val srcDevice = sense[Boolean]("source")
+  val dstDevice = sense[Boolean]("destination")
+  
+  val newDist = mux(srcDevice) {
+    0.0
+  } {
+    minHoodPlus(nbr(dist) + nbrRange())
+  }
+  
+  val newGrad = mux(dstDevice) {
+    0.0
+  } {
+    minHoodPlus(nbr(grad) + nbrRange())
+  }
+  
+  (newDist, newGrad)
+}._2

@@ -1,0 +1,30 @@
+rep(false) { channel =>
+  val amSource = mid() == sense[ID]("source")
+  val amDestination = mid() == sense[ID]("destination")
+  val amObstacle = sense[Boolean]("obstacle")
+  
+  val sourceGradient = rep(Double.PositiveInfinity) { distance =>
+    mux(amSource) {
+      0.0
+    } {
+      val minNeighDist = minHoodPlus(nbr(distance) + nbrRange())
+      mux(amObstacle) { Double.PositiveInfinity } { minNeighDist }
+    }
+  }
+  
+  val destinationPath = rep(false) { inPath =>
+    mux(amDestination) {
+      true
+    } {
+      mux(amObstacle) {
+        false
+      } {
+        val minNeighDist = minHoodPlus(nbr(sourceGradient) + nbrRange())
+        val onPath = sourceGradient == minNeighDist && !amSource
+        onPath && anyHood(nbr(inPath))
+      }
+    }
+  }
+  
+  destinationPath || channel
+}

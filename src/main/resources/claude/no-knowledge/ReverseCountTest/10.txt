@@ -1,0 +1,8 @@
+val source = node(mid = 0, isSource = true)
+val g = classicGradient(source)
+rep(1000) { v =>
+  mux(v <= 0) { 0 } {
+    val nbr_min = minHood(nbr(v))
+    if (nbr_min < v) nbr_min else v - 1
+  }
+}

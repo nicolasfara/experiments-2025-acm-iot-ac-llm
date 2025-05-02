@@ -1,0 +1,1 @@
+val minDistanceFromNeighbors = foldhoodPlus(Double.PositiveInfinity)(Math.min)(nbr(0.0) + nbrRange())

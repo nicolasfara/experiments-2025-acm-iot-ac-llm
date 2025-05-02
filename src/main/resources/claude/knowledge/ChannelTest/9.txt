@@ -1,0 +1,17 @@
+rep((Double.MaxValue, mid())) { case (dist, path) =>
+  mux(mid() == sense[Boolean]("source")) {
+    (0.0, mid())
+  } {
+    mux(mid() == sense[Boolean]("destination")) {
+      (dist, path)
+    } {
+      val (minDist, bestPath) = minHoodPlus((Double.PositiveInfinity, mid())) {
+        val nbrDist = nbr(dist)
+        val nbrPath = nbr(path)
+        val range = nbrRange()
+        (nbrDist + range, nbrPath)
+      }
+      (minDist, bestPath)
+    }
+  }
+}._2

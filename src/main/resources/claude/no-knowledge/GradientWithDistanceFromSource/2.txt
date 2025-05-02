@@ -1,0 +1,6 @@
+val source = sense[Boolean]("source")
+val distance = distanceTo(source)
+
+def distanceTo(source: Boolean): Double = {
+  G.distanceBetween(mid(), broadcast(mid(), source))
+}

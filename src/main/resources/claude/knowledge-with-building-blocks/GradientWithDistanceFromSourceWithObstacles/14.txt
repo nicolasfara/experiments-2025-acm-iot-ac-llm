@@ -1,0 +1,11 @@
+{
+  val obstacle = sense[Boolean]("obstacle")
+  val src = sense[Boolean]("source")
+  
+  G[Double](
+    source = src,
+    field = 0.0,
+    acc = _ + nbrRange(),
+    metric = () => if (nbr(obstacle)) Double.PositiveInfinity else nbrRange()
+  )
+}

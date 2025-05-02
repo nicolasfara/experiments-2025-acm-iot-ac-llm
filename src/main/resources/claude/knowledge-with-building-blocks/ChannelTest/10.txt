@@ -1,0 +1,26 @@
+rep(0.0) { channelWidth =>
+  val sourceField = G(sense[Boolean]("source"), 0.0, _ + 1.0, () => {
+    mux(nbr(sense[Boolean]("obstacle"))) {
+      Double.PositiveInfinity
+    } {
+      nbrRange()
+    }
+  })
+  
+  val destField = G(sense[Boolean]("destination"), 0.0, _ + 1.0, () => {
+    mux(nbr(sense[Boolean]("obstacle"))) {
+      Double.PositiveInfinity
+    } {
+      nbrRange()
+    }
+  })
+  
+  val pathDistance = sourceField + destField
+  val isOnPath = pathDistance <= minHood(nbr(pathDistance)) + 0.1
+  
+  mux(isOnPath) {
+    1.0
+  } {
+    0.0
+  }
+}

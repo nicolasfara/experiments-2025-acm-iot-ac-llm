@@ -1,0 +1,12 @@
+rep((Double.PositiveInfinity, Double.PositiveInfinity)) { case (dist, nextDist) =>
+  mux(sense[Boolean]("source")) {
+    (0.0, 0.0)
+  } {
+    mux(sense[Boolean]("obstacle")) {
+      (Double.PositiveInfinity, Double.PositiveInfinity)
+    } {
+      val newDist = minHoodPlus(nbr(nextDist) + nbrRange())
+      (nextDist, newDist)
+    }
+  }
+}._1

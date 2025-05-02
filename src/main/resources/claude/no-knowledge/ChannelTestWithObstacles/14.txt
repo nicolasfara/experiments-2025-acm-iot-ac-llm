@@ -1,0 +1,21 @@
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val channelResult = if (obstacle) {
+  false
+} else {
+  branch(source) {
+    val field = distanceTo(destination)
+    broadcast(field, field + nbrRange)
+  } {
+    val field = branch(destination) {
+      0.0
+    } {
+      minHoodPlus(nbr(field) + nbrRange)
+    }
+    field != Double.PositiveInfinity
+  }
+}
+
+channelResult

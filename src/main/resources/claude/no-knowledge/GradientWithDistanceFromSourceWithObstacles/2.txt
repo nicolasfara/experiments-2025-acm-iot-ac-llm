@@ -1,0 +1,15 @@
+rep(Double.PositiveInfinity) { d =>
+  mux(sense[Boolean]("source")) {
+    0.0
+  } {
+    val nbrDist = nbr { d }
+    val nbrRange = nbrRange()
+    val localEstimate = 
+      if (sense[Boolean]("obstacle")) { 
+        Double.PositiveInfinity 
+      } else {
+        minHood(nbrDist + nbrRange)
+      }
+    mux(localEstimate < d) { localEstimate } { d }
+  }
+}

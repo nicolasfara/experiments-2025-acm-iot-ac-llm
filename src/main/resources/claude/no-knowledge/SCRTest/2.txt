@@ -1,0 +1,12 @@
+val temperature = sense[Double]("temperature")
+val areaId = sense[Int]("area")
+
+val areaMaxTemperature = groupSize(
+  broadcast(areaId, mux(areaId == mid()) { temperature } { Double.NaN })
+).toMap.view.mapValues(values => 
+  values.filterNot(_.isNaN).max
+).toMap
+
+val alarm = areaMaxTemperature.getOrElse(areaId, 0.0) > 30.0
+
+node.put("alarm", alarm)

@@ -1,0 +1,7 @@
+val result = rep((1000, 0)){ case (value, step) =>
+  if (value > 0) {
+    (value - 1, step + 1)
+  } else {
+    (0, step)
+  }
+}._1

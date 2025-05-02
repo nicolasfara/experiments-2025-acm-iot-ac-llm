@@ -1,0 +1,10 @@
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacles = sense[Boolean]("obstacle")
+
+val destDist = G[Double](destination, 0.0, _ + nbrRange(), () => mux(nbr(obstacles))(Double.PositiveInfinity)(nbrRange()))
+val sourceDist = G[Double](source, 0.0, _ + nbrRange(), () => mux(nbr(obstacles))(Double.PositiveInfinity)(nbrRange()))
+
+val channel = destDist + sourceDist <= G[Double](destination, 0.0, _ + nbrRange(), nbrRange) + 0.5
+
+channel

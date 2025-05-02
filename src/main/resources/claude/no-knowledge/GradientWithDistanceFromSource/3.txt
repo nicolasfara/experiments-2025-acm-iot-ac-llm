@@ -1,0 +1,4 @@
+import it.unibo.scafi.lib.gradient._
+val source = sense[Boolean]("source")
+val g = classicGradient(source, nbrRange)
+node.put("distance", g)

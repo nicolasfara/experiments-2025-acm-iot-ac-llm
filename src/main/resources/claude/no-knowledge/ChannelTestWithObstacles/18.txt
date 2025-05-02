@@ -1,0 +1,18 @@
+val source = node.get("source")
+val destination = node.get("destination")
+val obstacle = node.get("obstacle")
+
+def gradient(source: Boolean): Double =
+  rep(Double.PositiveInfinity) { distance =>
+    mux(source) { 0.0 } {
+      foldhoodPlus(Double.PositiveInfinity)(Math.min)(
+        nbr { mux(obstacle) { Double.PositiveInfinity } { distance + nbrRange() } }
+      )
+    }
+  }
+
+val distanceToSource = gradient(source)
+val distanceToDestination = gradient(destination)
+val onPath = distanceToSource + distanceToDestination <= distanceToSource.toBreezeDouble + distanceToDestination.toBreezeDouble + 0.1
+
+mux(obstacle) { false } { onPath }

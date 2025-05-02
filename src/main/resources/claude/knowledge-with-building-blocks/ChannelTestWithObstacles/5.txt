@@ -1,0 +1,21 @@
+val potentialFromSource = G[Double](sense[Boolean]("source"), 0.0, _ + nbrRange(), () => {
+  if (nbr(sense[Boolean]("obstacle"))) Double.PositiveInfinity else nbrRange()
+})
+
+val potentialFromDest = G[Double](sense[Boolean]("destination"), 0.0, _ + nbrRange(), () => {
+  if (nbr(sense[Boolean]("obstacle"))) Double.PositiveInfinity else nbrRange()
+})
+
+val channel = potentialFromSource + potentialFromDest <= 1.1 * G[Double](
+  sense[Boolean]("source") || sense[Boolean]("destination"), 
+  0.0, 
+  _ + nbrRange(), 
+  () => nbrRange()
+)
+
+C[Double, Boolean](
+  potentialFromSource,
+  _ || _,
+  channel && sense[Boolean]("destination"),
+  false
+)

@@ -1,0 +1,2 @@
+val neighbors = includingSelf.nbr(mid()) != mid()
+val count = neighbors.fold(0)((acc, _) => acc + 1)

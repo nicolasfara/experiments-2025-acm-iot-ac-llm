@@ -1,0 +1,17 @@
+val source = sense[Boolean]("source")
+val temperature = sense[Double]("temperature")
+
+val leaderArea = S(5.0, () => nbrRange())
+val leaderInfluence = G(leaderArea, 0.0, _ + nbrRange(), () => nbrRange())
+
+val avgTemp = mux(leaderInfluence < Double.PositiveInfinity) {
+  val nodesInArea = foldhood(0)(_ + _)(mux(nbr(leaderInfluence < Double.PositiveInfinity))(nbr(1))(0))
+  val totalTemp = foldhood(0.0)(_ + _)(mux(nbr(leaderInfluence < Double.PositiveInfinity))(nbr(temperature))(0.0))
+  totalTemp / nodesInArea
+} {
+  0.0
+}
+
+val alarm = G(leaderArea, avgTemp > 30.0, a => a, () => nbrRange())
+
+alarm

@@ -1,0 +1,34 @@
+rep(false) { channel =>
+  val isSource = sense[Boolean]("source")
+  val isDestination = sense[Boolean]("destination")
+  val isObstacle = sense[Boolean]("obstacle")
+  
+  mux(!isObstacle) {
+    val srcDistance = rep(Double.PositiveInfinity) { dist =>
+      mux(isSource) {
+        0.0
+      } {
+        minHoodPlus(nbr(dist) + nbrRange())
+      }
+    }
+    
+    val destDistance = rep(Double.PositiveInfinity) { dist =>
+      mux(isDestination) {
+        0.0
+      } {
+        minHoodPlus(nbr(dist) + nbrRange())
+      }
+    }
+    
+    val potentialValue = srcDistance + destDistance
+    val minPotential = rep(Double.PositiveInfinity) { mp =>
+      Math.min(mp, minHood(nbr(potentialValue)))
+    }
+    
+    val inChannel = potentialValue <= minPotential + 0.1
+    
+    channel || (inChannel && !(isSource || isDestination))
+  } {
+    false
+  }
+}

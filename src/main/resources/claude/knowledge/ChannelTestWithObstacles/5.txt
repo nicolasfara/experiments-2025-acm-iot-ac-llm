@@ -1,0 +1,37 @@
+rep(false) { created =>
+  val isSource = sense[Boolean]("source")
+  val isDestination = sense[Boolean]("destination")
+  val isObstacle = sense[Boolean]("obstacle")
+  
+  val distFromSource = rep(Double.PositiveInfinity) { dist =>
+    mux(isSource) {
+      0.0
+    } {
+      mux(!isObstacle) {
+        minHoodPlus(nbr(dist) + nbrRange())
+      } {
+        Double.PositiveInfinity
+      }
+    }
+  }
+  
+  val distFromDest = rep(Double.PositiveInfinity) { dist =>
+    mux(isDestination) {
+      0.0
+    } {
+      mux(!isObstacle) {
+        minHoodPlus(nbr(dist) + nbrRange())
+      } {
+        Double.PositiveInfinity
+      }
+    }
+  }
+  
+  val isChannelNode = (distFromSource < Double.PositiveInfinity) && 
+                      (distFromDest < Double.PositiveInfinity) && 
+                      !isObstacle
+  
+  val pathExists = isDestination && (distFromSource < Double.PositiveInfinity)
+  
+  created || pathExists
+}

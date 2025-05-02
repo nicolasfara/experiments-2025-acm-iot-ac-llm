@@ -1,0 +1,2 @@
+val neighbors = foldhood(Set.empty[ID])(_ ++ _)(Set(nbr(mid())))
+neighbors.toList

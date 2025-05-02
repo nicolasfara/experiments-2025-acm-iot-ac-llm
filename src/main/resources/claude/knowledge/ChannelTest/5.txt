@@ -1,0 +1,7 @@
+rep(Double.PositiveInfinity) { distance =>
+  mux(sense[String]("name") == "source") {
+    0.0
+  } {
+    minHoodPlus(nbr(distance) + nbrRange())
+  }
+}

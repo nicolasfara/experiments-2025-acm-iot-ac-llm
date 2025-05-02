@@ -1,0 +1,27 @@
+rep(0.0) { oldAreaTemperature =>
+  val imLeader = S(3.0, () => nbrRange())
+  val potentialToLeader = G(imLeader, 0.0, _ + nbrRange(), () => nbrRange())
+  val leaderArea = potentialToLeader < 3.0
+  
+  val areaTemperatureSum = C[Double, Double](potentialToLeader, _ + _, sense[Double]("temperature"), 0.0)
+  val areaDeviceCount = C[Double, Int](potentialToLeader, _ + _, 1, 0)
+  
+  val areaTemperature = mux(imLeader) {
+    areaTemperatureSum / areaDeviceCount
+  } {
+    oldAreaTemperature
+  }
+  
+  val alarmTriggered = areaTemperature > 30.0
+  val alarmSignal = G(imLeader && alarmTriggered, true, identity, () => nbrRange())
+  
+  branch(leaderArea) {
+    mux(imLeader) {
+      areaTemperature
+    } {
+      if (alarmSignal) areaTemperature else oldAreaTemperature
+    }
+  } {
+    oldAreaTemperature
+  }
+}

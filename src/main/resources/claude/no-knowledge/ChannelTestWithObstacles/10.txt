@@ -1,0 +1,12 @@
+val source = node.has("source")
+val destination = node.has("destination")
+val obstacle = node.has("obstacle")
+
+val g = classicGradient(source)
+val field = distanceTo(source)
+val path = broadcast(source, destination)
+val channel = branch(g < Double.PositiveInfinity && !obstacle) {
+  broadcastAlongGradient(destination, g)
+} { false }
+
+channel && path

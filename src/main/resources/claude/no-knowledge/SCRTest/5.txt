@@ -1,0 +1,37 @@
+import scala.util.Random
+
+val temperature = Random.nextDouble() * 40 // Random temperature between 0 and 40 degrees
+
+val areas = vm.selfSensor("area").getOrElse(-1) // Each device knows its area
+
+// Compute average temperature in each area
+val areaTemperature = rep(Map.empty[Int, (Double, Int)]) { avgMap =>
+  val current = (temperature, 1)
+  val newMap = avgMap + (areas -> current)
+  
+  // Aggregate temperatures by area
+  val collected = includingSelf.aggregate(newMap)((m1, m2) => {
+    m2.foldLeft(m1) { case (acc, (area, (temp, count))) =>
+      val (accTemp, accCount) = acc.getOrElse(area, (0.0, 0))
+      acc + (area -> (accTemp + temp, accCount + count))
+    }
+  })
+  
+  // Calculate averages
+  collected.map { case (area, (totalTemp, totalCount)) =>
+    area -> (totalTemp / totalCount, totalCount)
+  }
+}
+
+// Check if area temperature is above threshold and broadcast alarm
+val alarmThreshold = 30.0
+val areaAvgTemp = areaTemperature.getOrElse(areas, (0.0, 0))._1
+
+val alarm = broadcast(mid(), mux(areaAvgTemp > alarmThreshold) {
+  s"ALARM: Area $areas temperature is $areaAvgTemp°C (above threshold)"
+} {
+  ""
+})
+
+// Output results
+(areas, temperature, areaAvgTemp, if (alarm.isEmpty) "No alarm" else alarm)

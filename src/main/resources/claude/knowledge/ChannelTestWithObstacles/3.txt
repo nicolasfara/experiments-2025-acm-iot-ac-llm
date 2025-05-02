@@ -1,0 +1,28 @@
+val src = sense[Boolean]("source")
+val dst = sense[Boolean]("destination")
+val isObstacle = sense[Boolean]("obstacle")
+
+// Initialize distance to source at the beginning
+val dist = rep(Double.PositiveInfinity) { d =>
+  mux(src) {
+    0.0
+  } {
+    minHoodPlus(nbr(d) + nbrRange())
+  }
+}
+
+// Calculate the gradient to destination starting from source
+val channel = rep(false) { ch =>
+  if (dst) {
+    // At destination, we always return true
+    true
+  } else if (isObstacle) {
+    // Obstacles are never part of the channel
+    false
+  } else {
+    // For other nodes, be part of the channel if any neighbor has a smaller distance and is part of the channel
+    foldhoodPlus(false)(_ || _)(nbr(ch) && nbr(dist) < dist)
+  }
+}
+
+channel

@@ -1,0 +1,5 @@
+val areas = S(3.0, nbrRange)
+val myArea = G(areas, mid(), (a, _) => a, nbrRange)
+val avgTemp = C(G(areas, 0.0, _ + nbrRange(), nbrRange), _ + _, sense[Double]("temperature"), 0.0) / C(G(areas, 0.0, _ + nbrRange(), nbrRange), _ + _, 1.0, 0.0)
+val alarm = avgTemp > 30.0
+G(mid() == myArea && alarm, true, (a, _) => a, nbrRange)

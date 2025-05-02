@@ -1,0 +1,1 @@
+foldhood(Double.MaxValue)(_ min _)(mux(nbr(mid()) != mid())(nbr(nbrRange()))(Double.MaxValue))

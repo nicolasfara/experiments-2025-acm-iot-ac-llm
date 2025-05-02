@@ -1,0 +1,9 @@
+val source = node.getOrElse("source", false)
+val destination = node.getOrElse("destination", false)
+
+val channel = gradient(source)
+val path = branch(destination) { 
+  broadcast(channel, 0.0) 
+} { 
+  Double.PositiveInfinity 
+}

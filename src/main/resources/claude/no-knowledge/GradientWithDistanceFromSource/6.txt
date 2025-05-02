@@ -1,0 +1,6 @@
+val source = sense[Boolean]("source")
+val srcId = mux(source){ mid() }{ Double.NaN }
+val g = classicGradient(source)
+
+AI: val source = sense[Boolean]("source")
+val distance = classicGradient(source)

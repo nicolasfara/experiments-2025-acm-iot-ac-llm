@@ -1,0 +1,8 @@
+val myId = mid()
+rep(myId) { case maxId =>
+  mux(nbr(maxId) > maxId) {
+    maxNeighborValue(nbr(maxId))
+  } {
+    maxId
+  }
+}

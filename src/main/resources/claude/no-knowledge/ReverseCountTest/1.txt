@@ -1,0 +1,10 @@
+val target = 0
+val source = 1000
+val evolution = rep((false, source)) { case (done, value) =>
+  mux(done) {
+    (true, value)
+  } {
+    val newValue = value - 1
+    (newValue <= target, newValue)
+  }
+}._2

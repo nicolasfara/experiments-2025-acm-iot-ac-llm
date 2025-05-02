@@ -1,0 +1,3 @@
+rep(Double.MaxValue) { distance =>
+  foldhoodPlus(Double.MaxValue)(Math.min)(nbr(distance))
+}

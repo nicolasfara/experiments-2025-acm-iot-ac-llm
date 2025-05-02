@@ -1,0 +1,12 @@
+rep((Double.MaxValue, mid())) { case (dist, parent) =>
+  mux(sense[Boolean]("source")) {
+    (0.0, mid())
+  } {
+    mux(sense[Boolean]("destination")) {
+      (dist, parent)
+    } {
+      val (nbrDist, nbrParent) = minHood(nbr((dist + nbrRange(), mid())))
+      if (nbrDist < dist) (nbrDist, nbrParent) else (dist, parent)
+    }
+  }
+}._2

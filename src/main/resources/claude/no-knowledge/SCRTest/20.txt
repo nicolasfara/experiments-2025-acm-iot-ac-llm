@@ -1,0 +1,12 @@
+val temperature = sense[Double]("temperature")
+val areaId = sense[Int]("area")
+val dangerTemp = 30.0
+
+// Group devices by area
+val areaTemp = aggregateByKey(areaId, temperature)((t1, t2) => (t1 + t2) / 2)
+
+// Check if area temperature is above threshold
+val alarm = areaTemp > dangerTemp
+
+// Broadcast the alarm within the same area
+broadcast(areaId, alarm)

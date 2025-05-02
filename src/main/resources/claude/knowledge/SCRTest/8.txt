@@ -1,0 +1,9 @@
+val areaId = sense[Int]("area")
+rep((0.0, 0)) { case (temp, count) =>
+  val newTemp = foldhood(0.0)(_ + _)(mux(nbr(areaId) == areaId)(nbr(sense[Double]("temperature")))(0.0))
+  val newCount = foldhood(0)(_ + _)(mux(nbr(areaId) == areaId)(1)(0))
+  val avgTemp = newTemp / newCount
+  val alarm = avgTemp > 30.0
+  val alarmInArea = foldhood(false)(_ || _)(mux(nbr(areaId) == areaId)(nbr(alarm))(false))
+  (avgTemp, if (alarmInArea) 1 else 0)
+}._2 > 0

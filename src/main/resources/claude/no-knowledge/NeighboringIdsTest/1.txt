@@ -1,0 +1,1 @@
+val neighborIDs = includingSelf.getNeighborhood().toList.map(_.getDeviceUID())

@@ -1,0 +1,11 @@
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val potential = G[Double](source, 0.0, _ + nbrRange(), () => nbrRange())
+val channel = rep(false) { value =>
+  mux(destination) {
+    true
+  } {
+    minHood(nbr(potential)) == potential && nbr(value)
+  }
+}
+channel

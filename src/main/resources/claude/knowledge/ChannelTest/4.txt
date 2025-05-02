@@ -1,0 +1,16 @@
+val isSource = sense[Boolean]("source")
+val isDestination = sense[Boolean]("destination")
+
+rep((isSource, Double.PositiveInfinity)) { case (src, dist) =>
+  mux(isDestination) {
+    (false, 0.0)
+  } {
+    val newSrc = src || isSource
+    val newDist = mux(newSrc) {
+      minHood(nbr(dist) + nbrRange())
+    } {
+      Double.PositiveInfinity
+    }
+    (newSrc, newDist)
+  }
+}._2

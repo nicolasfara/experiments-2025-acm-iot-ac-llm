@@ -1,0 +1,5 @@
+val result = foldhood(Double.PositiveInfinity)(_ min _) {
+  nbr {
+    mux(mid() == nbr(mid())) { Double.PositiveInfinity } { nbrRange() }
+  }
+}

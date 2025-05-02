@@ -1,0 +1,19 @@
+rep(false) { channel =>
+  val source = sense[Boolean]("source")
+  val destination = sense[Boolean]("destination")
+  val obstacle = sense[Boolean]("obstacle")
+  
+  val isSource = source && !obstacle
+  val isDest = destination && !obstacle
+  
+  mux(isSource) {
+    true
+  } {
+    mux(obstacle) {
+      false
+    } {
+      val nearSource = foldhood(false)(_ || _)(nbr(channel) && !nbr(obstacle))
+      isDest || (nearSource && !isDest)
+    }
+  }
+}

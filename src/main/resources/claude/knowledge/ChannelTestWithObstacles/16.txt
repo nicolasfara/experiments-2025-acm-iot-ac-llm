@@ -1,0 +1,27 @@
+rep(false) { chnl =>
+  val srcHere = sense[Boolean]("source")
+  val dstHere = sense[Boolean]("destination")
+  val hasObstacle = sense[Boolean]("obstacle")
+  
+  val potentials = rep(Double.PositiveInfinity) { pot =>
+    mux(dstHere) {
+      0.0
+    } {
+      mux(!hasObstacle) {
+        minHoodPlus(nbr(pot) + nbrRange()) min Double.PositiveInfinity
+      } {
+        Double.PositiveInfinity
+      }
+    }
+  }
+  
+  val channelCreated = srcHere && potentials < Double.PositiveInfinity
+  
+  mux(!hasObstacle) {
+    chnl || 
+    (potentials < Double.PositiveInfinity && 
+     foldhoodPlus(false)(_ || _)(nbr(chnl) && nbr(potentials) + nbrRange() >= potentials))
+  } {
+    false
+  }
+}

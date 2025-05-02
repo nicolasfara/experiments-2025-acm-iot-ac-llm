@@ -1,0 +1,7 @@
+val potential = G(true, 0.0, _ + nbrRange(), () => nbrRange())
+val areas = S(20.0, () => nbrRange())
+val tempInArea = C(potential, _ + _, sense[Double]("temperature"), 0.0)
+val devicesInArea = C(potential, _ + _, 1.0, 0.0)
+val avgTemp = tempInArea / devicesInArea
+val alarm = avgTemp > 30.0
+G(areas, alarm, _ || _, () => nbrRange())

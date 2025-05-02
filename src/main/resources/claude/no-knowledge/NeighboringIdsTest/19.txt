@@ -1,0 +1,1 @@
+val nbrs = includingSelf.getNeighborhood().getNeighbors().toList

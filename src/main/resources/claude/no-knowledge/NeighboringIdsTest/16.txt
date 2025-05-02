@@ -1,0 +1,1 @@
+val neighborhoodIds = includingSelf.getNeighborhood()

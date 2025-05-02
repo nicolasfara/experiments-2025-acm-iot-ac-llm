@@ -1,0 +1,21 @@
+val source = node.get("source")
+val destination = node.get("destination")
+val isSource = source.getOrElse(false)
+val isDestination = destination.getOrElse(false)
+
+val gradient = distanceTo(isSource)
+val path = branch(isDestination) {
+  // destination doesn't need to compute a path
+  Double.PositiveInfinity
+} {
+  // other nodes compute paths toward destination
+  distanceTo(isDestination)
+}
+
+val channel = branch(gradient < Double.PositiveInfinity && path < Double.PositiveInfinity) {
+  // nodes in the channel
+  true
+} {
+  // nodes outside the channel
+  false
+}

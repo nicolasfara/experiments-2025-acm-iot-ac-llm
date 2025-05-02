@@ -1,0 +1,11 @@
+val temperature = sense[Double]("temperature")
+val areas = reifyField(mid())
+val avgTemperature = C[Double, Double](0.0, _ + _, _ / _)
+val areaTemperature = share(avgTemperature.run(temperature, areas))
+val alarmThreshold = 30.0
+val alarm = areaTemperature > alarmThreshold
+branch(alarm) {
+  broadcast(mid(), true)
+} {
+  false
+}

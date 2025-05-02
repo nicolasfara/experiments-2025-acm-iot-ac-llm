@@ -1,0 +1,14 @@
+rep((0.0, false)) { case (areaTemp, areaAlarm) =>
+  val myTemp = sense[Double]("temperature")
+  val myArea = sense[Int]("area")
+  
+  val areaNodes = foldhood(0)(_ + _)(mux(nbr(sense[Int]("area")) == myArea)(nbr(1))(0))
+  val areaTempSum = foldhood(0.0)(_ + _)(mux(nbr(sense[Int]("area")) == myArea)(nbr(myTemp))(0.0))
+  
+  val newAreaTemp = areaTempSum / areaNodes
+  val newAreaAlarm = newAreaTemp > 30.0
+  
+  val alarmInArea = foldhood(false)(_ || _)(mux(nbr(sense[Int]("area")) == myArea)(nbr(newAreaAlarm))(false))
+  
+  (newAreaTemp, alarmInArea)
+}._2

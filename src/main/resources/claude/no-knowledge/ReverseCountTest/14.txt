@@ -1,0 +1,10 @@
+val initial = 1000
+val g = gradient(mid() == 0)
+branch(g < Double.PositiveInfinity) {
+  rep(initial) { v =>
+    val newValue = v - 1
+    if (newValue < 0) 0 else newValue
+  }
+} {
+  initial
+}

@@ -1,0 +1,9 @@
+val source = node("source")
+val destination = node("destination")
+val channel = distanceTo(source) + distanceTo(destination)
+val width = 0.5
+branch(channel < width) {
+  node.put("inChannel", true)
+} {
+  node.put("inChannel", false)
+}

@@ -1,0 +1,7 @@
+rep(Double.PositiveInfinity) { dist =>
+  mux(sense[Boolean]("source")) {
+    0.0
+  } {
+    minHoodPlus(nbr(dist) + nbrRange())
+  }
+}

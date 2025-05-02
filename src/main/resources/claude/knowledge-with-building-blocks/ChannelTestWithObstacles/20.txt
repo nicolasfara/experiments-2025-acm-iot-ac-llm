@@ -1,0 +1,20 @@
+{
+  // Calculate a gradient from destination to source, avoiding obstacles
+  val destinationGradient = G[Double](
+    source = sense[Boolean]("destination"),
+    field = 0.0,
+    acc = _ + nbrRange(),
+    metric = () => if (nbr(sense[Boolean]("obstacle"))) Double.PositiveInfinity else nbrRange()
+  )
+  
+  // Collect a confirmation signal back from destination to source
+  val pathExists = C[Double, Boolean](
+    potential = destinationGradient,
+    acc = _ || _,
+    local = sense[Boolean]("destination"),
+    Null = false
+  )
+  
+  // Return true at the source if a path exists
+  sense[Boolean]("source") && pathExists
+}

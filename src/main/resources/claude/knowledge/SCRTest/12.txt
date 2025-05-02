@@ -1,0 +1,14 @@
+foldhood(false)(_ || _)(
+  nbr {
+    val myArea = sense[String]("area")
+    val myTemp = sense[Double]("temperature")
+    
+    // Calculate the average temperature within my area
+    val areaDevices = foldhood(0)(_ + _)(mux(nbr(sense[String]("area") == myArea))(1)(0))
+    val areaTemperatureSum = foldhood(0.0)(_ + _)(mux(nbr(sense[String]("area") == myArea))(nbr(myTemp))(0.0))
+    val areaAvgTemp = areaTemperatureSum / areaDevices
+    
+    // Send alarm if average temperature in my area is above 30
+    areaAvgTemp > 30.0
+  }
+)

@@ -1,0 +1,8 @@
+val source = node.has("source")
+val destination = node.has("destination")
+val g = classicGradient(source)
+branch(destination) {
+  distanceTo(g)
+} {
+  0.0
+}

@@ -1,0 +1,18 @@
+val source = S(LSNS("source"))
+val obstacle = S(LSNS("obstacle"))
+
+def distanceTo(source: Boolean): Double = {
+  distanceToWithObstacle(source, false)
+}
+
+def distanceToWithObstacle(source: Boolean, obstacle: Boolean): Double = {
+  G[Double, Double](
+    source,
+    Double.PositiveInfinity,
+    (_, acc) => acc + 1,
+    _ + _,
+    (_, _, d1, d2) => Math.min(d1, d2)
+  )
+}
+
+val result = distanceToWithObstacle(source, obstacle)

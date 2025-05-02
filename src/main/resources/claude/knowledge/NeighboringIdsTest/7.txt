@@ -1,0 +1,2 @@
+val neighborIds = foldhoodPlus(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+neighborIds

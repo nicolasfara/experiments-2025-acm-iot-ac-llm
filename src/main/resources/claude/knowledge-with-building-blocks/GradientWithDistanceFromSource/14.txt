@@ -1,0 +1,8 @@
+rep(Double.PositiveInfinity) { dist =>
+  mux(sense[Boolean]("source")) {
+    0.0
+  } {
+    val dists = minHoodPlus(nbr(dist) + nbrRange())
+    dists
+  }
+}

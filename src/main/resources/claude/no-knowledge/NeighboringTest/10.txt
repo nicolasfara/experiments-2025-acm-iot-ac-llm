@@ -1,0 +1,2 @@
+val nbrCount = includingSelf.neighborsCount()
+rep(0) { _ => nbrCount }

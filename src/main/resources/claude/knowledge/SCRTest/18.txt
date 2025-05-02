@@ -1,0 +1,18 @@
+rep((0.0, false)) { case (temperature, _) =>
+  val areaId = sense[Int]("area")
+  val myTemp = sense[Double]("temperature")
+  
+  val areaTemps = foldhood(Map.empty[Int, List[Double]])(_ ++ _) {
+    nbr(Map(areaId -> List(myTemp)))
+  }
+  
+  val areaAvgTemps = areaTemps.map { case (id, temps) => 
+    id -> (temps.sum / temps.size)
+  }
+  
+  val alarmInArea = foldhood(Map.empty[Int, Boolean])(_ ++ _) {
+    nbr(Map(areaId -> (areaAvgTemps.getOrElse(areaId, 0.0) > 30.0)))
+  }
+  
+  (areaAvgTemps.getOrElse(areaId, 0.0), alarmInArea.getOrElse(areaId, false))
+}._2

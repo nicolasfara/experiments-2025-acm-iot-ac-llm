@@ -1,0 +1,8 @@
+import scala.collection.immutable.Queue
+
+val isSource = node.asInstanceOf[Double] == 0
+val neighbors = includingSelf.getNeighborhood
+  .filter(nbr => nbr != selfID)
+  .size
+
+neighbors

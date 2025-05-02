@@ -1,0 +1,3 @@
+rep(mid()) { currentMax =>
+  foldhood(currentMax)(_ max _)(nbr(currentMax))
+}

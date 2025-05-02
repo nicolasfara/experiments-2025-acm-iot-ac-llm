@@ -1,0 +1,21 @@
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val potentialField = distanceTo(destination)
+val gradientToSource = distanceTo(source)
+val obstacleField = distanceTo(obstacle)
+val channel = branch(obstacle) { false } {
+  branch(destination) { true } {
+    branch(source) { true } {
+      val nextHop = minHoodPlus(nbr(potentialField))
+      mux(nextHop < potentialField) {
+        true
+      } {
+        false
+      }
+    }
+  }
+}
+
+channel

@@ -1,0 +1,32 @@
+// Define temperature thresholds
+val tempThreshold = 30.0
+
+// Generate a random temperature value for each device
+val temperature = randomGenerator.nextDouble() * 40
+
+// Define areas based on device coordinates
+val areaId = distanceTo(Point(0, 0)).toInt / 100 // Group devices into areas of 100 units radius
+
+// Compute the average temperature in each area
+val avgTemperatureByArea = share(areaId -> (temperature, 1.0))((_, a), (_, b) => {
+  val ((tempA, countA), (tempB, countB)) = (a, b)
+  (tempA + tempB, countA + countB)
+}) map { case (id, (totalTemp, count)) => 
+  id -> (totalTemp / count)
+}
+
+// Determine if an area has temperature above threshold
+val isHotArea = avgTemperatureByArea.getOrElse(areaId, 0.0) > tempThreshold
+
+// Broadcast alarm within the same area
+val alarm = branch(isHotArea) {
+  broadcast(isHotArea, areaId == mid())
+} {
+  false
+}
+
+// Display temperature and alarm status
+node.put("temperature", temperature)
+node.put("area", areaId)
+node.put("areaAvgTemp", avgTemperatureByArea.getOrElse(areaId, 0.0))
+node.put("alarm", alarm)

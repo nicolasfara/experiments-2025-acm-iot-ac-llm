@@ -1,0 +1,26 @@
+val temperature = sense[Double]("temperature")
+
+// Compute an ID for the current area (e.g., based on location)
+val areaId = reifyField(mid())
+
+// Group devices by area
+val neighborhoodTemperature = includingSelf.neighbor { temperature }
+val areaTemperatures = groupByField(areaId, neighborhoodTemperature)
+
+// Calculate average temperature for each area
+val areaAverageTemp = areaTemperatures.map { case (id, temps) => 
+  (id, temps.values.sum / temps.size) 
+}
+
+// Check if average temperature in the current area is above threshold
+val myAreaId = areaId.head._2
+val myAreaTemp = areaAverageTemp.getOrElse(myAreaId, 0.0)
+val isAlarm = myAreaTemp > 30
+
+// Broadcast alarm within the same area
+val alarm = branch(isAlarm) { 
+  broadcast(areaId == myAreaId, true) 
+} { false }
+
+// Output result
+alarm

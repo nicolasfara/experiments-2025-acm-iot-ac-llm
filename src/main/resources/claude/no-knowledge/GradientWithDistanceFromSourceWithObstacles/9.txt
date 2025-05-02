@@ -1,0 +1,27 @@
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+
+val distance = distanceTo(source, obstacle)
+
+def distanceTo(source: Boolean, obstacle: Boolean): Double = {
+  rep((Double.PositiveInfinity, false)) { case (dist, reached) =>
+    mux(source) {
+      (0.0, true)
+    } {
+      mux(obstacle) {
+        (Double.PositiveInfinity, false)
+      } {
+        val (minNbrDist, minReached) = minHoodPlus {
+          val nbrDist = nbr { dist }
+          val nbrReached = nbr { reached }
+          mux(nbrReached && !nbrSense[Boolean]("obstacle")) {
+            (nbrDist + nbrRange, true)
+          } {
+            (Double.PositiveInfinity, false)
+          }
+        }
+        (minNbrDist, minReached)
+      }
+    }
+  }._1
+}

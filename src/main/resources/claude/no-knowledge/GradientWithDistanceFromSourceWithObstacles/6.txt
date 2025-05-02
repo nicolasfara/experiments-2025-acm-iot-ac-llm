@@ -1,0 +1,8 @@
+val source = sns[Boolean]("source")
+val obstacle = sns[Boolean]("obstacle")
+
+// Gradient to compute distance from source avoiding obstacles
+val result = classicGradient(source, obstacle)
+
+// Display the distance or infinity if blocked by obstacles
+node.put("distance", result)

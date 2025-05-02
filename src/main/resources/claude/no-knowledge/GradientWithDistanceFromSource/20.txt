@@ -1,0 +1,13 @@
+val source = sense[Boolean]("source")
+rep((Double.PositiveInfinity, source)) { case (state, src) =>
+  mux(src) {
+    (0.0, true)
+  } {
+    val (minDist, _) = minHoodPlus {
+      nbr {
+        (state._1, state._2)
+      }
+    }
+    (mux(minDist._2)(minDist._1 + nbrRange(), Double.PositiveInfinity), false)
+  }
+}._1

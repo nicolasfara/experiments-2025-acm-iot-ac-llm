@@ -1,0 +1,21 @@
+val areaId = S(region => nextRandom())
+val areaTemperature = C[Double, (Double, Int)](
+  0.0 -> 0,
+  (temp, count) => (temp, count) match {
+    case ((t1, c1), (t2, c2)) => (t1 + t2, c1 + c2)
+  },
+  nbr => nbr(areaId) == areaId
+)
+
+val avgTemperature = rep((0.0, 0)) { case (_, _) => 
+  areaTemperature(sense[Double]("temperature"), 1)
+} match {
+  case (sum, count) => if (count > 0) sum / count else 0.0
+}
+
+val alarm = avgTemperature > 30.0
+branch(alarm) {
+  broadcast(mid(), true)
+} {
+  false
+}

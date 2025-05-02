@@ -1,0 +1,12 @@
+rep((Double.MaxValue, false)) { case (dist, isSource) =>
+  mux(sense[Boolean]("obstacle")) {
+    (Double.MaxValue, false)
+  } {
+    val newIsSource = sense[Boolean]("source")
+    val newDist = if (newIsSource) 0.0 else {
+      val minNeighDist = minHoodPlus(nbr(dist._1) + nbrRange())
+      Math.min(dist._1, minNeighDist)
+    }
+    (newDist, newIsSource)
+  }
+}._1

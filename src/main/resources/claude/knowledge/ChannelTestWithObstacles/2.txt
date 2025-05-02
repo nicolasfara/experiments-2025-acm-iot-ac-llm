@@ -1,0 +1,22 @@
+rep((false, Double.PositiveInfinity)) { case (result, dist) =>
+  mux(mid() == sense[ID]("source")) {
+    (true, 0.0)
+  } {
+    mux(mid() == sense[ID]("destination")) {
+      (false, 0.0)
+    } {
+      mux(sense[Boolean]("obstacle")) {
+        (false, Double.PositiveInfinity)
+      } {
+        val (srcReached, minDist) = 
+          minHoodPlus((Double.PositiveInfinity, false))((t1, t2) => if (t1._1 < t2._1) t1 else t2) {
+            val nbrSrcReached = nbr(result._1)
+            val nbrDist = nbr(dist)
+            val range = nbrRange()
+            (if (nbrSrcReached) nbrDist + range else Double.PositiveInfinity, nbrSrcReached)
+          }
+        (srcReached, minDist)
+      }
+    }
+  }
+}._1

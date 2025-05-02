@@ -1,0 +1,8 @@
+mux(sense[Boolean]("source") || sense[Boolean]("destination")) {
+  val sourceValue = G[Boolean](sense[Boolean]("source"), true, _ => true, () => nbrRange())
+  val destValue = G[Boolean](sense[Boolean]("destination"), true, _ => true, () => nbrRange())
+  val path = sourceValue && destValue
+  path
+} {
+  false
+}

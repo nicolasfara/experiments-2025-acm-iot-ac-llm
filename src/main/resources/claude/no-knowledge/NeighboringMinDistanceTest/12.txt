@@ -1,0 +1,15 @@
+val source = node(0)
+val distanceFromSource = 
+  distanceTo(source, 
+    (n, d) => {
+      if (n == source) 0.0
+      else nbr(d) + nbrRange()
+    }
+  )
+rep(Double.PositiveInfinity) { distVal =>
+  mux(source) { 
+    0.0 
+  } {
+    foldhood(Double.PositiveInfinity)((a, b) => if (a < b) a else b)(nbr(distVal) + nbrRange())
+  }
+}

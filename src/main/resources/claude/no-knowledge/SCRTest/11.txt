@@ -1,0 +1,12 @@
+val temperature = sense[Double]("temperature")
+val region = branch(temperature > 30) {
+  distanceTo(temperature <= 30)
+} {
+  Double.PositiveInfinity
+}
+val regionId = branch(temperature > 30) {
+  summarize(mid(), identity, (_, v) => v, region)
+} {
+  summarize(Double.PositiveInfinity, identity, (_, v) => v, region)
+}
+broadcast(regionId, temperature > 30)

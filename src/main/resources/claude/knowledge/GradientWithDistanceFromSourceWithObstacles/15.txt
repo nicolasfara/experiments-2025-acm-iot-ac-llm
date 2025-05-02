@@ -1,0 +1,16 @@
+rep((Double.MaxValue, Double.MaxValue)) { case (dist, distObs) =>
+  mux(sense[Boolean]("source")) {
+    (0.0, 0.0)
+  } {
+    val obstacles = sense[Boolean]("obstacle")
+    val nbrData = foldhood((Double.MaxValue, Double.MaxValue))((x, y) => if (x._1 < y._1) x else y) {
+      val d = nbr(dist) + nbrRange()
+      val dObs = if (nbr(obstacles)) Double.MaxValue else nbr(distObs) + nbrRange()
+      (d, dObs)
+    }
+    mux(obstacles) {
+      (nbrData._1, Double.MaxValue)
+    } {
+      nbrData
+    }
+  }._2

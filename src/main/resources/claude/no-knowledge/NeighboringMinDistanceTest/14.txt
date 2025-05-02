@@ -1,0 +1,7 @@
+val g = classicGradient(mid == 0)
+branch(g < 1) {
+  "source"
+} {
+  val minNbrGradient = minHood(nbr(g))
+  minNbrGradient + nbrRange()
+}

@@ -1,0 +1,11 @@
+val temperature = sense[Double]("temperature")
+val areaId = sense[Int]("area")
+val localTemperature = temperature
+val avgTemperature = aggregateByKey(areaId, localTemperature, (t1, t2) => (t1 + t2) / 2)
+val areaSize = aggregateByKey(areaId, 1, _ + _)
+val alarm = avgTemperature > 30
+branch(alarm) {
+  broadcast(areaId, alarm)
+} {
+  false
+}

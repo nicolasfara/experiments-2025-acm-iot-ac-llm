@@ -1,0 +1,2 @@
+val source = mid()
+val result = rep(source) { v => Math.max(v, foldhood(source)(Math.max)(nbr(v))) }

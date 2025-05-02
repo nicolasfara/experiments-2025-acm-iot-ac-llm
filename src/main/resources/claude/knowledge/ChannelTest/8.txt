@@ -1,0 +1,18 @@
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+
+rep((Double.PositiveInfinity, false)) { state =>
+  val (distance, amIChannel) = state
+  mux(source) {
+    (0.0, false)
+  } {
+    mux(destination) {
+      (Double.PositiveInfinity, false)
+    } {
+      val shortest = minHoodPlus(nbr(distance) + nbrRange())
+      val parent = distance > shortest
+      val imOnChannel = parent && nbr(amIChannel)
+      (shortest, imOnChannel || foldhoodPlus(false)(_ || _)(nbr(amIChannel)))
+    }
+  }
+}._2

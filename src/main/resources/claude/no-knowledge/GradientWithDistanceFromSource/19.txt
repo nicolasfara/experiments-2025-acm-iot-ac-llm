@@ -1,0 +1,14 @@
+import scala.math.sqrt
+
+val source = sense[Boolean]("source")
+val g = classicGradient(source)
+
+def classicGradient(source: Boolean): Double = {
+  rep(Double.PositiveInfinity) { distance =>
+    mux(source) {
+      0.0
+    } {
+      minHoodPlus(nbr(distance) + nbrRange)
+    }
+  }
+}

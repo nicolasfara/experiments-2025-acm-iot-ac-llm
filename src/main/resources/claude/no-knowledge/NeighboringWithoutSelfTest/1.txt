@@ -1,0 +1,4 @@
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+
+val neighbors = includingSelf.neighbor(mid())
+val count = neighbors.size - 1  // Subtract 1 to exclude self

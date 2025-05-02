@@ -1,0 +1,19 @@
+rep(false) { channelExists =>
+  val source = sense[Boolean]("source")
+  val destination = sense[Boolean]("destination")
+  val obstacle = sense[Boolean]("obstacle")
+  
+  mux(obstacle) {
+    false
+  } {
+    mux(source) {
+      true
+    } {
+      mux(destination) {
+        true
+      } {
+        foldhood(false)(_ || _)(nbr(channelExists))
+      }
+    }
+  }
+}

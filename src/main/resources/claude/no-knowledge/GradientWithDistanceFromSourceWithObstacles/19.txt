@@ -1,0 +1,10 @@
+val source = sense[Boolean]("source")
+val obstacles = sense[Boolean]("obstacle")
+
+val distanceFromSource = distanceTo(source)
+
+def distanceTo(source: Boolean): Double = {
+  gradient(source) { (_, nbrRange) =>
+    mux(obstacles) { Double.PositiveInfinity } { nbrRange }
+  }
+}

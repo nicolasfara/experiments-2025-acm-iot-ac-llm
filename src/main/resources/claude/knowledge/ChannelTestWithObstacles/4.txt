@@ -1,0 +1,16 @@
+rep(false) { state =>
+  val source = sense[Boolean]("source")
+  val destination = sense[Boolean]("destination")
+  val obstacle = sense[Boolean]("obstacle")
+  
+  if (obstacle) {
+    false
+  } else if (source) {
+    true
+  } else if (destination) {
+    state
+  } else {
+    val nearSource = foldhood(false)(_ || _)(nbr(source || (state && !obstacle)))
+    nearSource
+  }
+}

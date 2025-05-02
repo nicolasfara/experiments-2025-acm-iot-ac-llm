@@ -1,0 +1,3 @@
+val source = sense[Boolean]("source")
+val g = classicGradient(source)
+node.put("distance", g)

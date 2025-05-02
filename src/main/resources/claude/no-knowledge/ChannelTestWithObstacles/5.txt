@@ -1,0 +1,9 @@
+val source = node.get("source")
+val destination = node.get("destination")
+val obstacle = node.get("obstacle")
+val channel = gradient(source) + gradient(destination)
+node.put("channelValue", channel)
+val path = branch(obstacle) { Double.PositiveInfinity } { channel }
+val validPath = path < Double.PositiveInfinity
+node.put("isChannelValid", validPath)
+validPath

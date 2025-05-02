@@ -1,0 +1,4 @@
+val sourceDistribution = G[Double](sense[Boolean]("source"), 0.0, _ + nbrRange(), () => mux(nbr(sense[Boolean]("obstacle")))(Double.PositiveInfinity)(nbrRange()))
+val destDistribution = G[Double](sense[Boolean]("destination"), 0.0, _ + nbrRange(), () => mux(nbr(sense[Boolean]("obstacle")))(Double.PositiveInfinity)(nbrRange()))
+val channel = (sourceDistribution + destDistribution) <= minHoodPlus(nbr(sourceDistribution + destDistribution))
+C[Double, Boolean](sourceDistribution, _ || _, sense[Boolean]("destination") || channel, false)

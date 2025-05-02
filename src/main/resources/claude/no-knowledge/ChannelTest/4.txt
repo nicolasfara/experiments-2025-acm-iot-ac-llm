@@ -1,0 +1,8 @@
+val source = node.get("source")
+val destination = node.get("destination")
+val g = classicGradient(source)
+val channel = branch(source) { 0.0 } {
+  branch(destination) { g } {
+    mux(g > distanceTo(destination)) { Double.PositiveInfinity } { g }
+  }
+}

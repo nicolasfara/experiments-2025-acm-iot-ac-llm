@@ -1,0 +1,12 @@
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+
+val distanceSensor = gradient(source) { (acc, d) =>
+  acc + d
+}
+
+val distanceWithObstacles = if (obstacle) {
+  Double.PositiveInfinity
+} else {
+  distanceSensor
+}

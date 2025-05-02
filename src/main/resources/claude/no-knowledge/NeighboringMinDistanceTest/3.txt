@@ -1,0 +1,1 @@
+val result = foldhood(Double.PositiveInfinity)((acc, nb) => Math.min(acc, nbr(nbrRange())))(identity)

@@ -1,0 +1,1 @@
+G[Double](sense[Boolean]("source"), 0, d => d + nbrRange(), () => mux(sense[Boolean]("obstacle"))(Double.PositiveInfinity)(nbrRange()))

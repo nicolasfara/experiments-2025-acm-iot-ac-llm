@@ -1,0 +1,11 @@
+rep(Double.PositiveInfinity) { dist =>
+  mux(mid() == sense[String]("source")) {
+    0.0
+  } {
+    mux(mid() == sense[String]("destination")) {
+      dist
+    } {
+      minHoodPlus(nbr(dist) + nbrRange())
+    }
+  }
+}

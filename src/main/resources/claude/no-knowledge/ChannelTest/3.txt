@@ -1,0 +1,9 @@
+val source = mid() == "source"
+val destination = mid() == "destination"
+val g = classicGradient(source)
+val channel = distanceBetween(source, destination)
+branch(g < channel) {
+  g
+} {
+  Double.PositiveInfinity
+}

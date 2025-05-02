@@ -1,0 +1,10 @@
+val source = node.get("source")
+val destination = node.get("destination")
+val obstacle = node.get("obstacle")
+
+val g = classicGradient(source)
+val path = branch(obstacle) { Double.PositiveInfinity } { g }
+val channel = distanceTo(destination, path)
+
+node.put("channel", channel < Double.PositiveInfinity)
+channel < Double.PositiveInfinity

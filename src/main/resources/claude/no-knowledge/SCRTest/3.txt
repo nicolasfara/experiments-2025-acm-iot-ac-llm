@@ -1,0 +1,26 @@
+// Define the temperature threshold
+val TEMP_THRESHOLD = 30.0
+
+// Assume each device can sense its local temperature
+val localTemp = sense[Double]("temperature")
+
+// Define a distance threshold to identify areas
+val AREA_RADIUS = 100.0 // meters
+
+// Create spatial regions (areas) based on device positions
+val area = S(AREA_RADIUS)
+
+// Compute average temperature in each area
+val avgTemp = area.fold(localTemp)((a, b) => a + b) / area.size
+
+// Generate alarm if the area temperature exceeds threshold
+val alarm = avgTemp > TEMP_THRESHOLD
+
+// Broadcast the alarm within each area
+val result = branch(alarm) {
+  area.broadcast("TEMPERATURE ALERT: " + avgTemp + "°C")
+} {
+  "Normal temperature: " + avgTemp + "°C"
+}
+
+result

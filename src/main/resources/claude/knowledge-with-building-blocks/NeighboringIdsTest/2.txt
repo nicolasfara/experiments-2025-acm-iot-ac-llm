@@ -1,0 +1,1 @@
+foldhood(Set.empty[ID])(_ ++ _)(Set(nbr(mid())))

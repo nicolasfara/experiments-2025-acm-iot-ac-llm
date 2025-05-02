@@ -1,0 +1,12 @@
+val source = sense[Boolean]("source")
+rep((Double.PositiveInfinity, source)){ case (state, newSource) =>
+  mux(newSource) {
+    (0.0, true)
+  } {
+    val nbrRes = includingSelf.reifyField(nbr { (state._1, state._2) })
+    val minNbrDist = nbrRes.toMap.collect {
+      case (nbr, (dist, _)) if dist < Double.PositiveInfinity => dist + nbrRange(nbr)
+    }.minOption.getOrElse(Double.PositiveInfinity)
+    (minNbrDist, state._2 || newSource)
+  }
+}._1

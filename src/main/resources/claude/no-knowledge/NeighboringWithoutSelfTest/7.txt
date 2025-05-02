@@ -1,0 +1,2 @@
+val neighbors = includingSelf.reifyField(nbr(mid())) - mid()
+val neighborCount = neighbors.size

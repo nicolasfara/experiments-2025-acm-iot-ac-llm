@@ -1,0 +1,39 @@
+rep(false) { active =>
+  val isSource = sense[Boolean]("source")
+  val isDestination = sense[Boolean]("destination")
+  val isObstacle = sense[Boolean]("obstacle")
+  
+  val distanceFromSource = rep(Double.PositiveInfinity) { d =>
+    mux(isSource) {
+      0.0
+    } {
+      mux(isObstacle) {
+        Double.PositiveInfinity
+      } {
+        minHoodPlus(nbr(d) + nbrRange())
+      }
+    }
+  }
+  
+  val distanceFromDestination = rep(Double.PositiveInfinity) { d =>
+    mux(isDestination) {
+      0.0
+    } {
+      mux(isObstacle) {
+        Double.PositiveInfinity
+      } {
+        minHoodPlus(nbr(d) + nbrRange())
+      }
+    }
+  }
+  
+  val gradientSum = distanceFromSource + distanceFromDestination
+  val potentialChannel = !isObstacle && distanceFromSource < Double.PositiveInfinity && distanceFromDestination < Double.PositiveInfinity
+  
+  val onOptimalPath = potentialChannel && {
+    val minNeighGradient = minHoodPlus(nbr(gradientSum))
+    Math.abs(gradientSum - minNeighGradient) < 0.01
+  }
+  
+  onOptimalPath || active && !isObstacle
+}

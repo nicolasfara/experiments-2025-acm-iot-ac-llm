@@ -1,0 +1,1 @@
+rep(mid()) { maxId => maxHood(nbr(maxId)) }

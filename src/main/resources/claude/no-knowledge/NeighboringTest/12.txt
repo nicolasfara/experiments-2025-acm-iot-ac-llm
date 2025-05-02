@@ -1,0 +1,4 @@
+val potential = includingSelf.reifyField(nbr(1))
+val total = foldhoodPlus(0)(_ + _)(potential)
+val myNeighbors = total - 1
+myNeighbors

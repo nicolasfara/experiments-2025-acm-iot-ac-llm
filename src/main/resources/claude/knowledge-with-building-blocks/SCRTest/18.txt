@@ -1,0 +1,9 @@
+rep(false) { alarm =>
+  val areas = S(5.0, nbrRange)
+  val potential = G[Double](areas, 0.0, _ + nbrRange(), nbrRange)
+  val nodesInArea = C[Double, Int](potential, _ + _, 1, 0)
+  val totalTemp = C[Double, Double](potential, _ + _, sense[Double]("temperature"), 0.0)
+  val avgTemp = totalTemp / nodesInArea
+  val newAlarm = G[Boolean](areas, avgTemp > 30.0, identity, nbrRange)
+  newAlarm
+}

@@ -1,0 +1,11 @@
+val src = source(id = 0)
+val areas = reifyField(S(nextRandom()))
+val areaAvgTemp = groupSize(areas, () => { 
+  average(includingSelf.reifyField(S(30 + nextRandom() * 10)))
+})
+val alarmField = areaAvgTemp > 30
+branch(alarmField) { 
+  broadcast(src, true)
+} { 
+  false
+}

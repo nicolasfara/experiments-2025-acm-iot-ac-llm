@@ -1,0 +1,2 @@
+val closestNeighborDistance = foldhoodPlus(Double.MaxValue)(_ min _)(nbrRange())
+closestNeighborDistance

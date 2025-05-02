@@ -1,0 +1,12 @@
+val source = S(grain.sense[Boolean]("source"))
+val obstacle = S(grain.sense[Boolean]("obstacle"))
+
+val potentialField = distanceTo(source)
+
+val distance = branch(obstacle) {
+  Double.PositiveInfinity
+} {
+  potentialField
+}
+
+node.put("distance", distance)

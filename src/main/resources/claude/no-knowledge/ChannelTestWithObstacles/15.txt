@@ -1,0 +1,16 @@
+// Build gradient from destination
+val g = classicGradient(mid() == destination)
+
+// Build path from source to destination
+val path = branch(mid() == source) {
+  distanceToWithObstacle(g, obstacle)
+} {
+  false
+}
+
+// Function to compute distance with obstacle avoidance
+def distanceToWithObstacle(field: Double, isObstacle: Boolean): Boolean = {
+  val neighborValue = minHoodPlus(nbr(if (isObstacle) Double.PositiveInfinity else field + nbrRange()))
+  val isOnPath = field > neighborValue && !isObstacle
+  isOnPath
+}

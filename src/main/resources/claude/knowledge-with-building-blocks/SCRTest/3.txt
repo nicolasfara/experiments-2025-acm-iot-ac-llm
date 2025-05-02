@@ -1,0 +1,32 @@
+val temperatureThreshold = 30.0
+val areaRadius = 3.0  // Range defining an "area"
+val leaderInfluence = 2.0 * areaRadius  // Ensure leaders are far enough apart
+
+// Create a sparse set of leaders
+val isLeader = S(leaderInfluence, nbrRange)
+
+// Each leader creates a potential field (limited by areaRadius)
+val potential = mux(isLeader) {
+  rep(Double.PositiveInfinity) { p =>
+    minHood(mux(nbrRange() <= areaRadius)(nbr(0.0))(Double.PositiveInfinity))
+  }
+} {
+  rep(Double.PositiveInfinity) { p =>
+    minHood(nbr(p) + nbrRange())
+  }
+}
+
+// Collect temperatures within each area
+val areaTemp = C(potential, _ + _, sense[Double]("temperature"), 0.0)
+val nodeCount = C(potential, _ + _, 1.0, 0.0)
+val avgTemp = areaTemp / nodeCount
+
+// Broadcast alarm back to all nodes in the area when temperature exceeds threshold
+val alarmPotential = mux(isLeader && avgTemp > temperatureThreshold) {
+  G(true, true, _ => true, nbrRange)
+} {
+  G(false, false, _ => false, nbrRange)
+}
+
+// Final result: true if alarm is active in this node's area
+potential < Double.PositiveInfinity && alarmPotential

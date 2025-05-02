@@ -1,0 +1,2 @@
+val neighbors = includingSelf(nbr(mid()) != mid()).size - 1
+val output = neighbors

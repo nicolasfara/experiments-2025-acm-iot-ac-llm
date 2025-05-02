@@ -1,0 +1,2 @@
+val neighbors = includingSelf.excludingSelf(nbr(true))
+val numNeighbors = foldhoodPlus(0)(_ + _)(if (neighbors) { 1 } else { 0 })

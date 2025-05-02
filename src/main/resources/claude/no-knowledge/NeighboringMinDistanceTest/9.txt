@@ -1,0 +1,3 @@
+val distances = includingSelf.reifyField(nbrRange)
+val allDistances = C[Double,Double](0, Math.min, _ + _, Double.PositiveInfinity)
+val minDistances = allDistances(distances)

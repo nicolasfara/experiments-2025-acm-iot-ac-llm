@@ -1,0 +1,3 @@
+val n = foldhoodPlus(0)(_ + _) {
+  mux(nbr(mid) == mid) { 0 } { 1 }
+}

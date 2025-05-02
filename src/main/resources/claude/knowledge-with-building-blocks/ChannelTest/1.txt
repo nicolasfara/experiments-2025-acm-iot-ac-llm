@@ -1,0 +1,28 @@
+val sourceCondition = sense[Boolean]("source")
+val destCondition = sense[Boolean]("destination")
+val obstacleCondition = sense[Boolean]("obstacle")
+
+val sourceDist = G[Double](
+  sourceCondition,
+  0.0,
+  _ + nbrRange(),
+  () => if (nbr(obstacleCondition)) Double.PositiveInfinity else nbrRange()
+)
+
+val destDist = G[Double](
+  destCondition,
+  0.0,
+  _ + nbrRange(),
+  () => if (nbr(obstacleCondition)) Double.PositiveInfinity else nbrRange()
+)
+
+val distSum = sourceDist + destDist
+val minDistSum = rep(Double.PositiveInfinity)(old => 
+  Math.min(old, minHood(nbr(distSum)))
+)
+
+branch(!obstacleCondition && Math.abs(distSum - minDistSum) < 0.1) {
+  true
+} {
+  false
+}

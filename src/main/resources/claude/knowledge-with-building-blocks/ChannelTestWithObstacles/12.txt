@@ -1,0 +1,13 @@
+{
+  val sourceCondition = sense[Boolean]("source")
+  val destCondition = sense[Boolean]("destination")
+  val isObstacle = sense[Boolean]("obstacle")
+  
+  val obstacleMetric = () => {
+    if (nbr(isObstacle)) Double.PositiveInfinity else nbrRange()
+  }
+  
+  val potential = G[Double](sourceCondition, 0.0, _ + nbrRange(), obstacleMetric)
+  
+  C[Double, Boolean](potential, _ || _, destCondition, false)
+}

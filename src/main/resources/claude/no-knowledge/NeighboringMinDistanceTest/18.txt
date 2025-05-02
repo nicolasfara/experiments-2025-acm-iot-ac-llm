@@ -1,0 +1,6 @@
+val minDistanceFromNeighbors = rep(Double.PositiveInfinity) { state =>
+  Math.min(
+    state,
+    foldhoodPlus(Double.PositiveInfinity)((a, b) => Math.min(a, b))(nbr { nbrRange() })
+  )
+}

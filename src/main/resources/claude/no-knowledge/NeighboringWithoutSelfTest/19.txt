@@ -1,0 +1,2 @@
+val neighbors = includingSelf.nbr(mid()) != mid()
+val neighborCount = neighbors.filter(_ == true).size

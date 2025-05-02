@@ -1,0 +1,12 @@
+rep((Double.MaxValue, Nil: List[ID])) { case (dist, path) =>
+  mux(sense[String]("type") == "source") {
+    (0.0, List(mid()))
+  } {
+    val (nbrDist, nbrPath) = minHood(nbr((dist + nbrRange(), path :+ nbr(mid()))))
+    mux(sense[String]("type") == "destination") {
+      (nbrDist, nbrPath)
+    } {
+      (nbrDist, if (nbrPath.nonEmpty) nbrPath else Nil)
+    }
+  }
+}._2

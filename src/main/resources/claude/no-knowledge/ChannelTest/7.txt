@@ -1,0 +1,30 @@
+import scala.util.Random
+
+val source = mid() == "source"
+val destination = mid() == "destination"
+
+val channelWidth = 0.5 // Width of the channel
+
+// Create a gradient from source
+val g = distanceTo(source)
+
+// Create a gradient from destination
+val gDest = distanceTo(destination)
+
+// Identify nodes in the channel - these form a path between source and destination
+val inChannel = branch(g < Double.PositiveInfinity && gDest < Double.PositiveInfinity) {
+  val sourceToDestVector = classicGradientField(source)
+  val normalizedVector = branch(norm(sourceToDestVector) > 0) {
+    normalize(sourceToDestVector)
+  } { (0.0, 0.0) }
+  
+  // Calculate distance from the direct line
+  val pos = currentPosition()
+  val projection = dot(vectorMinus(pos, pointFromId("source")), normalizedVector)
+  val projectionPoint = vectorSum(pointFromId("source"), amplify(normalizedVector, projection))
+  val distanceFromLine = distance(pos, projectionPoint)
+  
+  distanceFromLine < channelWidth
+} { false }
+
+inChannel

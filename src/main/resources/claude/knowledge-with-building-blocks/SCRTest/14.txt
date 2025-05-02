@@ -1,0 +1,12 @@
+rep(false) { alarm =>
+  val leader = S(5, nbrRange)
+  val leaderPotential = G(leader, 0, _ + nbrRange(), nbrRange)
+  val areaId = G(leader, mid(), (id, _) => id, nbrRange)
+  
+  val avgTemp = C(leaderPotential, _ + _, sense[Double]("temperature"), 0.0) / 
+                C(leaderPotential, _ + _, 1, 0)
+  
+  val isAlarm = avgTemp > 30
+  
+  G(leader && isAlarm, true, _ => true, nbrRange) || alarm
+}

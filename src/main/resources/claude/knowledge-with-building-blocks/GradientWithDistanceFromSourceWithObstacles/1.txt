@@ -1,0 +1,7 @@
+val gradient = G[Double](
+  source = sense[Boolean]("source"),
+  field = 0.0,
+  acc = v => v + nbrRange(),
+  metric = () => mux(nbr(sense[Boolean]("obstacle")))(Double.PositiveInfinity)(nbrRange())
+)
+gradient

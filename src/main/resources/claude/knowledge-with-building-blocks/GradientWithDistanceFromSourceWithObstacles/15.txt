@@ -1,0 +1,14 @@
+rep(Double.PositiveInfinity) { dist =>
+  mux(sense[Boolean]("source")) {
+    0.0
+  } {
+    val neighborDistances = foldhood(Double.PositiveInfinity)(_ min _) {
+      mux(!nbr(sense[Boolean]("obstacle"))) {
+        nbr(dist) + nbrRange()
+      } {
+        Double.PositiveInfinity
+      }
+    }
+    neighborDistances
+  }
+}

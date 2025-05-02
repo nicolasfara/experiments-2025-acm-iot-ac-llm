@@ -1,0 +1,3 @@
+import scala.math.min
+
+val result = includingSelf.neighborshood().fold(Double.PositiveInfinity)((acc, nv) => min(acc, nbrRange(nv)))

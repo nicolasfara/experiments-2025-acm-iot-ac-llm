@@ -1,0 +1,11 @@
+val areaId = S(grain = 150.0)(mid => mid)
+val localTemp = currentTemp()
+val areaTemp = C[Double, Double](localTemp, math.max(_, _), Double.MinValue)
+val dangerTemp = 30.0
+val alarm = areaTemp > dangerTemp
+broadcast(areaId, alarm)
+
+def currentTemp(): Double = {
+  // Simulate temperature reading
+  25.0 + 10.0 * nextRandom()
+}

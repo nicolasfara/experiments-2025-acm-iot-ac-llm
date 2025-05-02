@@ -1,0 +1,3 @@
+rep(mid()) { self =>
+  maxHood(nbr(self))
+}

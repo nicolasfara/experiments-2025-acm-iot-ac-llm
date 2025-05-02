@@ -1,0 +1,8 @@
+val sourcePotential = G[Double](sense[Boolean]("source"), 0.0, _ + nbrRange(), () => nbrRange())
+val destPotential = G[Double](sense[Boolean]("destination"), 0.0, _ + nbrRange(), () => nbrRange())
+val channel = sourcePotential + destPotential <= minHood(nbr(sourcePotential + destPotential)) + 0.5
+branch(channel) {
+  1.0
+} {
+  0.0
+}

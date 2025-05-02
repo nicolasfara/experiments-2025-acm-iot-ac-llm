@@ -1,0 +1,12 @@
+rep((Double.MaxValue, mid())) { case (dist, path) =>
+  mux(sense[Boolean]("source")) {
+    (0.0, mid())
+  } {
+    mux(sense[Boolean]("obstacle")) {
+      (Double.MaxValue, mid())
+    } {
+      val (minNbrDist, minNbrPath) = minHoodPlus(nbr(dist) + nbrRange())
+      (minNbrDist, if (minNbrDist < dist._1) minNbrPath else path)
+    }
+  }
+}._1

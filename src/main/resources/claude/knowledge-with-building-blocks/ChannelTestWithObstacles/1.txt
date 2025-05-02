@@ -1,0 +1,23 @@
+rep(false) { prevResult =>
+  val isSource = sense[Boolean]("source")
+  val isDestination = sense[Boolean]("destination")
+  
+  // Calculate gradient from source, avoiding obstacles
+  val distanceFromSource = G[Double](
+    isSource,
+    0.0,
+    _ + nbrRange(),
+    () => mux(nbr(!sense[Boolean]("obstacle")))(nbrRange())(Double.PositiveInfinity)
+  )
+  
+  // Collect success signal back from destination to source
+  val pathExists = C[Double, Boolean](
+    distanceFromSource,
+    _ || _,
+    isDestination,
+    false
+  )
+  
+  // Return true if source node receives confirmation of path
+  isSource && pathExists || prevResult
+}

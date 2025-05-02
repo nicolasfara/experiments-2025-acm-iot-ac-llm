@@ -1,0 +1,11 @@
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val result = if (obstacle) {
+  false
+} else {
+  val potential = distanceTo(destination)
+  val path = broadcast(source, potential)
+  path
+}

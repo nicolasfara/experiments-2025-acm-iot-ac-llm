@@ -1,0 +1,13 @@
+rep(false) { prevAlarm =>
+  val temperature = sense[Double]("temperature")
+  val areaId = sense[Int]("area")
+  
+  val areaSum = foldhood(0.0)(_ + _)(mux(nbr(areaId) == areaId)(nbr(temperature))(0.0))
+  val areaCount = foldhood(0)(_ + _)(mux(nbr(areaId) == areaId)(nbr(1))(0))
+  val areaAvg = if (areaCount > 0) areaSum / areaCount else 0.0
+  
+  val isAlarm = areaAvg > 30.0
+  val broadcastAlarm = foldhood(false)(_ || _)(mux(nbr(areaId) == areaId)(nbr(isAlarm))(false))
+  
+  broadcastAlarm
+}

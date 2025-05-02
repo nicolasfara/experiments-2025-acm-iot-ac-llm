@@ -1,0 +1,36 @@
+rep(false) { state =>
+  val amSource = sense[Boolean]("source")
+  val amDestination = sense[Boolean]("destination")
+  val amObstacle = sense[Boolean]("obstacle")
+  
+  val srcDist = rep(Double.PositiveInfinity) { sd =>
+    mux(amSource) {
+      0.0
+    } {
+      mux(amObstacle) {
+        Double.PositiveInfinity
+      } {
+        minHoodPlus(nbr(sd) + nbrRange())
+      }
+    }
+  }
+  
+  val destDist = rep(Double.PositiveInfinity) { dd =>
+    mux(amDestination) {
+      0.0
+    } {
+      mux(amObstacle) {
+        Double.PositiveInfinity
+      } {
+        minHoodPlus(nbr(dd) + nbrRange())
+      }
+    }
+  }
+  
+  val isChannel = srcDist < Double.PositiveInfinity && destDist < Double.PositiveInfinity
+  
+  val gradient = srcDist + destDist
+  val isOptimalPath = gradient <= minHood(nbr(gradient))
+  
+  state || (isChannel && isOptimalPath && !amObstacle)
+}

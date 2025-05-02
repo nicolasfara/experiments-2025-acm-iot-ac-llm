@@ -1,0 +1,4 @@
+val src = node(1000)
+val pot = GAlgebra.classicGradient(src)
+val target = 0
+pot.map(v => (target - src).toDouble / (target - src).toDouble * (v - src) + src).round.toInt

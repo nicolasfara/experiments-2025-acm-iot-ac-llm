@@ -1,0 +1,14 @@
+val source = mid("source")
+val destination = mid("destination")
+
+branch(source) {
+  rep(0)(_ + 1)
+} {
+  val g = classicGradient(source)
+  val path = broadcast(source, g)
+  branch(destination) {
+    path
+  } {
+    Double.PositiveInfinity
+  }
+}

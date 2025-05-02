@@ -1,0 +1,8 @@
+rep((sense[ID]("uid") % 3, false)) { case (area, _) =>
+  val tempSum = foldhood(0.0)(_ + _)(mux(nbr(area) == area)(nbr(sense[Double]("temperature")))(0.0))
+  val devices = foldhood(0)(_ + _)(mux(nbr(area) == area)(1)(0))
+  val avgTemp = tempSum / devices
+  val alarm = avgTemp > 30.0
+  
+  (area, foldhood(false)(_ || _)(nbr(alarm)))
+}._2

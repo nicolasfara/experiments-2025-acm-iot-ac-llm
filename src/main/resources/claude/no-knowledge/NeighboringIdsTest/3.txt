@@ -1,0 +1,1 @@
+val neighbors = includingSelf.getNeighborhood().map(nbr => nbr.getId())

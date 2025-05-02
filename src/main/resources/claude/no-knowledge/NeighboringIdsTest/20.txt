@@ -1,0 +1,5 @@
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+
+val nbrIds = includingSelf.reifyField(nbr{mid()})
+  .toList
+  .map { case (id, value) => value }

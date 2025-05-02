@@ -1,0 +1,3 @@
+val maxID = rep(mid()) { maxID => 
+  foldhood(maxID)((x, y) => if (x > y) x else y)(nbr { maxID })
+}

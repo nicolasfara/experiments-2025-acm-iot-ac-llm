@@ -1,0 +1,10 @@
+val source = node.get[Boolean]("source")
+val destination = node.get[Boolean]("destination")
+
+val potential = distanceTo(source)
+val channel = branch(potential < distanceTo(destination)) {
+  val dir = broadcast(source, nbrVector().normalize())
+  followUp(dir)
+} {
+  false
+}

@@ -1,0 +1,2 @@
+val neighborhoodSize = includingSelf.getNeighbors().size
+rep(0)(_ => neighborhoodSize)

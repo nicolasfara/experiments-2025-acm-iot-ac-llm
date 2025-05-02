@@ -1,0 +1,8 @@
+val src = sense[Boolean]("source")
+val g = classicGradient(src)
+val minGradient = C[Double, Double](
+  g,
+  nbr(g),
+  (myg, nbrg) => math.min(myg, nbrg)
+)
+node.put("minGradient", minGradient)

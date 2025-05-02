@@ -1,0 +1,4 @@
+rep(mid()) { maxId => 
+  val localId = mid()
+  maxHood(nbr(maxId) + localId)
+}

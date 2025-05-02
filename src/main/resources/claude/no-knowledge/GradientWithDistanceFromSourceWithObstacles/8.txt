@@ -1,0 +1,4 @@
+val source = if (sense[Boolean]("source")) 0.0 else Double.PositiveInfinity
+val gradient = G.gradient(source, nbrRange, obstacleTag = nbr { sense[Boolean]("obstacle") })
+
+node.put("distance", gradient)

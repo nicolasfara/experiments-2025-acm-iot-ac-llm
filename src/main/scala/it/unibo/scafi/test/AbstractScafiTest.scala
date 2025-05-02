@@ -32,8 +32,9 @@ abstract class AbstractScafiProgramTest(
       OpenRouterService(Model.MISTRAL_SMALL_3_1_24B),
       OpenRouterService(Model.MISTRAL_8B),
       OpenRouterService(Model.QWEN_2_5_CODER_32B),
-//      OpenRouterService(Model.DEEPSEEK_R1), // NOT WORKING !
+      //      OpenRouterService(Model.DEEPSEEK_R1), // NOT WORKING !
       OpenRouterService(Model.GPT_4_1_MINI),
+      ClaudeSonnet(),
     ),
     private val runs: Int = 20,
 ):

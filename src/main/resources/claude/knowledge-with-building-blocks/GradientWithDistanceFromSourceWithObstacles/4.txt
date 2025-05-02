@@ -1,0 +1,11 @@
+rep(Double.PositiveInfinity) { d =>
+  mux(sense[Boolean]("source")) {
+    0.0
+  } {
+    mux(sense[Boolean]("obstacle")) {
+      Double.PositiveInfinity
+    } {
+      minHoodPlus(nbr(d) + nbrRange())
+    }
+  }
+}

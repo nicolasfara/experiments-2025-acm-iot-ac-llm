@@ -1,0 +1,12 @@
+val sourcePotential = G[Double](sense[Boolean]("source"), 0.0, _ + nbrRange(), () => {
+  if (nbr(sense[Boolean]("obstacle"))) Double.PositiveInfinity else nbrRange()
+})
+
+val destinationPotential = G[Double](sense[Boolean]("destination"), 0.0, _ + nbrRange(), () => {
+  if (nbr(sense[Boolean]("obstacle"))) Double.PositiveInfinity else nbrRange()
+})
+
+val channelCreated = C[Double, Boolean](sourcePotential, _ || _, sense[Boolean]("destination"), false) && 
+                     C[Double, Boolean](destinationPotential, _ || _, sense[Boolean]("source"), false)
+
+channelCreated

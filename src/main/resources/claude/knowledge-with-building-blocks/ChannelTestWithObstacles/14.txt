@@ -1,0 +1,7 @@
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacleMetric = () => {
+  if (nbr(sense[Boolean]("obstacle"))) Double.PositiveInfinity else nbrRange()
+}
+val potential = G[Double](source, 0.0, _ + obstacleMetric(), obstacleMetric)
+C[Double, Boolean](potential, _ || _, destination, false)

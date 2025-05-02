@@ -1,0 +1,10 @@
+rep((false, 0.0)) { case (alarm, _) =>
+  val leader = S(5.0, () => nbrRange())
+  val potential = G(leader, 0.0, _ + nbrRange(), () => nbrRange())
+  val areaTemp = C(potential, _ + _, sense[Double]("temperature"), 0.0)
+  val devices = C(potential, _ + _, 1.0, 0.0)
+  val avgTemp = areaTemp / devices
+  val newAlarm = avgTemp > 30.0
+  val broadcastAlarm = G(leader, newAlarm, a => a, () => nbrRange())
+  (broadcastAlarm, avgTemp)
+}._1

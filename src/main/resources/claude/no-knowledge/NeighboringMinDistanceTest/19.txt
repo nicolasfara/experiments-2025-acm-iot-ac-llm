@@ -1,0 +1,11 @@
+rep(Double.PositiveInfinity) { case (d, _) =>
+  val src = mid() == 0
+  mux(src) {
+    0.0
+  } {
+    Math.min(
+      nbr(d) + nbrRange(),
+      Double.PositiveInfinity
+    )
+  }
+}

@@ -1,0 +1,11 @@
+{
+  val areas = S(10.0, nbrRange)
+  val potential = G(areas, 0.0, _ + nbrRange(), nbrRange)
+  val avgTemp = {
+    val temps = C(potential, _ + _, sense[Double]("temperature"), 0.0)
+    val count = C(potential, _ + _, 1.0, 0.0)
+    temps / count
+  }
+  val alarm = avgTemp > 30.0
+  G(areas, alarm, (a: Boolean) => a, nbrRange)
+}

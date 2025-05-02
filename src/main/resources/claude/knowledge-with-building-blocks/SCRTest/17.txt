@@ -1,0 +1,10 @@
+val source = S(3.0, nbrRange)
+val potential = G(source, 0.0, _ + nbrRange(), nbrRange)
+val totalTemp = C(potential, _ + _, sense[Double]("temperature"), 0.0)
+val count = C(potential, _ + _, 1.0, 0.0)
+val avgTemp = totalTemp / count
+mux(source) {
+  G(source, avgTemp > 30.0, (x: Boolean) => x, nbrRange)
+} {
+  G(source, false, (x: Boolean) => x, nbrRange)
+}

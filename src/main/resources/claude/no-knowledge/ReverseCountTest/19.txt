@@ -1,0 +1,4 @@
+val value = rep(1000) { v =>
+  if (v > 0) v - 1 else v
+}
+node.put("value", value)

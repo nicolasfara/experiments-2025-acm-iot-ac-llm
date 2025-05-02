@@ -1,0 +1,3 @@
+val source = branch(mid()) { 1000 } { nbr(1) }
+val distance = branch(source > 0) { source - 1 } { 0 }
+node.put("value", distance)

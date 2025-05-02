@@ -1,0 +1,5 @@
+val potential = classicGradient(mid(3))
+val nbrDistance = nbrRange()
+val nbrsWithDistances = excludingSelf.reifyField(nbr -> (nbr, nbrDistance.toTuple._2))
+val minNbr = nbrsWithDistances.minBy(_._2)
+minNbr._2

@@ -1,0 +1,12 @@
+rep((Double.MaxValue, mid())) { case (dist, path) =>
+  mux(mid() == sense[String]("source")) {
+    (0.0, mid())
+  } {
+    mux(mid() == sense[String]("destination")) {
+      (Double.MaxValue, mid())
+    } {
+      val neighborDistances = minHoodPlus((nbr(dist) + nbrRange(), nbr(path)))
+      neighborDistances
+    }
+  }
+}._2

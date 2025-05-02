@@ -1,0 +1,8 @@
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val g = classicGradient(source)
+val channel = branch(obstacle) { Double.PositiveInfinity } { distanceTo(destination) }
+val path = G(channel, g, nbrRange)
+branch(source) { broadcast(path, false) } { false }

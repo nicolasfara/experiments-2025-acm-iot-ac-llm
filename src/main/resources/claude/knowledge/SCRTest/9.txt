@@ -1,0 +1,22 @@
+rep(Map.empty[Int, (Double, Boolean)]) { state =>
+  val myArea = sense[Int]("area")
+  val temp = sense[Double]("temperature")
+  
+  val areaData = foldhood(Map.empty[Int, (Double, Int)]) { (m1, m2) => 
+    (m1.keySet ++ m2.keySet).map { area =>
+      val (sum1, count1) = m1.getOrElse(area, (0.0, 0))
+      val (sum2, count2) = m2.getOrElse(area, (0.0, 0))
+      area -> (sum1 + sum2, count1 + count2)
+    }.toMap
+  } {
+    Map(nbr(myArea) -> (nbr(temp), 1))
+  }
+  
+  val areaAvgTemps = areaData.map { case (area, (sum, count)) => 
+    area -> (sum / count, sum / count > 30.0)
+  }
+  
+  val alarmForMyArea = areaAvgTemps.getOrElse(myArea, (0.0, false))._2
+  
+  areaAvgTemps
+}

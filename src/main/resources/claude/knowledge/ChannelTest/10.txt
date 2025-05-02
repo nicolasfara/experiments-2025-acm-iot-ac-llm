@@ -1,0 +1,16 @@
+rep((Double.MaxValue, false)) { case (distanceToDest, isChannel) =>
+  mux(mid() == "destination") {
+    (0.0, false)
+  } {
+    val (neighborDist, _) = minHood(nbr((distanceToDest, mid())))
+    val newDist = neighborDist + nbrRange()
+    
+    mux(mid() == "source") {
+      (newDist, true)
+    } {
+      val potential = minHoodPlus(nbr((distanceToDest, isChannel)))
+      val isOnPath = potential._2 && potential._1 + nbrRange() <= newDist + 0.01
+      (newDist, isOnPath)
+    }
+  }
+}._2

@@ -1,0 +1,15 @@
+val source = mid("source")
+val destination = mid("destination")
+
+// Gradient from source to create a potential field
+val g = distanceTo(source)
+
+// Create channel using gradient descent
+val channel = branch(isAlive) {
+  val nextHop = broadcast(source, if (source) g else minHoodPlus(nbr(g) + nbrRange))
+  val path = gradient(source, through = nextHop)
+  val onPath = broadcast(source, path <= 0.5) || broadcast(destination, path <= 0.5)
+  onPath
+} { false }
+
+channel

@@ -1,0 +1,41 @@
+rep(Set.empty[ID]) { oldSet =>
+  val leaderID = minHood(nbr(mid()))
+  val iAmLeader = mid() == leaderID
+  val leadersTemp = sense[Double]("temperature")
+  
+  mux(iAmLeader) {
+    val myArea = rep(Set(mid())) { area =>
+      val expandedArea = foldhood(Set.empty[ID])(_ ++ _)(
+        mux(nbr(area).contains(mid()) && nbr(area.size) < 5)(Set(nbr(mid())))(Set.empty)
+      )
+      area ++ expandedArea
+    }
+    
+    val temps = foldhood(Map.empty[ID, Double])(_ ++ _)(
+      mux(nbr(myArea).contains(nbr(mid())))(Map(nbr(mid()) -> nbr(sense[Double]("temperature"))))(Map.empty)
+    )
+    
+    val avgTemp = if (temps.nonEmpty) temps.values.sum / temps.size else 0.0
+    val alarm = avgTemp > 30.0
+    
+    myArea
+  } {
+    val leaderArea = foldhood(Set.empty[ID])(_ ++ _)(nbr(mux(nbr(mid()) == leaderID)(nbr(oldSet))(Set.empty)))
+    leaderArea
+  }
+}
+
+val leaderID = minHood(nbr(mid()))
+val myArea = foldhood(Set.empty[ID])(_ ++ _)(nbr(mux(nbr(mid()) == leaderID)(nbr(rep(Set.empty[ID])(old => old)))(Set.empty)))
+val inArea = myArea.contains(mid())
+
+mux(inArea) {
+  val temps = foldhood(Map.empty[ID, Double])(_ ++ _)(
+    mux(nbr(myArea).contains(nbr(mid())))(Map(nbr(mid()) -> nbr(sense[Double]("temperature"))))(Map.empty)
+  )
+  
+  val avgTemp = if (temps.nonEmpty) temps.values.sum / temps.size else 0.0
+  avgTemp > 30.0
+} {
+  false
+}

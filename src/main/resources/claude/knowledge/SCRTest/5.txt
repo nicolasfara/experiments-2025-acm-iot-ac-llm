@@ -1,0 +1,15 @@
+rep(false) { alarm =>
+  val myTemperature = sense[Double]("temperature")
+  val myId = mid()
+  val areaId = myId % 3
+  
+  val totalTemperature = foldhood(0.0)(_ + _)(mux(nbr(myId % 3 == areaId))(nbr(myTemperature))(0.0))
+  val areaDevices = foldhood(0)(_ + _)(mux(nbr(myId % 3 == areaId))(1)(0))
+  
+  val areaAvgTemperature = totalTemperature / areaDevices
+  val isAlarmTriggered = areaAvgTemperature > 30.0
+  
+  val areaAlarms = foldhood(false)(_ || _)(mux(nbr(myId % 3 == areaId))(nbr(isAlarmTriggered))(false))
+  
+  areaAlarms
+}

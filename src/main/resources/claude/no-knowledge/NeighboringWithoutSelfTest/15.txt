@@ -1,0 +1,3 @@
+val hood = includingSelf.reifyField(nbr(mid()))
+val neighbors = hood.getOrElse(mid(), Set()) - mid()
+neighbors.size

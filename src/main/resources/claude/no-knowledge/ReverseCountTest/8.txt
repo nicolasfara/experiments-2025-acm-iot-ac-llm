@@ -1,0 +1,8 @@
+val source = mux(mid() == 0) { 1000 } { 0 }
+val evolution = rep(source) { v =>
+  val nbrsVal = includingSelf.sumHood(nbr(v))
+  val nbrsCount = includingSelf.sumHood(nbr { 1 })
+  val meanVal = nbrsVal / nbrsCount
+  if (meanVal <= 1) 0 else meanVal - 1
+}
+evolution

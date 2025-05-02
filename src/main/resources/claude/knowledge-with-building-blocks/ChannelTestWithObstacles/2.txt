@@ -1,0 +1,22 @@
+rep(false) { state =>
+  val sourceNode = sense[Boolean]("source")
+  val destNode = sense[Boolean]("destination")
+  
+  // Calculate a gradient from destination that avoids obstacles
+  val potentialField = G[Double](
+    destNode,
+    0.0,
+    _ + mux(nbr(sense[Boolean]("obstacle")))(Double.PositiveInfinity)(nbrRange()),
+    () => nbrRange()
+  )
+  
+  // Use collect to propagate success signal back from source to destination
+  val pathExists = C[Double, Boolean](
+    potentialField,
+    _ || _,
+    sourceNode,
+    false
+  )
+  
+  pathExists
+}

@@ -1,0 +1,9 @@
+val src = sense[Boolean]("source")
+val dist = rep(Double.PositiveInfinity) { d =>
+  mux(src) { 0.0 } {
+    foldhood(Double.PositiveInfinity)((a, b) => Math.min(a, b)) {
+      nbr { d } + nbrRange
+    }
+  }
+}
+node.put("dist", dist)

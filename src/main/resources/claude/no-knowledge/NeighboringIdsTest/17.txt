@@ -1,0 +1,1 @@
+val neighborsId = includingSelf.getNeighbors().toList

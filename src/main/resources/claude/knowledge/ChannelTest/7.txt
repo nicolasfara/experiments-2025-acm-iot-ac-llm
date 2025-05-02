@@ -1,0 +1,9 @@
+val gradient = rep(Double.PositiveInfinity) { 
+  g => mux(mid() == sense[ID]("destination"))(0.0)(minHoodPlus(nbr(g) + nbrRange()))
+}
+
+val channel = gradient + rep(Double.PositiveInfinity) { 
+  g => mux(mid() == sense[ID]("source"))(0.0)(minHoodPlus(nbr(g) + nbrRange()))
+}
+
+mux(channel == gradient + gradient)("channel")("")

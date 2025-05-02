@@ -1,0 +1,3 @@
+val neighbors = includingSelf.getNeighborhood()
+val count = neighbors.size
+node.put("neighbor_count", count)

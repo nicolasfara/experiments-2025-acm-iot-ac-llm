@@ -1,0 +1,21 @@
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val gradient = rep(Double.PositiveInfinity) { g =>
+  mux(source) {
+    0.0
+  } {
+    minHoodPlus(nbr(g) + nbrRange())
+  }
+}
+val channel = rep(false) { ch =>
+  mux(destination) {
+    true
+  } {
+    mux(ch) {
+      minHood((nbr(gradient), nbr(mid())))._2 == mid()
+    } {
+      false
+    }
+  }
+}
+channel

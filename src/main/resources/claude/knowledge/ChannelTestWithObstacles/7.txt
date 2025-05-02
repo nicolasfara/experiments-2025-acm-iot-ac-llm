@@ -1,0 +1,11 @@
+rep(false) { channel =>
+  mux(sense[String]("self") == "source") {
+    true
+  } {
+    mux(sense[Boolean]("obstacle")) {
+      false
+    } {
+      foldhood(false)(_ || _)(nbr(channel))
+    }
+  }
+}

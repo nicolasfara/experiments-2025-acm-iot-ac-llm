@@ -1,0 +1,4 @@
+{
+  val isSource = sense[Boolean]("source")
+  G(isSource, 0.0, _ + nbrRange(), () => nbrRange())
+}

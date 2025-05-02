@@ -1,0 +1,15 @@
+val temperature = sense[Double]("temperature")
+val areaId = sense[Int]("area")
+
+val alarmTriggered = rep(false) { alarm =>
+  val maxTemp = aggregateByKey(areaId, temperature, _ max _)
+  val shouldTrigger = maxTemp > 30
+  
+  if (shouldTrigger && !alarm) {
+    node.put("alarm", true)
+  } else if (!shouldTrigger && alarm) {
+    node.put("alarm", false)
+  }
+  
+  shouldTrigger
+}

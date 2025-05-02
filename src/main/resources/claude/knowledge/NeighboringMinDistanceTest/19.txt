@@ -1,0 +1,2 @@
+val idsAndNeigh = foldhoodPlus(List.empty[(Double, ID)])(_ ++ _)(List(nbrRange() -> nbr(mid())))
+idsAndNeigh.minBy(_._1)._1

@@ -1,0 +1,7 @@
+import it.unibo.scafi.lib.StandardSensors._
+import scala.util.Random
+
+val neighborhood = includingSelf.getNeighborhood()
+val numNeighbors = neighborhood.size - 1 // Exclude self
+
+println(s"Number of neighbors: $numNeighbors")

@@ -1,0 +1,3 @@
+val srcPotential = G(sense[Boolean]("source"), 0.0, _ + nbrRange(), () => nbrRange())
+val destPotential = G(sense[Boolean]("destination"), 0.0, _ + nbrRange(), () => nbrRange())
+val channel = srcPotential + destPotential == minHood(nbr(srcPotential + destPotential))

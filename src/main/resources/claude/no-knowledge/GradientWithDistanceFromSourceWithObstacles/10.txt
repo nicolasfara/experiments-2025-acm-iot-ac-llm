@@ -1,0 +1,19 @@
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+val infiniteVal = Double.PositiveInfinity
+val myID = mid()
+
+rep((infiniteVal, infiniteVal)) { case (dist, minDist) =>
+  mux(source) {
+    (0.0, 0.0)
+  } {
+    mux(obstacle) {
+      (infiniteVal, infiniteVal)
+    } {
+      val minDistNbr = minHoodPlus {
+        nbr { minDist } + nbrRange
+      }
+      (minDistNbr, minDistNbr)
+    }
+  }
+}._1

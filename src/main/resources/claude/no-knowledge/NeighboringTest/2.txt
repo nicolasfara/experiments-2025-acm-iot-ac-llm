@@ -1,0 +1,1 @@
+nbr(mid()).filter(_ != mid()).size

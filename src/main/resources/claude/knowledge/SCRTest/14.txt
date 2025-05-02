@@ -1,0 +1,10 @@
+rep(false) { alarm =>
+  val areaId = (mid() / 10) % 3  // Create 3 distinct areas
+  val devicesInArea = sumHood(mux(nbr(areaId) == areaId)(1)(0))
+  val tempInArea = sumHood(mux(nbr(areaId) == areaId)(nbr(sense[Double]("temperature")))(0.0))
+  val avgTempInArea = if (devicesInArea > 0) tempInArea / devicesInArea else 0.0
+  val isHot = avgTempInArea > 30.0
+  
+  val newAlarm = foldhood(false)(_ || _)(mux(nbr(areaId) == areaId)(nbr(isHot))(false))
+  newAlarm
+}

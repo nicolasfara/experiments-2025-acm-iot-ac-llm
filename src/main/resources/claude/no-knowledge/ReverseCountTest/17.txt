@@ -1,0 +1,3 @@
+val source = node(1) // Define the source node
+val potential = S(1000)((v, acc) => Math.max(0, v - 1), Math.min) // Value decreases by 1 until reaching 0
+potential

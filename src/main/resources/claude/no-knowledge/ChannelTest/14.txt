@@ -1,0 +1,7 @@
+val source = node.get("source")
+val destination = node.get("destination")
+val g = classicGradient(source)
+branch(destination) { 
+  val path = broadcast(source, g)
+  path
+} { Double.PositiveInfinity }

@@ -1,0 +1,4 @@
+val source = 1000
+rep(source){ v =>
+  mux(v <= 0)(0)(v - 1)
+}

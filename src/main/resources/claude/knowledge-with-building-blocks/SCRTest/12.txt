@@ -1,0 +1,11 @@
+rep(false) { prevAlarm =>
+  val isLeader = S(2.0, nbrRange)
+  val leaderDistance = G(isLeader, 0.0, _ + nbrRange(), nbrRange)
+  val leaderID = G(isLeader, mid(), (_, _) => mid(), nbrRange)
+  val tempSum = C(leaderDistance, _ + _, sense[Double]("temperature"), 0.0)
+  val nodeCount = C(leaderDistance, _ + _, 1, 0)
+  val avgTemp = if (isLeader && nodeCount > 0) tempSum / nodeCount else 0.0
+  val tempAlarm = isLeader && avgTemp > 30.0
+  val broadcastAlarm = G(tempAlarm, true, (a: Boolean) => a, nbrRange)
+  prevAlarm || broadcastAlarm
+}

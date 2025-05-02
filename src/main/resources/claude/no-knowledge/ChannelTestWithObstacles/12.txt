@@ -1,0 +1,36 @@
+val source = node.has("source")
+val destination = node.has("destination")
+val obstacle = node.sense[Boolean]("obstacle").getOrElse(false)
+
+def hopDistance(sink: Boolean): Double =
+  distanceTo(sink) match {
+    case Some(d) => d
+    case None => Double.PositiveInfinity
+  }
+
+def distanceTo(sink: Boolean): Option[Double] = {
+  G.share(
+    name = "distTo",
+    initial = if (sink) Some(0.0) else None,
+    acc = { case (a, b) => List(a, b).flatten.minByOption(x => x) },
+    metric = Some(nbrRange)
+  ) 
+}
+
+val gradientToDestination = 
+  if (destination) 0.0
+  else {
+    mux(obstacle) {
+      Double.PositiveInfinity
+    } {
+      minHoodPlus(nbr { gradientToDestination } + nbrRange)
+    }
+  }
+
+val channel = branch(source) {
+  G.broadcast(gradientToDestination, Double.PositiveInfinity)
+} {
+  Double.PositiveInfinity
+}
+
+channel < Double.PositiveInfinity

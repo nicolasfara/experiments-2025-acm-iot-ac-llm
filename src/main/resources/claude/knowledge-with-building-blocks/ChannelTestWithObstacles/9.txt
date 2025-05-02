@@ -1,0 +1,24 @@
+rep(false) { prevValue =>
+  val srcCond = sense[Boolean]("source")
+  val dstCond = sense[Boolean]("destination")
+  val obstacleAvoidanceMetric = () => {
+    if (nbr(sense[Boolean]("obstacle"))) {
+      Double.PositiveInfinity
+    } else {
+      nbrRange()
+    }
+  }
+  
+  // Calculate the potential field from source
+  val potentialFromSrc = G[Double](srcCond, 0.0, _ + nbrRange(), obstacleAvoidanceMetric)
+  
+  // Determine if path exists by collecting back from destination
+  val pathExists = C[Double, Boolean](
+    potentialFromSrc,
+    _ || _,
+    dstCond,
+    false
+  )
+  
+  pathExists
+}

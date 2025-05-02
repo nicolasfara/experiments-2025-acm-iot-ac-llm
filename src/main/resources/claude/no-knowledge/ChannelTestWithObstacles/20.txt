@@ -1,0 +1,12 @@
+val source = node.has("source")
+val destination = node.has("destination")
+val obstacle = node.has("obstacle")
+
+val g = classicGradient(source)
+val path = branch(destination) {
+  G(g, nbrRange)
+} { Double.PositiveInfinity }
+
+mux(path < Double.PositiveInfinity && !obstacle) {
+  path
+} { Double.PositiveInfinity } < Double.PositiveInfinity

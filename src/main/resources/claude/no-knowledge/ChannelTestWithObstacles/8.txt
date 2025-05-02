@@ -1,0 +1,14 @@
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val g = classicGradient(source)
+
+branch(obstacle) { Double.PositiveInfinity } {
+  val path = distanceTo(destination)
+  branch(path < Double.PositiveInfinity) {
+    true
+  } {
+    false
+  }
+}

@@ -1,0 +1,3 @@
+val source = sense[Boolean]("source")
+val g = gradient(source)
+val result = g
