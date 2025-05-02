@@ -1,3 +1,9 @@
+## [1.3.0](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/compare/v1.2.0...v1.3.0) (2025-05-02)
+
+### Features
+
+* add llama 405B model ([6fc56d0](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/6fc56d07bb5c5636a91db44358298d1e7b14aeeb))
+
 ## [1.2.0](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/compare/v1.1.2...v1.2.0) (2025-05-02)
 
 ### Features
