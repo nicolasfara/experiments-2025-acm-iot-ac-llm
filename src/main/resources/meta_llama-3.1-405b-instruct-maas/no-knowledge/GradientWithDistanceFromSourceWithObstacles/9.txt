@@ -1,0 +1,10 @@
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+val distance = G[Double](Double.PositiveInfinity,
+  (src, _
+  ) => if (src) 0.0 else Double.PositiveInfinity,
+  (l, r) => if (obstacle) Double.PositiveInfinity else (l min r) + 1.0,
+  (x, _) => x
+)
+
+export("distance", distance)

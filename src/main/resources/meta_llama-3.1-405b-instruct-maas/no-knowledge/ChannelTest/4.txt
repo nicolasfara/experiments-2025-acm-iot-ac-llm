@@ -1,0 +1,9 @@
+import it.unibo.scafi.incarnations.BasicAbstractIncarnation._
+
+val source = node("source")
+val destination = node("destination")
+
+mux ( Boolean ) {
+  case true => source
+  case _ => false
+} pipe shortestPathTo ( destination )

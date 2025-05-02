@@ -1,0 +1,5 @@
+```scala
+val source = sense[Boolean]("source")
+val distance = G[V](0, (s, x) => if (s) 0 else 1 + x)
+rep(distance)(d => mux(source, 0, 1 + distance nbr d))
+```

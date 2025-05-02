@@ -1,0 +1,6 @@
+```scala
+val source = sense("source")
+val metric = gradient(source)
+val euclideanDistance = metric * 1.0 // assume 1.0 is the speed for simplicity
+export("euclidean-distance", euclideanDistance)
+```

@@ -1,0 +1,7 @@
+rep(Double.MaxValue) {
+  distance => mux(sense[Boolean]("obstacle")) {
+    Double.MaxValue
+  } {
+    minHood(nbr(distance) + nbrRange(), sense[Boolean]("source") -> 0.0)._1
+  }
+}

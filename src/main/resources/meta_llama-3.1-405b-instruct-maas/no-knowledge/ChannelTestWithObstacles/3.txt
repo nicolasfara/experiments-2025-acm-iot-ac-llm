@@ -1,0 +1,20 @@
+import it.unibo.scafi.incarnations.BasicSimulatorIncarnation._
+import scala.collection.immutable.Set
+
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val channel = S withSensor (source, destination, obstacle) {
+  case (true, _, _) => GradientSource(100)
+  case (_, true, _) => GradientSink(100)
+  case _ => if (obstacle) GradientObstacle else GradientField(100)
+}
+
+val successfullyCreated = S withSensor source {
+  case true => S including channel partition(n => n!=source && n!=destination && n==channel(node masculineDoubleLine]].midpoint()).nonEmpty
+  case _ => S.foldHoodPlus( false )( _ || _ )( n => n==channel )
+
+}
+
+successfullyCreated(node)

@@ -1,0 +1,19 @@
+```scala
+rep(false) { channelCreated =>
+  val source = sense[Boolean]("source")
+  val destination = sense[Boolean]("destination")
+  val obstacle = sense[Boolean]("obstacle")
+  val neighborChannel = nbr(channelCreated)
+  val hasChannel = foldhood(false)(_ || _)(neighborChannel)
+
+  mux(source && !obstacle) {
+    true
+  } {
+    mux(destination && hasChannel) {
+      true
+    } {
+      hasChannel
+    }
+  }
+}
+```

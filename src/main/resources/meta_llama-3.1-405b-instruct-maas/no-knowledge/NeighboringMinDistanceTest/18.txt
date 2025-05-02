@@ -1,0 +1,10 @@
+```scala
+import it.unibo.scafi.incarnations.BasicAbstractInterpreter._
+import it.unibo.scafi.space.PairDivision._
+
+aggregate {
+  includeSelf = false
+  distance = nbrRange()
+  minDist = foldhood(10000.0)(Math.min, distance)
+}
+```

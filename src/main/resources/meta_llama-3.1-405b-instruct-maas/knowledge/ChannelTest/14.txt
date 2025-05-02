@@ -1,0 +1,3 @@
+```scala
+val channel = mux(mid() == "source")(nbr("destination"))(mux(mid() == "destination")(nbr("source"))(0))
+```

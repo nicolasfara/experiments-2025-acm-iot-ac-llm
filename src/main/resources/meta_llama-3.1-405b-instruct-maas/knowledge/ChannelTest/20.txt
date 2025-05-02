@@ -1,0 +1,15 @@
+```scala
+val distances = rep(Map.empty[ID, Int]) { distances =>
+  val newDistances = foldhood(distances)(_ ++ _)(mux(nbr(mid()) == "source") {
+    Map(mid() -> 0)
+  } {
+    if (distances.contains(mid())) Map(mid() -> (distances(mid()) + 1)) else Map.empty
+  })
+  newDistances
+}
+mux(mid() == "destination") {
+  true
+} {
+  false
+}
+```

@@ -1,0 +1,4 @@
+```scala
+val distances = includingSelf.reducers.Neighbors折()
+val minDistance = distances.minBy(_._2).get._2
+```

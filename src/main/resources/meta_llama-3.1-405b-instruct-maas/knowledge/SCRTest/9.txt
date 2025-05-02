@@ -1,0 +1,7 @@
+```scala
+val areaId: ID = sense[Int]("areaId")
+val areaTemperature = foldhood(0.0)(_ + _)(mux(nbr(areaId) == areaId)(nbr(sense[Double]("temperature")))(0.0))
+val averageTemperature = areaTemperature / foldhood(0)(_ + _)(mux(nbr(areaId) == areaId)(nbr(1))(0))
+val alarm = branch(averageTemperature > 30)(true)(false)
+broadcast(alarm)
+```

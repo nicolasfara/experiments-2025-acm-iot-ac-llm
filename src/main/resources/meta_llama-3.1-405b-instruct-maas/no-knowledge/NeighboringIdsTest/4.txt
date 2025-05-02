@@ -1,0 +1,1 @@
+`val neighborIds = rep( Set.empty[ID] ) { ids => unionHood( Set( self.id ) ) -- self.id }`

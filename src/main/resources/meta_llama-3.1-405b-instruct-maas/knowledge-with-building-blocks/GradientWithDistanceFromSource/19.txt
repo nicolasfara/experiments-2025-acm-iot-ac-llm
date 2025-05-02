@@ -1,0 +1,1 @@
+rep(Double.PositiveInfinity) { x => mux(sense[Boolean]("source"))(0)(minHood(nbr(x) + nbrRange())) }

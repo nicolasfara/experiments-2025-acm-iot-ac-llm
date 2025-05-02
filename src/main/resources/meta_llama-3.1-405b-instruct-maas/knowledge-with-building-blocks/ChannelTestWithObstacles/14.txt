@@ -1,0 +1,3 @@
+val sourcePotential = G[Double](source = sense("source"), field = 0, acc = _ + (if (sense[Boolean]("obstacle")) Double.PositiveInfinity else nbrRange()), metric = () => if (sense[Boolean]("obstacle")) Double.PositiveInfinity else nbrRange())
+val channelExists = C[Boolean, Boolean](sourcePotential, _ || _, sense("destination"), false)
+channelExists

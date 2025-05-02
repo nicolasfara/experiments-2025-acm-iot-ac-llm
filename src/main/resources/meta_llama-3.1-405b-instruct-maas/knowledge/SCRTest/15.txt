@@ -1,0 +1,5 @@
+```scala
+val areaTemperatures = foldhood(0.0)(_ + _)(mux(nbr(mid() % 3 == 0))(nbr(sense[Double]("temperature")))(0.0))
+val alarm = areaTemperatures / 3 > 30
+mux(alarm)(nbr(true))(nbr(false))
+```

@@ -1,0 +1,10 @@
+import it.unibo.scafi.space.Point3D
+
+aggregate {
+  include id
+  rep(Vector.empty) { neighbors =>
+    includingSelf.foldhood(Vector.empty) { neighborIds =>
+      neighborIds :+ nbr{id}
+    }
+  }
+}

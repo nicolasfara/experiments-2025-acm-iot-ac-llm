@@ -1,0 +1,24 @@
+```scala
+rep((false, None: Option[ID])) { case (channelEstablished, prevId) =>
+  mux(mid() == "source") {
+    foldhood((false, None: Option[ID])) { case ((accChannelEstablished, accPrevId), (newChannelEstablished, newPrevId)) =>
+      (!accChannelEstablished && newChannelEstablished, newPrevId.orElse(accPrevId))
+    }(
+      mux(nbr(sense[Boolean]("obstacle")) || nbr(channelEstablished)) {
+        (false, None: Option[ID])
+      } {
+        (true, Some(mid()))
+      }
+    ) match {
+      case (true, Some(prev)) => (true, Some(prev))
+      case _ => (false, None)
+    }
+  } {
+    mux(prevId.isDefined && prevId.get == nbr(mid())) {
+      (true, prevId)
+    } {
+      (channelEstablished, prevId)
+    }
+  }
+}._1
+```

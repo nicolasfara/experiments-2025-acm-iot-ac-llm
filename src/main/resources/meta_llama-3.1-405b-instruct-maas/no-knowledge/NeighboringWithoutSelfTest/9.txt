@@ -1,0 +1,2 @@
+includeSelf false;
+val neighborsCount = foldhood(0)(_ + 1)

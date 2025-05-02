@@ -1,0 +1,3 @@
+rep(Double.PositiveInfinity) { distance => 
+  minHood(nbr(distance) + (if (sense[Boolean]("source")) 0 else nbrRange())) 
+}

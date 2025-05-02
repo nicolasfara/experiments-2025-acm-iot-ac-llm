@@ -1,0 +1,17 @@
+import it.unibo.scafi.lib._
+import scala.concurrent.duration._
+
+implicit val node = new Node()
+
+var value = 1000
+val step = -100
+
+nodeDeclared {
+  Rep(0)(_ + 1) { i =>
+    value = value + step
+    if (value <= 0) node.halt()
+    node.log(s"Iteration $i: value = $value")
+  }
+}
+
+node.run()

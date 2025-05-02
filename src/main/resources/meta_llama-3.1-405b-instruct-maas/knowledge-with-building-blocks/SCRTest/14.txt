@@ -1,0 +1,5 @@
+```scala
+val area = S(2, nbrRange)
+val tempInArea = C(area, _ + _, sense("temperature"), 0.0)
+val alarm = G(area, tempInArea > 30, _ || _, nbrRange)
+```

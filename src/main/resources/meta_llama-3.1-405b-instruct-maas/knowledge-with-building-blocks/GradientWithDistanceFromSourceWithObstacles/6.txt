@@ -1,0 +1,1 @@
+`G[Double](source = sense[Boolean]("source"), field = 0, acc = x => x + 1, metric = mux(nbr[Boolean](sense[Boolean]("obstacle")))(Double.PositiveInfinity)(nbrRange()))`

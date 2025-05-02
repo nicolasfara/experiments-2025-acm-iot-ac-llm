@@ -1,0 +1,2 @@
+`val init = 1000`
+`val value = rep(init){ v => (v - 1) max 0 }`

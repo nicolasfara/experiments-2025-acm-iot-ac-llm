@@ -1,0 +1,6 @@
+val obstacle = sense[Boolean]("obstacle")
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val potential = G[Double](source, 0, _ + (if (nbr(obstacle)) Double.PositiveInfinity else nbrRange()), nbrRange)
+val channelConfirmation = C[Double, Boolean](potential, _ || _, destination, false)
+channelConfirmation

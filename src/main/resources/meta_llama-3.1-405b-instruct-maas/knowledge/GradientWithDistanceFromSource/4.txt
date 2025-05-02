@@ -1,0 +1,9 @@
+```scala
+rep(Infinity) { distance => 
+  mux(sense[Boolean]("source")) {
+    0.0
+  } {
+    minHood(nbr(distance) + nbrRange())
+  }
+}
+```

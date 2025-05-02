@@ -1,0 +1,64 @@
+```scala
+import it.unibo.scafi.space.PairSpace
+import it.unibo.scafi.space.Position
+
+class TemperatureAlarmProgram extends AggregateProgram with BlockG {
+  override def main(): Any = {
+    // Define areas
+    val areas = List(
+      new Area("Area1", Position(0, 0), Position(10, 10)),
+      new Area("Area2", Position(11, 11), Position(20, 20)),
+      new Area("Area3", Position(21, 21), Position(30, 30))
+    )
+
+    // Get current area
+    val currentArea = senseCurrentArea(areas)
+
+    // Compute area-wise temperature
+    val temperature = foldhood(0.0)(_ + _) {
+      if (currentArea == neighborCurrentArea(areas)) senseTemperature() else 0.0
+    }
+
+    // Compute average temperature
+    val avgTemperature = temperature / foldhood(0)(_ + _) {
+      if (currentArea == neighborCurrentArea(areas)) 1 else 0
+    }
+
+    // Send alarm if temperature is above 30 degrees
+    if (avgTemperature > 30) {
+      broadcast(avgTemperature)
+    } else {
+      (0.0, false)
+    }
+  }
+
+  def senseCurrentArea(areas: List[Area]): String = {
+    areas.find(a => a.isIn(sensePosition())).getOrElse(Area("", Position(0, 0), Position(0, 0))).name
+  }
+
+  def neighborCurrentArea(areas: List[Area]): String = {
+    areas.find(a => a.isIn nbr sensePosition()).getOrElse(Area("", Position(0, 0), Position(0, 0))).name
+  }
+
+  def senseTemperature(): Double = {
+    // Read temperature sensor value
+    25.0 // Simulated temperature value
+  }
+
+  def sensePosition(): Position = {
+    // Read position sensor value
+    Position(5, 5) // Simulated position value
+  }
+
+  def broadcast(value: Double): Unit = {
+    // Broadcast value to area
+    println(s"Alarm: Temperature above 30 degrees ($value)")
+  }
+
+  case class Area(name: String, p1: Position, p2: Position) {
+    def isIn(pos: Position): Boolean = {
+      pos.x >= p1.x && pos.x <= p2.x && pos.y >= p1.y && pos.y <= p2.y
+    }
+  }
+}
+```

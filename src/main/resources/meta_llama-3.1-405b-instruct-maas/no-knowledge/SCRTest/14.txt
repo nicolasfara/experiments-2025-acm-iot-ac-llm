@@ -1,0 +1,38 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import it.unibo.scafi.space.BasicGrid
+
+val grid = BasicGrid(100, 100)
+val tempSensors = 50
+
+// Temp values
+val temps = (1 to tempSensors).map(i => (grid.getRandomPoint, (Math.random * 50).toInt))
+
+// Areas definition (grid partitioning)
+val areas = 5
+val areaSize = grid.sizeX / areas
+
+// Temp per area
+val tempAreas = temps.groupBy { case (p, _) => p.x / areaSize }
+
+// Shared program
+shared {
+  // Let's assume node is equipped with a positioning system
+  // and can sense temperature from nearby sensors
+  def localTemp = foldhood(0) (hood => if (inRange(hood)) hood.temp else 0)
+  
+  // Compute area temp
+  def areaTemp = foldhood(0) (hood => localTemp + hood.localTemp)
+  
+  // Generate an alarm if areaTemp > 30
+  def alarm = areaTemp > 30
+  
+  // Output alarm for current area, suppressing if no temp
+  def output = if (localTemp != 0) if (alarm) 1 else 0 else -1
+  
+  // Gradcast implementation
+  def broadcastAlarm(alarmValue: Any) = gradcast(alarmValue)
+  
+  broadcastAlarm(output)
+}
+```

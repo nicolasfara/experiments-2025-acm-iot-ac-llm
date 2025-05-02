@@ -1,0 +1,27 @@
+import it.unibo.scafi.space.Point3D
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+
+val source = sense {
+  1000
+}
+
+val gradient = rep(Double.PositiveInfinity){ distance =>
+  source == 0 match {
+    case true => 0
+    case false => {
+      mux (source > 0) {
+        1 + minHoodPlus (nbr (distance))
+      } (distance)
+    }
+  }
+}
+
+val backward = rep(0){ value =>
+  source match {
+    case 0 => 0
+    case _ => {
+      val minPath = 1 + minHoodPlus (nbr (gradient))
+      (value + 1) * (minPath == gradient) + mux (source > 0) { 1000 } { 0 }
+    }
+  }
+}

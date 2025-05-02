@@ -1,0 +1,5 @@
+`val minDist = rep(Double.PositiveInfinity) { dist => 
+  mux(nbr(dist)) { 
+    foldhood(min)(nbr(dist)) 
+  } 
+}`

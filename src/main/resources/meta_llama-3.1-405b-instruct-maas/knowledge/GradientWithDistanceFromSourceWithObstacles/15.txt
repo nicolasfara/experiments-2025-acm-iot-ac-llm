@@ -1,0 +1,20 @@
+```scala
+rep((Double.MaxValue, (0, 0))) {
+  case (dist, _) =>
+    mux(sense[Boolean]("obstacle")) {
+      (dist, (0, 0))
+    } {
+      mux(sense[Boolean]("source")) {
+        (0.0, nbrRange())
+      } {
+        val minNeighDist = minHood((nbr(_._1), nbr(_._2)))
+        val newDist = minNeighDist._1 + minNeighDist._2
+        if (newDist < dist) {
+          (newDist, minNeighDist._2)
+        } else {
+          (dist, (0, 0))
+        }
+      }
+    }
+}._1
+```

@@ -1,0 +1,7 @@
+```scala
+val maxId = rep Double.NegativeInfinity {
+  Math.max nbr{maxId}, mid
+}
+
+val result = maxId
+```

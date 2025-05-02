@@ -1,0 +1,7 @@
+rep(false) { channel =>
+  mux(mid() == "source") {
+    foldhood(true)(_ && _)(mux(nbr(mid() == "destination"))(true)(nbr(channel) && !nbr(sense[Boolean]("obstacle"))))
+  } { 
+    foldhood(false)(_ || _)(nbr(channel))
+  }
+}

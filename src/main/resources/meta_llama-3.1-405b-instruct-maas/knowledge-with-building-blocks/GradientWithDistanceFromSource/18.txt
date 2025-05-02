@@ -1,0 +1,4 @@
+```scala
+val potential = G[Double](source = sense("source"), field = 0, acc = x => x + 1, metric = nbrRange)
+val distance = potential
+```

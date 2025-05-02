@@ -1,0 +1,7 @@
+```scala
+val channel = (sensor("source") && hop || !sensor("obstacle")) && hop
+
+val channelCreated = sense(channel, sensor("destination"))
+
+emit(channelCreated)
+```

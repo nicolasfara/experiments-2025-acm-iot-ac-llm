@@ -1,0 +1,4 @@
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import it.unibo.scafi.space.Point3D
+
+aggregate(neighbors(Note.empty).excludingSelf.count(_ => true))

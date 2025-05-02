@@ -1,0 +1,31 @@
+```scala
+import it.unibo.scafi.space.Point3D
+
+val source = sense[Boolean]("source")
+val distance = S { (s, nbr) =>
+  if (source) 0.0
+  else {
+    val d = nbr_MAP(distance)
+    if (d.contains(0.0)) 1.0
+    else (d.min + 1.0) min Double.PositiveInfinity
+  }
+}
+
+val euclideanDistance = S { (s, nbr) =>
+  val zeroDist = sense[Boolean]("source")
+  if (zeroDist) 0.0
+  else {
+    val neighborDistances = nbr(distance)
+    val distancesWithAngle = neighborDistances.filter(_._1 != Double.PositiveInfinity).map(d => (d._1, d._2, S { (s, nbr) => d._2 - s TreeMap space._angles } ) )
+    val minDistance = distancesWithAngle.minByOption { case (d,_,_) => d }
+    minDistance match {
+      case Some((d, srcId, angle)) => 
+        nbr.foldhood[Double]( Double.PositiveInfinity, HoodReducer.MIN){n => 
+            if (n.uid == srcId) angle.FloatField.getGeodesicDistance(Point3D(0.0, 0.0, 0.0), n.position.value) 
+            else Double.PositiveInfinity 
+          }
+      case None => Double.PositiveInfinity
+    }
+  }
+}
+```

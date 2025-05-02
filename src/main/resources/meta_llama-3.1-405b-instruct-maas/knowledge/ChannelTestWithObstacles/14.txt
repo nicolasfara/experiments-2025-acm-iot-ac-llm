@@ -1,0 +1,13 @@
+```scala
+rep(false) { channelCreated =>
+  mux(mid() == "source") {
+    foldhood(true)(_ && _)(mux(nbr(mid() == "destination") || nbr(channelCreated)) {
+      !nbr(sense[Boolean]("obstacle"))
+    } {
+      false
+    })
+  } {
+    nbr(channelCreated)
+  }
+}
+```

@@ -1,0 +1,3 @@
+```scala
+rep(Int.MinValue) { maxId => foldhood(maxId)(_ max _)(nbr(mid())) }
+```

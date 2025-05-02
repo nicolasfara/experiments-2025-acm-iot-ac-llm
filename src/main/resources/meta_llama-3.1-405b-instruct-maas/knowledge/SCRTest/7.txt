@@ -1,0 +1,10 @@
+```scala
+val areaTemperatures = foldhood(List.empty[(ID, Double)])(_ ++ _)(List(mid() -> sense[Double]("temperature")))
+val areaTemperature = areaTemperatures.map(_._2).sum / areaTemperatures.size
+val alarm = areaTemperature > 30
+mux(alarm) {
+  nbr(true)
+} {
+  nbr(false)
+}
+```

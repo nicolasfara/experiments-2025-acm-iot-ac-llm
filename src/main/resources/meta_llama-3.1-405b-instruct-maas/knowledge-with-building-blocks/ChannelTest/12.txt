@@ -1,0 +1,2 @@
+val channel = G[Boolean](source = sense("source"), field = false, acc = a => a, metric = nbrRange)
+val path = C[Boolean, Boolean](channel, _ || _, sense("destination"), false)

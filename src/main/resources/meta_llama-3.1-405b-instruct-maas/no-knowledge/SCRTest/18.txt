@@ -1,0 +1,39 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import scala.collection.mutable
+
+class Node extends AggregateProgram with BlockG {
+  override def main() = {
+    // Define temperature sensors at each node
+    val temperatureSensor = sense[Double]("temperature")
+
+    // Compute area-wise temperature
+    val areaTemperature = branch[AreaTemperature](sense[Boolean]("inArea")){ (inArea: Boolean) =>
+      if (inArea) {
+        foldHood[AreaTemperature](AreaTemperature(0.0, 0))(mergeAreaTemps) { (temp: AreaTemperature) =>
+          if (temp.readings > 0) temp
+          else {
+            AreaTemperature(temperatureSensor, 1)
+          }
+        }
+      } else {
+        AreaTemperature(temperatureSensor, 1)
+      }
+    }
+
+    // Send alarm if temperature above 30 degrees
+    val alarm = when(areaTemperature.temperature > 30) { alarmCode() }
+
+    // Broadcast alarm
+    broadcast(alarm)
+  }
+
+  // Helper function to merge area temperatures
+  def mergeAreaTemps(temp1: AreaTemperature, temp2: AreaTemperature): AreaTemperature = {
+    AreaTemperature((temp1.temperature + temp2.temperature) / (temp1.readings + temp2.readings), temp1.readings + temp2.readings)
+  }
+
+  // Data structure to hold area temperature
+  case class AreaTemperature(temperature: Double, readings: Int)
+}
+```

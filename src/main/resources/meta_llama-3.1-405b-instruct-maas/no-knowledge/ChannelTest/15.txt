@@ -1,0 +1,5 @@
+val source = node("source")
+val destination = node("destination")
+mux = branch(IsSrc(source), () => G admit 1)
+channel = C(channels = mux)
+muxDestination = branch(IsSrc(destination), () => channel)

@@ -1,0 +1,8 @@
+```scala
+val source = sense[Boolean]("source")
+val distance = rep(1000.0){ d =>
+  mux(source){ 0.0 }{
+    foldhood(1000.0){ (acc, v) => if(v) math.min(acc, nbr(d) + nbrRange()) else acc }
+  }
+}
+```

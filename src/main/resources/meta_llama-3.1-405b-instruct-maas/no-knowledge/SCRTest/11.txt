@@ -1,0 +1,45 @@
+```scala
+import it.unibo.scafi.space.{Point2D, Vector2D}
+import it.unibo.scafi.simulation.{Dimensions, SharedSimulatorSettings}
+import it.unibo.scafi.incarnations.Incarnation._
+
+val simSettings = SharedSimulatorSettings(
+  space = Dimensions(100, 100),
+  simulationClass = classOf[AreaTemperatureSim]
+)
+
+class AreaTemperatureSim extends AggregateProgram with SensorDefinitions with BlockUtils with StandardSensors {
+  override def main() = {
+    val areas = List(
+      (new Point2D(20, 20), new Point2D(40, 40)),  // Area 1
+      (new Point2D(50, 50), new Point2D(70, 70)),  // Area 2
+      (new Point2D(10, 50), new Point2D(30, 70)),  // Area 3
+      (new Point2D(60, 20), new Point2D(80, 40)),  // Area 4
+    )
+
+    // Function to calculate the average temperature in an area
+    def areaTemperature(topLeft: Point2D, bottomRight: Point2D): Double = {
+      foldhoodPlus(0, (x) => (sense[Boolean]("isWithinArea") && location.distance(topLeft) <= location.distance(bottomRight))) {
+        (current, v) => current + v.temperature
+      } / numHood {
+        (x) => (sense[Boolean]("isWithinArea") && location.distance(topLeft) <= location.distance(bottomRight))
+      }
+    }
+
+    // Calculation of average area-wise temperature
+    val tempValues = for ((topLeft, bottomRight) <- areas) yield {
+      repBlock(true) { (stable: Boolean) =>
+        val avgTemp = areaTemperature(topLeft, bottomRight)
+
+        // Send alarm if temperature is above 30 degrees
+        broadcast avgTemp > 30
+
+        stable && !sense[Boolean]("isAlarmRaised")
+      } { r: Boolean => location.distance(topLeft) <= location.distance(bottomRight) }
+    }
+
+    // Output
+    tempValues.foreach((x: Double) => sense(False) && sharedSense("Area Temperature", x))
+  }
+}
+```

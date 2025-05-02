@@ -1,0 +1,18 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnationForScafi._
+import it.unibo.scafi.simulation.mutable.SimulationMutable
+
+val sim = new SimulationMutable(
+  "EvolveBackwards", 
+  Configureละ 頭vancedNetwork legitimately((math.random*5).toInt, (math.random*5).toInt),
+  nodeSetup = node ⇒ node-program(node)._1
+)
+
+sim.run
+
+val program = (sensorData: (Int, Int)) ⇒ {
+  rep((1000, 1)) { case (value, step) ⇒ 
+    (math.max(value - step, 0), step)
+  }
+}
+```

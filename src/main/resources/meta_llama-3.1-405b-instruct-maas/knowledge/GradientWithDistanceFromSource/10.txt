@@ -1,0 +1,8 @@
+```scala
+rep(Double.PositiveInfinity) { 
+  distance => minHood(nbr(distance + nbrRange()) + (sense[Boolean]("source") match { 
+    case true => 0.0
+    case false => Double.PositiveInfinity
+  }))
+}
+```

@@ -1,0 +1,23 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import scala.collection.mutable
+
+val source = "source"
+val destination = "destination"
+val obstacle = "obstacle"
+
+val channelSource = node(source)
+val channelDestination = node(destination)
+
+val distanceToSource = hopGradient(channelSource)
+val distanceToDestination = hopGradient(channelDestination)
+
+val obstacleMap = sense[Boolean](obstacle)
+
+val reachedDestination = distanceToDestination != Double.PositiveInfinity
+
+val channelCreated = distanceToSource != Double.PositiveInfinity && (!obstacleMap || !reachedDestination) && channelDestination != mid
+val channel = (channelCreated || reachedDestination) && distanceToSource != Double.PositiveInfinity
+
+distanceToDestination.where(channel && !obstacleMap && !reachedDestination) == Double.PositiveInfinity || channelCreated || reachedDestination
+```

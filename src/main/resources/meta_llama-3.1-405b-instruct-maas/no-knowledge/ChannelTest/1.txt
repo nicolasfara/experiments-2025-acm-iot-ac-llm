@@ -1,0 +1,4 @@
+val source = node("source")
+val destination = node("destination")
+
+val channel = branch ( source )( (src, _) => destination )

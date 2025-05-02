@@ -1,0 +1,4 @@
+val potential = G[Double](source = sense("source"), field = 0, acc = _ + (if (sense[Boolean]("obstacle")) Double.PositiveInfinity else nbrRange()), metric = if (sense[Boolean]("obstacle")) Double.PositiveInfinity else nbrRange())
+val channel = C(potential, _ || _, sense("destination"), false)
+val success = C(potential, _ && _, channel, true)
+success

@@ -1,0 +1,6 @@
+import it.unibo.scafi.incarnations.BasicAbstractIncarnation
+
+class Program extends BasicAbstractIncarnation {
+  override def main() = 
+  rep(0)(_ => nbrRange().maxByOption(_ => mid()).getOrElse(mid()))
+}

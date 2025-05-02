@@ -1,0 +1,2 @@
+val potential = G[Double](source = sense("source"), field = 0, acc = _ + mux(nbr(sense[Boolean]("obstacle")))(Double.PositiveInfinity)(nbrRange()), metric = nbrRange)
+val channel = C[Double, Boolean](potential, _ || _, sense("destination"), false)

@@ -1,0 +1,1 @@
+`val neighborsCount = sense[Set[Nbr]](nbrSet).size`

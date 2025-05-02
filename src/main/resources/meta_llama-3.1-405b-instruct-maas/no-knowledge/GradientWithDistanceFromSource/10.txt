@@ -1,0 +1,11 @@
+import it.unibo.scafi.lib._
+
+MU Stephanie G scalaOpacity 0
+
+`source` foldhood 0 (x => x) {
+  + math.sqrt(
+    sense[Float]("neighGradient") foldhood 0 (_ + _) {
+      (x: Float) => x * x
+    }
+  )
+}

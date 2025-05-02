@@ -1,0 +1,27 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import scala.collection.mutable
+
+// sensor data map
+val sensorData = mutable.Map[Int, Double]()
+
+// Area-wise temperature computation and alarm broadcast
+val tempThreshold = 30.0
+val temperatureGradient = (mid: Int) => {
+  val readings = includingSelf.foldhood_plus[Int, Double](0)(_ + _, { (a, _) =>
+    sensorData.getOrElse(a, 0.0)
+  })
+  val avgTemp = readings / includingSelf.size()
+  (avgTemp, avgTemp > tempThreshold)
+}
+
+val alarmTriggered = includingSelf.exists[Boolean]((_, alarmTriggered) => alarmTriggered)(temperatureGradient)
+if (alarmTriggered) {
+  broadcast((mid: Int) => s"ALARM TRIGGERED in area $mid, temperature is above $tempThreshold degrees")
+}
+
+// Assign sensor data for testing
+includingSelf.foreach((mid: Int) => {
+  sensorData(mid) = mid.toDouble * 10 % 40 // simulating sensor data
+})
+```

@@ -6,7 +6,7 @@ import scala.io.{ BufferedSource, Source }
 import cats.effect.{ IO, Resource }
 import it.unibo.scafi.program.utils.PromptUtils.generatePreamblePrompt
 
-class ClaudeSonnet extends CodeGeneratorService:
+class FileBasedReplayer(val model: String) extends CodeGeneratorService:
   private val candidateKnowledgeFileNames = List(
     "knowledge/no-knowledge.md",
     "knowledge/knowledge.md",
@@ -50,10 +50,9 @@ class ClaudeSonnet extends CodeGeneratorService:
     prompts.get(prompt)
 
   private def readLlmResponse(testFile: String, knowledgeDirectory: String, iteration: Int): IO[String] =
-    openKnowledgeFile(s"claude/$knowledgeDirectory/$testFile/$iteration.txt").use(readFile)
+    openKnowledgeFile(s"$model/$knowledgeDirectory/$testFile/$iteration.txt").use(readFile)
 
   override def generateRaw(localKnowledge: String, preamble: String, prompt: String): IO[String] =
-    println(s"Prompt: $prompt")
     for
       knowledgeFileName <- getFileBasedOnKnowledge(localKnowledge)
       testFileName <- getTestBasedOnPrompt(prompt)
@@ -65,5 +64,5 @@ class ClaudeSonnet extends CodeGeneratorService:
   override def generateMain(localKnowledge: String, prompt: String): IO[String] =
     generateRaw(localKnowledge, generatePreamblePrompt(), prompt)
 
-  override def toString: String = "claude-3-7-sonnet"
-end ClaudeSonnet
+  override def toString: String = model
+end FileBasedReplayer

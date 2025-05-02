@@ -1,0 +1,6 @@
+```scala
+val potential = G[Double](source = sense("source"), field = 0, acc = _ + (if (nbr(sense[Boolean]("obstacle"))) Double.PositiveInfinity else nbrRange()), metric = if (sense[Boolean]("obstacle")) Double.PositiveInfinity else nbrRange)
+val channelConfirmation = C[Boolean, Boolean](potential, _ || _, sense("destination"), false)
+val channelCreated = rep(false)(_ || channelConfirmation)
+channelCreated
+```

@@ -1,0 +1,9 @@
+import it.unibo.scafi.incarnations.BasicAbstractIncarnation._
+
+val source = sense[Boolean]("source")
+val distance = G[Double](0, _ => 1000, (x, y) => x + 1)
+
+if (source) { 
+  distance() = 0 
+}
+distance() = minHood(distance()) + 1

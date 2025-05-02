@@ -1,0 +1,18 @@
+```scala
+rep(false) { channelCreated =>
+  mux(mid() == "source") {
+    val path = foldhood(List.empty[(Boolean, ID)])(_ ++ _)(List((nbr(sense[Boolean]("obstacle")), nbr(mid()))))
+    if (path.exists(_._1)) false
+    else {
+      val destinationReached = path.exists(_._2 == "destination")
+      if (destinationReached) true
+      else {
+        val nextNode = path.filter(!_._1).head._2
+        nbr(channelCreated) && nextNode == nbr(mid())
+      }
+    }
+  } {
+    nbr(channelCreated)
+  }
+}
+```

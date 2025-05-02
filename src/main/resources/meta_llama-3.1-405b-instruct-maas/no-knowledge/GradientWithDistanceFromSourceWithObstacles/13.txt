@@ -1,0 +1,23 @@
+import it.unibo.scafi空间efdomains.StatefulAggregateProgram
+import it.unibo.scafi空间efdomainsประNode
+
+import scala.collection.immutable.Set
+
+import java.lang.Double.isNaN
+
+`val` distanceFromSource = G.gradient[Double]( (env: node) => if (env.sensors("source") == true) 0.0 else Double.PositiveInfinity, (x: Double, y: Double) => math.min(x,y) + 1)
+
+`val` propagationFreeSpace = G.multipath[Set[node.Id]]( (env: node) => if (env.sensors("obstacle") == false) Set(env.id) else Set.empty[node.Id], (mine: Set[node.Id], neighbors: Set[node.Id]) => mine ++ neighbors)
+
+`val` envDistanceFromSource = rep[Option[Double]](None){ previousValue =>
+    `val` distancesAndNodes = includingSelf.minHood(
+        (distance: Double, mid: node.Id) => (distance, mid)
+    )(distanceFromSource, propagationFreeSpace)
+
+    distancesAndNodes.filter( t => !isnan(t._1) ).minByOption(_._1) match {
+        case None => None
+        case Some((dist, sourceId)) => Some(dist)
+    }
+}
+
+envDistanceFromSource.map( d => node.put("distance" -> d.get))

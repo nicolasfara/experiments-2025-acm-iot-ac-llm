@@ -1,0 +1,3 @@
+```scala
+G[Double](source = sense[Boolean]("source"), field = 0, acc = a => a + 1, metric = nbrRange())
+```

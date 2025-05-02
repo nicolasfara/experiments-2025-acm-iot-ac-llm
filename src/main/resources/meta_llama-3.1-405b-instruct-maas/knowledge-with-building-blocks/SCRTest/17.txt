@@ -1,0 +1,8 @@
+```scala
+val leader = S(2, nbrRange)
+val potential = G[Double](source = leader, field = 0, acc = _ + nbrRange(), metric = nbrRange)
+val temperature = C[Double, Double](potential, _ + _, sense("temperature"), 0)
+val averageTemperature = temperature / C[Double, Int](potential, _ + _, 1, 0)
+val alarm = G[Boolean](source = averageTemperature > 30, field = false, acc = _ || _, metric = nbrRange)
+alarm
+```

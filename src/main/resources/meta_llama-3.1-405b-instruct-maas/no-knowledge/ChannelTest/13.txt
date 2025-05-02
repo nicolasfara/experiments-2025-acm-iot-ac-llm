@@ -1,0 +1,42 @@
+import it.unibo.scafi.space.Point2D
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import scala.collection.mutable
+
+source = "source"
+destination = "destination"
+
+class AggregateProgram extends AggregateProgram with BlockG {
+  override def main(): Any = {
+    val channel = classicGradient(source) ++ distanceTo(source)
+    channel
+  }
+
+  def distanceTo(source: String): Double = {
+    rep(Double.PositiveInfinity) { distance =>
+      if (node == source) 0.0
+      else if (nbr(gradientName) == source)
+        distance min (nbr(distance) + nbrRange)
+      else distance
+    }
+  }
+
+  def classicGradient(source: String): String = {
+    rep("") { that =>
+      if (node == source) source
+      else if (nbr(gradientName) == source) that
+      else if (nbr(that) == source) nbr(gradientName)
+      else that
+    }
+  }
+}
+
+val network = new mutable.HashMap[String, Point2D]()
+
+val sim = new BasicSimulator(
+  _ => new AggregateProgram,
+  network = network
+)
+
+network += "source" -> new Point2D(0, 0)
+network += "destination" -> new Point2D(10, 10)
+sim.runMainOnNode("destination")

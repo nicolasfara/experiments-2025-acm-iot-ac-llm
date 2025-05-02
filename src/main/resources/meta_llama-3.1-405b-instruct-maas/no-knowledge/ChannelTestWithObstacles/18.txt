@@ -1,0 +1,24 @@
+import it.unibo.scafi.incarnations.BasicAbstractActorLike
+
+node.put("source")(true)
+node.put("destination")(false)
+node.put("obstacle")(false)
+node.put("channel")(false)
+
+val source = node.get[Boolean]("source")
+val destination = node.get[Boolean]("destination")
+val obstacle = node.get[Boolean]("obstacle")
+
+val channel = rep(node.get[Boolean]("channel")) { channel =>
+  if (source) true
+  else if (obstacle) false
+  else if (destination) false
+  else {
+    if (true west || true east || true north || true south) true
+    else false
+  }
+}
+
+node.put("channel")(channel)
+
+channel

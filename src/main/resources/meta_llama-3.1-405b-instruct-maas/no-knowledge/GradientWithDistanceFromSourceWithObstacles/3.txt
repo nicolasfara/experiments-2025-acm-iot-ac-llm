@@ -1,0 +1,14 @@
+```scala
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+
+val distance = G.metricDistance(
+  source,
+  (x, y) => if (x) 0 else Double.PositiveInfinity,
+  (x, y) => if (obstacle(y)) Double.PositiveInfinity else 1.0,
+  None,
+  0.0
+)
+
+export("distance", distance)
+```

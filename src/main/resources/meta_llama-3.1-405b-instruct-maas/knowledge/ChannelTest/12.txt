@@ -1,0 +1,9 @@
+```scala
+rep(false) { channelCreated =>
+  mux(mid() == "source") {
+    nbr(mid() == "destination")
+  } {
+    channelCreated
+  }
+}
+```

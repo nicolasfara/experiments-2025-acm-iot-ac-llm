@@ -1,0 +1,22 @@
+```scala
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val channel =
+  (source) union
+  (if (!obstacle) {
+    branch(channel)
+  } else {
+    false
+  })
+
+val channelCreated = distanceTo(destination, channel, 0) > 0
+
+if (channelCreated) {
+  mux(channelCreated, true, false)
+}
+else {
+  false
+}
+```

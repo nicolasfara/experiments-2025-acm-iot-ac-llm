@@ -1,0 +1,6 @@
+import it.unibo.scafi.incarnations.BasicAbstract
+
+class ComputeMaxId extends BasicAbstract {
+  override def main() =
+    rep(0)(_ max mid)
+}

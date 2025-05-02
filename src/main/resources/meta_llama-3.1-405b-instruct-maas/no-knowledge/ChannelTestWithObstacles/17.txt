@@ -1,0 +1,24 @@
+import it.unibo.scafi.incarnations.BasicSimulatorIncarnation._
+import it.unibo.scafi.lib.{LIB0, LIB3, LIB5}
+
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val distance = LIB5.distanceTo(source)
+val broadcast = LIB3.broadcast(distance, 0)
+val gradient = distance + broadcast
+val back = LIB5.distanceTo(destination)
+val pathBack = LIB3.reinforcedG(gradient, back)
+val path = LIB3.reinforcedG(gradient, 0)
+
+LIB0.branch(!obstacle) { () =>
+  LIB0.branch(source) { () =>
+    (LIB5.broadcastTrue(distance) || LIB5.senseBroadcastTrue(back))
+  } else LIB0.branch(destination) { () =>
+    (LIB5.broadcastTrue(back) || LIB5.senseBroadcastTrue(distance))
+  } else {
+    val minimize = (a: Double, b: Double) => math.min(a, b)
+    ( LIB3.reinforcedG(gradient, 0)(minimize) > 0 )
+  }
+} else false

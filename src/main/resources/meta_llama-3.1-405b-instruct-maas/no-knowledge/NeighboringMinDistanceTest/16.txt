@@ -1,0 +1,3 @@
+`val distance = rep( Double.PositiveInfinity ) { value =>
+  foldhood( Double.PositiveInfinity )( _ min _ ) { value - 1 }
+}`

@@ -1,0 +1,10 @@
+```scala
+val obstacle = sense[Boolean]("obstacle")
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+
+val metric = if (obstacle) Double.PositiveInfinity else nbrRange()
+val potential = G[Double](source, 0, _ + metric, metric)
+val pathConfirmation = C[Boolean, Boolean](potential, _ || _, destination, false)
+pathConfirmation
+```

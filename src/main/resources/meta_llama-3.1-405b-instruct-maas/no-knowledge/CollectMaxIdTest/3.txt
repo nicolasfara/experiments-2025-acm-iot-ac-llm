@@ -1,0 +1,11 @@
+import it.unibo.scafi.incarnations.BasicAbstractDevice
+import it.unibo.scafi.space.Point3D
+
+class Program extends AggregateProgram with BasicAbstractDevice {
+  override def main() =
+    rep(Double.NegativeInfinity) { value =>
+      mux(value > id) { value } { id }
+    } |+| rep(Double.NegativeInfinity) { value =>
+      foldhoodPlus[Double](Double.NegativeInfinity)(_ max _)(nbr { value })
+    }
+}

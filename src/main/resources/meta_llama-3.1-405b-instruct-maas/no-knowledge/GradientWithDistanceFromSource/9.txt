@@ -1,0 +1,14 @@
+import it.unibo.scafi.space.Point3D
+
+val source = sense[Boolean]("source")
+
+val distances = rep(10000.0){
+  distance =>
+  if(source) 0.0
+  else {
+    val nbrDistances = includingSelf.unionHood(nbr(distance))
+    distance + 1.0 min nbrDistances.min
+  }
+}
+
+val euclideanDistance = distances

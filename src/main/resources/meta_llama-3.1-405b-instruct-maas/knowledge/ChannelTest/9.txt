@@ -1,0 +1,13 @@
+```scala
+rep(false) { channel =>
+  mux(mid() == "source") {
+    foldhoodPlus(true)(_ && _)(nbr(channel))
+  } {
+    mux(mid() == "destination") {
+      false
+    } {
+      nbr(channel)
+    }
+  }
+}
+```

@@ -1,0 +1,8 @@
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import it.unibo.scafi.space.Point2D
+
+val source = nodeById("source")
+val destination = nodeById("destination")
+
+val channel = influence[Double](source, (s, _) => 0, (s, _) => if (s == source) 0 else Double.PositiveInfinity)
+   .diffusion((s, src, d) => if (s == destination) d else src + 1)

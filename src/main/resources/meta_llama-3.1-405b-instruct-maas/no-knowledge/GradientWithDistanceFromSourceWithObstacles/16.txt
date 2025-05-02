@@ -1,0 +1,15 @@
+import it.unibo.scafi.space.Point3D
+
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+
+val distance = rep( Double.PositiveInfinity){
+  case (self, _) => 
+    if (source) 0.0
+    else if (obstacle) Double.PositiveInfinity
+    else {
+      1 + nbr(distance).minHood(nbrRange)
+    }
+}
+
+emit("EuclideanDistance", distance)

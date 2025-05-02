@@ -1,0 +1,4 @@
+import it.unibo.scafi.lib.BasicBlock3D._
+import it.unibo.scafi.lib.Block3D._
+
+BypassGradientAlien (name == "source", name == "destination")

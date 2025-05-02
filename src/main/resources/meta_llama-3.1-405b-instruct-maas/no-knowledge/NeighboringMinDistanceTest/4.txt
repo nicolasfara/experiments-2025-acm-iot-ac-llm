@@ -1,0 +1,4 @@
+`val distances = rep Double.MaxValue
+  every 1.seconds {
+    distances.update(minHoodPlus(nbr(distances) + 1), nbrRange)
+  }`

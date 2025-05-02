@@ -1,0 +1,10 @@
+```scala
+val source = sense[Boolean]("source")
+val distance = GRow[Int](if (source) 0 else Double.PositiveInfinity.toInt)
+distance := (nbr(distance) + 1).min(distance)
+```
+or using `ScaFi` ` metric()`function  which provides a simplified and efficient way to compute distances
+```scala
+val source = sense[Boolean]("source")
+val distance = metric(source)
+```

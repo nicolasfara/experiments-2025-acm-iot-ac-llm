@@ -1,0 +1,35 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import it.unibo.scafi.simulation.ScafiSettings
+
+// Sensor data, node positions and shared data
+val temperatureReadings = Map(1 -> 32, 2 -> 20, 3 -> 35, 4 -> 18, 5 -> 31)
+val nodePositions = Map(1 -> (0, 0), 2 -> (1, 0), 3 -> (2, 0), 4 -> (0, 1), 5 -> (1, 1))
+val areas = List((1, 2), (3, 4), (5))
+
+// Check if the current node belongs to an area
+def isNodeInArea(nodeId: ID, area: List[ID]): Boolean = area.contains(nodeId)
+
+// Compute the area-wise temperature
+def computeAreaTemperature(localId: ID, area: List[ID]): Double =
+  foldhoodPlus(0)(_ + temperatureReadings.getOrElse(mid, 0)) {
+    isNodeInArea(mid, area)
+  } / area.length.toDouble
+
+// Send an alarm when the temperature is above 30 degrees
+def sendAlarm(temp: Double): Boolean = temp > 30
+
+// Main algorithm body
+Bui rep(10) { curRound =>
+  include [NodeId](1 to 5)
+  nodeput("curRound" -> curRound)
+  
+  areas.foreach(area =>
+    broadcast (msg => (node where isNodeInArea(node.id, area)) {
+      val temperature = computeAreaTemperature(node.id, area)
+      msg.put("temperature" -> temperature)
+      msg.put("alarm" -> sendAlarm(temperature))
+    })
+  )
+}
+```

@@ -1,0 +1,10 @@
+```scala
+val zoneIds = foldhood(Set.empty[Int])(_ union _)(nbr(mid()))
+val zoneTemperatures = foldhood(0.0)(_ + _)(mux(zoneIds.contains(nbr(mid())))(nbr(sense[Double]("temperature")))(0.0))
+val averageZoneTemperature = zoneTemperatures / zoneIds.size
+mux(averageZoneTemperature > 30) {
+  foldhood(true)(_ && _)(nbr(averageZoneTemperature > 30))
+} {
+  false
+}
+```

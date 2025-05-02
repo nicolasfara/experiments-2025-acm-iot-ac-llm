@@ -1,0 +1,23 @@
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val gradient = rep(Double.PositiveInfinity) { (dist => 
+  if (source) 0.0 
+  else if (!obstacle) { 
+    mux(nbr(dist)) { (d => Math.min(d + 1.0, dist)) } 
+  } 
+  else Double.PositiveInfinity
+)}
+
+val channel = rep(None: Option[Boolean]) { (chan =>
+  if (destination) Some(true)
+  else if (!obstacle && chan.isDefined) Some(true)
+  else if (!obstacle && !chan.isDefined) { 
+    mux(nbr(chan)) {( c => if (c.isDefined && gradient < nbr(gradient)) Some(true) else None)}
+  }
+  else None
+)}
+
+val channelEstablished = (source && channel.isDefined) || (destination && channel.isDefined)
+output(channelEstablished.getOrElse(false))

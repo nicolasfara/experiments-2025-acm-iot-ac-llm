@@ -1,0 +1,9 @@
+```scala
+val channelCreated = G CreationUtils.createChannel(
+  src = sense[Boolean]("source"),
+  dst = sense[Boolean]("destination"),
+  distance = 1.0,
+  obstacles = sense[Boolean]("obstacle"),
+  collision = (s, d) => false
+)
+```

@@ -1,0 +1,6 @@
+```scala
+val areas = S(2, nbrRange)
+val temp = foldhood(0.0)(_ + _)(mux(nbr(areas))(nbr(sense[Double]("temperature")))(0.0))
+val alarm = temp / foldhood(0)(_ + _)(mux(nbr(areas))(nbr(1))(0)) > 30
+G[Boolean](source = alarm, field = alarm, acc = a => a, metric = nbrRange)
+```

@@ -1,0 +1,7 @@
+import it.unibo.scafi.incarnations.BasicAbstractIncarnation._
+
+val source = node("source")
+val destination = node("destination")
+mux(src(source) || (hasPathTo(source) && !hasPathTo(destination))){ 
+  distanceTo(source)
+} + ShortestPaths.hopsTo(destination)

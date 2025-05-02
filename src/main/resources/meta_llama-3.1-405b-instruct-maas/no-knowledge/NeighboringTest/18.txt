@@ -1,0 +1,5 @@
+import it.unibo.scafi.space.PairLongLong
+
+aggregate { (self, nbrs) =>
+  nbrs.size
+}

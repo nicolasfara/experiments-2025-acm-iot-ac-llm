@@ -1,0 +1,3 @@
+`val source = sense[Boolean]("source")
+val distance = Gdt.selectivelySpread(source, metric = EuclideanDistance) { x => x.getOrElse(Double.PositiveInfinity) }
+distance`

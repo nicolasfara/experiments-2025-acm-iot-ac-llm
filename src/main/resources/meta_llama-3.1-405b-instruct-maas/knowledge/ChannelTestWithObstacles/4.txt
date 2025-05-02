@@ -1,0 +1,16 @@
+rep(false) { channelCreated =>
+  val sourceNode = sense[Boolean]("source")
+  val destinationNode = sense[Boolean]("destination")
+  val obstacle = sense[Boolean]("obstacle")
+  val isClear = !obstacle
+  val neighborChannel = nbr(channelCreated)
+  mux(sourceNode && isClear) {
+    true
+  } {
+    mux(destinationNode) {
+      false
+    } {
+      foldhood(false)(_ || _)(neighborChannel)
+    }
+  }
+}

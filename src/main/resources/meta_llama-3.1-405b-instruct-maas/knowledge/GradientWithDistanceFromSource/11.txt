@@ -1,0 +1,9 @@
+```scala
+rep(Double.PositiveInfinity) { dist =>
+  mux(sense[Boolean]("source")) {
+    0.0
+  } {
+    foldhood(Double.PositiveInfinity) (_ min _) (nbr(dist) + nbrRange())
+  }
+}
+```

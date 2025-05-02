@@ -1,0 +1,6 @@
+`val source = sense[Boolean]("source")
+val distance = rep(100000.0) { d =>
+  mux(source) { 0.0 } {
+    min(nbr(d) + 1.0)
+  }
+}`

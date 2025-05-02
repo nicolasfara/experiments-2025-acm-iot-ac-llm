@@ -1,0 +1,2 @@
+val sourcePotential = G[Double](source = sense("source"), field = 0, acc = _ + nbrRange(), metric = nbrRange)
+val channel = C[Boolean, Boolean](potential = sourcePotential, acc = _ || _, local = sense("destination"), Null = false)

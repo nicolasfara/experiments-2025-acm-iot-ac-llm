@@ -1,0 +1,5 @@
+`val distance = rep(Double.PositiveInfinity) { d => 
+  foldhoodPlus(Double.PositiveInfinity)(_ min _){ 
+    if (nbr(d) != Double.PositiveInfinity) nbr(d) + 1 else nbr(d)
+  }
+}`

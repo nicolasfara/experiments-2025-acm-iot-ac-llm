@@ -1,0 +1,5 @@
+val source = sense[Boolean]("source")
+val hasObstacle = sense[Boolean]("obstacle")
+val obstacleDistance = if (hasObstacle) Double.PositiveInfinity else nbrRange()
+val distance = G[Double](source, 0, _ + obstacleDistance, obstacleDistance)
+distance

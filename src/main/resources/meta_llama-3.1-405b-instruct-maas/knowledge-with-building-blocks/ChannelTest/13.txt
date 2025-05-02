@@ -1,0 +1,4 @@
+val sourcePotential = G[Double](source = sense("source"), field = 0, acc = _ + nbrRange(), metric = nbrRange)
+val destinationPotential = G[Double](source = sense("destination"), field = 0, acc = _ + nbrRange(), metric = nbrRange)
+val channel = C[Boolean, Boolean](sourcePotential, _ || _, sense("destination"), false)
+mux(channel) { sense("source") } { false }

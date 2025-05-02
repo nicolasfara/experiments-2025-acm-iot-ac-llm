@@ -1,0 +1,16 @@
+```scala
+rep((false, false, Double.MaxValue)) { case (sent, received, distance) =>
+  val isSource = sense[Boolean]("source")
+  val isDestination = sense[Boolean]("destination")
+  val isObstacle = sense[Boolean]("obstacle")
+
+  val newSent = isSource || (sent && !isObstacle)
+  val newReceived = isDestination || (received && !isObstacle)
+
+  val newDistance = mux(newSent)(0.0)(mux(received)(nbr(distance) + 1)(Double.MaxValue))
+
+  val channelEstablished = newSent && newReceived && !isObstacle
+
+  (newSent, newReceived, newDistance)
+}._3 < Double.MaxValue
+```

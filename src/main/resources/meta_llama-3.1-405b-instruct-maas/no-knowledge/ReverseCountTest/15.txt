@@ -1,0 +1,12 @@
+`import it.unibo.scafi.space.BasicGrid`
+`import it.unibo.scafi.space.Point3D`
+
+`val grid = BasicGrid(1, 1, 1)`
+`val program = new AggregateProgram with StandardSensors with BlockG with ScafiAlgorithms {`
+ 
+  `override type MainResult = Double`
+ 
+  `override def main() = rep(1000)(_ => 0)`
+`}`
+
+`program.round(grid.indexToPosition(0), 0, 10)`

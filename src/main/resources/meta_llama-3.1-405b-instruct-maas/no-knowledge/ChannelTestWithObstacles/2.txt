@@ -1,0 +1,14 @@
+```scala
+import it.unibo.scafi.lib._
+import scala.collection.immutable
+
+val source = node.oracle("source")
+val destination = node.oracle("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val channelBuilt = G.channel(source, destination) { path =>
+  path.shortestPathExplore(expand = nbr => !obstacle)
+}
+
+emit("channelBuilt", channelBuilt.isSuccess)
+```

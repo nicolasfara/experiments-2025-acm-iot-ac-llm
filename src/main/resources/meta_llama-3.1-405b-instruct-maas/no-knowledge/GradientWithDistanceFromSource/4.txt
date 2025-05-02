@@ -1,0 +1,7 @@
+import it.unibo.scafi.core._
+
+val source = sense[Boolean]("source")
+
+val distance = distanceTo(source)
+
+emit("Euclidean Distance", distance)

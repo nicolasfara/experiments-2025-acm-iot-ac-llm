@@ -1,0 +1,9 @@
+```scala
+rep(1000.0) { distance =>
+  mux(sense[Boolean]("obstacle")) {
+    distance
+  } {
+    minHood(mux(nbr(sense[Boolean]("source")))(0.0)(nbr(distance) + 1.0))
+  }
+}
+```

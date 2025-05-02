@@ -1,0 +1,5 @@
+```scala
+val potential = G[Double](source = sense("source"), field = 0, acc = _ + nbrRange(), metric = nbrRange)
+val path = C[Boolean, Boolean](potential, _ || _, sense("destination"), false)
+val channel = mux(path)(mux(sense("source"))(1.0)(0.0))(mux(sense("destination"))(1.0)(0.0))
+```

@@ -1,0 +1,1 @@
+`val count = (includingSelf(false) union neighbors()).size()`

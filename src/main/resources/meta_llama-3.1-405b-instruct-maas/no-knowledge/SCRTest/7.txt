@@ -1,0 +1,15 @@
+```scala
+import it.unibo.scafi.incarnations.BasicImplementation
+import it.unibo.scafi.lib.{BlockG, GradientG, StdLibG}
+import FieldUtils._
+
+import scala.math._
+
+val temperatureG = GDouble(1.0)
+val temperatureZone = foldhoodplus(0.0)(_ + temperatureG)(std.Metric.ballLens(3.0))
+val temperatureAlarmZone = repALSE[Set[ID]](Set()) { z =>
+  if (temperatureZone > 30.0) unionSet(z, includingSelf.zipWith(temperatureG).toMap.keySet) else Set()
+}
+
+if (temperatureAlarmZone.nonEmpty) broadcast(1) else broadcast(0)
+```

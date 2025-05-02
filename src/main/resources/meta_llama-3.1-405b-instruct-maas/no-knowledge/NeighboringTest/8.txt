@@ -1,0 +1,7 @@
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import it.unibo.scafi.space.Point2D
+
+aggregate {
+  includeSelf = false
+  rep(0)(_ + 1)
+}

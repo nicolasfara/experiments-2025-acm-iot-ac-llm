@@ -1,0 +1,6 @@
+val countNeighbors = { 
+  (mid: ID) => 
+    nbr(mid).size 
+}
+
+countNeighbors(nbr(mid()))

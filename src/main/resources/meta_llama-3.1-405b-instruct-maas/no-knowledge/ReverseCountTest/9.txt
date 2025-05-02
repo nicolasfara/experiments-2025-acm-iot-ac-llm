@@ -1,0 +1,1 @@
+val result = 1000 to 0 by -1

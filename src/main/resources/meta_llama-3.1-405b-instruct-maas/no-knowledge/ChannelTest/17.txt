@@ -1,0 +1,19 @@
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import scala.collection.mutable
+
+munify {
+
+  val source = "source"
+  val destination = "destination"
+
+  case class CreateChannel(src: String, dst: String)
+
+  node.put(CreateChannel(source, destination))
+
+  val channel = node match {
+    case CreateChannel(src, dst) => gradient(src) * 0.5 + classicGradient(dst)
+    case _ => 0
+  }
+
+  node.put(channel)
+}

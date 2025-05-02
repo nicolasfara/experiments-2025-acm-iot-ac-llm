@@ -1,0 +1,7 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import it.unibo.scafi.simulation.concurrent.{NbrRangeConv, P}
+
+val nbrRange = includingSelf union neighbors
+val count = nbrRange.fold(0)(_ => acc + 1)
+```

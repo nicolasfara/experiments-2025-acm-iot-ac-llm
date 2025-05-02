@@ -1,0 +1,21 @@
+```scala
+rep(false) { channelCreated =>
+  mux(sense[Boolean]("obstacle")) {
+    false
+  } {
+    foldhood(true)(_ && _)(nbr(channelCreated)) &&
+    (sense[String]("node_type") == "source" ||
+     foldhood(false)(_ || _)(nbr(sense[String]("node_type") == "source" && nbr(channelCreated))))
+  }
+} &&
+rep(sense[String]("node_type") != "destination") { notDestination =>
+  mux(sense[Boolean]("obstacle")) {
+    false
+  } {
+    foldhood(true)(_ && _)(nbr(notDestination)) &&
+    (sense[String]("node_type") != "destination" ||
+     foldhood(false)(_ || _)(nbr(sense[String]("node_type") == "destination" && nbr(notDestination))))
+  }
+} &&
+sense[String]("node_type") == "destination"
+```

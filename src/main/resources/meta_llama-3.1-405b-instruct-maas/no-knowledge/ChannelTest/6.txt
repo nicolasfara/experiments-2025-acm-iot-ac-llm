@@ -1,0 +1,15 @@
+import it.unibo.scafi.incarnations.BasicAbstractNote
+
+source.out = 10
+val channel = node => if (node == "source") { source.out } else if (node == "destination") { source.out } else { Double.NaN }
+channel("source") = source.out
+channel("destination") = source.out 
+
+basicNode.order = 1000
+val valueFromChannel = node => if (node == "destination") { channel(node) } else { Double.NaN }
+
+metric = node => node match {
+  case "source" => channel(node)
+  case "destination" => valueFromChannel(node)
+  case _ => Double.NaN
+}

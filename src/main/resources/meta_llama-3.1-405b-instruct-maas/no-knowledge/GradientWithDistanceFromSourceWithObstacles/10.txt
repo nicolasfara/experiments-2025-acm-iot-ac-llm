@@ -1,0 +1,1 @@
+`val distance = rep(1000.0) { d => if (sense[Boolean]("obstacle")) 1000.0 else if (sense[Boolean]("source")) 0.0 else minHood(d + 1.0) }`

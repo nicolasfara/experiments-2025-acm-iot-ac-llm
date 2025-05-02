@@ -1,0 +1,7 @@
+```scala
+val leader = S(2, nbrRange)
+val areaPotential = G[Double](source = leader, field = 0, acc = _ + nbrRange(), metric = nbrRange)
+val areaTemperature = C[Double, Double](potential = areaPotential, acc = _ + _, local = sense("temperature"), Null = 0)
+val alarm = areaTemperature / foldhood(0)(_ + _)(mux(leader)(nbr(1))(0)) > 30
+G[Boolean](source = leader, field = alarm, acc = a => a, metric = nbrRange)
+```

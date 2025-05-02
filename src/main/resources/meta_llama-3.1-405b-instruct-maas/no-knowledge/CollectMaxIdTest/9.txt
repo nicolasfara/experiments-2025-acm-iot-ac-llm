@@ -1,0 +1,1 @@
+`val maxId = rep(Double.MinValue){ case (id, _) => math.max(id, mid()) }.withoutGradient`

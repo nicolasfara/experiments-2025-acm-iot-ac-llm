@@ -1,0 +1,16 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulatorIncarnation._
+import scala.collection.immutable.Set
+
+val source = sense[Int]("temperature")
+
+val areaTemperature = branch[Int]( Set(0) ) { (area, temp) =>
+  area TemperatureArea(temp, n => n, x => mean[Int](x))
+}
+
+val alarm = branch[Boolean]( areaTemperature.keySet ) { (area, temp) =>
+  areaTemperature(area) > 30
+}
+
+diffuse(if (alarm(self)) 1 else 0, Set(alarm.keySet.filter(alarm(_) == true).toSeq: _*))
+```

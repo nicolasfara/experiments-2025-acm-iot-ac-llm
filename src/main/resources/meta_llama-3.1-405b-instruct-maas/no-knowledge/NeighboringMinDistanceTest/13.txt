@@ -1,0 +1,5 @@
+`val distance = rep(Double.PositiveInfinity) { d => 
+  foldhoodPlus(Double.PositiveInfinity) { 
+    case (dist, _) => math.min(dist, nbr(d) + 1.0) 
+  } 
+}`

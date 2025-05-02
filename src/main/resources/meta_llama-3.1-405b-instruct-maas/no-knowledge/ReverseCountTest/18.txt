@@ -1,0 +1,17 @@
+import it.unibo.scafi.space.Point3D
+import it.unibo.scafi.{AggregateSystem, Double2D}
+
+ AggregateSystem.assemble(
+  class BackwardsEvolution extends AggregateProgram with StandardSensors with BlockG with ScafiAlgorithms {
+    override def main(): Any = {
+      val source = 1000.0
+      val diff = 1.0
+
+      rep(Double.PositiveInfinity)(x => {
+        mux(x <= 0) { 0.0 } {
+          x - diff
+        }
+      })
+    }
+  }
+)

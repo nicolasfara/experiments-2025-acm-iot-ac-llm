@@ -1,0 +1,15 @@
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val channel =
+  source inflict (distanceTo(destination) > 0) && !obstacle &&
+    (neighborhood.multiplex(1, Set((mid => channel))){ (value, distances) =>
+      distances.minByOption(_._2).exists{ case (v, d) => v && d > 0 }
+    })
+
+val channelEstablished = destination && channel
+
+rep(channelEstablished || !source){ v => v }
+
+channelEstablished

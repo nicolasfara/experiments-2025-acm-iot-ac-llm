@@ -1,0 +1,1 @@
+`val count = includingSelf[G](_.id != self.id).fold(0)(_ => _ + 1)`

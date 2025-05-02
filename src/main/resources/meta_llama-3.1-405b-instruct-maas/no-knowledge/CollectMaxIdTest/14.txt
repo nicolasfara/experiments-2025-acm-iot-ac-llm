@@ -1,0 +1,8 @@
+import it.unibo.scafi.incarnations.BasicSimulator._
+import it.unibo.scafi.incarnations.BasicSimulatorierrez._
+
+val maxId = rep( Double.MinValue) {
+  (CurrentValue + 1) max nbr { maxId }
+}
+
+if(mid == 0) println(maxId)

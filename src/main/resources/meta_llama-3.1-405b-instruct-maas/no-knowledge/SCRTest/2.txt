@@ -1,0 +1,18 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import scala.concurrent.duration._
+
+// Assuming sensorData provides the temperature data
+val tempSensor = sense[Double]("temperature")
+
+// Compute area-wise temperature
+val areaTemp = branch(isSource) {
+  foldhoodPlus(tempSensor)(Math.max) // take maximum temperature in area
+}
+
+// Broadcast an alarm if temperature is above 30 degrees
+val alarm = when(areaTemp > 30) { broadcast("ALARM") }
+
+// Emit the alarm if the node itself is above 30 degrees
+emit(alarm)
+```

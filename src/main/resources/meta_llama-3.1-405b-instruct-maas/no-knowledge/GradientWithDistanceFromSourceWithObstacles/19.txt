@@ -1,0 +1,31 @@
+```scala
+import it.unibo.scafi.space.{Point2D}
+
+val distance = rep(Double.PositiveInfinity){ d =>
+  if (sense[Boolean]("obstacle")) {
+    Double.PositiveInfinity
+  } else if (sense[Boolean]("source")) {
+    0.0
+  } else {
+    (1 + foldhoodPlus(d)(d => d + 1)).min(Double.PositiveInfinity)
+  }
+}
+
+val sourceDistance = foldhood(distance)( (d1, d2) => math.min(d1, d2) )
+
+//path tracing
+val pathTrace = rep(None: Option[Point2D]){ pt =>
+  if (sense[Boolean]("source")) {
+    Some.lb.localPosition()
+  } else if (!sense[Boolean]("obstacle") && pathTrace.isDefined) {
+    Some(pathTrace.get + Vector2D.UnitX)
+  } else {
+    None
+  }
+}
+
+// Euclidean distance from source
+val euclideanDistance: Double = if (pathTrace.isDefined) pathTrace.get.distance(Vector2D.Zero) else Double.PositiveInfinity
+
+euclideanDistance
+```

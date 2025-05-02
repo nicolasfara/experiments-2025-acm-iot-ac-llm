@@ -1,0 +1,16 @@
+```scala
+rep(false) { 
+  channelCreated => 
+    mux(mid() == "source") { 
+      val obstacles = foldhoodPlus(List.empty[Boolean])(_ ++ _)(List(nbr(sense[Boolean]("obstacle"))))
+      !obstacles.contains(true) && foldhoodPlus(false)(_ || _)(nbr(channelCreated))
+    } { 
+      mux(mid() == "destination") {
+        false
+      } {
+        val obstacles = foldhoodPlus(List.empty[Boolean])(_ ++ _)(List(nbr(sense[Boolean]("obstacle"))))
+        !obstacles.contains(true) && foldhoodPlus(false)(_ || _)(nbr(channelCreated))
+      }
+    }
+}
+```

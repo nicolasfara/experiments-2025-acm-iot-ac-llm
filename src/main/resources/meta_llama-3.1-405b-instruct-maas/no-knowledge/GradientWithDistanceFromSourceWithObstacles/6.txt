@@ -1,0 +1,16 @@
+```scala
+import it.unibo.scafi.space.Point3D
+import it.unibo.scafi_incarnations.BasicSimulationIncarnation._
+
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+
+val distance = rep(Double.PositiveInfinity) {
+  d => if (source) 0.0 else {
+    if (obstacle) Double.PositiveInfinity
+    else 1 + nbr(d).min
+  }
+}
+
+val euclideanDistance = Sqrt(distance)
+```

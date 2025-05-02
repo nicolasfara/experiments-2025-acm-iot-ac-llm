@@ -1,0 +1,17 @@
+```scala
+rep(false) { channelCreated =>
+  mux(sense[Boolean]("obstacle")) {
+    false
+  } {
+    mux(mid() == "source") {
+      nbr(true)
+    } {
+      mux(mid() == "destination") {
+        foldhood(false)(_ || _)(nbr(channelCreated))
+      } {
+        foldhood(false)(_ || _)(nbr(channelCreated)) && nbr(channelCreated)
+      }
+    }
+  }
+}
+```

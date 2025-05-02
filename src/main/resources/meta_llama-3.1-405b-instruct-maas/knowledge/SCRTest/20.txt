@@ -1,0 +1,10 @@
+```scala
+val areaTemps: Double = foldhood(0.0)(_ + _)(mux(nbr(mid() % 4 == 0))(nbr(sense[Double]("temperature")))(0.0))
+val devicesInArea: Int = foldhood(0)(_ + _)(mux(nbr(mid() % 4 == 0))(nbr(1))(0))
+val averageTemp: Double = areaTemps / devicesInArea
+mux(averageTemp > 30) { 
+  broadcast(mid(), true)
+} { 
+  broadcast(mid(), false)
+}
+```

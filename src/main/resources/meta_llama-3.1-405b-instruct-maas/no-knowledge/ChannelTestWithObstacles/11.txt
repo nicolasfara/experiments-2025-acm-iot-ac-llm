@@ -1,0 +1,13 @@
+import it.unibo.scafi.config.GridSettings
+import it.unibo.scafi.core.Language._
+
+val source = node conjunction (sense[Boolean]("source"))
+val destination = node conjunction (sense[Boolean]("destination"))
+val obstacle = sense[Boolean]("obstacle")
+
+val channel = source.breadthFirstSpanningTree(obstacle.not)
+val path = source.multipathTo(channel, destination)
+
+val result = path.exists(_.nonEmpty)
+
+export("result" -> result)

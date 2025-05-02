@@ -1,0 +1,1 @@
+`val countNeighbors = (mid() + 1).sumHood(minDistance = 1) - 1`

@@ -1,0 +1,2 @@
+val potential = G[Double](source = sense("source"), field = 0, acc = _ + (if (sense("obstacle")) Double.PositiveInfinity else nbrRange()), metric = if (sense("obstacle")) Double.PositiveInfinity else nbrRange)
+C[Boolean, Boolean](potential, _ || _, sense("destination"), false)

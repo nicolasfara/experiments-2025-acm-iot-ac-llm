@@ -1,0 +1,11 @@
+```scala
+val areas: Map[ID, List[ID]] = Map(0 -> List(0, 1, 2), 1 -> List(3, 4, 5)) // predefined area mapping
+val areaId: ID = 0 // assuming area ID is accessible
+
+val temperature: Double = sense[Double]("temperature")
+val areaTemperatures: List[(ID, Double)] = foldhood(List.empty[(ID, Double)])(_ ++ _)(mux(areas(areaId).contains(mid()))(List(mid() -> temperature))(List.empty))
+val areaAverageTemperature: Double = areaTemperatures.map(_._2).sum / areaTemperatures.size
+val alarm: Boolean = areaAverageTemperature > 30
+
+mux(alarm)(nbr(true))(nbr(false))
+```

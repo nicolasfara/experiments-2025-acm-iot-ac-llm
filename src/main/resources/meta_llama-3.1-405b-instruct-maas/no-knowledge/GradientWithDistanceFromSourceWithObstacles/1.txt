@@ -1,0 +1,20 @@
+import it.unibo.scafi.space.Point3D
+import it.unibo.scafi.space.Vector3D
+
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+val distance = G[meter] { (x, _) =>
+  if (x == node) {
+    if (source) 0 else Double.MaxValue
+  } else if (obstacle) {
+    Double.MaxValue
+  } else {
+    distance + distanceBetween(node, x)
+  }
+}
+
+val shortestDistance = S(distance)(neighbors, _ min _)()
+
+if(node == mid) {
+    log( "mid" + shortestDistance )
+}

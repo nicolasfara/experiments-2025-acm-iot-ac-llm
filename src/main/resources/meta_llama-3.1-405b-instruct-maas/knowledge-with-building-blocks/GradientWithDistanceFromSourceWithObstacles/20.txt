@@ -1,0 +1,3 @@
+```scala
+G[Double](source = sense("source"), field = 0, acc = _ + mux(nbr(sense[Boolean]("obstacle")))(Double.PositiveInfinity)(nbrRange()), metric = mux(sense[Boolean]("obstacle"))(Double.PositiveInfinity)(nbrRange()))
+```

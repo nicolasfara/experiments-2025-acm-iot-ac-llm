@@ -1,0 +1,1 @@
+`val neighborCount = rep(0)(_ + 1) - 1`

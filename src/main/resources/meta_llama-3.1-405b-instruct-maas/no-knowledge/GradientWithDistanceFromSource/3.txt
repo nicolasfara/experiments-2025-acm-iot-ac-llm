@@ -1,0 +1,7 @@
+```scala
+import it.unibo.scafi.incarnations.BasicAbstractIncarnation._
+
+val source = sense[Boolean]("source")
+
+diffuse(source)(x => x)(x => x)(0)(_ + _)((x, _) => x)(math.sqrt)
+```

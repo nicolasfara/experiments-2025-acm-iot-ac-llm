@@ -1,0 +1,8 @@
+include(new Gradient(multiplicity = 10))
+
+val neighborIds = include(new G[NBR/Set[ID]] {
+  override def conf = branching()
+  override def init = Set[ID]()
+  override def merge(a: Set[ID], b: Set[ID]) = a ++ b
+  override def priority = 0
+})

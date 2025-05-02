@@ -1,0 +1,12 @@
+```scala
+rep(Double.PositiveInfinity) {
+  distance => mux(sense[Boolean]("obstacle")) {
+    distance
+  } {
+    minHood(nbr(distance) + 1.0, sense[Boolean]("source") match {
+      case true => 0.0
+      case false => nbr(distance) + 1.0
+    })
+  }
+}
+```

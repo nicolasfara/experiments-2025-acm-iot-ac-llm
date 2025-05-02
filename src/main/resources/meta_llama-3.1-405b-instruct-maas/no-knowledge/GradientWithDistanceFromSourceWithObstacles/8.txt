@@ -1,0 +1,19 @@
+import it.unibo.scafi.space.Point3D
+
+val distance = rep(Double.PositiveInfinity) { d =>
+  if (sense[Boolean]("obstacle")) Double.PositiveInfinity
+  else if (sense[Boolean]("source")) 0.0
+  else {
+    val neighborDistances = includingSelf.collectNeighbors(d)
+    neighborDistances.values.min + 1
+  }
+}
+
+val vectors: Map[ID, (Point3D, Double)] = includingSelf
+  .collectNeighbors[(Point3D, Double)]( (NB.position, distance) )
+
+val gradientVectors: Map[ID, Point3D] = vectors
+  .filter(_._1 != mid)
+  .map{ case (id, (vec, dist)) => id -> (mid.position - vec) / (dist - distance) }
+
+val euclideanDistance = includingSelf.collectNeighbors(distance).values.min

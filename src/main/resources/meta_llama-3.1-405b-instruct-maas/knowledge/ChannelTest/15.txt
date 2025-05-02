@@ -1,0 +1,1 @@
+mux(mid() == "source") { nbr(mid()) == "destination" } { mux(nbr(mid()) == "source") { mid() == "destination" } { false } }

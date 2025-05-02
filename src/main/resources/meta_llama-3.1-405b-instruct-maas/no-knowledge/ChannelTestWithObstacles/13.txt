@@ -1,0 +1,25 @@
+import it.unibo.scafi.incarnations.BasicAbstractScript
+
+node.put("channelCreated", false)
+
+if(node.id == "source") {
+  val destination = sense[Boolean]("destination")
+  val obstacle = sense[Boolean]("obstacle")
+
+  val isNotDestination = !destination
+  val isNotObstacle = !obstacle
+
+  val ch = stream(isNotDestination && isNotObstacle, 1, 0, _ + _, {() => true}, {v => v})
+  node.put("channelCreated", ch)
+
+  node.put("created", neighborFoldhood(isNotObstacle && (ch == 1))(_ || _))
+} else if(node.id != "destination") {
+  node.put("channelCreated", anyHood { _ ("created") })
+  node.put("created", false)
+} else {
+  val created = anyHood { _ ("created") }
+  node.put("channelCreated", created)
+  node.put("created", false)
+}
+
+node.get[Boolean]("channelCreated")

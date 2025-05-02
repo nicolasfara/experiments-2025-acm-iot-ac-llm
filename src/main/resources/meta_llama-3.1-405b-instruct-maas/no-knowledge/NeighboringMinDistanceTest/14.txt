@@ -1,0 +1,9 @@
+```scala
+import it.unibo.scafi.space.PeerPosition
+
+val nbrs = includingSelf.unionNeighbors(nbr { () })
+
+val distances = nbrs.map((nbr { PeerPosition }, (d: Double) => nbr { PeerPosition } distance))
+
+minHoodPlus(distance = distances.filter(_._1 != PeerPosition).map(_._2))
+```

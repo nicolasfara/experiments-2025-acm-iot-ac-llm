@@ -1,0 +1,33 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import scala.collection.mutable
+
+// Define a node class
+class Node extends AggregateProgram with Serializable {
+  override def main(): Any = {
+    // Assume shared temperature sensor readings
+    val temperatureReadings: Map[ID, Double] = senseAll[Double](LSNS NST transformations._temp)
+
+    // Compute area-wise temperature
+    val areaTemps: Map[ID, (Int, Double)] = foldhoodPlus[(ID, Double), Map[ID, (Int, Double)]](
+      mid => (mid -> temperatureReadings(mid)),
+      _ ++ _,
+      if (temperatureReadings.nonEmpty) Some((nodeId -> temperatureReadings(nodeId))) else None
+    ).mapValues { case (_, temp) => (1, temp) }
+      .foldLeft(Map[ID, (Int, Double)]()) {
+        case (m, (id, (c, t))) =>
+          m.get(id) match {
+            case Some((count, temp)) => m + (id -> (count + c, temp + t))
+            case _ => m + (id -> (c, t))
+          }
+      }.mapValues {
+        case (count, sum) => (count, sum / count)
+      }
+
+    // Send an alarm within an area if the temperature is above 30 degrees
+    areaTemps.find(_._2._2 > 30).foreach { case (id, (count, temp)) =>
+      broadcast(id, "Alarm! Temperature is above 30 degrees.")
+    }
+  }
+}
+```

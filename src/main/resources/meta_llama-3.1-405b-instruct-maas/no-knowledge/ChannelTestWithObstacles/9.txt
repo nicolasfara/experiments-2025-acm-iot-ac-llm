@@ -1,0 +1,7 @@
+```scala
+val channel = S distort 10
+  .branch(_ => sense[Boolean]("obstacle") neg)
+  .find(ByName("destination"))
+
+mux(channel.nonEmpty)(true, false) | rep(ByName("source"))
+```

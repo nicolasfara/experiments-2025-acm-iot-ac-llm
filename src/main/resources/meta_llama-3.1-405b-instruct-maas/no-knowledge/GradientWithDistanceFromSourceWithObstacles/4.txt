@@ -1,0 +1,13 @@
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+
+distanceToSourceUsing civilizedGradient =
+  G source initialDistance 0.0 repelling distanceIfAwayFromObstacle =
+    distance + (1 - obstacle) * civilizedGradient
+
+val distanceIfAwayFromObstacle =
+  distanceToSourceUsing(mid => if (obstacle) Double.PositiveInfinity else mid)
+
+val distance = distanceIfAwayFromObstacle * (1 - source)

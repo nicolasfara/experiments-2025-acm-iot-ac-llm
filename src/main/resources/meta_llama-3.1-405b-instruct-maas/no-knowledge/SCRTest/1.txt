@@ -1,0 +1,27 @@
+```scala
+import it.unibo.scafi.lib._
+
+object AreaWiseTemperatureAlarm {
+  main =
+    node => {
+      // Assuming a network of temperature sensors
+      val temperature = node.sensor[Int]("temperature")
+
+      // Assuming an area identification sensor
+      val area = node.sensor[Int]("area")
+
+      // Computing area-wise temperature
+      val areaWiseTemperature = node.branch(area) { a =>
+        node.aggregate[Int](0)(_ + _, _==_, 0, a) { neighbor =>
+          neighbor.sensor[Int]("temperature")
+        }
+      }
+
+      // Sending alarm within area if temperature is above 30 degrees
+      node.branch(area) { a =>
+        val alarm = areaWiseTemperature > 30
+        node.broadcast(alarm, a)
+      }
+    }
+}
+```

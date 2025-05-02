@@ -1,0 +1,13 @@
+```scala
+val distance = G inbox 10.0 minHood {
+  case Some(v) => v
+  case None    => Double.PositiveInfinity
+}
+```
+
+or 
+
+
+```scala
+val distance: Double = G inbox 10.0 minHood +{ Double.PositiveInfinity }
+```

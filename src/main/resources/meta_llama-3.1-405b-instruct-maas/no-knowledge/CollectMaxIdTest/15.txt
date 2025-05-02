@@ -1,0 +1,3 @@
+import it.unibo.scafi.incarnations.BasicAbstractIncarnation._
+
+maxId() = rep(-1) { x => maxhood { includingSelf, nid => x max nid } }

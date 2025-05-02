@@ -1,0 +1,15 @@
+```scala
+val zone1 = sense[Int]("zone") == 1
+val zone2 = sense[Int]("zone") == 2
+val zone3 = sense[Int]("zone") == 3
+
+val tempZone1 = foldhood(0.0)(_ + _)(mux(nbr(zone1))(nbr(sense[Double]("temperature")))(0.0)) / foldhood(0)(_ + _)(mux(nbr(zone1))(nbr(1))(0))
+val tempZone2 = foldhood(0.0)(_ + _)(mux(nbr(zone2))(nbr(sense[Double]("temperature")))(0.0)) / foldhood(0)(_ + _)(mux(nbr(zone2))(nbr(1))(0))
+val tempZone3 = foldhood(0.0)(_ + _)(mux(nbr(zone3))(nbr(sense[Double]("temperature")))(0.0)) / foldhood(0)(_ + _)(mux(nbr(zone3))(nbr(1))(0))
+
+val alarmZone1 = if (tempZone1 > 30) 1 else 0
+val alarmZone2 = if (tempZone2 > 30) 1 else 0
+val alarmZone3 = if (tempZone3 > 30) 1 else 0
+
+mux(zone1)(alarmZone1)(0) + mux(zone2)(alarmZone2)(0) + mux(zone3)(alarmZone3)(0)
+```

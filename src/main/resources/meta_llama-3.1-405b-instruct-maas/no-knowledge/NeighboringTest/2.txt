@@ -1,0 +1,9 @@
+```scala
+import it.unibo.scafi.space.Point3D
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import it.unibo.scafi.simulator.ScafiSimulatorObserver
+
+munite
+
+val neighborCount = (includingSelf) { NBR_RANGE.includes(NBR VectorClock) }
+```

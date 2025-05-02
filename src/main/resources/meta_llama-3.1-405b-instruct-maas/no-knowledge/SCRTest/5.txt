@@ -1,0 +1,24 @@
+```scala
+import it.unibo.scafi.core.Language._
+
+val temperature: Double = sense[Double]("temperature")
+val area = branch(temperature) { t =>
+  gradient(t) > 0
+} { _ =>
+  false
+}
+
+val areaTemperature = foldhoodPlus((0.0, 0))(
+  (acc, _, t) => (acc._1 + t, acc._2 + 1)
+)(temperature)
+
+val averageTemperature = areaTemperature._1 / areaTemperature._2
+
+val alarm = branch(area) { _ =>
+  averageTemperature > 30
+} { _ =>
+  false
+}
+
+broadcast(alarm)
+```

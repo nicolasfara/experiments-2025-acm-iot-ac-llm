@@ -1,0 +1,7 @@
+import it.unibo.scafi.space.PairLong
+
+aggregate {
+  rep(10000) { distance =>
+    foldhood(Int.MaxValue)(Math.min)(nbr(distance) + 1)
+  }
+}

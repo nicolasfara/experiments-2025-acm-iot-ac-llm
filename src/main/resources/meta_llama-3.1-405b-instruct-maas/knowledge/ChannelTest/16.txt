@@ -1,0 +1,7 @@
+rep(Map.empty[ID, ID]) { 
+  routing => mux(mid() == "source") { 
+    Map(mid() -> "destination") 
+  } { 
+    foldhood(Map.empty[ID, ID])(_ ++ _)(nbr(routing)) 
+  } 
+}

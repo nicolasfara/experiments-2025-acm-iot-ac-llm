@@ -1,0 +1,1 @@
+G[Double](source = sense("source"), field = 0, acc = _ + nbrRange(), metric = if (sense[Boolean]("obstacle")) Double.PositiveInfinity else nbrRange())

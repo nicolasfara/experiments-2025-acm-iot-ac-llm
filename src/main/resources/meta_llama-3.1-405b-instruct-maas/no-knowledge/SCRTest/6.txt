@@ -1,0 +1,50 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import scala.collection.mutable
+
+// Sensor Data
+val sensorData = mutable.Map[Int, Double]()
+
+// Shared Program
+shared { (id: Int) =>
+  // Neighbor definition
+  val nbrs = includingSelf
+
+  // Temperature sensor value
+  val temp = sensorData.getOrElse(id, 0.0)
+
+  // Leader election for each area (here we consider all nodes as part of the same area)
+  val leader = id == 0
+
+  // Collection of temperature values from all nodes in the area
+  val collectedTemps = includingSelf.foldhood(0.0)(_ + _)(nbr => nbr(temp))
+
+  // Computation of area-wise temperature
+  val areaTemp = collectedTemps / includingSelf.size
+
+  // Alarm generation
+  val alarm = if (areaTemp > 30) 1 else 0
+
+  // Broadcast the alarm in the area
+  val broadcastedAlarm = leader.shortestPath(nbrs)(alarm)
+
+  // Export result
+  (id, areaTemp, alarm, broadcastedAlarm)
+}
+
+// Simulation Setup
+sensorData(0) = 20
+sensorData(1) = 35
+sensorData(2) = 18
+sensorData(3) = 40
+sensorData(4) = 21
+sensorData(5) = 19
+
+// Sensor Network
+val network = new Network with BasicSimulationIncarnation {
+  override def simulate(nodeCount: Int): Any =
+    execute(nodeCount, (0 until nodeCount).toSet, C APS пищPlant CyrusField(0, 0), dt = 1.0)
+}
+
+network.simulate(6)
+```

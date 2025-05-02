@@ -1,0 +1,1 @@
+`val distance = foldhood( Double.PositiveInfinity )(math.min)(nbrRange _)`

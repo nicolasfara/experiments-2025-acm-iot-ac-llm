@@ -1,0 +1,1 @@
+`val neighborIds = aggregate(mbrane.netty.neighbours).map(n => n.sensorId)`

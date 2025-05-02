@@ -1,0 +1,5 @@
+```scala
+val distance = rep(Infinity) { d =>
+  mux(nbr(d) == Infinity) { d } { min(nbr(d) + 1, d) }
+}
+```

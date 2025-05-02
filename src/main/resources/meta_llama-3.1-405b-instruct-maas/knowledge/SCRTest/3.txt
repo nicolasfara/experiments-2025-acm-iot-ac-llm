@@ -1,0 +1,6 @@
+```scala
+val areas = foldhood(List.empty[(Int, ID)])(_ ++ _)(List(nbr(mid() / 10) -> nbr(mid())))
+val areaTemperature = areas.groupBy(_._1).mapValues(_.map(_._2).map(nbr(sense[Double]("temperature"))).foldLeft(0.0)(_ + _) / _.size)
+val areaAlarm = areaTemperature.mapValues(_ > 30)
+mux(areaAlarm(nbr(mid() / 10)))(1)(0)
+```

@@ -1,0 +1,3 @@
+import it.unibo.scafi.incarnations.BasicAbstractIncarnation._
+
+nbr[M].filter(_ != self).size

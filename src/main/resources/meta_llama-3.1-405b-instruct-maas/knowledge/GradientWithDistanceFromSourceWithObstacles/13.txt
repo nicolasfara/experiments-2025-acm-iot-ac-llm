@@ -1,0 +1,16 @@
+```scala
+rep((Double.MaxValue, None: Option[ID])) {
+  case (dist, _) => 
+    mux(sense[Boolean]("obstacle")) {
+      (Double.MaxValue, None)
+    } {
+      foldhood((dist, Some(mid())))(x => y => if (x._1 < y._1) x else y)(nbr {
+        mux(sense[Boolean]("source")) {
+          (0.0, Some(mid()))
+        } {
+          rep((Double.MaxValue, None: Option[ID]))(x => x)
+        }
+      })
+    }
+}._1
+```

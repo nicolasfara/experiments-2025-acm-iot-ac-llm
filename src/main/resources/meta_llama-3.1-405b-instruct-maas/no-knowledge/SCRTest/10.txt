@@ -1,0 +1,43 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import it.unibo.scafi.space.Point3D
+
+// Sensor node implementation
+class SensorNode extends AggregateProgram with BasicAggregateProgram {
+  override def main() = {
+    // Define neighboring range
+    val range = 5.0
+
+    // Select temperature sensor readings
+    val temperatureReadings = sense[Double]("temperature")
+
+    // Compute area-wise temperature
+    val areaTemperature = foldhoodPlus[Double](0.0)(hood) {
+      case (acc, neighbor) =>
+        acc + neighbor.temperatureReadings
+    } / foldhoodPlus[Double](1.0)(hood) { case (acc, _) => acc + 1.0 }
+
+    // Generate alarm when temperature exceeds 30 degrees
+    val alarm = if (areaTemperature > 30.0) 1.0 else 0.0
+
+    // Broadcast alarm within area
+    broadcast(alarm, range)
+  }
+}
+
+// Sensor node data generator
+class SensorNodeData extends SensorNode {
+  override def toString() = "SensorNodeData"
+
+  def data(): Map[String, Any] = Map("temperature" -> (math.random() * 50.0))
+}
+
+// Simulation setup
+val initialNodes = (1 to 100).map(i => new SensorNodeData)
+  .map(node => node "@@" new Point3D(math.random() * 100, math.random() * 100, math.random() * 100))
+
+// Run simulation
+simulate(initialNodes) { program =>
+  node => node.main()
+}
+```

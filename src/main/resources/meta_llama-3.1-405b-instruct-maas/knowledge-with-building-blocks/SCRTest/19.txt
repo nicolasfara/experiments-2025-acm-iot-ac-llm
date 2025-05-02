@@ -1,0 +1,8 @@
+```scala
+val leader = S(2, nbrRange)
+val areaPotential = G[Double](leader, 0, _ + nbrRange(), nbrRange)
+val areaTemperature = C[Double, Double](areaPotential, _ + _, sense("temperature"), 0)
+val averageTemperature = areaTemperature / C[Double, Int](areaPotential, _ + _, 1, 0)
+val alarm = mux(averageTemperature > 30)(true)(false)
+G[Boolean](leader, alarm, a => a, nbrRange)
+```

@@ -1,0 +1,7 @@
+import it.unibo.scafi.space.Point3D
+
+val initial = 1000
+
+val distance = 1000 - rep(0) { v => v }
+
+val result = initial - distance

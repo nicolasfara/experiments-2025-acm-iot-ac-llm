@@ -1,0 +1,10 @@
+```scala
+val areas = foldhood(List.empty[(ID, Double)])(_ ++ _)(List(mid() -> sense[Double]("temperature")))
+val areaTemperatures = areas.groupBy(_._1).mapValues(_.map(_._2).sum / _.size)
+val alarms = areaTemperatures.filter(_._2 > 30).keys
+mux(alarms.contains(mid())) {
+  true
+} {
+  false
+}
+```

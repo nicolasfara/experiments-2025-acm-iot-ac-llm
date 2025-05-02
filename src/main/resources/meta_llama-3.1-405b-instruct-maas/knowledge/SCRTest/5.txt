@@ -1,0 +1,7 @@
+```scala
+val areas = foldhood(List.empty[(ID, ID)])(_ ++ _)(List(mid() -> nbr(mid())))
+val temperaturePerArea = areas.map(area => (area._1, foldhood(0.0)(_ + _)(mux(nbr(mid()) == area._1)(nbr(sense[Double]("temperature")))(0.0)) / foldhood(0)(_ + _)(mux(nbr(mid()) == area._1)(1)(0)))
+val alarmPerArea = temperaturePerArea.map(areaTemp => (areaTemp._1, areaTemp._2 > 30))
+val alarm = alarmPerArea.exists(_._2)
+mux(alarm)(nbr(alarm))(false)
+```

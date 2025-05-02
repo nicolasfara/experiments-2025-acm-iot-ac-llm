@@ -1,0 +1,6 @@
+```scala
+val areaId = S(2, nbrRange)
+val potential = G[Double](source = areaId, field = 0, acc = _ + nbrRange(), metric = nbrRange)
+val areaTemperature = C[Double, Double](potential, _ + _, sense("temperature"), 0)
+val alarm = G[Boolean](source = areaTemperature > 30, field = true, acc = a => a, metric = nbrRange)
+```

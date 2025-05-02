@@ -1,0 +1,23 @@
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import scala.collection.mutable
+
+val source = "source"
+val destination = "destination"
+
+val system = new ScafiSystem
+val network = system.network(mutable.Map(source -> Set.empty, destination -> Set.empty), mutable.Map.empty)
+
+network.addLink(source, destination)
+val sourceNode = system.newNode(source)
+val destinationNode = system.newNode(destination)
+
+sourceNode格mut{ (g, s) =>
+  s.export("test")
+}
+
+destinationNode.む{(g, s) =>
+  s.importValue[Boolean]("test").getOrElse(false)
+}
+
+system.inject(source, sourceNode)
+system.inject(destination, destinationNode)

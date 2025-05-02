@@ -1,0 +1,28 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import scala.collection.immutable.Set
+
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val distanceToSource = classicGradient(source)
+val distanceToDestination = classicGradient(destination)
+
+val distanceToSourceWithObstacles = rep(Double.MaxValue) { distance =>
+  if (source) 0.0
+  else if (obstacle) Double.MaxValue
+  else {
+    val newDistance = includingSelf.minHoodEx(distanceToSource) + 1.0
+    if (newDistance < distance) newDistance else distance
+  }
+}
+
+val channelCreated = rep(false) { channel =>
+  if (destination && distanceToSourceWithObstacles < Double.MaxValue) true
+  else if (!obstacle && includingSelf.anyHoodEx(channel)) true
+  else false
+}
+
+export("channel", channelCreated)
+```

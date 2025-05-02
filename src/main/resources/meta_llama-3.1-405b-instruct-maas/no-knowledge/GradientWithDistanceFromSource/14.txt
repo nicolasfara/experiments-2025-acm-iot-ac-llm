@@ -1,0 +1,4 @@
+`val source = sense[Boolean]("source")
+val distance = G[Double](0.0, (src, _) => if (src) 0.0 else Double.PositiveInfinity,
+                         (x, y, _) => if (x == Double.PositiveInfinity) y else if (y == Double.PositiveInfinity) x else math.min(x, y + 1.0))
+export("euclideanDistance", distance)

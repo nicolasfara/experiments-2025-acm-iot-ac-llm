@@ -1,0 +1,29 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import scala.collection.mutable
+
+// Initialize temperature and alarm values
+val temperature = mutable.Map[String, Double]()
+val alarm = mutable.Map[String, Boolean]()
+
+// Simulate sensor nodes generating temperature values
+for (i <- 0 until 100) {
+  val node = "node" + i
+  val temp = 20 + (i % 30) // simulate temperature value between 20 and 50
+  temperature(node) = temp
+}
+
+// Compute area-wise temperature and send back alarm within each area
+val areas = List("area1", "area2", "area3")
+for (area <- areas) {
+  val areaNodes = (0 until 100).filter(i => (i % 3) == areas.indexOf(area)).map(i => "node" + i)
+  val areaTemp = areaNodes.map(node => temperature(node)).sum / areaNodes.size
+  val areaAlarm = areaTemp > 30
+  alarm(area) = areaAlarm
+  if (areaAlarm) {
+    for (node <- areaNodes) {
+      println(s"Sending alarm to $node in $area: temperature above 30 degrees ($areaTemp)")
+    }
+  }
+}
+```

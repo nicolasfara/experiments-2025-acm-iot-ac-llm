@@ -1,0 +1,17 @@
+`val source = node("source")
+val destination = node("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val distance = gradient(source, _ => 0, _ => 1)
+val path = distanceальним { case (n, d) => d }
+
+val channel =
+  if (path(destination) > 0)
+    false
+  else
+    pour(path, !obstacle) {
+      case (n, _) => n == destination
+    }
+
+output("channel", channel)
+channel`

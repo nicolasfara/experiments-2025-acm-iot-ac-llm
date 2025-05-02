@@ -1,0 +1,13 @@
+```scala
+rep(0) { iteration =>
+  mux(mid() == "source") {
+    nbr("channel") = 1
+  } {
+    mux(mid() == "destination") {
+      1
+    } {
+      foldhood(0)(_ max _)(nbr(nbr("channel")))
+    }
+  }
+}
+```

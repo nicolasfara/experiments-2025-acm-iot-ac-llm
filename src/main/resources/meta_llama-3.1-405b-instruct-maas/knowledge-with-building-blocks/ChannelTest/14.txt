@@ -1,0 +1,6 @@
+```scala
+val potential = G[Double](source = sense("source"), field = 0, acc = _ + nbrRange(), metric = nbrRange)
+val pathExists = C[Boolean, Boolean](potential, _ || _, sense("destination"), false)
+val channel = G[Boolean](source = pathExists, field = true, acc = _ && _, metric = nbrRange)
+channel
+```

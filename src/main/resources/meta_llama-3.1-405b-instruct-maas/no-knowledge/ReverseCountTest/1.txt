@@ -1,0 +1,14 @@
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+val MAX_VALUE = 1000
+val initValue = 1000
+val program = (grad: Boolean) => {
+    rep(initValue)(x => { 
+        val target = 0
+        if (x > target) { 
+            x - 1 
+        } else { x } 
+    })
+}
+val network = ScafiNetwork酬559round,geo())asiape(true))
+val values = 1 to 1 map {i => network.eval(program(false)) at (0,0)}
+values.foreach(println)

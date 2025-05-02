@@ -1,0 +1,11 @@
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+
+val maxValue = 1000
+val step = -10
+
+val initial = rep(0)(maxValue)
+val output = rep(0)(0)
+
+output += (initial - 1)
+initial += (initial + step)
+initial.when(initial < 0)(0)

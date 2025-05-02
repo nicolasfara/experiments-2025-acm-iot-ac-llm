@@ -1,0 +1,3 @@
+```scala
+val maxId = rep(Double.NegativeInfinity) { x => mux(x > maxId) { x } { maxId } }
+```

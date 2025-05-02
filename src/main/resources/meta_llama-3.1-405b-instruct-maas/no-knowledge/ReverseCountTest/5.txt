@@ -1,0 +1,9 @@
+import it.unibo.scafi.space._
+
+val env = new BasicEnvironment
+val system = env.system
+
+val field = 1000
+val evolvedField = rep(1000)(_ - 1) until (_ <= 0)
+
+system aggregate { env => evolvedField(env) }

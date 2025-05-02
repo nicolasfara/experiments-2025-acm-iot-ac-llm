@@ -1,0 +1,1 @@
+`val ids = (includingSelf orNeighbors).map(_.id)`

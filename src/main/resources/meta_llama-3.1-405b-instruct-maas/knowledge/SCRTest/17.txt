@@ -1,0 +1,10 @@
+```scala
+mux(foldhood(Set.empty[ID])(_ ++ _)(nbr(mid())).contains(mid())) {
+  val nodes = foldhood(0)(_ + _)(mux(foldhood(Set.empty[ID])(_ ++ _)(nbr(mid())).contains(mid()))(nbr(1))(0))
+  val temperature = foldhood(0.0)(_ + _)(mux(foldhood(Set.empty[ID])(_ ++ _)(nbr(mid())).contains(mid()))(nbr(sense[Double]("temperature")))(0.0))
+  val averageTemperature = temperature / nodes
+  branch(averageTemperature > 30)(true)(false)
+} {
+  false
+}
+```

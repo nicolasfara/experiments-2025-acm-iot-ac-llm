@@ -1,0 +1,17 @@
+import it.unibo.scafi.core.ScafiSystem
+import it.unibo.scafi.core Language._
+
+import Builtins._
+
+source(new builtins-Algo{
+  override def main()=
+   (mid== "source") branch {
+      mux[any](false,(nids + BuiltinsOutOfAppExport()))
+      } {
+        (mid=="destination") branch {
+          true
+        }{
+          false
+        }
+      }
+ })

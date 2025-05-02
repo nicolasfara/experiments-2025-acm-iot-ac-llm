@@ -1,0 +1,12 @@
+import it.unibo.scafi.incarnations.BasicAbstractClassifier._
+import it.unibo.scafi.incarnations.BasicAbstractClassifier
+
+node('source') { self =>
+  self-send( (scalaf) => scalaf + 1, 'source, Set('destination))
+}
+
+node('destination') { self =>
+  self.branch(self.sense[scalaf]{ case t => t > 0})
+    .when{ true => self.output("Received signal")}
+    .unless{ _ => self.output("No signal received yet")}
+}

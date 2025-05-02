@@ -1,0 +1,8 @@
+```scala
+val maxInfluence = 2
+val leaders = S(maxInfluence, nbrRange)
+val temperature = sense[Double]("temperature")
+val areaTemperature = C(G(leaders, 0, _ + nbrRange(), nbrRange), _ + _, temperature, 0.0)
+val alarm = areaTemperature > 30
+G(leaders, alarm, a => a, nbrRange)
+```

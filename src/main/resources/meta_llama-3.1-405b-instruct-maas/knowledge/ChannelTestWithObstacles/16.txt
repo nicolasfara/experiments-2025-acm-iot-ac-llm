@@ -1,0 +1,29 @@
+```scala
+rep((false, None: Option[ID])) { case (channelEstablished, nextHop) =>
+  mux(mid() == "source") {
+    foldhood(None: Option[ID]) { (acc, id) =>
+      mux(nbr(mid() == "destination") && !nbr(sense[Boolean]("obstacle")) && acc.isEmpty)(Some(nbr(mid())))(acc)
+    } (None) match {
+      case Some(destinationId) => (true, Some(destinationId))
+      case None => (false, None)
+    }
+  } {
+    mux(mid() == "destination") {
+      foldhood(None: Option[ID]) { (acc, id) =>
+        mux(nbr(channelEstablished) && !nbr(sense[Boolean]("obstacle")) && acc.isEmpty)(Some(nbr(mid())))(acc)
+      } (None) match {
+        case Some(sourceId) => (true, None)
+        case None => (false, None)
+      }
+    } {
+      (channelEstablished, nextHop) match {
+        case (true, Some(id)) => (true, Some(id))
+        case (true, None) => (true, foldhood(None: Option[ID]) { (acc, id) =>
+          mux(nbr(channelEstablished) && !nbr(sense[Boolean]("obstacle")) && acc.isEmpty)(Some(nbr(mid())))(acc)
+        } (None))
+        case (false, _) => (false, None)
+      }
+    }
+  }
+}._1
+```

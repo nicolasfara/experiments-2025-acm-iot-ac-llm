@@ -1,0 +1,1 @@
+`val neighbors = includingSelf.unionHood(nbr { id })`

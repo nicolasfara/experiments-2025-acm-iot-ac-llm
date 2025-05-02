@@ -1,0 +1,5 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+
+val neighborIds = includingSelf.sumreplica(identity)
+```

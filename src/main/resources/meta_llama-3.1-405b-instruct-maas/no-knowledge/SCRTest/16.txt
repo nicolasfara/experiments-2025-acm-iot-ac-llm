@@ -1,0 +1,60 @@
+```scala
+import it.unibo.scafi.space.Point3D
+import it.unibo.scafi-incarnations.BasicSimulationIncarnation._
+
+// Areas of interest
+val area1 = Set(Point3D(0, 0, 0), Point3D(1, 0, 0), Point3D(0, 1, 0))
+val area2 = Set(Point3D(2, 0, 0), Point3D(3, 0, 0), Point3D(2, 1, 0))
+val area3 = Set(Point3D(1, 1, 0), Point3D(1, 2, 0), Point3D(2, 2, 0))
+
+// Neighbourhood and sensor data
+val nbrRange = 1.0
+val temperatureSensors = Map(
+  Point3D(0, 0, 0) -> 25.0,
+  Point3D(1, 0, 0) -> 30.5,
+  Point3D(0, 1, 0) -> 28.0,
+  Point3D(2, 0, 0) -> 35.0,
+  Point3D(3, 0, 0) -> 20.0,
+  Point3D(2, 1, 0) -> 22.0,
+  Point3D(1, 1, 0) -> 32.0,
+  Point3D(1, 2, 0) -> 38.0,
+  Point3D(2, 2, 0) -> 25.0,
+)
+
+// Aggregate program
+val tempAlarm = gradient(temperatureSensors) { case (p, temp) =>
+  val inArea1 = area1.contains(p)
+  val inArea2 = area2.contains(p)
+  val inArea3 = area3.contains(p)
+
+  val areaTemp1 = foldhoodPlus(nbrRange)(_ + _) { case (q, _) =>
+    if (area1.contains(q)) temperatureSensors(q)
+    else 0.0
+  } / foldhoodPlus(nbrRange)((x: Int) => x + 1) { case (q, _) =>
+    if (area1.contains(q)) 1
+    else 0
+  }
+
+  val areaTemp2 = foldhoodPlus(nbrRange)(_ + _) { case (q, _) =>
+    if (area2.contains(q)) temperatureSensors(q)
+    else 0.0
+  } / foldhoodPlus(nbrRange)((x: Int) => x + 1) { case (q, _) =>
+    if (area2.contains(q)) 1
+    else 0
+  }
+
+  val areaTemp3 = foldhoodPlus(nbrRange)(_ + _) { case (q, _) =>
+    if (area3.contains(q)) temperatureSensors(q)
+    else 0.0
+  } / foldhoodPlus(nbrRange)((x: Int) => x + 1) { case (q, _) =>
+    if (area3.contains(q)) 1
+    else 0
+  }
+
+  // Check area-wise temperature and send alarm if above 30 degrees
+  (inArea1 && areaTemp1 > 30) || (inArea2 && areaTemp2 > 30) || (inArea3 && areaTemp3 > 30)
+}
+
+// Execute and print result
+println(tempAlarm)
+```

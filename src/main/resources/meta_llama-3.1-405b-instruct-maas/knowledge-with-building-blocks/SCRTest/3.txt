@@ -1,0 +1,5 @@
+```scala
+val areaTemp = G[Double](S(2, nbrRange), sense("temperature"), a => a, metric = nbrRange)
+val areaAlarm = G[Boolean](S(2, nbrRange), areaTemp > 30, a => a, metric = nbrRange)
+mux(areaAlarm)(true)(false)
+```

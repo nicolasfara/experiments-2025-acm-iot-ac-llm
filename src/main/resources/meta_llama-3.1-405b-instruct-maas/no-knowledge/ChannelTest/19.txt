@@ -1,0 +1,10 @@
+import it.unibo.scafi.incarnations.BasicAbstract.default
+import it.unibo.scafi.lib._
+
+G.sourceSensor("source") folding(distance => mux (nbr(distance) + 1) (infinity), infinity) { pathCost, distance => min (pathCost, distance) }_PIPELINE  distance => {
+  rep(distance < infinity) { enabled =>
+    mux(enabled) ( mux(nbr(distance) == Double.PositiveInfinity) ("No path")("Channel created"))
+  }
+} midSource = S.sourceSensor("source")
+midDest = S.sourceSensor("destination")
+distanceFromSourceToDest = distance midSource midDest

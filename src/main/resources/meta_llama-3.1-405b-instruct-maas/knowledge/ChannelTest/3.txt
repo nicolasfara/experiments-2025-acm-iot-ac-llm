@@ -1,0 +1,11 @@
+```scala
+mux(mid() == "source") {
+  nbr("channel")
+} {
+  mux(mid() == "destination") {
+    nbr("channel")
+  } {
+    false
+  }
+}
+```

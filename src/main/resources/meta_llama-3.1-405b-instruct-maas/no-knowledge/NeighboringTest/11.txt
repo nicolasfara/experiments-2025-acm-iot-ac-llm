@@ -1,0 +1,1 @@
+`val neighborsCount = aggregate(0)(_ + 1)`

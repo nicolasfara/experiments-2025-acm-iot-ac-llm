@@ -1,0 +1,16 @@
+import it.unibo.scafi.space.Point3D
+
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+
+val distance = rep(Double.MaxValue){ d =>
+  mux(source) {
+    0
+  }{
+    mux(obstacle){
+      Double.MaxValue
+    }{ minHood(nbr(d) + metric()) }
+  }
+}
+
+emit("distance", distance)

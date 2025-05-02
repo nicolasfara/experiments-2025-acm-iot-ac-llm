@@ -1,0 +1,12 @@
+```scala
+val source = sense[Boolean]("source")
+val distance = G(
+  mid => source.map(x => if(x) 0.0 else Double.PositiveInfinity),
+  (nbr, l) => {
+    rep(Double.PositiveInfinity){ d =>
+      mux(nbr) { d + 1.0 } { d.min(nbr + 1.0) }
+    }
+  },
+  (x, _) => x
+)
+```

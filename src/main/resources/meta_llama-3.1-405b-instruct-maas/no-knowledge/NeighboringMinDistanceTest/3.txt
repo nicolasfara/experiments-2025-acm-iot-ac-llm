@@ -1,0 +1,3 @@
+`val distance = rep(Double.PositiveInfinity) { d =>
+  minHoodPlus(nbr { d } + 1)
+}`

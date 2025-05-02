@@ -1,0 +1,7 @@
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import it.unibo.scafi.space.Point3D
+
+val source = "source"
+val destination = "destination"
+
+val channel = hopGradientWith sender source to distance destination using euclideanDistance plus 1

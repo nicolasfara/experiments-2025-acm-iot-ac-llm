@@ -1,0 +1,4 @@
+`val distance = aggregate(Infinity) { (dist, nbr) => 
+  if(nbr == self) dist min 0 
+  else dist min nbr(distance) + 1 
+}`

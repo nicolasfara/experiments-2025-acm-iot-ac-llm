@@ -1,0 +1,6 @@
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import scala.collection.mutable
+
+aggregateProgram(
+  main = _.foldhood( Double.PositiveInfinity, Math.min )( nbrRange() )
+)

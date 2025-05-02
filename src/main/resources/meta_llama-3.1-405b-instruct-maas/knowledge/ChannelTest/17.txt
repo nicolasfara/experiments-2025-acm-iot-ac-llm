@@ -1,0 +1,13 @@
+```scala
+rep(ID(-1)) { minId =>
+  mux(mid() == "source") {
+    nbr(mid())
+  } {
+    mux(mid() == "destination") {
+      mid()
+    } {
+      foldhood(minId)(_ min _)(mux(nbr(mid() == "source") || nbr(minId) != ID(-1))(nbr(mid()))(minId))
+    }
+  }
+}
+```

@@ -1,0 +1,6 @@
+```scala
+val areaTemperatures: Double = foldhood(0.0)(_ + _)(mux(nbr(mid() % 4 == 0))(nbr(sense[Double]("temperature")))(0.0))
+val nodesInArea: Int = foldhood(0)(_ + _)(mux(nbr(mid() % 4 == 0))(nbr(1))(0))
+val areaTemperature: Double = areaTemperatures / nodesInArea
+mux(areaTemperature > 30) { true } { false }
+```

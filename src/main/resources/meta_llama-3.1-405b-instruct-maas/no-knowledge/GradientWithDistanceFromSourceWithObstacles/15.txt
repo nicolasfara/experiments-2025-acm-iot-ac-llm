@@ -1,0 +1,20 @@
+```scala
+import it.unibo.scafi.space.Point3D
+
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+val distance = rep[Double](Double.PositiveInfinity)
+
+if (source) {
+  distance := 0
+} else if (!obstacle) {
+  distance := includingSelf.minHoodPlus {
+    neighbor => 
+      if (!neighbor.obstacle && neighbor.distance != Double.PositiveInfinity) 
+        neighbor.distance + distanceBetween(self.position(), neighbor.position())
+      else Double.PositiveInfinity
+  }
+}
+
+export("distance" -> distance)
+```

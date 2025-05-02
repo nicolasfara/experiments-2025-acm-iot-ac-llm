@@ -1,0 +1,9 @@
+```scala
+val source = sense[Boolean]("source")
+val distance = rep(Double.PositiveInfinity) {
+  case true => 0.0
+  case false => {
+    mux(source){ 0.0 } + 1.0
+  }
+} + grad(0.0){ case (d, _) => d + 1.0 }
+```

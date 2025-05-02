@@ -1,0 +1,11 @@
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import scala.collection.mutable
+
+BasicSimulationIncarnation(
+  new mutable.HashMap[Int, Float]() {{
+    put(node(0), 1000)
+  }},
+  (context, LS, self, state, neigh) => {
+    state(self) - 1
+  }
+)

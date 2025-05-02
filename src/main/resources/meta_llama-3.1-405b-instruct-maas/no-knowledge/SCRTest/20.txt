@@ -1,0 +1,45 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import scala.collection.mutable
+
+// Sensor node ids and corresponding temperatures
+val sensorTemps: mutable.Map[ID, Double] = mutable.Map(1 -> 25, 2 -> 31, 3 -> 20, 4 -> 35)
+
+// Temperature threshold for alarm
+val threshold = 30
+
+// Aggregate Program
+val areaTemps = S.collection.mapReduce[K = ID, V = Double]( 
+  domain = sensorTemps.keys.toSet,
+  mapFun = (id: ID) => sensorTemps(id),
+  mergeFun = (x: Double, y: Double) => x + y,
+  reduceFun = (k: ID, temps: Set[Double]) => temps.sum / temps.size
+)
+
+val alarmArea = S.collection.mapReduce[K = ID, V = Boolean]( 
+  domain = sensorTemps.keys.toSet,
+  mapFun = (id: ID) => areaTemps(id) > threshold,
+  mergeFun = (x: Boolean, y: Boolean) => x || y,
+  reduceFun = (k: ID, alarms: Set[Boolean]) => alarms.exists(_ == true)
+)
+
+// Main Aggregate Program
+val prog = S { _ =>
+  areaTemps
+  alarmArea
+  val singleNodeTemp = areaTemps(node.id)
+  val areaAlarm = alarmArea(node.id)
+
+  // Actions: Send alarm to nodes in area if temperature exceeds threshold
+  if (areaAlarm && singleNodeTemp > threshold) { 
+    emit("alarm", true)
+    if (node.id == 0) println(s"Alarm sent to area: $node.id")
+  }
+
+  node.id
+}
+// Setup simulation environment
+val simulation = S with incarnation sim with seeds boring
+// Launch simulation
+simulation.run(prog toNode _ => sensorTemps.keys.toSet)
+```

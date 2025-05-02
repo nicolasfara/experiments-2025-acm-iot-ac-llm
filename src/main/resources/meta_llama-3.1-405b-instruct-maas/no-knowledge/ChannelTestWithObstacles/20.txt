@@ -1,0 +1,34 @@
+```scala
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val channel =
+  if (source) {
+    branchTuple {
+      mux[Ball](obstacle, false, true)
+    }
+  } else {
+    false
+  }
+
+if (channel) {
+  rep(destination) { _.changed } { x => 
+    destination ->
+    tell(_.termination-detail-channel-path)-(true)
+  }
+} else {
+  false
+}
+
+if (any(overAnyInt(distance)(rep(channel))(
+  x => channel ⟂ x maxAny, greater(changed destination)) {
+  src => rep(distance)(src) {
+    d => (keepMin(distance)*channel.minAny)(d) ⟂ channel
+  }
+})) {
+  true
+} else {
+  false
+}
+```

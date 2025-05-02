@@ -1,0 +1,7 @@
+```scala
+import it.unibo.scafi.space.{Sensor => S}
+
+val source = sense[Boolean]("source")
+val dist = classicGradient(source)
+println(s"Distance from source: $dist")
+```

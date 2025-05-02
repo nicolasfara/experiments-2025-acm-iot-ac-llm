@@ -1,0 +1,8 @@
+import it.unibo.scafi.space.Point3D
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+
+aggregate {
+  val nbrs = includingSelf.nbrs()
+  val countNbrsExcludingSelf = nbrs.size - 1
+  countNbrsExcludingSelf
+}

@@ -1,0 +1,1 @@
+mux(sense[Boolean]("source")) { 0 } { Double.PositiveInfinity }; G[Double](sense[Boolean]("source"), 0, (a: Double) => a + mux(nbr(sense[Boolean]("obstacle")))(Double.PositiveInfinity)(1), nbrRange)

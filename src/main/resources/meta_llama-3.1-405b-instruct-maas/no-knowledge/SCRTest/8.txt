@@ -1,0 +1,56 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import scala.collection.mutable
+
+// Define a temperature sensor node
+case class SensorNode(id: String, temperature: Double)
+
+// Define the area boundaries
+case class AreaBoundary(xMin: Double, xMax: Double, yMin: Double, yMax: Double)
+
+// Create some sample areas
+val areas = Map(
+  "Area1" -> AreaBoundary(0, 10, 0, 10),
+  "Area2" -> AreaBoundary(10, 20, 10, 20)
+)
+
+// Create some sample nodes with temperatures
+val nodes = Map(
+  "Node1" -> SensorNode("Node1", 35),
+  "Node2" -> SensorNode("Node2", 20),
+  "Node3" -> SensorNode("Node3", 32),
+  "Node4" -> SensorNode("Node4", 18)
+)
+
+// Define a ScaFi program that computes area-wise temperature and broadcasts an alarm when the temperature is above 30 degrees
+program(move => {
+  // Sense the temperature at this node
+  val temperature = sense {
+    nodes.get(mid).map(_.temperature).getOrElse(0)
+  }
+
+  // Determine the area this node belongs to
+  val myArea = areas.find {
+    case (_, boundary) => boundary.xMin <= x && x < boundary.xMax && boundary.yMin <= y && y < boundary.yMax
+  }.map(_._1).getOrElse("Unknown")
+
+  // Share the temperature with other nodes in the same area
+  shareInArea(myArea, temperature)
+
+  // Compute the average temperature in the area
+  val avgTemperature = includingSelf.sumInArea(myArea, temperature) / includingSelf.countInArea(myArea)
+
+  // Broadcast an alarm to all nodes in the area if the temperature is above 30 degrees
+  broadcastInArea(myArea, avgTemperature > 30)
+
+  // Sense the alarm broadcast
+  val alarm = sense {
+    Boolean.box(broadcastInArea(myArea, avgTemperature > 30))
+  }
+
+  // Do something when an alarm is received
+  if (alarm) {
+    println(s"Alarm! Average temperature in area $myArea is above 30 degrees")
+  }
+})
+```

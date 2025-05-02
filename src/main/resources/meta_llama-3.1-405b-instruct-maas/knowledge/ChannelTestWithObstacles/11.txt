@@ -1,0 +1,10 @@
+```scala
+rep(false) { channelCreated =>
+  mux(mid() == "source") {
+    val clearPath = foldhood(true)(_ && _)(nbr(mux(sense[Boolean]("obstacle"))(false)(true)))
+    clearPath && foldhood(false)(_ || _)(nbr(channelCreated))
+  } {
+    foldhood(false)(_ || _)(nbr(channelCreated)) && mid() == "destination"
+  }
+}
+```

@@ -1,0 +1,26 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import scala.collection.mutable
+
+val sourceSensorData: mutable.Map[ID, Double] = mutable.Map(
+  node(0) -> 20,
+  node(1) -> 35,
+  node(2) -> 15,
+  node(3) -> 45,
+  node(4) -> 10,
+  node(5) -> 50
+)
+
+val areaBoundaries: Set[ID] = Set(node(1), node(4))
+
+val area Temperatures = node.foldhoodPlus[Map[ID, Double]](Map.empty, {
+  case (acc, node) if areaBoundaries.contains(node) => acc
+  case (acc, node) => acc + (node -> sourceSensorData.getOrElse(node, 0.0))
+})
+
+val areaTemperature = areaTemperatures.values.foldLeft(0.0)(_ + _) / areaTemperatures.values.size
+
+val alarm = if (areaTemperature > 30) true else false
+
+mux[Set[ID]]{ (areaBoundaries.contains(self)) -> (if (alarm) Set(node(0), node(1), node(2)) else Set.empty[ID]) }
+```

@@ -1,0 +1,13 @@
+```scala
+import it.unibo.scafi.space.Point3D
+
+val source = sense[Boolean]("source")
+
+val distance = G(
+  if (source) 0.0 else Double.PositiveInfinity,
+  _ + 1.0,
+  Math.min
+)
+
+export("distance" -> distance)
+```

@@ -1,0 +1,13 @@
+```scala
+rep(false) {
+  channelEstablished => mux(mid() == "source") {
+    foldhood(false)(_ || _)(nbr(mid() == "destination"))
+  } {
+    mux(mid() == "destination") {
+      foldhood(false)(_ || _)(nbr(channelEstablished))
+    } {
+      foldhood(false)(_ || _)(nbr(channelEstablished))
+    }
+  }
+}
+```

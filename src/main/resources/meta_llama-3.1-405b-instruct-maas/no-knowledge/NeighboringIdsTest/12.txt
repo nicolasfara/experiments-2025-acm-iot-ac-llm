@@ -1,0 +1,3 @@
+include(new NeighbourhoodDiscovery) and then
+
+val neighbourIds = includingSelf.unionHood(NeighbourhoodDiscovery.getDevices _).map(_.id)

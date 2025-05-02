@@ -1,0 +1,7 @@
+```scala
+val source = sense[Boolean]("source")
+val distance = G[]{ 
+  (grad -> (true -> source),
+    (x, s) => if (s) 0.0 else 1 + mux(minHood(nbr(x) + 1)))
+} at (0)
+```

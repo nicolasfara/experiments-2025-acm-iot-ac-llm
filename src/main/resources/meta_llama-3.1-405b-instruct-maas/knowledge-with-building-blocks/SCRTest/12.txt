@@ -1,0 +1,4 @@
+val isLeader = S(2, nbrRange)
+val areaTemp = C[G[Double](isLeader, 0, _ + nbrRange(), nbrRange), Double](G[Double](isLeader, 0, _ + nbrRange(), nbrRange), _ + _, sense[Double]("temperature"), 0.0)
+val avgTemp = areaTemp / C[G[Double](isLeader, 0, _ + nbrRange(), nbrRange), Int](G[Double](isLeader, 0, _ + nbrRange(), nbrRange), _ + _, 1, 0)
+G[Boolean](avgTemp > 30, avgTemp > 30, a => a, G[Double](isLeader, 0, _ + nbrRange(), nbrRange))

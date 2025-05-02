@@ -1,0 +1,11 @@
+`val maxId = rep Double.MinValue {
+  case (_, s) => s foldhood 0.0 (_ max _)
+}` 
+since the question requires ID it is more appropriate to represent ID using Int or Long
+
+
+``` 
+val maxId = rep(-1) { case (mid, s) =>
+  s.foldhood(-1)(_ max _)
+}
+```

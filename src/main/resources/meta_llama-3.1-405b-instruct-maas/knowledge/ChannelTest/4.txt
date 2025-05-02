@@ -1,0 +1,11 @@
+```scala
+mux(mid() == "source") {
+  nbr("destination")
+} {
+  mux(mid() == "destination") {
+    nbr("source")
+  } {
+    foldhoodPlus(None)((x, y) => if (x.isDefined) x else y)(nbr(Some(mid())))
+  }
+}
+```

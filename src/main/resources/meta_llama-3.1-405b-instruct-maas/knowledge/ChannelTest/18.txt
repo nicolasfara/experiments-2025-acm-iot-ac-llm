@@ -1,0 +1,1 @@
+mux(mid() == "source")(mux(nbr(mid()) == "destination")(1)(0))(mux(nbr(mid()) == "source")(1)(0))

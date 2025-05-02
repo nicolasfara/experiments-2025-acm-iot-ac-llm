@@ -1,0 +1,6 @@
+import it.unibo.scafi.lib._
+
+val source = node("source")
+val destination = node("destination")
+
+val channel = (source --> destination)

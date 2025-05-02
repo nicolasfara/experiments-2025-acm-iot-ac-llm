@@ -1,0 +1,8 @@
+`val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+
+val distance = G[Int](if (source) 0 else Int.MaxValue)
+
+distance(nbr(distance) + 1, !obstacle && nbr(distance) != Int.MaxValue)
+
+export("distance" -> distance)`

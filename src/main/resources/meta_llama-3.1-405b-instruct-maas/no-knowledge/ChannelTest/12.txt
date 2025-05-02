@@ -1,0 +1,3 @@
+val source = node("source")
+val destination = node("destination")
+val channel = source <---> destination

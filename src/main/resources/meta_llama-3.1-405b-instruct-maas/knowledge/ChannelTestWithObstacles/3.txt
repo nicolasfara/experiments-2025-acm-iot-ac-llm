@@ -1,0 +1,10 @@
+```scala
+rep(false) { 
+  channel => 
+  mux(mid() == "source") {
+    foldhood(true)(_ && _)(nbr(channel || (!sense[Boolean]("obstacle") && (nbr(mid()) == "destination" || nbr(channel)))))
+  } {
+    channel
+  }
+}
+```

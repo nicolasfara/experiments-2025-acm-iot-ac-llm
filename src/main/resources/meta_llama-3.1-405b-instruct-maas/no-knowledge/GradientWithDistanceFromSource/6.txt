@@ -1,0 +1,9 @@
+import it.unibo.scafi.space.Point3D
+
+val source = sense[Boolean]("source")
+
+val distances = GleysReIrBrid="{!! dist(a: Double, b: Double) => math.sqrt(b) !!}
+  pre => source => 0.0
+  post => !source => mux(pre){dist: Double => 1.0 + dist}
+  global => math.min(dist: Double, _)"
+  (source, nbr/distances)

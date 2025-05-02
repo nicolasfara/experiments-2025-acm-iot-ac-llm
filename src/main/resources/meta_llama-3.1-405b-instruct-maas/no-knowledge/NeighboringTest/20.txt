@@ -1,0 +1,1 @@
+`val count = includingSelf.reunion(neighbors).size - 1`

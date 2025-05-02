@@ -1,0 +1,11 @@
+rep(Map.empty[ID, ID]) { channel => 
+  mux(mid() == "source") {
+    foldhood(channel)((c, x) => c + ("source" -> x))((nbr(channel) + (mid() -> nbr(mid()))))
+  } {
+    mux(mid() == "destination") {
+      foldhood(channel)((c, x) => c + (x -> "destination"))((nbr(channel) + (nbr(mid()) -> mid())))
+    } {
+      foldhood(channel)((c, x) => c)((nbr(channel)))
+    }
+  }
+}

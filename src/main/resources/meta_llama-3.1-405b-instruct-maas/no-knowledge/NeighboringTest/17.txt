@@ -1,0 +1,10 @@
+```scala
+import it.unibo.scafi.incarnations.BasicAbstract
+
+class CountNeighbors extends BasicAbstract {
+  override def main() = {
+    val nbrCount = NBR(1).sumHood()
+    nbrCount
+  }
+}
+```

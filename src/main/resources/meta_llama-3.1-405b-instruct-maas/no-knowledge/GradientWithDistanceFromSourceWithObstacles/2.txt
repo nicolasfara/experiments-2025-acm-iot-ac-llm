@@ -1,0 +1,9 @@
+import it.unibo.scafi.incarnations.BasicSimulatorIncarnation._
+
+val distance = rep(Double.MaxValue){
+  distance => mux(source) { 0.0 } {
+    mux(obstacle) { Double.MaxValue } {
+      1 + minHoodPlus(distance)
+    }
+  }
+}

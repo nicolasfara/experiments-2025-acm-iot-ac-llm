@@ -1,0 +1,11 @@
+```scala
+val maxInfluence = 2.0
+val isLeader = S(maxInfluence, nbrRange)
+val potential = G[Double](isLeader, 0, _ + nbrRange(), nbrRange)
+val localTemperature = sense[Double]("temperature")
+val areaTemperature = C[Double, Double](potential, _ + _, localTemperature, 0.0)
+val areaSize = C[Double, Int](potential, _ + _, 1, 0)
+val averageTemperature = areaTemperature / areaSize
+val alarm = averageTemperature > 30
+G[Double](alarm, alarm, a => a, nbrRange)
+```

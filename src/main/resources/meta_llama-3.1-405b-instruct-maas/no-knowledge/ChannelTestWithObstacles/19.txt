@@ -1,0 +1,29 @@
+import it.unibo.scafi.space.Point3D
+
+val source = node(id == "source")
+val destination = node(id == "destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val channel = gradient(source) { x =>
+  if (x == 0) {
+    distanceTo(destination)
+  } else {
+    1000
+  }
+} withDistance play Round , //
+    afterObstacle = branch {
+      case (s) if (obstacle) => 1000
+      case _ => channel
+    }
+
+emit("channel", channel != 1000)
+
+val channelCreated = rep(true) { x =>
+  if (id == "destination" && !sense[Boolean]("channel")) {
+    false
+  } else {
+    x
+  }
+}
+
+channelCreated

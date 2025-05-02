@@ -1,0 +1,1 @@
+`val channel = gradient("source") * (hasName("destination") ? 0 : 1) + hasName("source") ? 1 : 0`

@@ -1,0 +1,3 @@
+val sourcePotential = G[Double](source = sense("source"), field = 0, acc = _ + (if (nbr(sense[Boolean]("obstacle"))) Double.PositiveInfinity else nbrRange()), metric = nbrRange)
+val channelCreated = C[Boolean, Boolean](potential = sourcePotential, acc = _ || _, local = sense("destination"), Null = false)
+foldhood(false)(_ || _)(nbr(channelCreated))

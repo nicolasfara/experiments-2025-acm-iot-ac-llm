@@ -1,0 +1,1 @@
+rep(Int.MinValue){ minId => maxHood(nbr(minId)) }

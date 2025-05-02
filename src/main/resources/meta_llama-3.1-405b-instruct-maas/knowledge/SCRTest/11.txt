@@ -1,0 +1,6 @@
+```scala
+val areaId: ID = sense[ID]("areaId")
+val areaTemperature = foldhood(0.0)(_ + _)(mux(nbr(areaId) == areaId)(nbr(sense[Double]("temperature")))(0.0))
+val alarm = areaTemperature / foldhood(0)(_ + _)(mux(nbr(areaId) == areaId)(nbr(1))(0)) > 30
+mux(areaId == areaId)(alarm)(false)
+```

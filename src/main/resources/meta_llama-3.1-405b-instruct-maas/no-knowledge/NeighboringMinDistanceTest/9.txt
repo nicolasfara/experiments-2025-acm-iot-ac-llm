@@ -1,0 +1,7 @@
+import it.unibo.scafi.incarnations.BasicSimulatorIncarnation._
+import scala.collection.mutable
+
+ mux {
+   case (self, _) =>
+     foldhood(1000)(_ min _){ nbr(nbrDistance) + 1 }
+ }

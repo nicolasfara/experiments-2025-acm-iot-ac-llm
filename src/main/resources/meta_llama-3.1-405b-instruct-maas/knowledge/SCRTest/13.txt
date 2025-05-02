@@ -1,0 +1,7 @@
+```scala
+val areaIds: List[ID] = List(1, 2, 3)
+val areas = areaIds.map(id => (id, foldhood(0.0)(_ + _)(mux(nbr(mid()) == id)(nbr(sense[Double]("temperature")))(0.0))))
+val alarmAreas = areas.filter(_._2 / areas.size > 30)
+val alarm = alarmAreas.map(_._1).nonEmpty
+mux(alarmAreas.map(_._1).contains(mid())){ true } { false }
+```

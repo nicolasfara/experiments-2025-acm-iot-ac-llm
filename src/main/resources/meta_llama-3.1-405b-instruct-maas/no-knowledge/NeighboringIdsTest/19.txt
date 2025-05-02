@@ -1,0 +1,13 @@
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import it.unibo.scafi.simulation.mutable.SimulationNetwork
+
+val net = new SimulationNetwork
+val ids = 1 to 10
+ids.foreach(id => net.addNode(id))
+ids.foreach(id => net.addNodeSensor(id, "id" -> id))
+ids.foreach(id => if (id > 1) net.addEdge(id, id-1))
+ids.foreach(id => if (id < ids.last) net.addEdge(id, id+1))
+
+val program = rep(neighbors => ids)(id => includingSelf.unionHood(nbr(id)))
+val result = ids.map(id => id -> net.runProgram(program)(id))
+println(result.map{case (id, value) => id + ": " + value}.mkString(" "))

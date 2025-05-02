@@ -1,0 +1,1 @@
+`val neighborCount = classicCount(neighbors) - 1`

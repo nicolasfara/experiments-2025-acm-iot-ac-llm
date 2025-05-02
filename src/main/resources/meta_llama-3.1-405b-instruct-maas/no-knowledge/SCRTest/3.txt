@@ -1,0 +1,26 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import it.unibo.scafi.simulationDos.default._
+
+val temperatureSensor: Map[ID, Double] = Map(1 -> 25.0, 2 -> 35.0, 3 -> 20.0, 4 -> 32.0)
+
+val areas: Map[ID, Set[ID]] = Map(
+  1 -> Set(1, 2),
+  2 -> Set(3, 4)
+)
+
+val areaIds = areas.keys.toSet
+val temperatureThreshold = 30.0
+
+aggregate(areaIds) { self =>
+  val areaTemperatures = foldhoodPlus[Double](0)(_ + _){ areaId: ID =>
+    branches(areas(self)).map(x => temperatureSensor.getOrElse(x, 0.0)).reduce(_ + _) / branches(areas(self)).size
+  }
+
+  if (areaTemperatures > temperatureThreshold) {
+    broadcast(areaIds)(ALARM)
+  }
+}
+
+case object ALARM
+```

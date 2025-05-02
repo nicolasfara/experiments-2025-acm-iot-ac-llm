@@ -1,0 +1,12 @@
+import scala.collection.immutable
+
+val distance = rep(1000.0) { d =>
+  mux(d > 30) {
+    if (has("obstacle")) d
+    else {
+      min(d, sense[Int]("source").map(_.distance).getOrElse(1000.0))
+    }
+  } { 0.0 }
+}
+
+val euclideanDistance = gradient(distance)

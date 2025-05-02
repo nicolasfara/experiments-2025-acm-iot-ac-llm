@@ -1,0 +1,7 @@
+`val neighborIds = foldhood(Int.MinValue){ case (acc, n) => 
+  include(n.id) 
+  acc max n.id 
+} |+| rep(Int.MinValue){ x: Int => x match {
+  case Int.MinValue => Set.empty[Int]
+  case _ => Set(x)
+}}`

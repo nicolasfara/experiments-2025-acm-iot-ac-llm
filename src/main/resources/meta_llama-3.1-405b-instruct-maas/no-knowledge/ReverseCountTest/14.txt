@@ -1,0 +1,11 @@
+import it.unibo.scafi chemical.UTF
+
+import scala.concurrent.duration._
+
+lazy val program = gradient(1000) flatMap { g =>
+  utf(g)
+    . foldriters +
+    (ctx => (g - 10, g))
+}
+
+emit(program)

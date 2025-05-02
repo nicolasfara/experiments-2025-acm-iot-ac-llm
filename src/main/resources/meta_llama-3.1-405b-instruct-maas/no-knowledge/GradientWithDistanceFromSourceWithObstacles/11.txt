@@ -1,0 +1,5 @@
+`val distance = rep(Double.PositiveInfinity){ case (self, nbr) =>`
+  `if (has("source")) 0.0`
+  `else if (has("obstacle")) Double.PositiveInfinity`
+  `else if (nbr("distance").nonEmpty) nbr("distance").min + 1.0`
+  `else self}`

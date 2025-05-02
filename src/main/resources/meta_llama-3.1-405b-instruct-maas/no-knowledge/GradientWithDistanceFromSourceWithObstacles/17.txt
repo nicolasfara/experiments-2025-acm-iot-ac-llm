@@ -1,0 +1,8 @@
+```scala
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+val distance = G marqueDistance source
+val avoidedDistance = distance + (1000 * obstacle)
+val metricDistance = avoidedDistance.localMin + 1
+export("euclidean_distance", metricDistance)
+```

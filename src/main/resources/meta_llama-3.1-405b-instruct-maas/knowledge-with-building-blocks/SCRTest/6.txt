@@ -1,0 +1,5 @@
+```scala
+val potential = G[Double](source = sense("source"), field = 0, acc = _ + nbrRange(), metric = nbrRange)
+val areaTemp = C[Double, Double](potential, _ + _, sense("temperature"), 0)
+val alarm = G[Boolean](source = areaTemp / foldhood(0)(_ + _)(nbr(1)) > 30, field = true, acc = a => a, metric = nbrRange)
+```

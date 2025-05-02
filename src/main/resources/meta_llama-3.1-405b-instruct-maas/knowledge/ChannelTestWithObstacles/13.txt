@@ -1,0 +1,11 @@
+```scala
+rep(false) { channelCreated =>
+  mux(mid() == "source") {
+    val obstacleFreePath = foldhood(true)(_ && _)(nbr(!sense[Boolean]("obstacle")))
+    val destinationReached = foldhood(false)(_ || _)(nbr(mid() == "destination"))
+    obstacleFreePath && destinationReached
+  } {
+    foldhood(channelCreated)(_ || _)(nbr(channelCreated))
+  }
+}
+```

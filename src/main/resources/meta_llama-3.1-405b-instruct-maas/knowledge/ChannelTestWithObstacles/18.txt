@@ -1,0 +1,18 @@
+```scala
+rep(false) { channelCreated =>
+  mux(mid() == "source") {
+    val obstacleFound = foldhood(false)(_ || _)(nbr(sense[Boolean]("obstacle")))
+    if (obstacleFound) false else {
+      val destinationReached = foldhood(false)(_ || _)(nbr(mid() == "destination"))
+      if (destinationReached) true else {
+        val nextNode = foldhood(None: Option[ID])((a, b) => if (a.isDefined) a else b)(
+          mux(nbr(mid() != "source") && !nbr(sense[Boolean]("obstacle")))(Some(nbr(mid())))(None)
+        )
+        nextNode.isDefined
+      }
+    }
+  } {
+    nbr(channelCreated)
+  }
+}
+```

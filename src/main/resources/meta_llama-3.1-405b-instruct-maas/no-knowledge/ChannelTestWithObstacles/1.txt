@@ -1,0 +1,24 @@
+```scala
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val channel =
+  branch(source) {
+    fixMNil[Ball] { tokens =>
+      branch(obstacle) {
+        fixMNil[Ball] { tokens => MNil() }
+      } union branch(!obstacle) {
+        mux[Ball] { (token, h) => if (h.id == mid) token + h else token } { _ =>
+          channel
+        }
+      } union branch(destination) {
+        fixMNil[Ball] { tokens =>
+          G[Ball] { _ => true }
+        }
+      }
+    }
+  }
+
+emit("channelCreated", channel != MNil())
+```

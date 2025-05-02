@@ -1,0 +1,3 @@
+`val neighbors = Sace.neighborhood.includeSelf`
+`val countNeighbors = neighbors.fold(0)(_ => acc => acc + 1)`
+`countNeighbors`

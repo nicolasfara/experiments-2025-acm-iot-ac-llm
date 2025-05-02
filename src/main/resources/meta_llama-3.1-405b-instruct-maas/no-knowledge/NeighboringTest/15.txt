@@ -1,0 +1,1 @@
+`val count = foldhood(0)(_ + 1)`

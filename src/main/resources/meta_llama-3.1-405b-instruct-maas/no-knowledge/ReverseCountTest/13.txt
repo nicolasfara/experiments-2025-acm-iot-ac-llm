@@ -1,0 +1,11 @@
+import it.unibo.scafi.space.Point3D
+import it.unibo.scafi-incarnations.BasicSimulatorIncarnation._
+ 
+class GradientProgram extends AggregateProgram with Serializable {
+  override type MainResult = Int
+ 
+  override def main() =
+    rep(1000)(_ - 1)
+ 
+  override def midpoint() = _midpoint.as[Int]
+}

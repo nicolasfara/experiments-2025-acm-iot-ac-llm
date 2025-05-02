@@ -1,0 +1,1 @@
+`val ids = includingSelf.unionHood(nbr{self.id})`

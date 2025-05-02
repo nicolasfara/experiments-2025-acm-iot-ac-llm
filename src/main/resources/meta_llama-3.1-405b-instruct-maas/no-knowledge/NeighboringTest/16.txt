@@ -1,0 +1,1 @@
+`val countNeighbors = nbr(1).sum`

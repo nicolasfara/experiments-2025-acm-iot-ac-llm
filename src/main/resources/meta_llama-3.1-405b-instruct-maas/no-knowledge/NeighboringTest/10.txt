@@ -1,0 +1,5 @@
+import it.unibo.scafi.space.Point3D
+import it.unibo.scafi.{AggregateSystem, Double2D}
+
+val system: AggregateSystem = Double2D_AsynchronousMobile_Sensors.newWithTransitiveProximity(_ => true)
+val program = (mid: ID) => (nbrVector: Map[ID,Point3D]) => nbrVector.size

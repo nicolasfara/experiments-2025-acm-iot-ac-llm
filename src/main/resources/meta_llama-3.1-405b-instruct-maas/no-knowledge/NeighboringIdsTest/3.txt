@@ -1,0 +1,1 @@
+`val neighborIds = includingSelf.collectIds - self.id`

@@ -1,0 +1,15 @@
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import scala.collection.mutable
+
+class Program extends AggregateProgram with SensorDefinitions {
+  override type MainResult = Double
+
+  override def main() = {
+    val dist = rep(Double.MaxValue) { d => 
+      includingSelf.minHoodPlus(nbr(d) + 1)
+    }
+    dist
+  }
+}
+
+val main = (new Program).main()

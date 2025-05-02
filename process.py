@@ -161,6 +161,7 @@ if __name__ == '__main__':
     })
     dataset = rename_index_values(dataset, "model", {
         "claude-3-7-sonnet": "Claude 3.7B Sonnet",
+        "meta_llama-3.1-405b-instruct-maas": "Llama 3.1 405B Instruct",
         "google_gemma-3-4b-it": "Gemma 3.4B Instruct",
         "google_gemma-3-12b-it": "Gemma 3.12B Instruct",
         "google_gemma-3-27b-it": "Gemma 3.27B Instruct",

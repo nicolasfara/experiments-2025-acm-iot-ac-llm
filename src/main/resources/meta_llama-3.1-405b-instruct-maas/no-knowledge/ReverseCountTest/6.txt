@@ -1,0 +1,10 @@
+import it.unibo.scafi.incarnations.BasicSimulatorIncarnation._
+import scala.collection.mutable
+
+class AggregateProgram extends AggregateProgram with BasicSimulatorIncarnation {
+  override def main() = 
+    fold(1000)(_ - 1, _ < 0)
+}
+
+// or if the main should be outside the class, though this is against OOP principles
+val value = fold(1000)(_ - 1, _ < 0)

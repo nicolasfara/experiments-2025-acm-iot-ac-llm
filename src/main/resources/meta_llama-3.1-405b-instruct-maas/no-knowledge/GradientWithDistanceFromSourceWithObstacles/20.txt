@@ -1,0 +1,17 @@
+```scala
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+
+val distance = G[Int] { self =>
+  if (source) 0
+  else if (obstacle) Int.MaxValue
+  else {
+    val minDist = (includingSelf false) { nbr =>
+      self nbr distance + 1
+    }
+    min(minDist, Int.MaxValue - 1)
+  }
+}
+
+export("distance" -> distance)
+```

@@ -1,0 +1,15 @@
+```scala
+val source = node("source")
+val destination = node("destination")
+val obstacle = sense[Boolean]("obstacle")
+
+val channel =
+  branch(channel => {
+    (distanceTo(source) == 0) union (distanceTo(destination) == 0) union
+      (channel && !obstacle)
+  })
+
+val channelCreated = hop(channel, towards = destination, gradient = channel)
+
+emit("channelCreated", channelCreated)
+```

@@ -1,0 +1,40 @@
+```scala
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+import scala.collection.immutable.Set
+
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+
+def gradient() = {
+  rep(Double.PositiveInfinity) { distance =>
+    if (source) 0.0
+    else if (obstacle) Double.PositiveInfinity
+    else {
+      val neighborsDistances = includingSelf.nbr(distance)
+      val minNeighborDistance = neighborsDistances.minHoodPlus()
+      if (minNeighborDistance == Double.PositiveInfinity) Double.PositiveInfinity
+      else 1 + minNeighborDistance
+    }
+  }
+}
+
+def euclideanDistance() = {
+  rep(Double.PositiveInfinity) { distance =>
+    if (source) 0.0
+    else if (obstacle) Double.PositiveInfinity
+    else {
+      val distances = includingSelf.nbr(distance)
+      val allDistances = includingSelf.nbr(euclideanDistance())
+      val minDist = distances.zip(allDistances).map(x => (x._1, x._2)).minBy { x => (x._1, x._2) }
+      if (minDist._1 == Double.PositiveInfinity) Double.PositiveInfinity
+      else {
+        val distDiff = minDist._1 - distance
+        if (distDiff >= 0)
+          1 + Math.sqrt(Math.pow(minDist._2, 2) - Math.pow(distDiff, 2))
+        else minDist._2 + 1
+      }
+    }
+  }
+}
+euclideanDistance()
+```

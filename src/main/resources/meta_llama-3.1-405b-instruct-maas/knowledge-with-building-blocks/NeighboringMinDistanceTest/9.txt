@@ -1,0 +1,3 @@
+```scala
+val dist = foldhood(Double.PositiveInfinity)(_ min _)(nbr(nbrRange()))
+```

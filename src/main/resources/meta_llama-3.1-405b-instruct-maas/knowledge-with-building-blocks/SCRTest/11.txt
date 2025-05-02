@@ -1,0 +1,3 @@
+val area = S(2, nbrRange)
+val areaTemp = C(G(area, 0, _ + nbrRange(), nbrRange), _ + _, sense("temperature"), 0.0)
+val alarm = G(areaTemp > 30, true, _ && _, nbrRange)

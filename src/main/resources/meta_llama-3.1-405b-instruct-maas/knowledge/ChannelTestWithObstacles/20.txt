@@ -1,0 +1,10 @@
+```scala
+rep(false) { channelCreated =>
+  val isSource = sense[Boolean]("source")
+  val isDestination = sense[Boolean]("destination")
+  val isObstacle = sense[Boolean]("obstacle")
+  val distance = foldhood(Int.MaxValue)(_ min _)(mux(nbr(!isObstacle))(nbr(1))(Int.MaxValue))
+  val hasReachedDestination = foldhood(false)(_ || _)(mux(nbr(isDestination))(nbr(true))(false))
+  isSource && (distance != Int.MaxValue || hasReachedDestination) || channelCreated
+}
+```

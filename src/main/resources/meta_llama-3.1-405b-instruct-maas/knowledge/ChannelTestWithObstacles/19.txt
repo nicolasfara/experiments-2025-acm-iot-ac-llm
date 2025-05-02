@@ -1,0 +1,19 @@
+```scala
+rep(false) { channelCreated =>
+  val isSource = sense[Boolean]("source")
+  val isDestination = sense[Boolean]("destination")
+  val isObstacle = sense[Boolean]("obstacle")
+  val obstacleNearby = foldhood(false)(_ || _)(nbr(isObstacle))
+
+  mux(isSource && !channelCreated) {
+    val clearPath = !obstacleNearby
+    foldhood(clearPath)(_ && _)(nbr(clearPath))
+  } {
+    mux(isDestination && !channelCreated) {
+      true
+    } {
+      channelCreated
+    }
+  }
+}
+```

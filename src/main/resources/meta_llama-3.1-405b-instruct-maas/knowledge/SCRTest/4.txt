@@ -1,0 +1,6 @@
+```scala
+val areaTemp = foldhood(0.0)(_ + _)(mux(nbr(mid() % 4 == 0))(nbr(sense[Double]("temperature")))(0.0))
+val areaCount = foldhood(0)(_ + _)(mux(nbr(mid() % 4 == 0))(nbr(1))(0))
+val areaAvgTemp = areaTemp / areaCount
+mux(areaAvgTemp > 30) { true } { false }
+```

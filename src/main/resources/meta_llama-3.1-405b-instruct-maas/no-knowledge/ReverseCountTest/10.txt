@@ -1,0 +1,14 @@
+import it.unibo.scafi.incarnations.BasicSimulationIncarnation._
+
+val PlaygroundSize = 10
+val진 key = "myGradient"
+
+round = round + 1
+val initialVal = 1000
+val src = 0
+val backupVal = initialVal
+val prevVal = if (round == 1) initialVal else G.get[B] (key)
+val gradientVal = if (round == 1) initialVal - src else prevVal - 1
+
+G.put[B] (key, gradientVal)
+output[B] (gradientVal)

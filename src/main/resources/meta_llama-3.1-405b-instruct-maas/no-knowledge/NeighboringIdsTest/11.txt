@@ -1,0 +1,3 @@
+`val neighbors = sense[LSNS](nbr(mid()))`
+
+`val neighborIds = neighbors.map(_._1)`

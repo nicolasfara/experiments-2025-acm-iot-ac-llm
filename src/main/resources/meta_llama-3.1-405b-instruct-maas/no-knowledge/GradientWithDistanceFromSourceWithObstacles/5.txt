@@ -1,0 +1,13 @@
+import it.unibo.scafi.space.Point3D
+
+val distance = G babelGradient (
+  source,
+  neighbor => if (!neighbor("obstacle")) 1 else Double.PositiveInfinity,
+  (a, b) => a + b,
+  _ => Double.PositiveInfinity,
+  0
+)
+
+val minDistance = distance minHoodPlus ((x, y) => if (!y("obstacle")) x else Double.PositiveInfinity) includingSelf
+
+distance map { d => if (d < Double.PositiveInfinity && !self("obstacle")) d else Double.PositiveInfinity } += (minDistance map { d => d + 1 })

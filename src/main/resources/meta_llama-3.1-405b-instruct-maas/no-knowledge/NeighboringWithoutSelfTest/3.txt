@@ -1,0 +1,4 @@
+includeSelf = false
+val count = rep(0){ x => x + 1 }
+val neighborsCount = includingSelf(count, includeSelf)
+neighborsCount { x => x - 1 }
