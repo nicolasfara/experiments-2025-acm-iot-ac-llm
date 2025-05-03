@@ -1,0 +1,25 @@
+To compute the area-wise temperature and send back an alarm within the area when the temperature is above 30 degrees, you can use a combination of `branch`, `foldhood`, and `mux` constructs. Here is the Scala code for the `main` function:
+
+```scala
+val areaTemperature = foldhood(0.0)(_ + _)(mux(nbr(mid() == mid()))(nbr(sense[Double]("temperature")))(0.0))
+val nodesInArea = foldhood(0)(_ + _)(mux(nbr(mid() == mid()))(1)(0))
+val averageTemperature = areaTemperature / nodesInArea
+
+branch(averageTemperature > 30) {
+  true
+} {
+  false
+}
+```
+
+This code performs the following steps:
+
+1. **Calculate Area-wise Temperature**: It sums the temperatures of all nodes in the area using `foldhood` and `mux` to ensure that only nodes within the same area contribute to the sum.
+
+2. **Count Nodes in the Area**: It counts the number of nodes in the area using `foldhood` and `mux`.
+
+3. **Calculate Average Temperature**: It calculates the average temperature by dividing the sum of temperatures by the number of nodes in the area.
+
+4. **Send Alarm**: It uses `branch` to send an alarm (`true`) if the average temperature is above 30 degrees, otherwise it sends `false`.
+
+This solution ensures that the temperature is computed and checked area-wise and that an alarm is broadcast within the area if the temperature exceeds 30 degrees.

@@ -1,0 +1,13 @@
+```scala
+def source: A = sense[A]("source")
+def destination: A = sense[A]("destination")
+
+def main(): String = {
+  rep(0) {
+    _ match {
+      case 0 => nbr(source)
+      case _ => nbr(destination)
+    }
+  }
+}
+```

@@ -1,0 +1,10 @@
+```scala
+rep((Double.PositiveInfinity, false)) { case (d, _) =>
+  mux(sense[Boolean]("source")) { (0.0, true) } {
+    mux(sense[Boolean]("destination")) { (d, false) } {
+      val potential = foldhoodPlus(Double.PositiveInfinity)(Math.min(_, _)) { nbr(d) + nbrRange() }
+      (potential, potential < d && !sense[Boolean]("obstacle"))
+    }
+  }
+}._2
+```

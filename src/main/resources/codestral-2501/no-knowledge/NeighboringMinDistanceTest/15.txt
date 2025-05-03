@@ -1,0 +1,11 @@
+```scala
+val source = Seq((1, 1), (2, 2), (3, 3), (4, 4))
+val result = source.groupBy(coord => (coord._1 % 2, coord._2 % 2)).values.map { coords =>
+  coords.minBy { coord =>
+    math.sqrt(coords.map { neighbor =>
+      math.pow(coord._1 - neighbor._1, 2) + math.pow(coord._2 - neighbor._2, 2)
+    }.reduce(_ + _))
+  }
+}.toList
+result
+```

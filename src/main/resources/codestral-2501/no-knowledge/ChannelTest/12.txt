@@ -1,0 +1,3 @@
+```scala
+make[Int](source) foreach { dst("destination") }
+```

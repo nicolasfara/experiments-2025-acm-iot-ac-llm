@@ -1,0 +1,1 @@
+```source('source').filter(!('obstacle')).map(_ => true).reduce(_ || _, false).map(x => x).write('destination')```

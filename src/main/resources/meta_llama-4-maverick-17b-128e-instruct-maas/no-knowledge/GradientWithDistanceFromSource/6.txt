@@ -1,0 +1,5 @@
+```scala
+val source = sense[Boolean]("source")
+val distance = aggregateGrain[Double](0.0, source)( (d1,d2) => d1 + 1, _ + _ )
+distance
+```

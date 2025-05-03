@@ -1,0 +1,56 @@
+```scala
+import it.unibo.scafi.ports._
+import it.unibo.scafi.space.{ScaFiSpace, Coord}
+
+val source = Coord(0, 0)
+val destination = Coord(2, 2)
+
+val space = new ScaFiSpace(3, 3)
+
+val obstacles = Set(Coord(1, 0), Coord(1, 1))
+
+val path = astarPath(space, source, destination, obstacles)
+
+path.nonEmpty
+```
+
+```scala
+def astarPath(space: ScaFiSpace, start: Coord, goal: Coord, obstacles: Set[Coord]): List[Coord] = {
+  val openSet = scala.collection.mutable.Set(start)
+  val cameFrom = scala.collection.mutable.Map[Coord, Coord]()
+  val gScore = scala.collection.mutable.Map[Coord, Int]().withDefaultValue(Int.MaxValue)
+  gScore(start) = 0
+  val fScore = scala.collection.mutable.Map[Coord, Int]().withDefaultValue(Int.MaxValue)
+  fScore(start) = heuristic(start, goal)
+
+  while (openSet.nonEmpty) {
+    val current = openSet.minBy(fScore(_))
+    if (current == goal) return reconstructPath(cameFrom, current)
+    openSet -= current
+
+    for (neighbor <- space.neighbors(current)) {
+      if (obstacles.contains(neighbor)) continue
+
+      val tentativeGScore = gScore(current) + 1
+      if (tentativeGScore < gScore(neighbor)) {
+        cameFrom(neighbor) = current
+        gScore(neighbor) = tentativeGScore
+        fScore(neighbor) = gScore(neighbor) + heuristic(neighbor, goal)
+        if (!openSet.contains(neighbor)) openSet += neighbor
+      }
+    }
+  }
+  List()
+}
+
+def heuristic(a: Coord, b: Coord): Int = Math.abs(a.x - b.x) + Math.abs(a.y - b.y)
+
+def reconstructPath(cameFrom: Map[Coord, Coord], current: Coord): List[Coord] = {
+  val totalPath = scala.collection.mutable.ListBuffer(current)
+  while (cameFrom.contains(current)) {
+    current = cameFrom(current)
+    totalPath.prepend(current)
+  }
+  totalPath.toList
+}
+```

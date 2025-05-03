@@ -1,0 +1,7 @@
+```scala
+branch(sense[Double]("temperature") > 30) {
+  rep(0.0)(_ + 1)
+} {
+  rep(0.0)(_ + 1)
+}
+```

@@ -1,0 +1,7 @@
+```scala
+rep(Double.MaxValue){ d =>
+  mux(sense[Boolean]("source")) { 0.0 } {
+    minHood(nbr(d) + nbrRange())
+  }
+}
+```

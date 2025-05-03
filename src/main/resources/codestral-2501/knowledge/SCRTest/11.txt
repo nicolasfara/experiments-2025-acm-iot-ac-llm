@@ -1,0 +1,18 @@
+To achieve the desired computation of area-wise temperature and broadcasting an alarm when the temperature is above 30 degrees, you can use the provided DSL constructs effectively. Here is the resulting Scala code body for the main function:
+
+```scala
+branch(sense[Double]("temperature") > 30)(true)(false)
+```
+
+This code snippet uses the `branch` construct to determine if the temperature is above 30 degrees. If it is, it evaluates to `true`, otherwise, it evaluates to `false`.
+
+To perform the area-wise temperature computation and broadcast an alarm, we need to combine `rep`, `foldhood`, and `branch`. Here's the complete solution:
+
+```scala
+val areaTemp = foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature")))
+val numNodes = foldhood(0)(_ + _)(nbr(1))
+val avgTemp = areaTemp / numNodes
+branch(avgTemp > 30)(true)(false)
+```
+
+This code calculates the average temperature of the area and broadcasts an alarm (`true`) if the average temperature is above 30 degrees, otherwise, it broadcasts `false`.

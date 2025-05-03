@@ -1,0 +1,5 @@
+```scala
+rep(if (sense[Boolean]("source")) 0.0 else Double.PositiveInfinity) { dist =>
+  minHood(dist + nbrRange())
+}
+```

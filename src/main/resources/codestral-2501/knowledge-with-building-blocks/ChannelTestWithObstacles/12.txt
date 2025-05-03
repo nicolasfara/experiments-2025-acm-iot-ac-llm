@@ -1,0 +1,5 @@
+```scala
+val obstacleAvoidanceMetric = () => if (nbr(sense[Boolean]("obstacle"))) Double.PositiveInfinity else nbrRange()
+val potential = G[Double](source = sense("source"), field = 0, acc = _ + obstacleAvoidanceMetric(), metric = obstacleAvoidanceMetric)
+C[Double, Boolean](potential, _ || _, sense("destination"), false)
+```

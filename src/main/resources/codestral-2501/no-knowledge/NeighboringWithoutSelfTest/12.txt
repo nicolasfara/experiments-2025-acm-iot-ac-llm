@@ -1,0 +1,11 @@
+```scala
+val scafi = new ScaFi
+val graph = scafi.fromFile("graph.gr").asGraph
+val vertexCount = graph.mapVertices{ case (id, attr) => (id, 1) }
+val message = vertexCount.aggregateMessages[Int](
+  tripEdges = _.sendMsgToDst(1),
+  reduceMessages = _ + _
+)
+val result = message.innerJoin(vertexCount) { (id, count, _) => count - 1 }
+scafi.toFile(result, "output.gr")
+```

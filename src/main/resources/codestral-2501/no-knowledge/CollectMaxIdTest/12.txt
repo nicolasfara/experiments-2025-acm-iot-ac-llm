@@ -1,0 +1,3 @@
+```scala
+val maxID = network.reduce((a, b) => if (a > b) a else b)
+```

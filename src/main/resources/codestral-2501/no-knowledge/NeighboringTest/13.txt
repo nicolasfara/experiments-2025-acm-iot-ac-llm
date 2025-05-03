@@ -1,0 +1,5 @@
+```scala
+val neighbors = ScaFi.aggregate(Seq("neighbors")) {
+  case Seq(neighbors: Seq[Int]) => neighbors.size
+}
+```

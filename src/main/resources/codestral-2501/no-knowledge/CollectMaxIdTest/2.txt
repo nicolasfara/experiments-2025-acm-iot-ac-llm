@@ -1,0 +1,3 @@
+```scala
+val maxId = g.aggregate(Seq((v: Vertex) => v.id))(_.max)
+```

@@ -1,0 +1,14 @@
+```scala
+rep((0 to 0, false)) { case (path, created) =>
+  if (created) path -> created
+  else {
+    val nbrObstacle = nbr(sense[Boolean]("obstacle"))
+    val potentialPath = path :+ (mid() -> nbr("source"))
+    if (nbrObstacle || foldhoodPlus(true)(_ && _)(nbrObstacle) || !nbr(sense[Boolean]("destination"))) {
+      potentialPath -> created
+    } else {
+      potentialPath -> true
+    }
+  }
+}._2
+```

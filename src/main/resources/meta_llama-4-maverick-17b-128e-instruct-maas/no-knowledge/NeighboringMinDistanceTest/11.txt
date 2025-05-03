@@ -1,0 +1,7 @@
+```scala
+val distances = rep(Double.PositiveInfinity){ d => 
+  mux(sense("source")) { 0.0 } { 
+    minHood(nbr(d) + nbrRange) 
+  } 
+}
+```

@@ -1,0 +1,6 @@
+```scala
+rep(10000.0) {
+  minDistance =>
+    minHood(nbr(minDistance + nbrRange())).min
+}
+```

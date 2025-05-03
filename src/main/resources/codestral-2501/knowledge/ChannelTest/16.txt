@@ -1,0 +1,8 @@
+```scala
+def main(): Unit = {
+  val sourceID = mid()
+  val destinationID = mid() + 1  // Assuming the destination is the next node in the network
+
+  createChannel(sourceID, destinationID, "source", "destination")
+}
+```

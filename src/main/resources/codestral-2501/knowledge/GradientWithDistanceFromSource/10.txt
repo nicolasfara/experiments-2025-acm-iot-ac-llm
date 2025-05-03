@@ -1,0 +1,6 @@
+```scala
+def rep(0.0) { dist =>
+  val minDist = foldhoodPlus(Double.MaxValue)(_ min _)(nbr(dist + nbrRange()) * sense[Boolean]("source"))
+  if (minDist == Double.MaxValue) dist else minDist
+}
+```

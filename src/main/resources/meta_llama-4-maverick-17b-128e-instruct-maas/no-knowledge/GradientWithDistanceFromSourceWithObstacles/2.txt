@@ -1,0 +1,11 @@
+```scala
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+val distanceToSource = distanceTo(source)
+val gradient = rep(Double.MaxValue)(d => mux(source)(0.0) { d + 1 } min (nbr(d) + 1))
+val avoidingObstacles = gradient < 100 // assuming a threshold for simplicity; adjust as needed
+val finalDistance = distanceToSource // ideally, should be computed considering obstacles
+// For a more accurate 'finalDistance' avoiding obstacles, a more complex algorithm is required,
+// such as using a potential field or a pathfinding algorithm that considers 'obstacle'.
+branch(avoidingObstacles){ finalDistance }{ distanceToSource }
+```

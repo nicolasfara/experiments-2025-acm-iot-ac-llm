@@ -1,0 +1,5 @@
+To gather a list of IDs of the neighbors of each node in a distributed system using the DSL, you can use the `nbr` construct to access the IDs of neighboring nodes. Here is the Scala code for the `main` function that collects these IDs:
+
+```scala
+foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```

@@ -1,0 +1,7 @@
+```scala
+branch(sense[Double]("temperature") > 30) {
+  foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature")))
+} {
+  0.0
+}
+```

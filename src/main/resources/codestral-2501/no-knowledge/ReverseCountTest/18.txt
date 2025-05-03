@@ -1,0 +1,4 @@
+```scala
+  val result = (1 to 1000).reverse.reduce(_ + _)
+  println(result)
+```

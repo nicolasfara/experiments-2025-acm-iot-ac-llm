@@ -1,0 +1,5 @@
+```scala
+val gradient = G[Double](sense[Boolean]("source"), 0, _ + nbrRange(), nbrRange)
+val distanceToDestination = G[Double](sense[Boolean]("destination"), 0, _ + mux(sense[Boolean]("obstacle"), Double.PositiveInfinity, nbrRange()), nbrRange)
+C[Double, Boolean](distanceToDestination, _ || _, sense[Boolean]("source"), false)
+```

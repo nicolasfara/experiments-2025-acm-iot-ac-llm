@@ -1,0 +1,9 @@
+```scala
+rep((Double.PositiveInfinity, "no-id")) { case (d, _) =>
+  mux(sense[Boolean]("source")) {
+    (0.0, mid().toString)
+  } {
+    minHoodPlus((nbr(d) + nbrRange(), nbr(_: String)))
+  }
+}._2
+```

@@ -1,0 +1,5 @@
+```scala
+val distanceToDestination = G(sense[Boolean]("destination"), 0.0, (x: Double) => x + 1, () => if(sense[Boolean]("obstacle")) Double.PositiveInfinity else nbrRange())
+val distanceToSource = G(sense[Boolean]("source"), 0.0, (x: Double) => x + 1, () => if(sense[Boolean]("obstacle")) Double.PositiveInfinity else nbrRange())
+C(distanceToDestination, (_: Double) min (_: Double), distanceToSource, Double.MaxValue) < nbrRange() * 3
+```

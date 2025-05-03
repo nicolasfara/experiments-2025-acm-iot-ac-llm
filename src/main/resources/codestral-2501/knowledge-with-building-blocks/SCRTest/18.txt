@@ -1,0 +1,10 @@
+```scala
+val potential = G[Double](source = S(2, nbrRange), field = 0, acc = _ + nbrRange(), metric = nbrRange)
+val areaTemp = C[Double, Double](potential, _ + _, sense[Double]("temperature"), 0)
+branch(areaTemp > 30) {
+  val nodes = foldhood(0)(_ + _)(nbr(1))
+  foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature"))) / nodes > 30
+} {
+  false
+}
+```

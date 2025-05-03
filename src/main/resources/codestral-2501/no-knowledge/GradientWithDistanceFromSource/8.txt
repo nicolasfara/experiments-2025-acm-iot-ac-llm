@@ -1,0 +1,19 @@
+```scala
+val graph = Graph.load("graph_file")
+val distances = graph.mapVertices { (id, _) =>
+  if (id == "source") 0.0 else Double.PositiveInfinity
+}
+val sssp = graph.pregel(distances)(
+  (id, dist, newDist) => math.min(dist, newDist),
+  triplet => {
+    if (triplet.srcAttr + triplet.attr < triplet.dstAttr) {
+      Iterator((triplet.dstId, triplet.srcAttr + triplet.attr))
+    } else {
+      Iterator.empty
+    }
+  },
+  (a, b) => math.min(a, b)
+)
+val result = sssp.vertices.collect
+result.foreach { case (id, dist) => println(s"Vertex $id: $dist") }
+```

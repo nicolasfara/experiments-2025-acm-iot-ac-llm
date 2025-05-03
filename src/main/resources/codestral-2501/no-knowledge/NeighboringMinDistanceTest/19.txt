@@ -1,0 +1,21 @@
+```import org.apache.spark.sql.SparkSession
+import org.scalafi.spark.ScaFiContext
+
+val sc = SparkSession.builder
+  .appName("MinDistanceFromNeighbors")
+  .getOrCreate()
+
+val scaFiContext = new ScaFiContext(sc)
+
+val distances = scaFiContext.parallelize(Seq((0, 1.0), (1, 2.0), (2, 3.0), (3, 4.0)))
+  .aggregateByKey(1.0)(
+    (acc, value) => acc + value,
+    (acc1, acc2) => acc1 + acc2
+  )
+  .map { case (key, value) => (key, value / 2.0) }
+  .collect()
+
+distances.foreach(println)
+
+sc.stop()
+```

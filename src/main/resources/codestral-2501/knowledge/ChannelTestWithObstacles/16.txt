@@ -1,0 +1,15 @@
+```scala
+branch(nbr(sense[Boolean]("obstacle"))) {
+  false
+} {
+  rep(false) { success =>
+    branch(success) { true } {
+      if (sense[Boolean]("obstacle")) false
+      else {
+        val neighbor = foldhoodPlus(false)(_ || _)(nbr(success))
+        if (neighbor) true else false
+      }
+    }
+  }
+}
+```

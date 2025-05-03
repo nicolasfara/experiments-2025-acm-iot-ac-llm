@@ -1,0 +1,21 @@
+To gather a list of IDs of their neighbors in a distributed system using the described DSL, you can leverage the `foldhood` construct to aggregate information from neighbors. Here is the Scala code that accomplishes this:
+
+```scala
+    val neighborIds = foldhood(List.empty[ID])(_ ++ _)(nbr(mid()))
+    neighborIds
+```
+
+This code does the following:
+
+1. `List.empty[ID]`: Initializes an empty list to hold the neighbor IDs.
+2. `_ ++ _`: Combines the lists of neighbor IDs from all neighbors, including itself.
+3. `nbr(mid())`: Retrieves the ID of each neighbor using `nbr(mid())`.
+
+By running this code on each node, each node will gather the list of IDs of its neighbors, including itself.
+
+Here is the complete body of the `main` function, formatted according to the rules:
+
+```scala
+val neighborIds = foldhood(List.empty[ID])(_ ++ _)(nbr(mid()))
+neighborIds
+```

@@ -1,0 +1,4 @@
+```scala
+val potential = G[Double](sense[Boolean]("source"), 0, _ + nbrRange(), if (nbr(sense[Boolean]("obstacle"))) Double.PositiveInfinity else nbrRange())
+potential
+```

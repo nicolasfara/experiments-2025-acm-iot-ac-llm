@@ -1,0 +1,6 @@
+```scala
+val distance = aggr("source", "euclidean")(_.asInstanceOf[Vector[Double]])
+val obstacles = aggr("obstacle", "any")(_.asInstanceOf[Boolean])
+val validDistance = if (obstacles) 0.0 else distance
+validDistance
+```

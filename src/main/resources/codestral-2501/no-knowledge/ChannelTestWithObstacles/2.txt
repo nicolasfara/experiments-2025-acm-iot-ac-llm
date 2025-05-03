@@ -1,0 +1,1 @@
+```|> source |> filter(!obstacle) |> destination |> map(_ => true) |> reduce(_ || _)```

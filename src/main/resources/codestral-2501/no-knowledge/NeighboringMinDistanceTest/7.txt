@@ -1,0 +1,14 @@
+```val distances = Map(
+  "node1" -> Seq(("node2", 10), ("node3", 15)),
+  "node2" -> Seq(("node1", 10), ("node4", 20)),
+  "node3" -> Seq(("node1", 15), ("node4", 25)),
+  "node4" -> Seq(("node2", 20), ("node3", 25))
+)
+
+val minDistance = distances.map { case (node, neighbors) =>
+  val minNeighborDistance = neighbors.map(_._2).min
+  (node, minNeighborDistance)
+}
+
+println(minDistance)
+```

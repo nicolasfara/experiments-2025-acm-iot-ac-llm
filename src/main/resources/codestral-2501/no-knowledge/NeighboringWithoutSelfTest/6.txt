@@ -1,0 +1,5 @@
+```scala
+val graph = AggregateGraph.loadGraphFromFile("path/to/graph")
+val neighborsCount = graph.aggregate(vertex => vertex.neighbors.size).sum
+println(neighborsCount)
+```

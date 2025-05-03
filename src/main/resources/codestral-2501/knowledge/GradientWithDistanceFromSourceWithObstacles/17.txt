@@ -1,0 +1,12 @@
+```scala
+rep(Double.MaxValue) {
+  minDist => {
+    val shortestDist = foldhood(Double.MaxValue)(_ min _)(
+      if (nbr(sense[Boolean]("obstacle"))) Double.MaxValue
+      else if (nbr(sense[Double]("source")) == 0.0) 0.0
+      else nbr(minDist) + 1.0
+    )
+    shortestDist
+  }
+}
+```

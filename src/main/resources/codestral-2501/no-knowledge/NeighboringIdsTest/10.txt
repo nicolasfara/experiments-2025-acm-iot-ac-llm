@@ -1,0 +1,12 @@
+```scala
+val neighborIds = ids.map { id =>
+    val neighbors = id match {
+      case "A" => List("B", "C")
+      case "B" => List("A", "D")
+      case "C" => List("A", "D")
+      case "D" => List("B", "C")
+      case _ => List()
+    }
+    neighbors
+}.flatten
+```

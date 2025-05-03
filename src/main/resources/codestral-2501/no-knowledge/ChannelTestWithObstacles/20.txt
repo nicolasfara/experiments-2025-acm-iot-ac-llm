@@ -1,0 +1,15 @@
+```Scala
+val path = source.aggregateOn(Seq("destination")) { (current, neighbors) =>
+  if (neighbors.exists(_.id == "destination")) {
+    true
+  } else {
+    val nextNeighbors = neighbors.filterNot(_.sensors.contains("obstacle")).map(_.id)
+    if (nextNeighbors.isEmpty) {
+      false
+    } else {
+      current.aggregateOn(nextNeighbors)(_ => true)
+    }
+  }
+}
+path.isDefined
+```

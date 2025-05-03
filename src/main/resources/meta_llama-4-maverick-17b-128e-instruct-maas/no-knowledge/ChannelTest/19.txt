@@ -1,0 +1,8 @@
+```scala
+val source = node.sense("source")
+val destination = node.sense("destination")
+val channel = gradient(source && !destination, nbrRange)
+val path = distanceTo(source, nbrRange)
+val isPath = path < nbrRange()
+val isChannel = channel < nbrRange() && isPath
+```

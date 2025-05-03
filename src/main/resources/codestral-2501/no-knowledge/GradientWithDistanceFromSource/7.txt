@@ -1,0 +1,15 @@
+```scala
+val distances = g.aggregateMessages[(Double, Double), Double](
+  tripSrc => {
+    if (tripSrc.field("sensor") == "source") {
+      sendToSrc(tripSrc, (tripSrc.field("x"), tripSrc.field("y")))
+    }
+  },
+  (trips, srcs) => {
+    val euclideanDist = srcs.map { case (x, y) =>
+      Math.sqrt(Math.pow(trips.field("x") - x, 2) + Math.pow(trips.field("y") - y, 2))
+    }
+    Iterator.iterate(euclideanDist.min, 1)
+  }
+)
+```

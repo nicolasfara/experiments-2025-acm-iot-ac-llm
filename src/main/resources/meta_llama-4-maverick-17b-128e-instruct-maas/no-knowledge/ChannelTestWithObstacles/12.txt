@@ -1,0 +1,17 @@
+```scala
+val sourceNode = node.sense[Boolean]("source").mux(1, 0)
+val destinationNode = node.sense[Boolean]("destination").mux(1, 0)
+val obstacle = node.sense[Boolean]("obstacle")
+val channel = gradientWithObstacle(sourceNode, destinationNode, obstacle)
+channel == destinationNode
+
+def gradientWithObstacle(source: Int, destination: Int, obstacle: Boolean): Int = {
+  rep(Double.PositiveInfinity){ distance =>
+    mux(source == 1 && !obstacle)(0.0, 
+      minHoodPlus(distance, 
+        (nbr(distance) + nbrRange()).toDouble
+      )
+    ).toDouble
+  }.toInt
+}
+```

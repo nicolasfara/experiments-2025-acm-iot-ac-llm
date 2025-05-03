@@ -1,0 +1,4 @@
+```scala
+val gradient = gradientField(1000, 0, 10)
+val evolvedValue = foldhood(1000)(Math.min(_,_))(gradient)
+```

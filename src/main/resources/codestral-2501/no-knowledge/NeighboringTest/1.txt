@@ -1,0 +1,13 @@
+```scala
+val sc = new SciFiContext(sc)
+import sc._
+import org.apache.spark.graphx._
+
+val graph = GraphLoader.edgeListFile(sc, "data/edges.txt")
+val neighborsCount = graph.aggregateMessages[Int](
+  _.sendToSrc(1),
+  _ + _
+)
+
+neighborsCount.vertices.collect().foreach(println)
+```

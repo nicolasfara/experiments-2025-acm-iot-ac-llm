@@ -1,0 +1,11 @@
+```scala
+val potential = G[Double](source = sense("source"), field = 0, acc = _ + nbrRange(), metric = () => {
+  if (sense[Boolean]("obstacle")) Double.PositiveInfinity
+  else nbrRange()
+})
+C[Double, Boolean](potential, _ || _, sense("destination"), false)
+```
+
+In summary, the code above achieves the desired functionality by:
+1. Using the `G` function to compute a potential field from the source node to the destination node while avoiding obstacles.
+2. Using the `C` function to propagate a "success" signal back from the destination node if a path exists.

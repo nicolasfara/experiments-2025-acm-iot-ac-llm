@@ -1,0 +1,9 @@
+```scala
+rep(Map.empty[ID, Double]) { areas =>
+  val currentTemperature = sense[Double]("temperature")
+  val isHot = currentTemperature > 30
+  val neighbours = foldhoodPlus(Map.empty[ID, Double])(_ ++ _)(nbr(areas))
+  val newAreas = neighbours + (mid() -> currentTemperature)
+  mux(isHot)(newAreas)(newAreas.filter { case (_, temp) => temp > 30 })
+}
+```

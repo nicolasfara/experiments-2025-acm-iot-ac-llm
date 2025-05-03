@@ -1,0 +1,5 @@
+```scala
+val area = G[Double](source = sense[Boolean]("source"), field = 0, acc = _ + nbrRange(), metric = nbrRange)
+val areaTemp = C[Double, Double](area, _ + _, sense[Double]("temperature"), 0)
+branch(areaTemp > 30 * area)(G[Boolean](source = true, field = true, acc = _ || _, metric = nbrRange), false)
+```

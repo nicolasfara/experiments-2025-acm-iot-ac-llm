@@ -1,0 +1,7 @@
+```scala
+import org.scalafi.channel.{Channel, ChannelFactory}
+
+val source = ChannelFactory.createSourceChannel("source")
+val destination = ChannelFactory.createDestinationChannel("destination")
+source >> destination
+```

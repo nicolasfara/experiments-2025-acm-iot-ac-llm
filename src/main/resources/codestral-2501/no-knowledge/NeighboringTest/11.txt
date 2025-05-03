@@ -1,0 +1,5 @@
+```scala
+val g = Graph.fromEdges(Int, Int, Seq((1, 2), (2, 3), (3, 4), (4, 5)))
+val neighborsCount = g.vertices.map(v => (v, g.outDegree(v))).reduce((a, b) => if (a._2 > b._2) a else b)
+println(neighborsCount)
+```

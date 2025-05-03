@@ -1,0 +1,5 @@
+```scala
+val source = sense[Boolean]("source")
+val distance = aggregateGrain[Double](0, (v: Double, _: Boolean) => v + 1, (v1: Double, v2: Double) => Math.min(v1, v2), source)
+distance * nbrRange()
+```

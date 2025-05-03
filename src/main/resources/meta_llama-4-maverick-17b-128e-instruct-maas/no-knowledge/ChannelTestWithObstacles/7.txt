@@ -1,0 +1,12 @@
+```scala
+val sourceNode = node.sense[Boolean]("source").toSenseBool()
+val destinationNode = node.sense[Boolean]("destination").toSenseBool()
+val obstacleSensor = node.sense[Boolean]("obstacle").toSenseBool()
+
+val channel = gradientWithObstacle(sourceNode, obstacleSensor)
+val distanceToDestination = distanceTo(destinationNode)
+val isChannelCreated = branch(sourceNode){ 0 }{ distanceToDestination }
+val result = isChannelCreated == distanceToDestination && destinationNode
+
+result
+```

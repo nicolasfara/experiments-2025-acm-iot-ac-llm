@@ -1,0 +1,1 @@
+```val result = ScaFi(1000).map(_ - 1).iterateWhile(_ > 0)```

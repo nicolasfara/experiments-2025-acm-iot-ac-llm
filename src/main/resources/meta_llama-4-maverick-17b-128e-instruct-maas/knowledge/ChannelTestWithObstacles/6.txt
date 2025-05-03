@@ -1,0 +1,19 @@
+```scala
+rep((Double.PositiveInfinity, false)) { case (d, _) =>
+  val isSource = sense[Boolean]("source")
+  val isDest = sense[Boolean]("destination")
+  val isObstacle = sense[Boolean]("obstacle")
+  mux(isSource) {
+    (0.0, true)
+  } {
+    mux(isObstacle) {
+      (d, false)
+    } {
+      val potential = minHoodPlus((nbr(d) + nbrRange(), nbr(isSource)))
+      val isPotentialSource = potential._2
+      val dist = potential._1
+      (dist, isPotentialSource)
+    }
+  }
+}._2
+```

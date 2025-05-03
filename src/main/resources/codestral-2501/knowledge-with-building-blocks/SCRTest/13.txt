@@ -1,0 +1,11 @@
+```scala
+val areaId = S(2, nbrRange)
+val areaTemperature = mux(areaId) {
+    foldhoodPlus(0.0)(_ + _)(nbr(sense[Double]("temperature")))
+} {
+    0.0
+}
+val averageTemperature = areaTemperature / foldhoodPlus(0)(_ + _)(nbr(1))
+val alarm = branch(averageTemperature > 30)(true)(false)
+G[Boolean](areaId, alarm, _ || _, nbrRange)
+```

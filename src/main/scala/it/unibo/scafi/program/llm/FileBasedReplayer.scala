@@ -1,10 +1,10 @@
 package it.unibo.scafi.program.llm
 
 import scala.collection.mutable
-import scala.io.{ BufferedSource, Source }
-
-import cats.effect.{ IO, Resource }
+import scala.io.{BufferedSource, Source}
+import cats.effect.{IO, Resource}
 import it.unibo.scafi.program.utils.PromptUtils.generatePreamblePrompt
+import it.unibo.scafi.program.utils.StringUtils
 
 class FileBasedReplayer(val model: String) extends CodeGeneratorService:
   private val candidateKnowledgeFileNames = List(
@@ -31,6 +31,8 @@ class FileBasedReplayer(val model: String) extends CodeGeneratorService:
 
   private def readFile(src: Source): IO[String] = IO(src.getLines.mkString)
 
+  private def readFileBreakLines(src: Source): IO[String] = IO(src.getLines.mkString("\n"))
+
   private def closeSource(src: Source): IO[Unit] = IO(src.close)
 
   private def openKnowledgeFile(file: String): Resource[IO, BufferedSource] =
@@ -50,7 +52,7 @@ class FileBasedReplayer(val model: String) extends CodeGeneratorService:
     prompts.get(prompt)
 
   private def readLlmResponse(testFile: String, knowledgeDirectory: String, iteration: Int): IO[String] =
-    openKnowledgeFile(s"$model/$knowledgeDirectory/$testFile/$iteration.txt").use(readFile)
+    openKnowledgeFile(s"$model/$knowledgeDirectory/$testFile/$iteration.txt").use(readFileBreakLines)
 
   override def generateRaw(localKnowledge: String, preamble: String, prompt: String): IO[String] =
     for
@@ -59,7 +61,7 @@ class FileBasedReplayer(val model: String) extends CodeGeneratorService:
       counter = currentIterations((knowledgeFileName.get, testFileName.get))
       _ = currentIterations((knowledgeFileName.get, testFileName.get)) = counter + 1
       response <- readLlmResponse(testFileName.get, knowledgeFileName.get, counter)
-    yield response
+    yield StringUtils.refineOutput(response)
 
   override def generateMain(localKnowledge: String, prompt: String): IO[String] =
     generateRaw(localKnowledge, generatePreamblePrompt(), prompt)

@@ -1,0 +1,8 @@
+```scala
+val channelCreated = rep(false) { created =>
+  if (created) true
+  else if (sense[Boolean]("obstacle")) false
+  else if (mid() == "destination") true
+  else foldhood(created)(_ || _)(nbr(created))
+}
+```

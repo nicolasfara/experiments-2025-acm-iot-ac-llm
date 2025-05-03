@@ -1,0 +1,8 @@
+```scala
+def main() = {
+  def obstacleAvoidance = nbrRange() * branch(sense[Boolean]("obstacle"))(Double.PositiveInfinity)(1.0)
+  val potential = G[Double](sense[Boolean]("source"), 0, _ + obstacleAvoidance, obstacleAvoidance)
+  val pathConfirmed = C[Double, Boolean](potential, _ || _, sense[Boolean]("source"), false)
+  pathConfirmed
+}
+```

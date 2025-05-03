@@ -1,0 +1,7 @@
+Certainly! Based on the DSL for aggregate computing, you can count the neighbors (including the node itself) using the `foldhood` construct. Here is the raw Scala code for counting neighbors:
+
+```scala
+foldhood(0)(_ + _)(nbr(1))
+```
+
+This code will count the number of neighbors, including the current node, using the `foldhood` function. Each node contributes `1` to the count, and the results are combined across the neighborhood.

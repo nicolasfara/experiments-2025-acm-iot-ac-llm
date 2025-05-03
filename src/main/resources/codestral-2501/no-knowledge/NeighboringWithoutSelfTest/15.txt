@@ -1,0 +1,11 @@
+```scala
+val graph = scalfi.graph.Graph.fromAdjacencyMatrix(AdjacencyMatrix.fromBitMatrix(BitMatrix.fromSeqs(Seq(
+  Seq(0, 1, 0, 0),
+  Seq(1, 0, 1, 0),
+  Seq(0, 1, 0, 1),
+  Seq(0, 0, 1, 0)
+))))
+
+val neighborCounts = scalfi.graph.NeighborCount(graph)
+neighborCounts.run().get()
+```

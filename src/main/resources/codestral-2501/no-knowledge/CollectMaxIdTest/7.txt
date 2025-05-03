@@ -1,0 +1,5 @@
+```scala
+val maxId = Stream.aggregate((x: Int, y: Int) => Math.max(x, y))
+```
+
+This code uses the ScaFi library to compute the maximum ID in the whole network by aggregating the maximum value across all nodes.

@@ -1,0 +1,26 @@
+```scala
+import it.unibo.alchemist.model.implementations.positions.Euclidean2DPosition
+import it.unibo.alchemist.model.scafi.SCAFIAggregateFunction
+import it.unibo.alchemist.model.scafi.SCAFIIncarnationForAlchemist
+import it.unibo.alchemist.model.scafi.Aggregate
+
+val scafiIncarnation = SCAFIIncarnationForAlchemist
+
+val distanceThreshold = 1.0
+
+val myAggregate = new Aggregate[Euclidean2DPosition, Int] {
+  override def compute(
+    myPos: Euclidean2DPosition,
+    neighbors: Seq[(Euclidean2DPosition, Int)]
+  ): Int = {
+    neighbors.count { case (neighborPos, _) =>
+      myPos.euclideanDistance(neighborPos) < distanceThreshold
+    }
+  }
+}
+
+val aggregateFunction: SCAFIAggregateFunction[Euclidean2DPosition, Int] =
+  scafiIncarnation.createAggregate(myAggregate)
+
+val result = aggregateFunction(neighborPositions)
+```

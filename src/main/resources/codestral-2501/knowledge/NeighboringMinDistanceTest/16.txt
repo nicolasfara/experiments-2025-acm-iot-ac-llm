@@ -1,0 +1,5 @@
+To calculate the minimum distance from neighbors, we can use the `foldhood` construct to collect distances from all neighbors and then find the minimum distance using the `minHood` function. Here is the Scala code for calculating the minimum distance from neighbors:
+
+```scala
+minHood(nbrRange())
+```

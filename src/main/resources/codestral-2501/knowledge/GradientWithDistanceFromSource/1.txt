@@ -1,0 +1,7 @@
+```scala
+rep(0.0) { distance =>
+  foldhood(Double.PositiveInfinity) { (a, b) => Math.min(a, b) } {
+    if (sense[Boolean]("source")) 0.0 else nbr(distance) + 1.0
+  }
+}
+```

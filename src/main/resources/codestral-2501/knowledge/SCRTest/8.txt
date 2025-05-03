@@ -1,0 +1,28 @@
+```scala
+def main(): Double = {
+  val averageTemperature = foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature"))) / foldhood(0)(_ + _)(nbr(1))
+  if (averageTemperature > 30) {
+    foldhood(0.0)(_ + _)(nbr(if (averageTemperature > 30) 1.0 else 0.0))
+  } else {
+    0.0
+  }
+}
+```
+
+Here is the breakdown of the code:
+
+1. **Calculate Average Temperature:**
+   - `val averageTemperature = foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature"))) / foldhood(0)(_ + _)(nbr(1))`
+     - This computes the average temperature of all neighbors, including itself.
+
+2. **Check if Average Temperature is Above 30:**
+   - `if (averageTemperature > 30)`
+     - If the average temperature is above 30 degrees, proceed to the next step.
+
+3. **Broadcast Alarm Within the Area:**
+   - `foldhood(0.0)(_ + _)(nbr(if (averageTemperature > 30) 1.0 else 0.0))`
+     - This broadcasts an alarm (represented as `1.0`) to all neighbors if the average temperature is above 30 degrees.
+     - If the average temperature is not above 30 degrees, it returns `0.0`.
+
+4. **Return Result:**
+   - The result of the `foldhood` operation is returned, which represents the broadcasted alarm within the area.

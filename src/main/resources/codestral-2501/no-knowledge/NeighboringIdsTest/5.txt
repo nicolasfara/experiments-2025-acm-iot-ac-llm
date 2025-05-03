@@ -1,0 +1,15 @@
+```scala
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.Row
+import org.scalafi.core.DataFrameOps._
+import org.scalafi.spark.SparkSessionOps._
+
+val spark = SparkSession.builder().appName("Neighbor IDs").getOrCreate()
+import spark.implicits._
+
+val df = spark.read.csv("path/to/your/graph.csv").toDF("id", "neighbor_id")
+
+val result = df.groupBy("id").agg(collect_list("neighbor_id") as "neighbors")
+result.show()
+```

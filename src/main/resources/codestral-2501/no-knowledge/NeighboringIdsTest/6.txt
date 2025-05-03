@@ -1,0 +1,6 @@
+```scala
+ScaFi.main{ implicit sc: ScaFi =>
+  val neighborIDs = sc.aggregateNeighbors[Set[Long]](Set.empty)((a,b) => a ++ b)
+  neighborIDs
+}
+```

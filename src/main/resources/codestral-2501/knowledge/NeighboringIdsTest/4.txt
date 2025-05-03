@@ -1,0 +1,13 @@
+To gather a list of IDs of their neighbors in the distributed system, you can use the `nbr` and `foldhood` constructs. Here is how you can write the body of the `main` function to achieve this:
+
+```scala
+foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```
+
+This code snippet does the following:
+- `foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))`:
+  - `List.empty[ID]`: Initializes an empty list.
+  - `_ ++ _`: Combines the lists by concatenating them.
+  - `List(nbr(mid()))`: Creates a list containing the neighbor's ID.
+
+This will result in a list of IDs of all the neighbors of each node.

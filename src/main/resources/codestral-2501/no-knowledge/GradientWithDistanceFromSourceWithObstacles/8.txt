@@ -1,0 +1,9 @@
+```scala
+val distances = Aggregate("source")(
+  (currentDistance: Int, sensorValue: Boolean) => {
+    if (sensorValue) Int.MaxValue // avoid obstacles
+    else currentDistance + 1 // otherwise, increment distance
+  },
+  (d1: Int, d2: Int) => d1.min(d2) // reduce distances to find the minimum
+)
+```

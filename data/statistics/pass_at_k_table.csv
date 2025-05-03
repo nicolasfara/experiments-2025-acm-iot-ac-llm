@@ -1,463 +1,529 @@
-,model,knowledge,testName,pass@1,pass@5,pass@10
-26,Claude 3.7B Sonnet,No Knowledge,Count Down,0.0000,0.0000,0.0000
-30,Claude 3.7B Sonnet,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000
-31,Claude 3.7B Sonnet,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000
-29,Claude 3.7B Sonnet,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000
-24,Claude 3.7B Sonnet,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-25,Claude 3.7B Sonnet,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000
-22,Claude 3.7B Sonnet,No Knowledge,Calculate Gradient,0.0500,0.2500,0.5000
-23,Claude 3.7B Sonnet,No Knowledge,Calculate Gradient (Obstacles),0.0500,0.2500,0.5000
-27,Claude 3.7B Sonnet,No Knowledge,Create Channel,0.0000,0.0000,0.0000
-28,Claude 3.7B Sonnet,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-32,Claude 3.7B Sonnet,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-4,Claude 3.7B Sonnet,Basic Knowledge,Count Down,1.0000,1.0000,1.0000
-8,Claude 3.7B Sonnet,Basic Knowledge,Neighbors Count,1.0000,1.0000,1.0000
-9,Claude 3.7B Sonnet,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-7,Claude 3.7B Sonnet,Basic Knowledge,Gather Neighbors IDs,0.9000,1.0000,1.0000
-2,Claude 3.7B Sonnet,Basic Knowledge,Calculate Min Distance Neighbors,0.6500,0.9986,1.0000
-3,Claude 3.7B Sonnet,Basic Knowledge,Collect Max ID,1.0000,1.0000,1.0000
-0,Claude 3.7B Sonnet,Basic Knowledge,Calculate Gradient,0.9000,1.0000,1.0000
-1,Claude 3.7B Sonnet,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-5,Claude 3.7B Sonnet,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000
-6,Claude 3.7B Sonnet,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-10,Claude 3.7B Sonnet,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-15,Claude 3.7B Sonnet,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000
-19,Claude 3.7B Sonnet,Knowledge with Building Blocks,Neighbors Count,0.9500,1.0000,1.0000
-20,Claude 3.7B Sonnet,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-18,Claude 3.7B Sonnet,Knowledge with Building Blocks,Gather Neighbors IDs,0.7500,0.9999,1.0000
-13,Claude 3.7B Sonnet,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.5500,0.9919,1.0000
-14,Claude 3.7B Sonnet,Knowledge with Building Blocks,Collect Max ID,0.9000,1.0000,1.0000
-11,Claude 3.7B Sonnet,Knowledge with Building Blocks,Calculate Gradient,0.9000,1.0000,1.0000
-12,Claude 3.7B Sonnet,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.2000,0.7183,0.9567
-16,Claude 3.7B Sonnet,Knowledge with Building Blocks,Create Channel,0.0000,0.0000,0.0000
-17,Claude 3.7B Sonnet,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000
-21,Claude 3.7B Sonnet,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000
-59,GPT-4.1 Mini,No Knowledge,Count Down,0.1500,0.6009,0.8947
-63,GPT-4.1 Mini,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000
-64,GPT-4.1 Mini,No Knowledge,Neighbors Count Excluding Self,0.0500,0.2500,0.5000
-62,GPT-4.1 Mini,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000
-57,GPT-4.1 Mini,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-58,GPT-4.1 Mini,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000
-55,GPT-4.1 Mini,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-56,GPT-4.1 Mini,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-60,GPT-4.1 Mini,No Knowledge,Create Channel,0.0000,0.0000,0.0000
-61,GPT-4.1 Mini,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-65,GPT-4.1 Mini,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-37,GPT-4.1 Mini,Basic Knowledge,Count Down,1.0000,1.0000,1.0000
-41,GPT-4.1 Mini,Basic Knowledge,Neighbors Count,1.0000,1.0000,1.0000
-42,GPT-4.1 Mini,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-40,GPT-4.1 Mini,Basic Knowledge,Gather Neighbors IDs,0.1000,0.4474,0.7632
-35,GPT-4.1 Mini,Basic Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-36,GPT-4.1 Mini,Basic Knowledge,Collect Max ID,1.0000,1.0000,1.0000
-33,GPT-4.1 Mini,Basic Knowledge,Calculate Gradient,0.8500,1.0000,1.0000
-34,GPT-4.1 Mini,Basic Knowledge,Calculate Gradient (Obstacles),0.4000,0.9489,0.9996
-38,GPT-4.1 Mini,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000
-39,GPT-4.1 Mini,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-43,GPT-4.1 Mini,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-48,GPT-4.1 Mini,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000
-52,GPT-4.1 Mini,Knowledge with Building Blocks,Neighbors Count,1.0000,1.0000,1.0000
-53,GPT-4.1 Mini,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-51,GPT-4.1 Mini,Knowledge with Building Blocks,Gather Neighbors IDs,0.6000,0.9964,1.0000
-46,GPT-4.1 Mini,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-47,GPT-4.1 Mini,Knowledge with Building Blocks,Collect Max ID,1.0000,1.0000,1.0000
-44,GPT-4.1 Mini,Knowledge with Building Blocks,Calculate Gradient,0.7500,0.9999,1.0000
-45,GPT-4.1 Mini,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-49,GPT-4.1 Mini,Knowledge with Building Blocks,Create Channel,0.1000,0.4474,0.7632
-50,GPT-4.1 Mini,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000
-54,GPT-4.1 Mini,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000
-92,Gemini 1.5 Flash,No Knowledge,Count Down,0.0000,0.0000,0.0000
-96,Gemini 1.5 Flash,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000
-97,Gemini 1.5 Flash,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000
-95,Gemini 1.5 Flash,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000
-90,Gemini 1.5 Flash,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-91,Gemini 1.5 Flash,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000
-88,Gemini 1.5 Flash,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-89,Gemini 1.5 Flash,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-93,Gemini 1.5 Flash,No Knowledge,Create Channel,0.0000,0.0000,0.0000
-94,Gemini 1.5 Flash,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-98,Gemini 1.5 Flash,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-70,Gemini 1.5 Flash,Basic Knowledge,Count Down,1.0000,1.0000,1.0000
-74,Gemini 1.5 Flash,Basic Knowledge,Neighbors Count,1.0000,1.0000,1.0000
-75,Gemini 1.5 Flash,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-73,Gemini 1.5 Flash,Basic Knowledge,Gather Neighbors IDs,1.0000,1.0000,1.0000
-68,Gemini 1.5 Flash,Basic Knowledge,Calculate Min Distance Neighbors,1.0000,1.0000,1.0000
-69,Gemini 1.5 Flash,Basic Knowledge,Collect Max ID,1.0000,1.0000,1.0000
-66,Gemini 1.5 Flash,Basic Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-67,Gemini 1.5 Flash,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-71,Gemini 1.5 Flash,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000
-72,Gemini 1.5 Flash,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-76,Gemini 1.5 Flash,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-81,Gemini 1.5 Flash,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000
-85,Gemini 1.5 Flash,Knowledge with Building Blocks,Neighbors Count,1.0000,1.0000,1.0000
-86,Gemini 1.5 Flash,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-84,Gemini 1.5 Flash,Knowledge with Building Blocks,Gather Neighbors IDs,1.0000,1.0000,1.0000
-79,Gemini 1.5 Flash,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-80,Gemini 1.5 Flash,Knowledge with Building Blocks,Collect Max ID,1.0000,1.0000,1.0000
-77,Gemini 1.5 Flash,Knowledge with Building Blocks,Calculate Gradient,0.0000,0.0000,0.0000
-78,Gemini 1.5 Flash,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-82,Gemini 1.5 Flash,Knowledge with Building Blocks,Create Channel,0.0000,0.0000,0.0000
-83,Gemini 1.5 Flash,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000
-87,Gemini 1.5 Flash,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000
-125,Gemini 2.0 Flash Exp,No Knowledge,Count Down,0.0000,0.0000,0.0000
-129,Gemini 2.0 Flash Exp,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000
-130,Gemini 2.0 Flash Exp,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000
-128,Gemini 2.0 Flash Exp,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000
-123,Gemini 2.0 Flash Exp,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-124,Gemini 2.0 Flash Exp,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000
-121,Gemini 2.0 Flash Exp,No Knowledge,Calculate Gradient,0.1000,0.4474,0.7632
-122,Gemini 2.0 Flash Exp,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-126,Gemini 2.0 Flash Exp,No Knowledge,Create Channel,0.0000,0.0000,0.0000
-127,Gemini 2.0 Flash Exp,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-131,Gemini 2.0 Flash Exp,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-103,Gemini 2.0 Flash Exp,Basic Knowledge,Count Down,1.0000,1.0000,1.0000
-107,Gemini 2.0 Flash Exp,Basic Knowledge,Neighbors Count,1.0000,1.0000,1.0000
-108,Gemini 2.0 Flash Exp,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-106,Gemini 2.0 Flash Exp,Basic Knowledge,Gather Neighbors IDs,0.8500,1.0000,1.0000
-101,Gemini 2.0 Flash Exp,Basic Knowledge,Calculate Min Distance Neighbors,1.0000,1.0000,1.0000
-102,Gemini 2.0 Flash Exp,Basic Knowledge,Collect Max ID,0.6500,0.9986,1.0000
-99,Gemini 2.0 Flash Exp,Basic Knowledge,Calculate Gradient,1.0000,1.0000,1.0000
-100,Gemini 2.0 Flash Exp,Basic Knowledge,Calculate Gradient (Obstacles),0.1000,0.4474,0.7632
-104,Gemini 2.0 Flash Exp,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000
-105,Gemini 2.0 Flash Exp,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-109,Gemini 2.0 Flash Exp,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-114,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000
-118,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Neighbors Count,1.0000,1.0000,1.0000
-119,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-117,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Gather Neighbors IDs,0.0500,0.2500,0.5000
-112,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-113,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Collect Max ID,0.8500,1.0000,1.0000
-110,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Calculate Gradient,1.0000,1.0000,1.0000
-111,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.2000,0.7183,0.9567
-115,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Create Channel,0.6000,0.9964,1.0000
-116,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Create Channel (Obstacles),0.3000,0.8709,0.9946
-120,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,SCR Temperature Above 30,0.5500,0.9919,1.0000
-158,Gemini 2.5 Pro,No Knowledge,Count Down,0.9500,1.0000,1.0000
-162,Gemini 2.5 Pro,No Knowledge,Neighbors Count,0.4000,0.9489,0.9996
-163,Gemini 2.5 Pro,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000
-161,Gemini 2.5 Pro,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000
-156,Gemini 2.5 Pro,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-157,Gemini 2.5 Pro,No Knowledge,Collect Max ID,0.6000,0.9964,1.0000
-154,Gemini 2.5 Pro,No Knowledge,Calculate Gradient,0.4000,0.9489,0.9996
-155,Gemini 2.5 Pro,No Knowledge,Calculate Gradient (Obstacles),0.6000,0.9964,1.0000
-159,Gemini 2.5 Pro,No Knowledge,Create Channel,0.0500,0.2500,0.5000
-160,Gemini 2.5 Pro,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-164,Gemini 2.5 Pro,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-136,Gemini 2.5 Pro,Basic Knowledge,Count Down,1.0000,1.0000,1.0000
-140,Gemini 2.5 Pro,Basic Knowledge,Neighbors Count,0.6000,0.9964,1.0000
-141,Gemini 2.5 Pro,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-139,Gemini 2.5 Pro,Basic Knowledge,Gather Neighbors IDs,0.6500,0.9986,1.0000
-134,Gemini 2.5 Pro,Basic Knowledge,Calculate Min Distance Neighbors,1.0000,1.0000,1.0000
-135,Gemini 2.5 Pro,Basic Knowledge,Collect Max ID,1.0000,1.0000,1.0000
-132,Gemini 2.5 Pro,Basic Knowledge,Calculate Gradient,1.0000,1.0000,1.0000
-133,Gemini 2.5 Pro,Basic Knowledge,Calculate Gradient (Obstacles),1.0000,1.0000,1.0000
-137,Gemini 2.5 Pro,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000
-138,Gemini 2.5 Pro,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-142,Gemini 2.5 Pro,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-147,Gemini 2.5 Pro,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000
-151,Gemini 2.5 Pro,Knowledge with Building Blocks,Neighbors Count,0.7000,0.9996,1.0000
-152,Gemini 2.5 Pro,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-150,Gemini 2.5 Pro,Knowledge with Building Blocks,Gather Neighbors IDs,0.4000,0.9489,0.9996
-145,Gemini 2.5 Pro,Knowledge with Building Blocks,Calculate Min Distance Neighbors,1.0000,1.0000,1.0000
-146,Gemini 2.5 Pro,Knowledge with Building Blocks,Collect Max ID,1.0000,1.0000,1.0000
-143,Gemini 2.5 Pro,Knowledge with Building Blocks,Calculate Gradient,1.0000,1.0000,1.0000
-144,Gemini 2.5 Pro,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.1000,0.4474,0.7632
-148,Gemini 2.5 Pro,Knowledge with Building Blocks,Create Channel,0.8000,1.0000,1.0000
-149,Gemini 2.5 Pro,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000
-153,Gemini 2.5 Pro,Knowledge with Building Blocks,SCR Temperature Above 30,0.0500,0.2500,0.5000
-191,Gemma 3.12B Instruct,No Knowledge,Count Down,0.0000,0.0000,0.0000
-195,Gemma 3.12B Instruct,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000
-196,Gemma 3.12B Instruct,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000
-194,Gemma 3.12B Instruct,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000
-189,Gemma 3.12B Instruct,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-190,Gemma 3.12B Instruct,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000
-187,Gemma 3.12B Instruct,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-188,Gemma 3.12B Instruct,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-192,Gemma 3.12B Instruct,No Knowledge,Create Channel,0.0000,0.0000,0.0000
-193,Gemma 3.12B Instruct,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-197,Gemma 3.12B Instruct,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-169,Gemma 3.12B Instruct,Basic Knowledge,Count Down,1.0000,1.0000,1.0000
-173,Gemma 3.12B Instruct,Basic Knowledge,Neighbors Count,1.0000,1.0000,1.0000
-174,Gemma 3.12B Instruct,Basic Knowledge,Neighbors Count Excluding Self,0.9500,1.0000,1.0000
-172,Gemma 3.12B Instruct,Basic Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000
-167,Gemma 3.12B Instruct,Basic Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-168,Gemma 3.12B Instruct,Basic Knowledge,Collect Max ID,0.8500,1.0000,1.0000
-165,Gemma 3.12B Instruct,Basic Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-166,Gemma 3.12B Instruct,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-170,Gemma 3.12B Instruct,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000
-171,Gemma 3.12B Instruct,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-175,Gemma 3.12B Instruct,Basic Knowledge,SCR Temperature Above 30,0.4000,0.9489,0.9996
-180,Gemma 3.12B Instruct,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000
-184,Gemma 3.12B Instruct,Knowledge with Building Blocks,Neighbors Count,1.0000,1.0000,1.0000
-185,Gemma 3.12B Instruct,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-183,Gemma 3.12B Instruct,Knowledge with Building Blocks,Gather Neighbors IDs,0.0000,0.0000,0.0000
-178,Gemma 3.12B Instruct,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.3500,0.9170,0.9985
-179,Gemma 3.12B Instruct,Knowledge with Building Blocks,Collect Max ID,0.0000,0.0000,0.0000
-176,Gemma 3.12B Instruct,Knowledge with Building Blocks,Calculate Gradient,0.0000,0.0000,0.0000
-177,Gemma 3.12B Instruct,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-181,Gemma 3.12B Instruct,Knowledge with Building Blocks,Create Channel,0.0000,0.0000,0.0000
-182,Gemma 3.12B Instruct,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000
-186,Gemma 3.12B Instruct,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000
-224,Gemma 3.27B Instruct,No Knowledge,Count Down,0.0000,0.0000,0.0000
-228,Gemma 3.27B Instruct,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000
-229,Gemma 3.27B Instruct,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000
-227,Gemma 3.27B Instruct,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000
-222,Gemma 3.27B Instruct,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-223,Gemma 3.27B Instruct,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000
-220,Gemma 3.27B Instruct,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-221,Gemma 3.27B Instruct,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-225,Gemma 3.27B Instruct,No Knowledge,Create Channel,0.0000,0.0000,0.0000
-226,Gemma 3.27B Instruct,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-230,Gemma 3.27B Instruct,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-202,Gemma 3.27B Instruct,Basic Knowledge,Count Down,1.0000,1.0000,1.0000
-206,Gemma 3.27B Instruct,Basic Knowledge,Neighbors Count,0.9500,1.0000,1.0000
-207,Gemma 3.27B Instruct,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-205,Gemma 3.27B Instruct,Basic Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000
-200,Gemma 3.27B Instruct,Basic Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-201,Gemma 3.27B Instruct,Basic Knowledge,Collect Max ID,0.0000,0.0000,0.0000
-198,Gemma 3.27B Instruct,Basic Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-199,Gemma 3.27B Instruct,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-203,Gemma 3.27B Instruct,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000
-204,Gemma 3.27B Instruct,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-208,Gemma 3.27B Instruct,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-213,Gemma 3.27B Instruct,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000
-217,Gemma 3.27B Instruct,Knowledge with Building Blocks,Neighbors Count,1.0000,1.0000,1.0000
-218,Gemma 3.27B Instruct,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-216,Gemma 3.27B Instruct,Knowledge with Building Blocks,Gather Neighbors IDs,0.0000,0.0000,0.0000
-211,Gemma 3.27B Instruct,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.8000,1.0000,1.0000
-212,Gemma 3.27B Instruct,Knowledge with Building Blocks,Collect Max ID,0.0000,0.0000,0.0000
-209,Gemma 3.27B Instruct,Knowledge with Building Blocks,Calculate Gradient,0.2000,0.7183,0.9567
-210,Gemma 3.27B Instruct,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-214,Gemma 3.27B Instruct,Knowledge with Building Blocks,Create Channel,0.0500,0.2500,0.5000
-215,Gemma 3.27B Instruct,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000
-219,Gemma 3.27B Instruct,Knowledge with Building Blocks,SCR Temperature Above 30,0.1000,0.4474,0.7632
-257,Gemma 3.4B Instruct,No Knowledge,Count Down,0.0000,0.0000,0.0000
-261,Gemma 3.4B Instruct,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000
-262,Gemma 3.4B Instruct,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000
-260,Gemma 3.4B Instruct,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000
-255,Gemma 3.4B Instruct,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-256,Gemma 3.4B Instruct,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000
-253,Gemma 3.4B Instruct,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-254,Gemma 3.4B Instruct,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-258,Gemma 3.4B Instruct,No Knowledge,Create Channel,0.0000,0.0000,0.0000
-259,Gemma 3.4B Instruct,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-263,Gemma 3.4B Instruct,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-235,Gemma 3.4B Instruct,Basic Knowledge,Count Down,0.8500,1.0000,1.0000
-239,Gemma 3.4B Instruct,Basic Knowledge,Neighbors Count,0.0000,0.0000,0.0000
-240,Gemma 3.4B Instruct,Basic Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000
-238,Gemma 3.4B Instruct,Basic Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000
-233,Gemma 3.4B Instruct,Basic Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-234,Gemma 3.4B Instruct,Basic Knowledge,Collect Max ID,0.6500,0.9986,1.0000
-231,Gemma 3.4B Instruct,Basic Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-232,Gemma 3.4B Instruct,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-236,Gemma 3.4B Instruct,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000
-237,Gemma 3.4B Instruct,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-241,Gemma 3.4B Instruct,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-246,Gemma 3.4B Instruct,Knowledge with Building Blocks,Count Down,0.9500,1.0000,1.0000
-250,Gemma 3.4B Instruct,Knowledge with Building Blocks,Neighbors Count,0.0000,0.0000,0.0000
-251,Gemma 3.4B Instruct,Knowledge with Building Blocks,Neighbors Count Excluding Self,0.0000,0.0000,0.0000
-249,Gemma 3.4B Instruct,Knowledge with Building Blocks,Gather Neighbors IDs,0.0000,0.0000,0.0000
-244,Gemma 3.4B Instruct,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-245,Gemma 3.4B Instruct,Knowledge with Building Blocks,Collect Max ID,0.0000,0.0000,0.0000
-242,Gemma 3.4B Instruct,Knowledge with Building Blocks,Calculate Gradient,0.0000,0.0000,0.0000
-243,Gemma 3.4B Instruct,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-247,Gemma 3.4B Instruct,Knowledge with Building Blocks,Create Channel,0.0000,0.0000,0.0000
-248,Gemma 3.4B Instruct,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000
-252,Gemma 3.4B Instruct,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000
-290,Llama 3.1 405B Instruct,No Knowledge,Count Down,0.0000,0.0000,0.0000
-294,Llama 3.1 405B Instruct,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000
-295,Llama 3.1 405B Instruct,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000
-293,Llama 3.1 405B Instruct,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000
-288,Llama 3.1 405B Instruct,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-289,Llama 3.1 405B Instruct,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000
-286,Llama 3.1 405B Instruct,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-287,Llama 3.1 405B Instruct,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-291,Llama 3.1 405B Instruct,No Knowledge,Create Channel,0.0000,0.0000,0.0000
-292,Llama 3.1 405B Instruct,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-296,Llama 3.1 405B Instruct,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-268,Llama 3.1 405B Instruct,Basic Knowledge,Count Down,0.8500,1.0000,1.0000
-272,Llama 3.1 405B Instruct,Basic Knowledge,Neighbors Count,0.2500,0.8063,0.9837
-273,Llama 3.1 405B Instruct,Basic Knowledge,Neighbors Count Excluding Self,0.9500,1.0000,1.0000
-271,Llama 3.1 405B Instruct,Basic Knowledge,Gather Neighbors IDs,0.6500,0.9986,1.0000
-266,Llama 3.1 405B Instruct,Basic Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-267,Llama 3.1 405B Instruct,Basic Knowledge,Collect Max ID,0.2500,0.8063,0.9837
-264,Llama 3.1 405B Instruct,Basic Knowledge,Calculate Gradient,0.1000,0.4474,0.7632
-265,Llama 3.1 405B Instruct,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-269,Llama 3.1 405B Instruct,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000
-270,Llama 3.1 405B Instruct,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-274,Llama 3.1 405B Instruct,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-279,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000
-283,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Neighbors Count,0.2500,0.8063,0.9837
-284,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Neighbors Count Excluding Self,0.7000,0.9996,1.0000
-282,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Gather Neighbors IDs,0.6000,0.9964,1.0000
-277,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-278,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Collect Max ID,0.5000,0.9837,1.0000
-275,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Calculate Gradient,0.3500,0.9170,0.9985
-276,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-280,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Create Channel,0.0000,0.0000,0.0000
-281,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000
-285,Llama 3.1 405B Instruct,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000
-323,Llama 3.3 70B Instruct,No Knowledge,Count Down,0.0000,0.0000,0.0000
-327,Llama 3.3 70B Instruct,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000
-328,Llama 3.3 70B Instruct,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000
-326,Llama 3.3 70B Instruct,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000
-321,Llama 3.3 70B Instruct,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-322,Llama 3.3 70B Instruct,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000
-319,Llama 3.3 70B Instruct,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-320,Llama 3.3 70B Instruct,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-324,Llama 3.3 70B Instruct,No Knowledge,Create Channel,0.0000,0.0000,0.0000
-325,Llama 3.3 70B Instruct,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-329,Llama 3.3 70B Instruct,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-301,Llama 3.3 70B Instruct,Basic Knowledge,Count Down,1.0000,1.0000,1.0000
-305,Llama 3.3 70B Instruct,Basic Knowledge,Neighbors Count,1.0000,1.0000,1.0000
-306,Llama 3.3 70B Instruct,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-304,Llama 3.3 70B Instruct,Basic Knowledge,Gather Neighbors IDs,1.0000,1.0000,1.0000
-299,Llama 3.3 70B Instruct,Basic Knowledge,Calculate Min Distance Neighbors,0.5500,0.9919,1.0000
-300,Llama 3.3 70B Instruct,Basic Knowledge,Collect Max ID,0.4000,0.9489,0.9996
-297,Llama 3.3 70B Instruct,Basic Knowledge,Calculate Gradient,0.1500,0.6009,0.8947
-298,Llama 3.3 70B Instruct,Basic Knowledge,Calculate Gradient (Obstacles),0.0500,0.2500,0.5000
-302,Llama 3.3 70B Instruct,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000
-303,Llama 3.3 70B Instruct,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-307,Llama 3.3 70B Instruct,Basic Knowledge,SCR Temperature Above 30,0.1500,0.6009,0.8947
-312,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000
-316,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Neighbors Count,1.0000,1.0000,1.0000
-317,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-315,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Gather Neighbors IDs,0.9500,1.0000,1.0000
-310,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-311,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Collect Max ID,0.4000,0.9489,0.9996
-308,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Calculate Gradient,0.4500,0.9702,0.9999
-309,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-313,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Create Channel,0.0000,0.0000,0.0000
-314,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000
-318,Llama 3.3 70B Instruct,Knowledge with Building Blocks,SCR Temperature Above 30,0.1000,0.4474,0.7632
-356,Llama 4 Scout,No Knowledge,Count Down,0.0000,0.0000,0.0000
-360,Llama 4 Scout,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000
-361,Llama 4 Scout,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000
-359,Llama 4 Scout,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000
-354,Llama 4 Scout,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-355,Llama 4 Scout,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000
-352,Llama 4 Scout,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-353,Llama 4 Scout,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-357,Llama 4 Scout,No Knowledge,Create Channel,0.0000,0.0000,0.0000
-358,Llama 4 Scout,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-362,Llama 4 Scout,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-334,Llama 4 Scout,Basic Knowledge,Count Down,0.9000,1.0000,1.0000
-338,Llama 4 Scout,Basic Knowledge,Neighbors Count,0.6500,0.9986,1.0000
-339,Llama 4 Scout,Basic Knowledge,Neighbors Count Excluding Self,0.9500,1.0000,1.0000
-337,Llama 4 Scout,Basic Knowledge,Gather Neighbors IDs,0.4500,0.9702,0.9999
-332,Llama 4 Scout,Basic Knowledge,Calculate Min Distance Neighbors,0.0500,0.2500,0.5000
-333,Llama 4 Scout,Basic Knowledge,Collect Max ID,0.3000,0.8709,0.9946
-330,Llama 4 Scout,Basic Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-331,Llama 4 Scout,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-335,Llama 4 Scout,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000
-336,Llama 4 Scout,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-340,Llama 4 Scout,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-345,Llama 4 Scout,Knowledge with Building Blocks,Count Down,0.8500,1.0000,1.0000
-349,Llama 4 Scout,Knowledge with Building Blocks,Neighbors Count,0.4000,0.9489,0.9996
-350,Llama 4 Scout,Knowledge with Building Blocks,Neighbors Count Excluding Self,0.9000,1.0000,1.0000
-348,Llama 4 Scout,Knowledge with Building Blocks,Gather Neighbors IDs,0.8000,1.0000,1.0000
-343,Llama 4 Scout,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.0500,0.2500,0.5000
-344,Llama 4 Scout,Knowledge with Building Blocks,Collect Max ID,0.0000,0.0000,0.0000
-341,Llama 4 Scout,Knowledge with Building Blocks,Calculate Gradient,0.0500,0.2500,0.5000
-342,Llama 4 Scout,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-346,Llama 4 Scout,Knowledge with Building Blocks,Create Channel,0.1500,0.6009,0.8947
-347,Llama 4 Scout,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000
-351,Llama 4 Scout,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000
-389,Mistral 3.1 24B Instruct,No Knowledge,Count Down,0.0000,0.0000,0.0000
-393,Mistral 3.1 24B Instruct,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000
-394,Mistral 3.1 24B Instruct,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000
-392,Mistral 3.1 24B Instruct,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000
-387,Mistral 3.1 24B Instruct,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-388,Mistral 3.1 24B Instruct,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000
-385,Mistral 3.1 24B Instruct,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-386,Mistral 3.1 24B Instruct,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-390,Mistral 3.1 24B Instruct,No Knowledge,Create Channel,0.0000,0.0000,0.0000
-391,Mistral 3.1 24B Instruct,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-395,Mistral 3.1 24B Instruct,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-367,Mistral 3.1 24B Instruct,Basic Knowledge,Count Down,1.0000,1.0000,1.0000
-371,Mistral 3.1 24B Instruct,Basic Knowledge,Neighbors Count,1.0000,1.0000,1.0000
-372,Mistral 3.1 24B Instruct,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-370,Mistral 3.1 24B Instruct,Basic Knowledge,Gather Neighbors IDs,0.9000,1.0000,1.0000
-365,Mistral 3.1 24B Instruct,Basic Knowledge,Calculate Min Distance Neighbors,0.1000,0.4474,0.7632
-366,Mistral 3.1 24B Instruct,Basic Knowledge,Collect Max ID,0.5500,0.9919,1.0000
-363,Mistral 3.1 24B Instruct,Basic Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-364,Mistral 3.1 24B Instruct,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-368,Mistral 3.1 24B Instruct,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000
-369,Mistral 3.1 24B Instruct,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-373,Mistral 3.1 24B Instruct,Basic Knowledge,SCR Temperature Above 30,0.0500,0.2500,0.5000
-378,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000
-382,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Neighbors Count,1.0000,1.0000,1.0000
-383,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-381,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Gather Neighbors IDs,0.7000,0.9996,1.0000
-376,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.1000,0.4474,0.7632
-377,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Collect Max ID,0.6500,0.9986,1.0000
-374,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Calculate Gradient,0.1000,0.4474,0.7632
-375,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-379,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Create Channel,0.0000,0.0000,0.0000
-380,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000
-384,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000
-422,Mistral 8B,No Knowledge,Count Down,0.0000,0.0000,0.0000
-426,Mistral 8B,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000
-427,Mistral 8B,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000
-425,Mistral 8B,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000
-420,Mistral 8B,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-421,Mistral 8B,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000
-418,Mistral 8B,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-419,Mistral 8B,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-423,Mistral 8B,No Knowledge,Create Channel,0.0000,0.0000,0.0000
-424,Mistral 8B,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-428,Mistral 8B,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-400,Mistral 8B,Basic Knowledge,Count Down,0.0000,0.0000,0.0000
-404,Mistral 8B,Basic Knowledge,Neighbors Count,0.0000,0.0000,0.0000
-405,Mistral 8B,Basic Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000
-403,Mistral 8B,Basic Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000
-398,Mistral 8B,Basic Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-399,Mistral 8B,Basic Knowledge,Collect Max ID,0.0000,0.0000,0.0000
-396,Mistral 8B,Basic Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-397,Mistral 8B,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-401,Mistral 8B,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000
-402,Mistral 8B,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-406,Mistral 8B,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-411,Mistral 8B,Knowledge with Building Blocks,Count Down,0.0000,0.0000,0.0000
-415,Mistral 8B,Knowledge with Building Blocks,Neighbors Count,0.0000,0.0000,0.0000
-416,Mistral 8B,Knowledge with Building Blocks,Neighbors Count Excluding Self,0.0500,0.2500,0.5000
-414,Mistral 8B,Knowledge with Building Blocks,Gather Neighbors IDs,0.0000,0.0000,0.0000
-409,Mistral 8B,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-410,Mistral 8B,Knowledge with Building Blocks,Collect Max ID,0.0000,0.0000,0.0000
-407,Mistral 8B,Knowledge with Building Blocks,Calculate Gradient,0.0000,0.0000,0.0000
-408,Mistral 8B,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-412,Mistral 8B,Knowledge with Building Blocks,Create Channel,0.0000,0.0000,0.0000
-413,Mistral 8B,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000
-417,Mistral 8B,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000
-455,Qwen 2.5 Coder 32B Instruct,No Knowledge,Count Down,0.0000,0.0000,0.0000
-459,Qwen 2.5 Coder 32B Instruct,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000
-460,Qwen 2.5 Coder 32B Instruct,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000
-458,Qwen 2.5 Coder 32B Instruct,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000
-453,Qwen 2.5 Coder 32B Instruct,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000
-454,Qwen 2.5 Coder 32B Instruct,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000
-451,Qwen 2.5 Coder 32B Instruct,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-452,Qwen 2.5 Coder 32B Instruct,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-456,Qwen 2.5 Coder 32B Instruct,No Knowledge,Create Channel,0.0000,0.0000,0.0000
-457,Qwen 2.5 Coder 32B Instruct,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-461,Qwen 2.5 Coder 32B Instruct,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000
-433,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Count Down,1.0000,1.0000,1.0000
-437,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Neighbors Count,1.0000,1.0000,1.0000
-438,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-436,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Gather Neighbors IDs,0.3000,0.8709,0.9946
-431,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Calculate Min Distance Neighbors,0.7000,0.9996,1.0000
-432,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Collect Max ID,0.2000,0.7183,0.9567
-429,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Calculate Gradient,0.0000,0.0000,0.0000
-430,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-434,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000
-435,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000
-439,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,SCR Temperature Above 30,0.1000,0.4474,0.7632
-444,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000
-448,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Neighbors Count,0.9000,1.0000,1.0000
-449,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000
-447,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Gather Neighbors IDs,0.3000,0.8709,0.9946
-442,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.3000,0.8709,0.9946
-443,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Collect Max ID,0.0000,0.0000,0.0000
-440,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Calculate Gradient,0.1500,0.6009,0.8947
-441,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000
-445,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Create Channel,0.0500,0.2500,0.5000
-446,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000
-450,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000
+,model,knowledge,testName,pass@1,pass@5,pass@10,compile@1,compile@5,compile@10
+26,Claude 3.7B Sonnet,No Knowledge,Count Down,0.1500,0.6009,0.8947,0.35,0.9169891640866873,0.9984520123839009
+30,Claude 3.7B Sonnet,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+31,Claude 3.7B Sonnet,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000,0.19999999999999996,0.7182662538699691,0.956656346749226
+29,Claude 3.7B Sonnet,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+24,Claude 3.7B Sonnet,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.15000000000000002,0.6008771929824561,0.8947368421052632
+25,Claude 3.7B Sonnet,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000,0.5,0.9837461300309598,0.9999945874558878
+22,Claude 3.7B Sonnet,No Knowledge,Calculate Gradient,0.0500,0.2500,0.5000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+23,Claude 3.7B Sonnet,No Knowledge,Calculate Gradient (Obstacles),0.0500,0.2500,0.5000,0.050000000000000044,0.25,0.5
+27,Claude 3.7B Sonnet,No Knowledge,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+28,Claude 3.7B Sonnet,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.15000000000000002,0.6008771929824561,0.8947368421052632
+32,Claude 3.7B Sonnet,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.0,0.0,0.0
+4,Claude 3.7B Sonnet,Basic Knowledge,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+8,Claude 3.7B Sonnet,Basic Knowledge,Neighbors Count,1.0000,1.0000,1.0000,1.0,1.0,1.0
+9,Claude 3.7B Sonnet,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+7,Claude 3.7B Sonnet,Basic Knowledge,Gather Neighbors IDs,0.9000,1.0000,1.0000,0.95,1.0,1.0
+2,Claude 3.7B Sonnet,Basic Knowledge,Calculate Min Distance Neighbors,0.7000,0.9996,1.0000,0.9,1.0,1.0
+3,Claude 3.7B Sonnet,Basic Knowledge,Collect Max ID,1.0000,1.0000,1.0000,1.0,1.0,1.0
+0,Claude 3.7B Sonnet,Basic Knowledge,Calculate Gradient,0.9000,1.0000,1.0000,0.95,1.0,1.0
+1,Claude 3.7B Sonnet,Basic Knowledge,Calculate Gradient (Obstacles),0.2500,0.8063,0.9837,0.8,1.0,1.0
+5,Claude 3.7B Sonnet,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000,0.5,0.9837461300309598,0.9999945874558878
+6,Claude 3.7B Sonnet,Basic Knowledge,Create Channel (Obstacles),0.1000,0.4474,0.7632,0.75,0.9999355005159959,1.0
+10,Claude 3.7B Sonnet,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.30000000000000004,0.8708720330237358,0.9945820433436533
+15,Claude 3.7B Sonnet,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+19,Claude 3.7B Sonnet,Knowledge with Building Blocks,Neighbors Count,0.9500,1.0000,1.0000,1.0,1.0,1.0
+20,Claude 3.7B Sonnet,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+18,Claude 3.7B Sonnet,Knowledge with Building Blocks,Gather Neighbors IDs,0.8000,1.0000,1.0000,0.85,1.0,1.0
+13,Claude 3.7B Sonnet,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.5500,0.9919,1.0000,1.0,1.0,1.0
+14,Claude 3.7B Sonnet,Knowledge with Building Blocks,Collect Max ID,0.9000,1.0000,1.0000,0.95,1.0,1.0
+11,Claude 3.7B Sonnet,Knowledge with Building Blocks,Calculate Gradient,1.0000,1.0000,1.0000,1.0,1.0,1.0
+12,Claude 3.7B Sonnet,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.2000,0.7183,0.9567,1.0,1.0,1.0
+16,Claude 3.7B Sonnet,Knowledge with Building Blocks,Create Channel,0.1000,0.4474,0.7632,0.9,1.0,1.0
+17,Claude 3.7B Sonnet,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.9,1.0,1.0
+21,Claude 3.7B Sonnet,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.25,0.8063080495356038,0.9837461300309598
+59,Codestral,No Knowledge,Count Down,0.0000,0.0000,0.0000,0.7,0.9996130030959752,1.0
+63,Codestral,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000,0.15000000000000002,0.6008771929824561,0.8947368421052632
+64,Codestral,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+62,Codestral,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+57,Codestral,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.15000000000000002,0.6008771929824561,0.8947368421052632
+58,Codestral,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000,0.0,0.0,0.0
+55,Codestral,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+56,Codestral,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+60,Codestral,No Knowledge,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+61,Codestral,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+65,Codestral,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+37,Codestral,Basic Knowledge,Count Down,0.6500,0.9986,1.0000,0.65,0.9986455108359134,1.0
+41,Codestral,Basic Knowledge,Neighbors Count,0.7000,0.9996,1.0000,0.85,1.0,1.0
+42,Codestral,Basic Knowledge,Neighbors Count Excluding Self,0.8500,1.0000,1.0000,0.85,1.0,1.0
+40,Codestral,Basic Knowledge,Gather Neighbors IDs,0.1000,0.4474,0.7632,0.09999999999999998,0.4473684210526315,0.7631578947368421
+35,Codestral,Basic Knowledge,Calculate Min Distance Neighbors,0.1000,0.4474,0.7632,0.5,0.9837461300309598,0.9999945874558878
+36,Codestral,Basic Knowledge,Collect Max ID,0.7500,0.9999,1.0000,0.8,1.0,1.0
+33,Codestral,Basic Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.5,0.9837461300309598,0.9999945874558878
+34,Codestral,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.55,0.9918730650154799,1.0
+38,Codestral,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+39,Codestral,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.30000000000000004,0.8708720330237358,0.9945820433436533
+43,Codestral,Basic Knowledge,SCR Temperature Above 30,0.1000,0.4474,0.7632,0.5,0.9837461300309598,0.9999945874558878
+48,Codestral,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+52,Codestral,Knowledge with Building Blocks,Neighbors Count,0.9500,1.0000,1.0000,1.0,1.0,1.0
+53,Codestral,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+51,Codestral,Knowledge with Building Blocks,Gather Neighbors IDs,0.0500,0.2500,0.5000,0.050000000000000044,0.25,0.5
+46,Codestral,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.0500,0.2500,0.5000,0.35,0.9169891640866873,0.9984520123839009
+47,Codestral,Knowledge with Building Blocks,Collect Max ID,0.7500,0.9999,1.0000,0.95,1.0,1.0
+44,Codestral,Knowledge with Building Blocks,Calculate Gradient,0.2500,0.8063,0.9837,0.6,0.9963880288957688,1.0
+45,Codestral,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.65,0.9986455108359134,1.0
+49,Codestral,Knowledge with Building Blocks,Create Channel,0.5000,0.9837,1.0000,0.55,0.9918730650154799,1.0
+50,Codestral,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.85,1.0,1.0
+54,Codestral,Knowledge with Building Blocks,SCR Temperature Above 30,0.0500,0.2500,0.5000,0.19999999999999996,0.7182662538699691,0.956656346749226
+92,GPT-4.1 Mini,No Knowledge,Count Down,0.1500,0.6009,0.8947,0.30000000000000004,0.8708720330237358,0.9945820433436533
+96,GPT-4.1 Mini,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+97,GPT-4.1 Mini,No Knowledge,Neighbors Count Excluding Self,0.0500,0.2500,0.5000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+95,GPT-4.1 Mini,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+90,GPT-4.1 Mini,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.25,0.8063080495356038,0.9837461300309598
+91,GPT-4.1 Mini,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+88,GPT-4.1 Mini,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+89,GPT-4.1 Mini,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+93,GPT-4.1 Mini,No Knowledge,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+94,GPT-4.1 Mini,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+98,GPT-4.1 Mini,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.0,0.0,0.0
+70,GPT-4.1 Mini,Basic Knowledge,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+74,GPT-4.1 Mini,Basic Knowledge,Neighbors Count,1.0000,1.0000,1.0000,1.0,1.0,1.0
+75,GPT-4.1 Mini,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+73,GPT-4.1 Mini,Basic Knowledge,Gather Neighbors IDs,0.1000,0.4474,0.7632,1.0,1.0,1.0
+68,GPT-4.1 Mini,Basic Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,1.0,1.0,1.0
+69,GPT-4.1 Mini,Basic Knowledge,Collect Max ID,1.0000,1.0000,1.0000,1.0,1.0,1.0
+66,GPT-4.1 Mini,Basic Knowledge,Calculate Gradient,0.8500,1.0000,1.0000,0.9,1.0,1.0
+67,GPT-4.1 Mini,Basic Knowledge,Calculate Gradient (Obstacles),0.4000,0.9489,0.9996,0.8,1.0,1.0
+71,GPT-4.1 Mini,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000,0.15000000000000002,0.6008771929824561,0.8947368421052632
+72,GPT-4.1 Mini,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.65,0.9986455108359134,1.0
+76,GPT-4.1 Mini,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.65,0.9986455108359134,1.0
+81,GPT-4.1 Mini,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+85,GPT-4.1 Mini,Knowledge with Building Blocks,Neighbors Count,1.0000,1.0000,1.0000,1.0,1.0,1.0
+86,GPT-4.1 Mini,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+84,GPT-4.1 Mini,Knowledge with Building Blocks,Gather Neighbors IDs,0.6000,0.9964,1.0000,1.0,1.0,1.0
+79,GPT-4.1 Mini,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,1.0,1.0,1.0
+80,GPT-4.1 Mini,Knowledge with Building Blocks,Collect Max ID,1.0000,1.0000,1.0000,1.0,1.0,1.0
+77,GPT-4.1 Mini,Knowledge with Building Blocks,Calculate Gradient,0.7500,0.9999,1.0000,0.9,1.0,1.0
+78,GPT-4.1 Mini,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.9,1.0,1.0
+82,GPT-4.1 Mini,Knowledge with Building Blocks,Create Channel,0.1000,0.4474,0.7632,0.19999999999999996,0.7182662538699691,0.956656346749226
+83,GPT-4.1 Mini,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+87,GPT-4.1 Mini,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.15000000000000002,0.6008771929824561,0.8947368421052632
+125,Gemini 1.5 Flash,No Knowledge,Count Down,0.0000,0.0000,0.0000,0.0,0.0,0.0
+129,Gemini 1.5 Flash,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000,0.0,0.0,0.0
+130,Gemini 1.5 Flash,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000,0.0,0.0,0.0
+128,Gemini 1.5 Flash,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+123,Gemini 1.5 Flash,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.0,0.0,0.0
+124,Gemini 1.5 Flash,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000,0.0,0.0,0.0
+121,Gemini 1.5 Flash,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.0,0.0,0.0
+122,Gemini 1.5 Flash,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+126,Gemini 1.5 Flash,No Knowledge,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+127,Gemini 1.5 Flash,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+131,Gemini 1.5 Flash,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.0,0.0,0.0
+103,Gemini 1.5 Flash,Basic Knowledge,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+107,Gemini 1.5 Flash,Basic Knowledge,Neighbors Count,1.0000,1.0000,1.0000,1.0,1.0,1.0
+108,Gemini 1.5 Flash,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+106,Gemini 1.5 Flash,Basic Knowledge,Gather Neighbors IDs,1.0000,1.0000,1.0000,1.0,1.0,1.0
+101,Gemini 1.5 Flash,Basic Knowledge,Calculate Min Distance Neighbors,1.0000,1.0000,1.0000,1.0,1.0,1.0
+102,Gemini 1.5 Flash,Basic Knowledge,Collect Max ID,1.0000,1.0000,1.0000,1.0,1.0,1.0
+99,Gemini 1.5 Flash,Basic Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.0,0.0,0.0
+100,Gemini 1.5 Flash,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+104,Gemini 1.5 Flash,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+105,Gemini 1.5 Flash,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+109,Gemini 1.5 Flash,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.85,1.0,1.0
+114,Gemini 1.5 Flash,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+118,Gemini 1.5 Flash,Knowledge with Building Blocks,Neighbors Count,1.0000,1.0000,1.0000,1.0,1.0,1.0
+119,Gemini 1.5 Flash,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+117,Gemini 1.5 Flash,Knowledge with Building Blocks,Gather Neighbors IDs,1.0000,1.0000,1.0000,1.0,1.0,1.0
+112,Gemini 1.5 Flash,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,1.0,1.0,1.0
+113,Gemini 1.5 Flash,Knowledge with Building Blocks,Collect Max ID,1.0000,1.0000,1.0000,1.0,1.0,1.0
+110,Gemini 1.5 Flash,Knowledge with Building Blocks,Calculate Gradient,0.0000,0.0000,0.0000,0.0,0.0,0.0
+111,Gemini 1.5 Flash,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.19999999999999996,0.7182662538699691,0.956656346749226
+115,Gemini 1.5 Flash,Knowledge with Building Blocks,Create Channel,0.0000,0.0000,0.0000,0.85,1.0,1.0
+116,Gemini 1.5 Flash,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.85,1.0,1.0
+120,Gemini 1.5 Flash,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.0,0.0,0.0
+158,Gemini 2.0 Flash Exp,No Knowledge,Count Down,0.0000,0.0000,0.0000,0.0,0.0,0.0
+162,Gemini 2.0 Flash Exp,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000,0.0,0.0,0.0
+163,Gemini 2.0 Flash Exp,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000,0.0,0.0,0.0
+161,Gemini 2.0 Flash Exp,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+156,Gemini 2.0 Flash Exp,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.0,0.0,0.0
+157,Gemini 2.0 Flash Exp,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000,0.0,0.0,0.0
+154,Gemini 2.0 Flash Exp,No Knowledge,Calculate Gradient,0.1000,0.4474,0.7632,0.09999999999999998,0.4473684210526315,0.7631578947368421
+155,Gemini 2.0 Flash Exp,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+159,Gemini 2.0 Flash Exp,No Knowledge,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+160,Gemini 2.0 Flash Exp,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+164,Gemini 2.0 Flash Exp,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.0,0.0,0.0
+136,Gemini 2.0 Flash Exp,Basic Knowledge,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+140,Gemini 2.0 Flash Exp,Basic Knowledge,Neighbors Count,1.0000,1.0000,1.0000,1.0,1.0,1.0
+141,Gemini 2.0 Flash Exp,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+139,Gemini 2.0 Flash Exp,Basic Knowledge,Gather Neighbors IDs,0.8500,1.0000,1.0000,0.85,1.0,1.0
+134,Gemini 2.0 Flash Exp,Basic Knowledge,Calculate Min Distance Neighbors,1.0000,1.0000,1.0000,1.0,1.0,1.0
+135,Gemini 2.0 Flash Exp,Basic Knowledge,Collect Max ID,0.6500,0.9986,1.0000,1.0,1.0,1.0
+132,Gemini 2.0 Flash Exp,Basic Knowledge,Calculate Gradient,1.0000,1.0000,1.0000,1.0,1.0,1.0
+133,Gemini 2.0 Flash Exp,Basic Knowledge,Calculate Gradient (Obstacles),0.1000,0.4474,0.7632,0.55,0.9918730650154799,1.0
+137,Gemini 2.0 Flash Exp,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+138,Gemini 2.0 Flash Exp,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.4,0.9489164086687306,0.9996427720885925
+142,Gemini 2.0 Flash Exp,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.4,0.9489164086687306,0.9996427720885925
+147,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+151,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Neighbors Count,1.0000,1.0000,1.0000,1.0,1.0,1.0
+152,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+150,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Gather Neighbors IDs,0.0500,0.2500,0.5000,0.050000000000000044,0.25,0.5
+145,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,1.0,1.0,1.0
+146,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Collect Max ID,0.8500,1.0000,1.0000,1.0,1.0,1.0
+143,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Calculate Gradient,1.0000,1.0000,1.0000,1.0,1.0,1.0
+144,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.2000,0.7183,0.9567,0.85,1.0,1.0
+148,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Create Channel,0.6000,0.9964,1.0000,0.9,1.0,1.0
+149,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,Create Channel (Obstacles),0.3000,0.8709,0.9946,0.95,1.0,1.0
+153,Gemini 2.0 Flash Exp,Knowledge with Building Blocks,SCR Temperature Above 30,0.5500,0.9919,1.0000,0.9,1.0,1.0
+191,Gemini 2.5 Pro,No Knowledge,Count Down,0.9500,1.0000,1.0000,0.95,1.0,1.0
+195,Gemini 2.5 Pro,No Knowledge,Neighbors Count,0.4000,0.9489,0.9996,0.4,0.9489164086687306,0.9996427720885925
+196,Gemini 2.5 Pro,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+194,Gemini 2.5 Pro,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+189,Gemini 2.5 Pro,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.30000000000000004,0.8708720330237358,0.9945820433436533
+190,Gemini 2.5 Pro,No Knowledge,Collect Max ID,0.6000,0.9964,1.0000,0.7,0.9996130030959752,1.0
+187,Gemini 2.5 Pro,No Knowledge,Calculate Gradient,0.4000,0.9489,0.9996,0.44999999999999996,0.9702012383900929,0.9999404620147654
+188,Gemini 2.5 Pro,No Knowledge,Calculate Gradient (Obstacles),0.6000,0.9964,1.0000,0.65,0.9986455108359134,1.0
+192,Gemini 2.5 Pro,No Knowledge,Create Channel,0.0500,0.2500,0.5000,0.4,0.9489164086687306,0.9996427720885925
+193,Gemini 2.5 Pro,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.4,0.9489164086687306,0.9996427720885925
+197,Gemini 2.5 Pro,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.0,0.0,0.0
+169,Gemini 2.5 Pro,Basic Knowledge,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+173,Gemini 2.5 Pro,Basic Knowledge,Neighbors Count,0.6000,0.9964,1.0000,1.0,1.0,1.0
+174,Gemini 2.5 Pro,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+172,Gemini 2.5 Pro,Basic Knowledge,Gather Neighbors IDs,0.6500,0.9986,1.0000,1.0,1.0,1.0
+167,Gemini 2.5 Pro,Basic Knowledge,Calculate Min Distance Neighbors,1.0000,1.0000,1.0000,1.0,1.0,1.0
+168,Gemini 2.5 Pro,Basic Knowledge,Collect Max ID,1.0000,1.0000,1.0000,1.0,1.0,1.0
+165,Gemini 2.5 Pro,Basic Knowledge,Calculate Gradient,1.0000,1.0000,1.0000,1.0,1.0,1.0
+166,Gemini 2.5 Pro,Basic Knowledge,Calculate Gradient (Obstacles),1.0000,1.0000,1.0000,1.0,1.0,1.0
+170,Gemini 2.5 Pro,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000,0.44999999999999996,0.9702012383900929,0.9999404620147654
+171,Gemini 2.5 Pro,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.9,1.0,1.0
+175,Gemini 2.5 Pro,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.15000000000000002,0.6008771929824561,0.8947368421052632
+180,Gemini 2.5 Pro,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+184,Gemini 2.5 Pro,Knowledge with Building Blocks,Neighbors Count,0.7000,0.9996,1.0000,1.0,1.0,1.0
+185,Gemini 2.5 Pro,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+183,Gemini 2.5 Pro,Knowledge with Building Blocks,Gather Neighbors IDs,0.4000,0.9489,0.9996,0.95,1.0,1.0
+178,Gemini 2.5 Pro,Knowledge with Building Blocks,Calculate Min Distance Neighbors,1.0000,1.0000,1.0000,1.0,1.0,1.0
+179,Gemini 2.5 Pro,Knowledge with Building Blocks,Collect Max ID,1.0000,1.0000,1.0000,1.0,1.0,1.0
+176,Gemini 2.5 Pro,Knowledge with Building Blocks,Calculate Gradient,1.0000,1.0000,1.0000,1.0,1.0,1.0
+177,Gemini 2.5 Pro,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.1000,0.4474,0.7632,0.85,1.0,1.0
+181,Gemini 2.5 Pro,Knowledge with Building Blocks,Create Channel,0.8000,1.0000,1.0000,0.95,1.0,1.0
+182,Gemini 2.5 Pro,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.9,1.0,1.0
+186,Gemini 2.5 Pro,Knowledge with Building Blocks,SCR Temperature Above 30,0.0500,0.2500,0.5000,0.4,0.9489164086687306,0.9996427720885925
+224,Gemma 3.12B Instruct,No Knowledge,Count Down,0.0000,0.0000,0.0000,0.15000000000000002,0.6008771929824561,0.8947368421052632
+228,Gemma 3.12B Instruct,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000,0.0,0.0,0.0
+229,Gemma 3.12B Instruct,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000,0.0,0.0,0.0
+227,Gemma 3.12B Instruct,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+222,Gemma 3.12B Instruct,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.0,0.0,0.0
+223,Gemma 3.12B Instruct,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000,0.0,0.0,0.0
+220,Gemma 3.12B Instruct,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.0,0.0,0.0
+221,Gemma 3.12B Instruct,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+225,Gemma 3.12B Instruct,No Knowledge,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+226,Gemma 3.12B Instruct,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+230,Gemma 3.12B Instruct,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.0,0.0,0.0
+202,Gemma 3.12B Instruct,Basic Knowledge,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+206,Gemma 3.12B Instruct,Basic Knowledge,Neighbors Count,1.0000,1.0000,1.0000,1.0,1.0,1.0
+207,Gemma 3.12B Instruct,Basic Knowledge,Neighbors Count Excluding Self,0.9500,1.0000,1.0000,0.95,1.0,1.0
+205,Gemma 3.12B Instruct,Basic Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+200,Gemma 3.12B Instruct,Basic Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.25,0.8063080495356038,0.9837461300309598
+201,Gemma 3.12B Instruct,Basic Knowledge,Collect Max ID,0.8500,1.0000,1.0000,0.95,1.0,1.0
+198,Gemma 3.12B Instruct,Basic Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+199,Gemma 3.12B Instruct,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.85,1.0,1.0
+203,Gemma 3.12B Instruct,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000,0.85,1.0,1.0
+204,Gemma 3.12B Instruct,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.4,0.9489164086687306,0.9996427720885925
+208,Gemma 3.12B Instruct,Basic Knowledge,SCR Temperature Above 30,0.4000,0.9489,0.9996,0.55,0.9918730650154799,1.0
+213,Gemma 3.12B Instruct,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+217,Gemma 3.12B Instruct,Knowledge with Building Blocks,Neighbors Count,1.0000,1.0000,1.0000,1.0,1.0,1.0
+218,Gemma 3.12B Instruct,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+216,Gemma 3.12B Instruct,Knowledge with Building Blocks,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+211,Gemma 3.12B Instruct,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.3500,0.9170,0.9985,0.85,1.0,1.0
+212,Gemma 3.12B Instruct,Knowledge with Building Blocks,Collect Max ID,0.0000,0.0000,0.0000,1.0,1.0,1.0
+209,Gemma 3.12B Instruct,Knowledge with Building Blocks,Calculate Gradient,0.0000,0.0000,0.0000,0.30000000000000004,0.8708720330237358,0.9945820433436533
+210,Gemma 3.12B Instruct,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.30000000000000004,0.8708720330237358,0.9945820433436533
+214,Gemma 3.12B Instruct,Knowledge with Building Blocks,Create Channel,0.0000,0.0000,0.0000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+215,Gemma 3.12B Instruct,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+219,Gemma 3.12B Instruct,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.35,0.9169891640866873,0.9984520123839009
+257,Gemma 3.27B Instruct,No Knowledge,Count Down,0.0000,0.0000,0.0000,0.0,0.0,0.0
+261,Gemma 3.27B Instruct,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000,0.0,0.0,0.0
+262,Gemma 3.27B Instruct,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000,0.0,0.0,0.0
+260,Gemma 3.27B Instruct,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+255,Gemma 3.27B Instruct,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.0,0.0,0.0
+256,Gemma 3.27B Instruct,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000,0.0,0.0,0.0
+253,Gemma 3.27B Instruct,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.0,0.0,0.0
+254,Gemma 3.27B Instruct,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+258,Gemma 3.27B Instruct,No Knowledge,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+259,Gemma 3.27B Instruct,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+263,Gemma 3.27B Instruct,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.0,0.0,0.0
+235,Gemma 3.27B Instruct,Basic Knowledge,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+239,Gemma 3.27B Instruct,Basic Knowledge,Neighbors Count,0.9500,1.0000,1.0000,0.95,1.0,1.0
+240,Gemma 3.27B Instruct,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+238,Gemma 3.27B Instruct,Basic Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+233,Gemma 3.27B Instruct,Basic Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,1.0,1.0,1.0
+234,Gemma 3.27B Instruct,Basic Knowledge,Collect Max ID,0.0000,0.0000,0.0000,1.0,1.0,1.0
+231,Gemma 3.27B Instruct,Basic Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.6,0.9963880288957688,1.0
+232,Gemma 3.27B Instruct,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+236,Gemma 3.27B Instruct,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000,0.8,1.0,1.0
+237,Gemma 3.27B Instruct,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+241,Gemma 3.27B Instruct,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.7,0.9996130030959752,1.0
+246,Gemma 3.27B Instruct,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+250,Gemma 3.27B Instruct,Knowledge with Building Blocks,Neighbors Count,1.0000,1.0000,1.0000,1.0,1.0,1.0
+251,Gemma 3.27B Instruct,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+249,Gemma 3.27B Instruct,Knowledge with Building Blocks,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+244,Gemma 3.27B Instruct,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.8000,1.0000,1.0000,0.8,1.0,1.0
+245,Gemma 3.27B Instruct,Knowledge with Building Blocks,Collect Max ID,0.0000,0.0000,0.0000,1.0,1.0,1.0
+242,Gemma 3.27B Instruct,Knowledge with Building Blocks,Calculate Gradient,0.2000,0.7183,0.9567,0.19999999999999996,0.7182662538699691,0.956656346749226
+243,Gemma 3.27B Instruct,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+247,Gemma 3.27B Instruct,Knowledge with Building Blocks,Create Channel,0.0500,0.2500,0.5000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+248,Gemma 3.27B Instruct,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+252,Gemma 3.27B Instruct,Knowledge with Building Blocks,SCR Temperature Above 30,0.1000,0.4474,0.7632,0.4,0.9489164086687306,0.9996427720885925
+290,Gemma 3.4B Instruct,No Knowledge,Count Down,0.0000,0.0000,0.0000,1.0,1.0,1.0
+294,Gemma 3.4B Instruct,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000,0.35,0.9169891640866873,0.9984520123839009
+295,Gemma 3.4B Instruct,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000,0.5,0.9837461300309598,0.9999945874558878
+293,Gemma 3.4B Instruct,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+288,Gemma 3.4B Instruct,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.25,0.8063080495356038,0.9837461300309598
+289,Gemma 3.4B Instruct,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000,0.85,1.0,1.0
+286,Gemma 3.4B Instruct,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+287,Gemma 3.4B Instruct,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.44999999999999996,0.9702012383900929,0.9999404620147654
+291,Gemma 3.4B Instruct,No Knowledge,Create Channel,0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+292,Gemma 3.4B Instruct,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.25,0.8063080495356038,0.9837461300309598
+296,Gemma 3.4B Instruct,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.0,0.0,0.0
+268,Gemma 3.4B Instruct,Basic Knowledge,Count Down,0.8500,1.0000,1.0000,1.0,1.0,1.0
+272,Gemma 3.4B Instruct,Basic Knowledge,Neighbors Count,0.0000,0.0000,0.0000,1.0,1.0,1.0
+273,Gemma 3.4B Instruct,Basic Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000,1.0,1.0,1.0
+271,Gemma 3.4B Instruct,Basic Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+266,Gemma 3.4B Instruct,Basic Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,1.0,1.0,1.0
+267,Gemma 3.4B Instruct,Basic Knowledge,Collect Max ID,0.6500,0.9986,1.0000,0.95,1.0,1.0
+264,Gemma 3.4B Instruct,Basic Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.95,1.0,1.0
+265,Gemma 3.4B Instruct,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.8,1.0,1.0
+269,Gemma 3.4B Instruct,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000,0.44999999999999996,0.9702012383900929,0.9999404620147654
+270,Gemma 3.4B Instruct,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+274,Gemma 3.4B Instruct,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.4,0.9489164086687306,0.9996427720885925
+279,Gemma 3.4B Instruct,Knowledge with Building Blocks,Count Down,0.9500,1.0000,1.0000,1.0,1.0,1.0
+283,Gemma 3.4B Instruct,Knowledge with Building Blocks,Neighbors Count,0.0000,0.0000,0.0000,1.0,1.0,1.0
+284,Gemma 3.4B Instruct,Knowledge with Building Blocks,Neighbors Count Excluding Self,0.0000,0.0000,0.0000,1.0,1.0,1.0
+282,Gemma 3.4B Instruct,Knowledge with Building Blocks,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+277,Gemma 3.4B Instruct,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,1.0,1.0,1.0
+278,Gemma 3.4B Instruct,Knowledge with Building Blocks,Collect Max ID,0.0000,0.0000,0.0000,1.0,1.0,1.0
+275,Gemma 3.4B Instruct,Knowledge with Building Blocks,Calculate Gradient,0.0000,0.0000,0.0000,0.65,0.9986455108359134,1.0
+276,Gemma 3.4B Instruct,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.6,0.9963880288957688,1.0
+280,Gemma 3.4B Instruct,Knowledge with Building Blocks,Create Channel,0.0000,0.0000,0.0000,0.95,1.0,1.0
+281,Gemma 3.4B Instruct,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.85,1.0,1.0
+285,Gemma 3.4B Instruct,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.35,0.9169891640866873,0.9984520123839009
+323,Llama 3.1 405B Instruct,No Knowledge,Count Down,0.0000,0.0000,0.0000,0.30000000000000004,0.8708720330237358,0.9945820433436533
+327,Llama 3.1 405B Instruct,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000,0.0,0.0,0.0
+328,Llama 3.1 405B Instruct,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000,0.19999999999999996,0.7182662538699691,0.956656346749226
+326,Llama 3.1 405B Instruct,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+321,Llama 3.1 405B Instruct,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.19999999999999996,0.7182662538699691,0.956656346749226
+322,Llama 3.1 405B Instruct,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000,0.0,0.0,0.0
+319,Llama 3.1 405B Instruct,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+320,Llama 3.1 405B Instruct,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+324,Llama 3.1 405B Instruct,No Knowledge,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+325,Llama 3.1 405B Instruct,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+329,Llama 3.1 405B Instruct,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.0,0.0,0.0
+301,Llama 3.1 405B Instruct,Basic Knowledge,Count Down,0.8500,1.0000,1.0000,0.9,1.0,1.0
+305,Llama 3.1 405B Instruct,Basic Knowledge,Neighbors Count,0.3500,0.9170,0.9985,1.0,1.0,1.0
+306,Llama 3.1 405B Instruct,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+304,Llama 3.1 405B Instruct,Basic Knowledge,Gather Neighbors IDs,1.0000,1.0000,1.0000,1.0,1.0,1.0
+299,Llama 3.1 405B Instruct,Basic Knowledge,Calculate Min Distance Neighbors,0.1000,0.4474,0.7632,1.0,1.0,1.0
+300,Llama 3.1 405B Instruct,Basic Knowledge,Collect Max ID,0.2500,0.8063,0.9837,0.95,1.0,1.0
+297,Llama 3.1 405B Instruct,Basic Knowledge,Calculate Gradient,0.4000,0.9489,0.9996,0.7,0.9996130030959752,1.0
+298,Llama 3.1 405B Instruct,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.55,0.9918730650154799,1.0
+302,Llama 3.1 405B Instruct,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+303,Llama 3.1 405B Instruct,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.30000000000000004,0.8708720330237358,0.9945820433436533
+307,Llama 3.1 405B Instruct,Basic Knowledge,SCR Temperature Above 30,0.0500,0.2500,0.5000,0.35,0.9169891640866873,0.9984520123839009
+312,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+316,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Neighbors Count,0.5000,0.9837,1.0000,1.0,1.0,1.0
+317,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+315,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Gather Neighbors IDs,1.0000,1.0000,1.0000,1.0,1.0,1.0
+310,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.9,1.0,1.0
+311,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Collect Max ID,0.5000,0.9837,1.0000,1.0,1.0,1.0
+308,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Calculate Gradient,0.3500,0.9170,0.9985,0.85,1.0,1.0
+309,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+313,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Create Channel,0.0500,0.2500,0.5000,0.30000000000000004,0.8708720330237358,0.9945820433436533
+314,Llama 3.1 405B Instruct,Knowledge with Building Blocks,Create Channel (Obstacles),0.1000,0.4474,0.7632,0.15000000000000002,0.6008771929824561,0.8947368421052632
+318,Llama 3.1 405B Instruct,Knowledge with Building Blocks,SCR Temperature Above 30,0.1000,0.4474,0.7632,0.4,0.9489164086687306,0.9996427720885925
+356,Llama 3.3 70B Instruct,No Knowledge,Count Down,0.0000,0.0000,0.0000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+360,Llama 3.3 70B Instruct,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+361,Llama 3.3 70B Instruct,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000,0.0,0.0,0.0
+359,Llama 3.3 70B Instruct,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+354,Llama 3.3 70B Instruct,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.0,0.0,0.0
+355,Llama 3.3 70B Instruct,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000,0.0,0.0,0.0
+352,Llama 3.3 70B Instruct,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.0,0.0,0.0
+353,Llama 3.3 70B Instruct,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+357,Llama 3.3 70B Instruct,No Knowledge,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+358,Llama 3.3 70B Instruct,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+362,Llama 3.3 70B Instruct,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.0,0.0,0.0
+334,Llama 3.3 70B Instruct,Basic Knowledge,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+338,Llama 3.3 70B Instruct,Basic Knowledge,Neighbors Count,1.0000,1.0000,1.0000,1.0,1.0,1.0
+339,Llama 3.3 70B Instruct,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+337,Llama 3.3 70B Instruct,Basic Knowledge,Gather Neighbors IDs,1.0000,1.0000,1.0000,1.0,1.0,1.0
+332,Llama 3.3 70B Instruct,Basic Knowledge,Calculate Min Distance Neighbors,0.5500,0.9919,1.0000,0.75,0.9999355005159959,1.0
+333,Llama 3.3 70B Instruct,Basic Knowledge,Collect Max ID,0.4000,0.9489,0.9996,1.0,1.0,1.0
+330,Llama 3.3 70B Instruct,Basic Knowledge,Calculate Gradient,0.1500,0.6009,0.8947,0.6,0.9963880288957688,1.0
+331,Llama 3.3 70B Instruct,Basic Knowledge,Calculate Gradient (Obstacles),0.0500,0.2500,0.5000,0.75,0.9999355005159959,1.0
+335,Llama 3.3 70B Instruct,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000,0.15000000000000002,0.6008771929824561,0.8947368421052632
+336,Llama 3.3 70B Instruct,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+340,Llama 3.3 70B Instruct,Basic Knowledge,SCR Temperature Above 30,0.1500,0.6009,0.8947,0.95,1.0,1.0
+345,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+349,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Neighbors Count,1.0000,1.0000,1.0000,1.0,1.0,1.0
+350,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+348,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Gather Neighbors IDs,0.9500,1.0000,1.0000,0.95,1.0,1.0
+343,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+344,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Collect Max ID,0.4000,0.9489,0.9996,0.85,1.0,1.0
+341,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Calculate Gradient,0.4500,0.9702,0.9999,0.85,1.0,1.0
+342,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.4,0.9489164086687306,0.9996427720885925
+346,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+347,Llama 3.3 70B Instruct,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+351,Llama 3.3 70B Instruct,Knowledge with Building Blocks,SCR Temperature Above 30,0.1000,0.4474,0.7632,0.30000000000000004,0.8708720330237358,0.9945820433436533
+389,Llama 4 Maverick,No Knowledge,Count Down,0.0000,0.0000,0.0000,0.0,0.0,0.0
+393,Llama 4 Maverick,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000,0.0,0.0,0.0
+394,Llama 4 Maverick,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000,0.0,0.0,0.0
+392,Llama 4 Maverick,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+387,Llama 4 Maverick,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.0,0.0,0.0
+388,Llama 4 Maverick,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000,0.0,0.0,0.0
+385,Llama 4 Maverick,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.0,0.0,0.0
+386,Llama 4 Maverick,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+390,Llama 4 Maverick,No Knowledge,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+391,Llama 4 Maverick,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+395,Llama 4 Maverick,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.0,0.0,0.0
+367,Llama 4 Maverick,Basic Knowledge,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+371,Llama 4 Maverick,Basic Knowledge,Neighbors Count,1.0000,1.0000,1.0000,1.0,1.0,1.0
+372,Llama 4 Maverick,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+370,Llama 4 Maverick,Basic Knowledge,Gather Neighbors IDs,0.9500,1.0000,1.0000,0.95,1.0,1.0
+365,Llama 4 Maverick,Basic Knowledge,Calculate Min Distance Neighbors,0.7500,0.9999,1.0000,1.0,1.0,1.0
+366,Llama 4 Maverick,Basic Knowledge,Collect Max ID,0.0000,0.0000,0.0000,1.0,1.0,1.0
+363,Llama 4 Maverick,Basic Knowledge,Calculate Gradient,1.0000,1.0000,1.0000,1.0,1.0,1.0
+364,Llama 4 Maverick,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,1.0,1.0,1.0
+368,Llama 4 Maverick,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+369,Llama 4 Maverick,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.15000000000000002,0.6008771929824561,0.8947368421052632
+373,Llama 4 Maverick,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.4,0.9489164086687306,0.9996427720885925
+378,Llama 4 Maverick,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+382,Llama 4 Maverick,Knowledge with Building Blocks,Neighbors Count,1.0000,1.0000,1.0000,1.0,1.0,1.0
+383,Llama 4 Maverick,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+381,Llama 4 Maverick,Knowledge with Building Blocks,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+376,Llama 4 Maverick,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,1.0,1.0,1.0
+377,Llama 4 Maverick,Knowledge with Building Blocks,Collect Max ID,0.0000,0.0000,0.0000,1.0,1.0,1.0
+374,Llama 4 Maverick,Knowledge with Building Blocks,Calculate Gradient,1.0000,1.0000,1.0000,1.0,1.0,1.0
+375,Llama 4 Maverick,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,1.0,1.0,1.0
+379,Llama 4 Maverick,Knowledge with Building Blocks,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+380,Llama 4 Maverick,Knowledge with Building Blocks,Create Channel (Obstacles),0.2000,0.7183,0.9567,0.35,0.9169891640866873,0.9984520123839009
+384,Llama 4 Maverick,Knowledge with Building Blocks,SCR Temperature Above 30,0.0500,0.2500,0.5000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+422,Llama 4 Scout,No Knowledge,Count Down,0.0000,0.0000,0.0000,0.0,0.0,0.0
+426,Llama 4 Scout,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000,0.0,0.0,0.0
+427,Llama 4 Scout,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000,0.0,0.0,0.0
+425,Llama 4 Scout,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+420,Llama 4 Scout,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.0,0.0,0.0
+421,Llama 4 Scout,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000,0.0,0.0,0.0
+418,Llama 4 Scout,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.0,0.0,0.0
+419,Llama 4 Scout,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+423,Llama 4 Scout,No Knowledge,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+424,Llama 4 Scout,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+428,Llama 4 Scout,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.0,0.0,0.0
+400,Llama 4 Scout,Basic Knowledge,Count Down,0.9000,1.0000,1.0000,1.0,1.0,1.0
+404,Llama 4 Scout,Basic Knowledge,Neighbors Count,0.6500,0.9986,1.0000,1.0,1.0,1.0
+405,Llama 4 Scout,Basic Knowledge,Neighbors Count Excluding Self,0.9500,1.0000,1.0000,1.0,1.0,1.0
+403,Llama 4 Scout,Basic Knowledge,Gather Neighbors IDs,0.4500,0.9702,0.9999,0.44999999999999996,0.9702012383900929,0.9999404620147654
+398,Llama 4 Scout,Basic Knowledge,Calculate Min Distance Neighbors,0.0500,0.2500,0.5000,1.0,1.0,1.0
+399,Llama 4 Scout,Basic Knowledge,Collect Max ID,0.3000,0.8709,0.9946,1.0,1.0,1.0
+396,Llama 4 Scout,Basic Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.30000000000000004,0.8708720330237358,0.9945820433436533
+397,Llama 4 Scout,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.4,0.9489164086687306,0.9996427720885925
+401,Llama 4 Scout,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000,0.15000000000000002,0.6008771929824561,0.8947368421052632
+402,Llama 4 Scout,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+406,Llama 4 Scout,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.55,0.9918730650154799,1.0
+411,Llama 4 Scout,Knowledge with Building Blocks,Count Down,0.8500,1.0000,1.0000,0.9,1.0,1.0
+415,Llama 4 Scout,Knowledge with Building Blocks,Neighbors Count,0.4000,0.9489,0.9996,1.0,1.0,1.0
+416,Llama 4 Scout,Knowledge with Building Blocks,Neighbors Count Excluding Self,0.9000,1.0000,1.0000,1.0,1.0,1.0
+414,Llama 4 Scout,Knowledge with Building Blocks,Gather Neighbors IDs,0.8000,1.0000,1.0000,0.8,1.0,1.0
+409,Llama 4 Scout,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.0500,0.2500,0.5000,0.4,0.9489164086687306,0.9996427720885925
+410,Llama 4 Scout,Knowledge with Building Blocks,Collect Max ID,0.0000,0.0000,0.0000,1.0,1.0,1.0
+407,Llama 4 Scout,Knowledge with Building Blocks,Calculate Gradient,0.0500,0.2500,0.5000,0.6,0.9963880288957688,1.0
+408,Llama 4 Scout,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.35,0.9169891640866873,0.9984520123839009
+412,Llama 4 Scout,Knowledge with Building Blocks,Create Channel,0.1500,0.6009,0.8947,0.35,0.9169891640866873,0.9984520123839009
+413,Llama 4 Scout,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+417,Llama 4 Scout,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.44999999999999996,0.9702012383900929,0.9999404620147654
+455,Mistral 3.1 24B Instruct,No Knowledge,Count Down,0.0000,0.0000,0.0000,0.44999999999999996,0.9702012383900929,0.9999404620147654
+459,Mistral 3.1 24B Instruct,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000,0.0,0.0,0.0
+460,Mistral 3.1 24B Instruct,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000,0.0,0.0,0.0
+458,Mistral 3.1 24B Instruct,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+453,Mistral 3.1 24B Instruct,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.0,0.0,0.0
+454,Mistral 3.1 24B Instruct,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000,0.0,0.0,0.0
+451,Mistral 3.1 24B Instruct,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.0,0.0,0.0
+452,Mistral 3.1 24B Instruct,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+456,Mistral 3.1 24B Instruct,No Knowledge,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+457,Mistral 3.1 24B Instruct,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+461,Mistral 3.1 24B Instruct,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.0,0.0,0.0
+433,Mistral 3.1 24B Instruct,Basic Knowledge,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+437,Mistral 3.1 24B Instruct,Basic Knowledge,Neighbors Count,1.0000,1.0000,1.0000,1.0,1.0,1.0
+438,Mistral 3.1 24B Instruct,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+436,Mistral 3.1 24B Instruct,Basic Knowledge,Gather Neighbors IDs,0.9000,1.0000,1.0000,0.9,1.0,1.0
+431,Mistral 3.1 24B Instruct,Basic Knowledge,Calculate Min Distance Neighbors,0.1000,0.4474,0.7632,0.4,0.9489164086687306,0.9996427720885925
+432,Mistral 3.1 24B Instruct,Basic Knowledge,Collect Max ID,0.5500,0.9919,1.0000,1.0,1.0,1.0
+429,Mistral 3.1 24B Instruct,Basic Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.19999999999999996,0.7182662538699691,0.956656346749226
+430,Mistral 3.1 24B Instruct,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.30000000000000004,0.8708720330237358,0.9945820433436533
+434,Mistral 3.1 24B Instruct,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000,0.15000000000000002,0.6008771929824561,0.8947368421052632
+435,Mistral 3.1 24B Instruct,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+439,Mistral 3.1 24B Instruct,Basic Knowledge,SCR Temperature Above 30,0.0500,0.2500,0.5000,0.9,1.0,1.0
+444,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+448,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Neighbors Count,1.0000,1.0000,1.0000,1.0,1.0,1.0
+449,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+447,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Gather Neighbors IDs,0.7000,0.9996,1.0000,0.7,0.9996130030959752,1.0
+442,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.1000,0.4474,0.7632,0.6,0.9963880288957688,1.0
+443,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Collect Max ID,0.6500,0.9986,1.0000,1.0,1.0,1.0
+440,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Calculate Gradient,0.1000,0.4474,0.7632,0.30000000000000004,0.8708720330237358,0.9945820433436533
+441,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+445,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Create Channel,0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+446,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.15000000000000002,0.6008771929824561,0.8947368421052632
+450,Mistral 3.1 24B Instruct,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+488,Mistral 8B,No Knowledge,Count Down,0.0000,0.0000,0.0000,0.5,0.9837461300309598,0.9999945874558878
+492,Mistral 8B,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+493,Mistral 8B,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000,0.25,0.8063080495356038,0.9837461300309598
+491,Mistral 8B,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+486,Mistral 8B,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+487,Mistral 8B,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000,0.0,0.0,0.0
+484,Mistral 8B,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.15000000000000002,0.6008771929824561,0.8947368421052632
+485,Mistral 8B,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+489,Mistral 8B,No Knowledge,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+490,Mistral 8B,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+494,Mistral 8B,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+466,Mistral 8B,Basic Knowledge,Count Down,0.0000,0.0000,0.0000,0.95,1.0,1.0
+470,Mistral 8B,Basic Knowledge,Neighbors Count,0.0000,0.0000,0.0000,0.5,0.9837461300309598,0.9999945874558878
+471,Mistral 8B,Basic Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000,0.9,1.0,1.0
+469,Mistral 8B,Basic Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+464,Mistral 8B,Basic Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.75,0.9999355005159959,1.0
+465,Mistral 8B,Basic Knowledge,Collect Max ID,0.0000,0.0000,0.0000,0.95,1.0,1.0
+462,Mistral 8B,Basic Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.85,1.0,1.0
+463,Mistral 8B,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.35,0.9169891640866873,0.9984520123839009
+467,Mistral 8B,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000,0.5,0.9837461300309598,0.9999945874558878
+468,Mistral 8B,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.15000000000000002,0.6008771929824561,0.8947368421052632
+472,Mistral 8B,Basic Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.19999999999999996,0.7182662538699691,0.956656346749226
+477,Mistral 8B,Knowledge with Building Blocks,Count Down,0.0000,0.0000,0.0000,1.0,1.0,1.0
+481,Mistral 8B,Knowledge with Building Blocks,Neighbors Count,0.0000,0.0000,0.0000,0.7,0.9996130030959752,1.0
+482,Mistral 8B,Knowledge with Building Blocks,Neighbors Count Excluding Self,0.0500,0.2500,0.5000,0.95,1.0,1.0
+480,Mistral 8B,Knowledge with Building Blocks,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+475,Mistral 8B,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.6,0.9963880288957688,1.0
+476,Mistral 8B,Knowledge with Building Blocks,Collect Max ID,0.0000,0.0000,0.0000,0.85,1.0,1.0
+473,Mistral 8B,Knowledge with Building Blocks,Calculate Gradient,0.0000,0.0000,0.0000,0.9,1.0,1.0
+474,Mistral 8B,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.25,0.8063080495356038,0.9837461300309598
+478,Mistral 8B,Knowledge with Building Blocks,Create Channel,0.0000,0.0000,0.0000,0.30000000000000004,0.8708720330237358,0.9945820433436533
+479,Mistral 8B,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.15000000000000002,0.6008771929824561,0.8947368421052632
+483,Mistral 8B,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.4,0.9489164086687306,0.9996427720885925
+521,Qwen 2.5 Coder 32B Instruct,No Knowledge,Count Down,0.0000,0.0000,0.0000,0.15000000000000002,0.6008771929824561,0.8947368421052632
+525,Qwen 2.5 Coder 32B Instruct,No Knowledge,Neighbors Count,0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+526,Qwen 2.5 Coder 32B Instruct,No Knowledge,Neighbors Count Excluding Self,0.0000,0.0000,0.0000,0.19999999999999996,0.7182662538699691,0.956656346749226
+524,Qwen 2.5 Coder 32B Instruct,No Knowledge,Gather Neighbors IDs,0.0000,0.0000,0.0000,0.0,0.0,0.0
+519,Qwen 2.5 Coder 32B Instruct,No Knowledge,Calculate Min Distance Neighbors,0.0000,0.0000,0.0000,0.0,0.0,0.0
+520,Qwen 2.5 Coder 32B Instruct,No Knowledge,Collect Max ID,0.0000,0.0000,0.0000,0.0,0.0,0.0
+517,Qwen 2.5 Coder 32B Instruct,No Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.0,0.0,0.0
+518,Qwen 2.5 Coder 32B Instruct,No Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+522,Qwen 2.5 Coder 32B Instruct,No Knowledge,Create Channel,0.0000,0.0000,0.0000,0.0,0.0,0.0
+523,Qwen 2.5 Coder 32B Instruct,No Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.0,0.0,0.0
+527,Qwen 2.5 Coder 32B Instruct,No Knowledge,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.0,0.0,0.0
+499,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+503,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Neighbors Count,1.0000,1.0000,1.0000,1.0,1.0,1.0
+504,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+502,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Gather Neighbors IDs,0.3000,0.8709,0.9946,0.35,0.9169891640866873,0.9984520123839009
+497,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Calculate Min Distance Neighbors,0.7000,0.9996,1.0000,0.75,0.9999355005159959,1.0
+498,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Collect Max ID,0.2000,0.7183,0.9567,0.75,0.9999355005159959,1.0
+495,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Calculate Gradient,0.0000,0.0000,0.0000,0.30000000000000004,0.8708720330237358,0.9945820433436533
+496,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.7,0.9996130030959752,1.0
+500,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Create Channel,0.0000,0.0000,0.0000,0.050000000000000044,0.25,0.5
+501,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+505,Qwen 2.5 Coder 32B Instruct,Basic Knowledge,SCR Temperature Above 30,0.1000,0.4474,0.7632,0.44999999999999996,0.9702012383900929,0.9999404620147654
+510,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Count Down,1.0000,1.0000,1.0000,1.0,1.0,1.0
+514,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Neighbors Count,0.9000,1.0000,1.0000,0.9,1.0,1.0
+515,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Neighbors Count Excluding Self,1.0000,1.0000,1.0000,1.0,1.0,1.0
+513,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Gather Neighbors IDs,0.3000,0.8709,0.9946,0.35,0.9169891640866873,0.9984520123839009
+508,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Calculate Min Distance Neighbors,0.3000,0.8709,0.9946,0.9,1.0,1.0
+509,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Collect Max ID,0.0000,0.0000,0.0000,0.95,1.0,1.0
+506,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Calculate Gradient,0.1500,0.6009,0.8947,0.25,0.8063080495356038,0.9837461300309598
+507,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Calculate Gradient (Obstacles),0.0000,0.0000,0.0000,0.30000000000000004,0.8708720330237358,0.9945820433436533
+511,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Create Channel,0.0500,0.2500,0.5000,0.050000000000000044,0.25,0.5
+512,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,Create Channel (Obstacles),0.0000,0.0000,0.0000,0.09999999999999998,0.4473684210526315,0.7631578947368421
+516,Qwen 2.5 Coder 32B Instruct,Knowledge with Building Blocks,SCR Temperature Above 30,0.0000,0.0000,0.0000,0.4,0.9489164086687306,0.9996427720885925

@@ -1,0 +1,7 @@
+To calculate the minimum distance from neighbors, you can use the `minHood` function to find the minimum value among the neighbors. Here's how you can implement it:
+
+```scala
+minHood(nbrRange())
+```
+
+This code snippet will return the minimum distance to any neighbor from the current node. Given the network and the distances between the nodes, this will provide the shortest distance to any neighboring node.

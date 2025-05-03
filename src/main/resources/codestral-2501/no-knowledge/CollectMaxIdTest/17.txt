@@ -1,0 +1,3 @@
+```scala
+val maxId = ScaFi.topology.maxId()
+```

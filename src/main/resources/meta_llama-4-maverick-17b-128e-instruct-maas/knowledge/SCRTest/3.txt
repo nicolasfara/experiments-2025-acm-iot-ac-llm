@@ -1,0 +1,10 @@
+```scala
+rep((0.0, false)) { case (avgTemp, alarm) =>
+  val isHot = sense[Double]("temperature") > 30
+  val neighbours = foldhoodPlus(List.empty[(Double, Boolean)])(_ ++ _)(List((sense[Double]("temperature"), isHot)))
+  val localTemp = sense[Double]("temperature")
+  val areaAvgTemp = (localTemp + sumHood(neighbours.map(_._1))) / (1 + neighbours.size)
+  val areaAlarm = isHot || neighbours.exists(_._2)
+  (areaAvgTemp, areaAlarm)
+}._2
+```

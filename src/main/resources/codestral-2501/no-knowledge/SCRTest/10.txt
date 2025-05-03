@@ -1,0 +1,19 @@
+```scala
+val gridSize = 10
+val tempThreshold = 30
+
+val tempGrid = scifi.aggregate(0 until gridSize, 0 until gridSize) { case (i, j) =>
+  val temp = scala.util.Random.nextInt(40)
+  (i / 3, j / 3) -> temp
+}
+
+val areaAverages = tempGrid.map { case ((i, j), temps) =>
+  ((i, j), temps.sum / temps.size)
+}
+
+val alarmGrid = areaAverages.map { case ((i, j), avgTemp) =>
+  ((i, j), if (avgTemp > tempThreshold) "ALARM" else "OK")
+}
+
+alarmGrid
+```

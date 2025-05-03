@@ -1,0 +1,9 @@
+```scala
+val areaTemperature = G[Double](sense("temperature") > 30, 0, _ + 1, nbrRange)
+branch(areaTemperature > 0) {
+  val areaAlarm = C[Double, Boolean](areaTemperature, _ || _, false, false)
+  areaAlarm
+} {
+  false
+}
+```

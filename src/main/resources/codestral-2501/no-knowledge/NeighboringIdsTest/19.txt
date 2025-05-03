@@ -1,0 +1,8 @@
+```scala
+val neighbors = g.aggregate(
+  msg = s => s,
+  combine = (a: List[Int], b: List[Int]) => a ++ b,
+  reduce = (a: List[Int], b: List[Int]) => a ++ b
+).run
+val neighborIds = neighbors.map(_._2).flatten.toList
+```

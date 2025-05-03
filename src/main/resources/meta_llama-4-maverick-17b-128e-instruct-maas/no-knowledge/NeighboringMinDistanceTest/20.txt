@@ -1,0 +1,10 @@
+```scala
+val neighbours = nbrRange()
+val distances = foldhoodPlus((Double.PositiveInfinity, Set[ID]()))((acc, v) => {
+  val (dist, ids) = acc
+  val newDist = Math.min(dist, nbrVar[Double]("distance"))
+  val newIds = ids + nbrVar[ID]("id")
+  (newDist, newIds)
+})((Double.PositiveInfinity, Set[ID]()))
+distances._1
+```

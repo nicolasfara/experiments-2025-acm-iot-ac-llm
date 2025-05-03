@@ -1,0 +1,8 @@
+```scala
+val potential = G[Double](source = sense("source"), field = 0.0, acc = _ + nbrRange(), metric = nbrRange)
+val areaTemperature = C[Double, Double](potential, _ + _, sense("temperature"), 0.0)
+val nodesInArea = C[Double, Double](potential, _ + _, 1.0, 0.0)
+val averageTemperature = areaTemperature / nodesInArea
+val alarm = averageTemperature > 30.0
+G[Boolean](source = alarm, field = alarm, acc = _ || _, metric = nbrRange)
+```

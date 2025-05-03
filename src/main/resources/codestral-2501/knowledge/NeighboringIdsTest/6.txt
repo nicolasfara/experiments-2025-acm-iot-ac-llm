@@ -1,0 +1,3 @@
+```scala
+def main(): Seq[ID] = foldhood(Seq.empty[ID])(_ ++ _)(nbr(mid()))
+```

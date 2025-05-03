@@ -1,0 +1,5 @@
+```scala
+val ids = coll.map(_.id)
+val maxId = ids.reduce(_ max _)
+println(maxId)
+```

@@ -1,0 +1,14 @@
+```scala
+rep(Double.PositiveInfinity) {
+  dist => foldhood(dist)(_ min _) {
+    branch(sense[Boolean]("obstacle"))(Double.PositiveInfinity)(nbr(dist) + sense[Double]("source"))
+  }
+}
+```
+
+This code performs the following operations:
+
+1. **Initialization**: Starts with an initial distance of `Double.PositiveInfinity` for all nodes.
+2. **Repetition**: Uses `rep` to repeatedly update the distance.
+3. **Foldhood**: For each node, it combines the distances from its neighbors using `foldhood` and the minimum operation.
+4. **Branching**: Checks if there is an obstacle. If there is, it sets the distance to `Double.PositiveInfinity`. Otherwise, it computes the distance as the minimum of the current distance plus the sensed distance from the source.

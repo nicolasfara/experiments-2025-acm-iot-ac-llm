@@ -1,0 +1,3 @@
+```scala
+G[Double](sense("source") == true, 0.0, _ + 1, () => if (nbr(sense[Boolean]("obstacle"))) Double.PositiveInfinity else nbrRange())
+```

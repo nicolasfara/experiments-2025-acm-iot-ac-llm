@@ -1,0 +1,5 @@
+```val range = foldhood(1000)(_ min _)(nbr(range))
+rep(range)(_ - 1)
+```
+
+This code initializes the value `range` by taking the minimum of the current and neighboring values. Then, it evolves the value to decrease by 1 over time, effectively going from 1000 down to 0.

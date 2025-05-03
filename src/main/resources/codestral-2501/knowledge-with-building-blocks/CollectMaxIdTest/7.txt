@@ -1,0 +1,5 @@
+```scala
+rep(Int.MinValue) { maxId =>
+  maxHood(nbr(maxId))
+}
+```

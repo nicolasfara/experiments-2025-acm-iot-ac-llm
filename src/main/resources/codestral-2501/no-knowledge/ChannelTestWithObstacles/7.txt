@@ -1,0 +1,10 @@
+```scala
+val source = "source"
+val destination = "destination"
+
+val obstacle = input("obstacle")
+
+val pathExists = source ~> destination where (!obstacle)
+
+output(pathExists)
+```

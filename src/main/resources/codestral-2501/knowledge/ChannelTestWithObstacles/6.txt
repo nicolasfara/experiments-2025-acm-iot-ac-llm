@@ -1,0 +1,16 @@
+```scala
+rep(false) { created =>
+  if (created) {
+    true
+  } else {
+    val currentObstacle = sense[Boolean]("obstacle")
+    if (currentObstacle) {
+      false
+    } else {
+      val pathToDestination = foldhood(true)(_ && _)(nbr(sense[Boolean]("obstacle")))
+      val allPaths = foldhood(true)(_ && _)(nbr(pathToDestination))
+      allPaths && pathToDestination
+    }
+  }
+}
+```

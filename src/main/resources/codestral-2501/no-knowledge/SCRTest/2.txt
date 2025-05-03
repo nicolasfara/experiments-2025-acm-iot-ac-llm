@@ -1,0 +1,23 @@
+```scala
+val areaTemp = g.aggregate((id: VertexId, attr: (Double, Int), msg: Option[(Double, Int)]) => {
+  val (currTemp, count) = attr
+  val received = msg.getOrElse((0.0, 0))
+  (currTemp + received._1, count + received._2)
+})(triplet => {
+  if (triplet.srcAttr._2 != 0) {
+    Iterator(triplet.srcAttr, (triplet.dstAttr._1 + triplet.srcAttr._1, triplet.dstAttr._2 + triplet.srcAttr._2))
+  } else {
+    Iterator((triplet.dstAttr._1 + triplet.srcAttr._1, triplet.dstAttr._2 + triplet.srcAttr._2))
+  }
+})(triplet => {
+  triplet.sendToSrc((triplet.dstAttr._1 + triplet.srcAttr._1, triplet.dstAttr._2 + triplet.srcAttr._2))
+})
+
+val averageTemp = g.mapVertices((id: VertexId, attr: (Double, Int)) => {
+  if (attr._2 != 0) attr._1 / attr._2 else attr._1
+})
+
+val alarm = averageTemp.mapVertices((id: VertexId, temp: Double) => if (temp > 30) "ALARM" else "OK")
+```
+
+This code calculates the area-wise average temperature and broadcasts an alarm within each area if the average temperature is above 30 degrees.

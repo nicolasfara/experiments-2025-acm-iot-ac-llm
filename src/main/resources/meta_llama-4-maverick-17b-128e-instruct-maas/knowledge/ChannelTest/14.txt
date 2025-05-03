@@ -1,0 +1,9 @@
+```scala
+rep((Double.PositiveInfinity, mid())) { case (d, _) =>
+  mux(sense[Boolean]("source")) {
+    (0.0, mid())
+  } {
+    minHoodPlus((nbr(d._1) + nbrRange(), nbr(d._2)))
+  }
+}._2 == mid() && !sense[Boolean]("source") && foldhoodPlus(true)(_ && _)(nbr(sense[Boolean]("destination")))
+```

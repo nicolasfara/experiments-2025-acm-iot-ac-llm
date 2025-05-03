@@ -1,0 +1,7 @@
+```scala
+val distanceToDestination = G(sense[Boolean]("destination"), 0.0, _ + nbrRange(), nbrRange)
+val distanceToSource = G(sense[Boolean]("source"), 0.0, _ + nbrRange(), nbrRange)
+val isObstacle = sense[Boolean]("obstacle")
+val potential = distanceToDestination
+C(potential, (a: Boolean, b: Boolean) => a || b, mux(isObstacle)(false, distanceToSource < distanceToDestination + nbrRange()), false)
+```

@@ -1,0 +1,14 @@
+```scala
+val scafi = new scafi.Scafi
+
+scafi.start()
+
+val source = scafi.node("source")
+val destination = scafi.node("destination")
+
+val path = scafi.path(source, destination).where(_.sensor("obstacle").bool = true)
+
+val channel = scafi.createChannel(source, destination, path)
+
+channel
+```

@@ -1,0 +1,14 @@
+```scala
+import org.scalafi._
+val neighbors = for {
+  edge <- edges
+  (src, dst) = edge
+  neighbor <- Set(src, dst)
+} yield neighbor
+
+val counts = neighbors.groupBy(identity).mapValues(_.size)
+
+for {
+  (neighbor, count) <- counts
+} yield s"$neighbor: $count"
+```

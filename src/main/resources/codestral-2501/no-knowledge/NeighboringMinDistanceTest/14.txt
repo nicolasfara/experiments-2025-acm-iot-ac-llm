@@ -1,0 +1,17 @@
+```scala
+val graph = Graph.fromCollection(List(
+    ("A", "B", 2.0), ("A", "C", 1.0), ("B", "C", 2.0),
+    ("B", "D", 1.0), ("C", "D", 3.0), ("C", "E", 1.0),
+    ("D", "E", 1.0)
+), Some((1.0)))
+
+val minDistance = graph.aggregateMessages[Double](
+    tri => {
+        tri.sendToDst(tri.srcAttr)
+        tri.sendToSrc(tri.dstAttr)
+    },
+    (a, b) => math.min(a, b)
+)
+
+minDistance.collect
+```

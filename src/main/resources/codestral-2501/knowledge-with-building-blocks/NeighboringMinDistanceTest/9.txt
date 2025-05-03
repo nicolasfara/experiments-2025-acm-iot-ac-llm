@@ -1,0 +1,3 @@
+```scala
+val minDistance = minHood(nbrRange)
+```

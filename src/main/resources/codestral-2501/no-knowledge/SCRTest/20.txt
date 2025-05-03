@@ -1,0 +1,21 @@
+```scala
+val temperatureData = spark.read.parquet("path/to/temperature/data")
+val gridSize = 10 // Example grid size
+
+val aggregatedData = temperatureData
+  .withColumn("grid_x", (col("longitude") / gridSize).cast("int"))
+  .withColumn("grid_y", (col("latitude") / gridSize).cast("int"))
+  .groupBy("grid_x", "grid_y")
+  .agg(avg("temperature").as("average_temperature"))
+
+val alarmCondition = col("average_temperature") > 30
+val alarmData = aggregatedData
+  .where(alarmCondition)
+  .select("grid_x", "grid_y", lit(true).as("alarm"))
+
+val result = aggregatedData
+  .join(alarmData, Seq("grid_x", "grid_y"), "left")
+  .na.fill(Map("alarm" -> false))
+
+result.show()
+```

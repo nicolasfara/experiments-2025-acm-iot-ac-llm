@@ -1,0 +1,5 @@
+To evolve a value from 1000 to 0 using the `rep` construct, you can define a function that decrements the value by 1 in each step. Here is the resulting Scala code:
+
+```scala
+rep(1000)(_ - 1)
+```

@@ -1,0 +1,7 @@
+```scala
+val source = node.sense("node-name").contains("source")
+val destination = node.sense("node-name").contains("destination")
+val channel = gradient(source, nbrRange)
+val path = distanceTo(destination)
+mux(source & (path < channel)) { 0 } { path }
+```

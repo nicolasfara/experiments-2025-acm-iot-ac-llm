@@ -1,0 +1,10 @@
+```val graph = Graph.fromEdges(edges)
+val minDistances = graph.mapVertices((id, attr) => Double.PositiveInfinity)
+val source = 0 // Assuming the source vertex is 0
+val initialDistances = minDistances.setVertexAttr(source, 0.0)
+
+val result = initialDistances.pregel[Double](Double.PositiveInfinity)((id, dist, msg) =>
+  math.min(dist, msg)
+)(triplet => if (triplet.srcAttr + triplet.attr < triplet.dstAttr) Iterator((triplet.dstId, triplet.srcAttr + triplet.attr)) else Iterator.empty, "minDist")
+
+result.vertices.map { case (id, dist) => (id, dist) }.toSeq.sortBy(_._1)```

@@ -1,0 +1,7 @@
+Certainly! To calculate the minimum distance from neighbors, we will use the `foldhood` construct to aggregate the distances from all neighbors. Here is the revised Scala code for the `main` function:
+
+```scala
+foldhoodPlus(Double.PositiveInfinity)(_ min _)(nbrRange())
+```
+
+This code snippet finds the minimum distance to any neighbor, excluding the node itself, using `foldhoodPlus`. The `nbrRange()` function is used to get the distance to the neighbor, and `_ min _` is the combining function to find the minimum value. `Double.PositiveInfinity` is used as the initial value to ensure that any actual distance will be smaller and thus correctly identified as the minimum.

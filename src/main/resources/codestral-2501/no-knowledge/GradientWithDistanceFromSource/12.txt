@@ -1,0 +1,7 @@
+```scala
+val distances = ScaFi.sensor("source").map((_, 1)).map { case (distance, _) =>
+  val dx = distance._1 - ScaFi.sensor("source")._1
+  val dy = distance._2 - ScaFi.sensor("source")._2
+  math.sqrt(dx * dx + dy * dy)
+}
+```

@@ -1,0 +1,5 @@
+```scala
+val source = ScaFi.source[Int]("source")
+val destination = ScaFi.sink[Int]("destination")
+source.pipe(destination)
+```

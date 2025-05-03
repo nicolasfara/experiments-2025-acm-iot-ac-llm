@@ -1,0 +1,6 @@
+```scala
+val distances = Node.summarize[Double](ctx.neighbors.summarizeDouble((b) => ctx.edge(me, b).get.distance))
+val minDist = distances.min
+
+minDist
+```

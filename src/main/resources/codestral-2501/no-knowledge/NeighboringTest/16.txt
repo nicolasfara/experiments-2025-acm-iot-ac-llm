@@ -1,0 +1,10 @@
+```scala
+val graph: Graph[Int, Int] = ...
+val result = graph.aggregateMessages[Int](_.copyToDst(1)).sum
+```
+
+
+```scala
+val graph: Graph[Int, Int] = ...
+val result = graph.aggregateMessages[Int](_.copyToDst(1)).sum
+```

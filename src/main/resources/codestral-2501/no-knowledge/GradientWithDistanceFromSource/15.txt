@@ -1,0 +1,9 @@
+```scala
+val source = "source"
+val distances = g.collect {
+  case (sensor, value) if sensor != source =>
+    val sourceValue = g("source")
+    (sensor, math.sqrt(math.pow(value._1 - sourceValue._1, 2) + math.pow(value._2 - sourceValue._2, 2)))
+}
+g = distances
+```

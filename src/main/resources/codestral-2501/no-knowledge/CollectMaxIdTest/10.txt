@@ -1,0 +1,15 @@
+```scala
+    // Import necessary libraries
+    import distribsim.scafi.core._
+    import distribsim.scafi.core.FieldOps._
+    import distribsim.scafi.core.ScaFi._
+
+    // Create the initial aggregate
+    val init = Aggregate[Int](0, (a, b) => if (a > b) a else b)
+
+    // Apply the aggregate operation to the network
+    val maxId = aggregate(init)
+
+    // Print the result
+    maxId
+```

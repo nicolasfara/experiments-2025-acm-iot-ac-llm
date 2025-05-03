@@ -1,0 +1,11 @@
+```scala
+rep(List.empty[(Boolean,Boolean,ID)]) {
+  x =>
+  foldhood(x) {
+    (y,z) =>
+    if (y._1 || y._2) y else z
+  } {
+    nbr(sense[Boolean]("source"),sense[Boolean]("destination"),mid())
+  }
+}.filter(_._3 == mid()).head._2
+```

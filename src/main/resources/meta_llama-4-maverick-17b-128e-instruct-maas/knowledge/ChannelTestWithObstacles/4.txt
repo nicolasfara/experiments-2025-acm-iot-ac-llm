@@ -1,0 +1,12 @@
+```scala
+rep((Double.PositiveInfinity, false)) { case (d, _) =>
+  val isSource = sense[Boolean]("source")
+  val isDest = sense[Boolean]("destination")
+  val isObstacle = sense[Boolean]("obstacle")
+  mux(isObstacle)(Double.PositiveInfinity, false) {
+    mux(isSource)(0.0, minHoodPlus((nbr(d) + nbrRange(), nbr(isDest)))) match {
+      case (dist, isDestNbr) => (dist, isDest || isDestNbr)
+    }
+  }
+}._2
+```

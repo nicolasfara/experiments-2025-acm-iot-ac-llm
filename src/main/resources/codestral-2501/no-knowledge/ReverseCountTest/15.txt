@@ -1,0 +1,4 @@
+```scala
+val result = (0 to 1000).reduce(_ + _)
+println(result)
+```

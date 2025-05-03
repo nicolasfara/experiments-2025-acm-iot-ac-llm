@@ -1,0 +1,4 @@
+```scala
+val maxId = aggregate(max(mid()))
+export(maxId)
+```

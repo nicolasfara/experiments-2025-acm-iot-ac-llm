@@ -1,0 +1,17 @@
+```scala
+rep(false) { success =>
+  if (success) true else {
+    val obstacleAhead = sense[Boolean]("obstacle")
+    if (obstacleAhead) false else {
+      val destinationFound = foldhoodPlus(false)(_ || _)(nbr(mid() == "destination"))
+      if (destinationFound) true else {
+        val nextHop = foldhoodPlus(List.empty[String])((l1, l2) => l1 ++ l2)(nbr(mid()))
+        if (nextHop.isEmpty) false else {
+          val chosenNextHop = nextHop.minBy(_ => nbrRange())
+          nbr(chosenNextHop)
+        }
+      }
+    }
+  }
+}
+```

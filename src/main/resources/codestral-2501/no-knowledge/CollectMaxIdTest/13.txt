@@ -1,0 +1,9 @@
+```scala
+import it.unibo.alchemist.model.scafi.ScaFiIncarnationForScaFi
+import it.unibo.alchemist.model.scafi.StandardScaFiIncarnationForScaFi.
+
+val s = new StandardScaFiIncarnationForScaFi
+s.init
+s.max[Double]("ID")
+s.output
+```

@@ -1,0 +1,9 @@
+```scala
+val euclideanDistance = Graph
+    .nodes
+    .filter(_.hasAttr("name") && _.getAttr[String]("name") == "source")
+    .map(n => Graph.nodes.map(m => (n, m, sqrt(pow(n.getAttr[Double]("x") - m.getAttr[Double]("x"), 2) + pow(n.getAttr[Double]("y") - m.getAttr[Double]("y"), 2)))))
+    .reduce((a, b) => a ++ b)
+    .toList
+```
+In this Scala code, it assumes that the graph is represented as a Graph object with nodes having attributes "name", "x", and "y". The code calculates the Euclidean distance from the node named 'source' to all other nodes in the graph.

@@ -1,0 +1,25 @@
+```
+import org.scalafi.common._
+import org.scalafi.space._
+import org.scalafi.algebra._
+import org.scalafi.space.dsl._
+import org.scalafi.field._
+import org.scalafi.coord._
+
+val numAreas = 4
+val temperatureThreshold = 30.0
+
+val areas = 0 until numAreas
+
+val temperatureField = areas.map(i => Field(i, i.toDouble + 20.0))
+
+val alarmField = temperatureField.map { case Field(area, temperature) =>
+  if (temperature > temperatureThreshold) Field(area, true) else Field(area, false)
+}
+
+val broadcastAlarmField = alarmField.broadcast
+
+broadcastAlarmField.toScala
+```
+
+The above code computes the temperature for each area, determines if the temperature exceeds the threshold, and broadcasts an alarm signal within each area where the temperature is above 30 degrees.

@@ -1,0 +1,15 @@
+```scala
+rep((List.empty[(Double, ID)], List.empty[(Double, ID)])) {
+  case (areas, alarms) =>
+    val areaPotential = G[Double](sense[Boolean]("source"), 0, _ + nbrRange(), nbrRange)
+    val areaId = C[Double, ID](areaPotential, (a, b) => a, mid(), -1)
+    val areaTemperature = C[Double, Double](areaPotential, _ + _, nbr(sense[Double]("temperature")), 0.0)
+    val areaSize = C[Double, Double](areaPotential, _ + _, 1, 0.0)
+    val areaAvgTemperature = areaTemperature / areaSize
+    val newAreas = areas :+ (areaAvgTemperature, areaId)
+    val newAlarms = if (areaAvgTemperature > 30) alarms :+ (areaAvgTemperature, areaId) else alarms
+    (newAreas, newAlarms)
+}._2.foldLeft(false) {
+  case (_, (temp, id)) => if (temp > 30) true else false
+}
+```

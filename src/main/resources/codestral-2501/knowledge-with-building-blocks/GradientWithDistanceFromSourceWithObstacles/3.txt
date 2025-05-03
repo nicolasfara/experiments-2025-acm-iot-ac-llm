@@ -1,0 +1,5 @@
+```scala
+val potential = G[Double](source = sense("source"), field = 0, acc = _ + nbrRange(), metric = () => if(sense[Boolean]("obstacle")) Double.PositiveInfinity else nbrRange())
+val pathExistence = C[Double, Boolean](potential, _ || _, sense("source"), false)
+pathExistence
+```

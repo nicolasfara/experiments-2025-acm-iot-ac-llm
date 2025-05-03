@@ -1,0 +1,14 @@
+To gather a list of IDs of a node's neighbors using the `foldhood` construct in Scala, you can use the following code:
+
+```scala
+foldhood(List[ID]())(_ ++ _)(nbr(mid())).distinct
+```
+
+Here’s a step-by-step breakdown of the code:
+
+1. **Initial Value**: `List[ID]()` initializes an empty list to hold the IDs of the neighbors.
+2. **Combine Function**: `_ ++ _` concatenates two lists, which is used to combine the neighbor IDs from different neighbors.
+3. **Neighbor Expression**: `nbr(mid())` accesses the ID of each neighbor using the `mid()` function, which returns the ID of the current node.
+4. **Distinct**: The resulting list is passed through the `distinct` method to ensure that each ID appears only once, even if there are multiple connections to the same neighbor.
+
+This code will gather a list of the IDs of all neighbors of the current node, including duplicates if there are multiple connections to the same neighbor. The `distinct` method ensures that each ID appears only once in the final list.

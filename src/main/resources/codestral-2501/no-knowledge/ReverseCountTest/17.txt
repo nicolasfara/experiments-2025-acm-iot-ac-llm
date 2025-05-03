@@ -1,0 +1,11 @@
+```scala
+val initialValue = 1000
+val finalValue = 0
+val stepSize = 1
+
+var currentValue = initialValue
+while (currentValue > finalValue) {
+  currentValue -= stepSize
+}
+println(currentValue)
+```

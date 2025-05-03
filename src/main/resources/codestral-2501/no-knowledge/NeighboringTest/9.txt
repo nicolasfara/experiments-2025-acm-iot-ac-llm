@@ -1,0 +1,13 @@
+```scala
+import org.scalafi.core._
+import org.scalafi.core.ops._
+import org.scalafi.core.ops.aggregates._
+import org.scalafi.core.ops.aggregates.Count
+
+val graph: Aggregate = Aggregate("graph")
+val neighbors: Aggregate = Aggregate("neighbors")
+
+val countNeighbors = graph.fold(0)((count, node) => count + node.neighbors.size)
+
+countNeighbors.aggregate(neighbors)
+```

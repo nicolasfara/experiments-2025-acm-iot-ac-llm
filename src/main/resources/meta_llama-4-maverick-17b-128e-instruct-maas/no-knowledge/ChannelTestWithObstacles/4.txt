@@ -1,0 +1,8 @@
+```scala
+val sourceNode = node.sense[Boolean]("source").toSenseBool()
+val destinationNode = node.sense[Boolean]("destination").toSenseBool()
+val obstacleSensor = node.sense[Boolean]("obstacle").toSenseBool()
+
+val path = channel(sourceNode, destinationNode, obstacleSensor)
+path().toBoolean
+```

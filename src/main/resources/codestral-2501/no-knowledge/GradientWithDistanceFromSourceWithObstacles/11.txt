@@ -1,0 +1,11 @@
+```scala
+val distances = Sensor[Double]("distance")
+val obstacles = Sensor[Boolean]("obstacle")
+val source = Sensor[Double]("source")
+
+val euclideanDistance = distances.compose(source) { (dist, src) =>
+  if (obstacles.value) Double.PositiveInfinity else dist - src
+}.fold(Double.PositiveInfinity) { (minDist, newDist) =>
+  if (newDist < minDist) newDist else minDist
+}
+```

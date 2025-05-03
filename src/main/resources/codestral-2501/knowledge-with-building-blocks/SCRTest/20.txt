@@ -1,0 +1,8 @@
+```scala
+val potential = G[Double](source = true, field = 0, acc = _ + nbrRange(), metric = () => if (nbr(sense[Boolean]("obstacle"))) Double.PositiveInfinity else nbrRange())
+branch(foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature"))) / foldhood(0)(_ + _)(nbr(1)) > 30) {
+  C[Double, Boolean](potential, _ || _, true, false)
+} {
+  false
+}
+```

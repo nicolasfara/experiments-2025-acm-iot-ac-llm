@@ -1,0 +1,8 @@
+```scala
+branch(areaId() % 2 == 0) {
+  val nodes = foldhood(0)(_ + _)(nbr(1))
+  foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature"))) / nodes > 30
+} {
+  false
+}
+```

@@ -1,0 +1,27 @@
+```scala
+import com.twitter.algebird.Aggregator
+import org.apache.spark.SparkConf
+import org.apache.spark.SparkContext
+import org.apache.spark.graphx._
+import org.apache.spark.rdd.RDD
+
+val conf = new SparkConf().setAppName("Count Neighbors").setMaster("local")
+val sc = new SparkContext(conf)
+
+val edges: RDD[Edge[Int]] = sc.parallelize(Array(Edge(1, 2, 1), Edge(1, 3, 1), Edge(2, 3, 1)))
+val vertices: RDD[(VertexId, Int)] = sc.parallelize(Array((1, 1), (2, 1), (3, 1)))
+
+val graph = Graph(vertices, edges)
+
+val neighborCount = graph.aggregateMessages[Int](
+  triplet => {
+    triplet.sendToDst(1)
+    triplet.sendToSrc(1)
+  },
+  _ + _
+)
+
+val result = neighborCount.collect.sortBy(_._1).map(x => (x._1, x._2 - 1))
+
+result.foreach(println)
+```

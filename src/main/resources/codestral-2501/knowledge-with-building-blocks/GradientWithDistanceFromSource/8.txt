@@ -1,0 +1,6 @@
+Here is the Scala code for computing the Euclidean distance from the source using a sensor named 'source':
+
+```scala
+val potential = G[Double](source = sense("source"), field = 0, acc = _ + nbrRange(), metric = nbrRange)
+C[Double, Double](potential, _ + _, 1, 0)
+```

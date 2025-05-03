@@ -1,0 +1,20 @@
+```scala
+import org.scafi.{ScaFiApp, _}
+import org.scafi.operators._
+
+object Main extends ScaFiApp {
+  def main() = {
+    val g = Graph.fromEdges("edges.txt", directed = false)
+
+    val minDistance = g.mapVertices((id, _) => 1.0)
+
+    val result = minDistance.pregel(
+      (id, dist, newDist) => math.min(dist, newDist),
+      triplet => if (triplet.srcAttr < triplet.dstAttr) Iterator((triplet.dstId, triplet.srcAttr + 1)) else Iterator.empty,
+      activeDirection = EdgeDirection.Either
+    ).vertices.aggregate(min = _.min)
+
+    result.collect().foreach(println)
+  }
+}
+```

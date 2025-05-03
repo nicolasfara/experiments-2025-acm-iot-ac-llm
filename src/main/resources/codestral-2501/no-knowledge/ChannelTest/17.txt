@@ -1,0 +1,5 @@
+```scala
+val source = leaf[Int]("source")
+val destination = leaf[Int]("destination")
+val channel = source --> destination
+```

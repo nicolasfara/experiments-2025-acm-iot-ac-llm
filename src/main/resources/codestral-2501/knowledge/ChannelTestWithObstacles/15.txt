@@ -1,0 +1,11 @@
+```scala
+val pathExists = rep(List(mid())) { currentPath =>
+  if (sense[Boolean]("obstacle")) {
+    currentPath
+  } else {
+    foldhood(currentPath)(_ ++ _)(nbr(currentPath)).toSet.toList
+  }
+}
+val destinationFound = pathExists.contains(destination)
+destinationFound
+```

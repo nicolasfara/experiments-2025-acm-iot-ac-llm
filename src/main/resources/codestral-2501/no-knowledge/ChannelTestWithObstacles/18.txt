@@ -1,0 +1,9 @@
+```scala
+val sourceNode = name("source")
+val destinationNode = name("destination")
+val obstacleSensors = name("obstacle")
+
+val pathExists = mux(obstacleSensors, low, high)
+val channel = createChannel(sourceNode, destinationNode, pathExists)
+channel
+```

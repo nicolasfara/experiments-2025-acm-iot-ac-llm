@@ -1,0 +1,8 @@
+```scala
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+val gradient = G(source, 0, (x: Double) => x + 1)
+val distanceToSource = gradient
+val avoidingObstacles = branch(obstacle){ Double.PositiveInfinity }{ distanceToSource }
+distanceToSource
+```

@@ -1,0 +1,7 @@
+Sure, here is the Scala code that creates a channel from a source node to a destination node:
+
+```scala
+val channel = createChannel("source", "destination")
+```
+
+This code initializes a channel from the node named "source" to the node named "destination" using the `createChannel` method. Ensure that the `createChannel` method is defined elsewhere in the code to handle the creation of the channel.

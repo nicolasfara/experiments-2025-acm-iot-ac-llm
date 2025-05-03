@@ -1,0 +1,19 @@
+To gather a list of IDs of their neighbors in the context of aggregate computing using the DSL, you can use the `foldhood` construct to aggregate the neighbor IDs. Here’s how you can do it:
+
+```scala
+foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```
+
+This code snippet will collect the IDs of all neighbors (including the node itself) into a list. Let's break down the components:
+
+1. `foldhood(List.empty[ID])`: Initializes the aggregation with an empty list.
+2. `_ ++ _`: Combines the lists from each neighbor.
+3. `List(nbr(mid()))`: Creates a list containing the ID of each neighbor.
+
+Here is the complete body of the `main` function:
+
+```scala
+foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```
+
+This will return a list of IDs of all neighbors for each node in the network.

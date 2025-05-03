@@ -1,0 +1,9 @@
+```scala
+val f = Aggregate[Id, Int](
+  _ => 1,
+  _ + _,
+  (l, r) => math.max(l, r),
+  identity
+)
+network.aggregate(f)
+```

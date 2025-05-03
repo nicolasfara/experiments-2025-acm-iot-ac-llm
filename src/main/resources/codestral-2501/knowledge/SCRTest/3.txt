@@ -1,0 +1,7 @@
+```scala
+branch(foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature"))) / foldhood(0)(_ + _)(nbr(1)) > 30){
+  foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature"))) / foldhood(0)(_ + _)(nbr(1))
+}{
+  false
+}
+```

@@ -1,0 +1,8 @@
+```scala
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+val gradient = G[V](source, (x: V) => x, (x: V, y: V) => x + y, 0)
+val potential = rep(Double.PositiveInfinity){ case d => mux(obstacle){ Double.PositiveInfinity }{ minHoodPlus(gradient + nbr{d}) } }
+val distance = rep(Double.PositiveInfinity){ case d => mux(source){ 0 }{ minHoodPlus(nbr{d} + 1) } }
+distance
+```

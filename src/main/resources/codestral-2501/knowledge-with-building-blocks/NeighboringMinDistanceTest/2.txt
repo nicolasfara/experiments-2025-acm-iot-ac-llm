@@ -1,0 +1,6 @@
+To calculate the minimum distance from neighbors, you can use the `foldhood` construct with `nbr` to gather the distances from neighbors and then find the minimum value. Here is the raw Scala code for the `main` function that accomplishes this:
+
+```scala
+val idsAndNeigh = foldhood(List.empty[(Double, ID)])(_ ++ _)(List(nbrRange() -> nbr(mid())))
+idsAndNeigh.minBy(_._1)._1
+```

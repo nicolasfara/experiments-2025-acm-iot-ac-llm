@@ -1,0 +1,21 @@
+```scala
+val sourceNode = node.sense[Boolean]("source").toLMap
+val destinationNode = node.sense[Boolean]("destination").toLMap
+val obstacleSensor = node.sense[Boolean]("obstacle").toLMap
+
+val channel = gradientWithObstacle(sourceNode, destinationNode, obstacleSensor)
+
+def gradientWithObstacle(source: Boolean, destination: Boolean, obstacle: Boolean): Boolean = {
+  val distanceToSource = gradient(source)
+  val isPathClear = distanceToSource != Double.PositiveInfinity && !obstacle
+  val pathTowardsSource = mux(isPathClear, distanceToSource, Double.PositiveInfinity)
+  val isDestinationReachable = distanceTo(source).minHoodPlus(pathTowardsSource) < 1.0
+  isDestinationReachable && destination
+}
+
+branch(sourceNode) {
+  channel
+} {
+  false
+}
+```

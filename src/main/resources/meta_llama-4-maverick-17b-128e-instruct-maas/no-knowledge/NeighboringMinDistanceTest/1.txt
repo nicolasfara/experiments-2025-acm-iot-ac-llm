@@ -1,0 +1,8 @@
+```scala
+val nbrDist = rep(Double.PositiveInfinity){ case d => 
+  mux(isSource) { 0.0 } { 
+    minHoodPlus(nbrRange() + nbr(d)) 
+  } 
+}
+nbrDist
+```

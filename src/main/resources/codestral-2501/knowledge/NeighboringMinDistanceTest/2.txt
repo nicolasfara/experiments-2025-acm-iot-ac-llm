@@ -1,0 +1,3 @@
+```scala
+foldhoodPlus((Double.MaxValue, mid()))((a, b) => if (a._1 < b._1) a else b)((nbrRange(), mid()))._1
+```

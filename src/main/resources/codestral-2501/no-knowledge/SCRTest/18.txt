@@ -1,0 +1,19 @@
+```scala
+implicit val sc = SparkSession.builder.appName("AreaWiseTemperatureAlarm").getOrCreate().sparkContext
+
+val temperatureData: RDD[(String, Double)] = sc.textFile("temperature_data.txt")
+  .map(line => {
+    val parts = line.split(",")
+    (parts(0), parts(1).toDouble) // Assuming the first part is the area and the second part is the temperature
+  })
+
+val areaWiseTemperature: RDD[(String, Double)] = temperatureData.reduceByKey((temp1, temp2) => (temp1 + temp2) / 2.0)
+
+val alarmData: RDD[(String, String)] = areaWiseTemperature.map {
+  case (area, temp) =>
+    if (temp > 30.0) (area, s"Alarm: Temperature in $area is above 30 degrees")
+    else (area, s"Temperature in $area is normal")
+}
+
+alarmData.collect.foreach(println)
+```

@@ -1,0 +1,9 @@
+```scala
+val temperatures = aggregate(Seq("area1", "area2", "area3"))(Seq())
+val alarms = temperatures.map {
+  case (area, temp) =>
+    if (temp > 30) (area, s"Alarm: Temperature in $area is above 30 degrees")
+    else (area, s"No alarm: Temperature in $area is $temp degrees")
+}
+broadcast(alarms)
+```

@@ -1,0 +1,12 @@
+```scala
+val areaTemp = foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature")))
+val areaSize = foldhood(0)(_ + _)(nbr(1))
+val avgTemp = areaTemp / areaSize
+
+val alarmCondition = avgTemp > 30
+val alarm = branch(alarmCondition)(true)(false)
+
+val broadcastAlarm = foldhood(alarm)(_ && _)(nbr(alarm))
+
+broadcastAlarm
+```

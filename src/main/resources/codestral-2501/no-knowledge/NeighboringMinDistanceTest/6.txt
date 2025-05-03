@@ -1,0 +1,12 @@
+```scala
+val g = new Graph[Int, Int]
+val vertices = nodes.map(n => g.addVertex(n))
+val edges = edges.map { case (src, tgt, w) => g.addEdge(vertices(src), vertices(tgt), w) }
+val distance = g.aggregate[Int](vertices, (v, u) => v) {
+  (a, b) => a.min(b)
+  (d, u) => d + 1
+  (a, b) => a.min(b)
+  (d, u) => d
+}
+distance
+```

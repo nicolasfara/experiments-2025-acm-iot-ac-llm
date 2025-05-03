@@ -1,0 +1,9 @@
+```scala
+val result = aggregate[Int] {
+  val initial = 1000
+  evolve(initial) { a =>
+    a - 1
+  }
+}(_ <= 0, 1000)
+result
+```

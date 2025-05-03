@@ -1,0 +1,5 @@
+To compute the maximum ID in the whole network, you can use the `rep` construct to propagate the maximum ID across the network over time, and the `foldhood` construct to gather the maximum ID from the neighbors. Here is the resulting Scala code for the `main` function:
+
+```scala
+rep(Int.MinValue) { maxId => foldhood(maxId)(_ max _)(nbr(maxId)) }
+```

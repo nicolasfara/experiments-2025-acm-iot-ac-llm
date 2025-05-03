@@ -1,0 +1,3 @@
+```scala
+foldhood(false)(_ || _)(branch(nbr(sense[Boolean]("obstacle")))(false)(true)) && foldhood(true)(_ && _)(branch(nbr(sense[Boolean]("obstacle")))(false)(nbr(mid()) == destination))
+```

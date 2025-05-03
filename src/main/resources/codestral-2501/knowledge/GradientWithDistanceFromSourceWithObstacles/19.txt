@@ -1,0 +1,7 @@
+```scala
+rep(Double.PositiveInfinity) { distToSource =>
+  if (sense[Boolean]("obstacle")) Double.PositiveInfinity
+  else if (sense[Boolean]("source")) 0.0
+  else foldhood(Double.PositiveInfinity)(_ min _)(nbr(distToSource + 1.0))
+}
+```

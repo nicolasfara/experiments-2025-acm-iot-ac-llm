@@ -1,0 +1,14 @@
+```scala
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+val gradient = G(source, 0, (_:Double)+1)
+val distanceToObstacle = G(obstacle, Double.PositiveInfinity, (d:Double) => d+1 min nbrRange())
+val potential = rep(Double.PositiveInfinity){ case d => 
+  mux(source){0.0}{ 
+    minHoodPlus(nbr{d} + nbrRange() * (1 + distanceToObstacle))
+  }
+}
+val direction = gradient - potential
+val isBlocked = branch(obstacle){Double.PositiveInfinity}{direction}
+val finalGradient = mux(source){0.0}{minHood(nbr{finalGradient} + isBlocked)}
+```

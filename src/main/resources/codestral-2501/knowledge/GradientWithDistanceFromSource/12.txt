@@ -1,0 +1,6 @@
+```scala
+rep(0.0) { distance =>
+  val distances = foldhoodPlus(Double.MaxValue)(_ min _)(nbr(distance + sense[Double]("source")))
+  minHood(distances)
+}
+```

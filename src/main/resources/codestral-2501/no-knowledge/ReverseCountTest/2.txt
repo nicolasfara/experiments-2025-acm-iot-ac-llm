@@ -1,0 +1,10 @@
+```scala
+val start = 1000
+val end = 0
+var current = start
+
+while (current > end) {
+  current -= 1
+  println(current)
+}
+```

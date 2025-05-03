@@ -1,0 +1,7 @@
+```scala
+val sensorData = getData()
+val source = sensorData("source")
+val obstacles = sensorData.filterKeys(_.startsWith("obstacle"))
+val safePath = obstacles.values.foldLeft(sensorData)(_ - _)
+val euclideanDistance = math.sqrt(safePath.values.map(_.toDouble * _.toDouble).sum)
+```

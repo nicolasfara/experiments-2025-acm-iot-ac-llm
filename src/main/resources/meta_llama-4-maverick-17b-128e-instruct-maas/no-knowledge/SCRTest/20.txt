@@ -1,0 +1,8 @@
+```scala
+val tempSensor = sensor[Double]("temperature")
+val isHot = tempSensor > 30
+val areas = G[V, Boolean](nbr(isHot), isHot)(_ || _)
+val areaTemperature = aggregate(areas)(G[V, Double](nbr(tempSensor), tempSensor)((a, b) => (a + b) / 2))
+val alarm = areaTemperature > 30
+broadcast(areas, alarm)
+```

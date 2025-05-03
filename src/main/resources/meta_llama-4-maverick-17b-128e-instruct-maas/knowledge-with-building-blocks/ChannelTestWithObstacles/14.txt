@@ -1,0 +1,8 @@
+```scala
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+val distanceToDestination = G[Double](destination, 0, _ + 1, () => if(obstacle) Double.PositiveInfinity else nbrRange())
+val pathExists = C[Double, Boolean](distanceToDestination, _ || _, source, false)
+source && pathExists
+```

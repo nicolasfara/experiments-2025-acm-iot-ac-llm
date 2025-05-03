@@ -1,0 +1,3 @@
+```scala
+val neighborIDs = src[Int].gatherNeighbors[Int]({ (id, neighbor) => neighbor }).toCollection
+```

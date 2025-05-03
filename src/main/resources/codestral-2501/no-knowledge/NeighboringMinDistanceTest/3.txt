@@ -1,0 +1,8 @@
+```scala
+val distances = Graph.undirected[Double]
+val minDistances = distances.mapEdges((edge, dist) =>
+  if (dist > 0.0) Some(dist) else None
+).mapVertices((id, dist) =>
+  dist
+)
+```

@@ -1,0 +1,7 @@
+```scala
+val graph = scaFi.edge("graph", Seq(("v1", "v2"), ("v2", "v3"), ("v1", "v4")))
+val neighbors = graph.aggregate(Seq("v1", "v2", "v3", "v4"))
+  .mapValues(v => v.size)
+  .compute
+neighbors.collect
+```

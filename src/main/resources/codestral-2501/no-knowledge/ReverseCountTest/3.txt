@@ -1,0 +1,7 @@
+```scala
+val Program = new AggregateProgram with AggregateSortedCollection[Long] {
+  def main(coll: SCollection[Long]): SCollection[Long] = {
+    coll.map(x => x - 1).filter(_.>=(0))
+  }
+}
+```

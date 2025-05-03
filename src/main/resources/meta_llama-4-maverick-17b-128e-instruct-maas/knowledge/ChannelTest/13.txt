@@ -1,0 +1,7 @@
+```scala
+rep((Double.MaxValue, "any")) { case (d, s) =>
+  mux(sense[Boolean]("source")) { (0.0, mid()) } {
+    minHoodPlus((nbr(d), nbr(s)))
+  }
+}._2 == sense[String]("destination")
+```

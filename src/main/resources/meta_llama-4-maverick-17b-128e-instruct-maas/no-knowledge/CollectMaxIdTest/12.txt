@@ -1,0 +1,5 @@
+```scala
+val id = self.getId()
+val maxId = aggregate(max(id))
+export(maxId)
+```

@@ -1,0 +1,14 @@
+```scala
+rep((Double.PositiveInfinity, false)) { case (d, _) =>
+  val isSource = sense[Boolean]("source")
+  val isDest = sense[Boolean]("destination")
+  val isObstacle = sense[Boolean]("obstacle")
+  mux(isObstacle){ (Double.PositiveInfinity, false) }{
+    val potential = foldhoodPlus(Double.PositiveInfinity)(Math.min(_, _)) {
+      nbr(d) + nbrRange()
+    }
+    val isChannel = isSource || (potential < d)
+    (if (isSource) 0.0 else potential, isDest && isChannel)
+  }
+}._2
+```

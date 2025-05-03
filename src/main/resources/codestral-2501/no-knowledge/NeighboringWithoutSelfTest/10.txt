@@ -1,0 +1,7 @@
+```scala
+import dfc._
+import dfc.ops._
+
+val graph = GraphOps.loadGraph("path/to/graph")
+val degree = graph.neighbors().count() - 1
+```

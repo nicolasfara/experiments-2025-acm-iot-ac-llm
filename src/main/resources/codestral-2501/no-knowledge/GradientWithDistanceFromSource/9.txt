@@ -1,0 +1,13 @@
+```scala
+val distances = GraphX.fromGraph(scafi.ScafiGraph, scafi.ScafiGraph.edges).
+  aggregateMessages[String, Double](
+    triplet => {
+      if (triplet.srcAttr == "source") {
+        Iterator((triplet.dstId, triplet.attr.weight))
+      } else {
+        Iterator.empty
+      }
+    },
+    (a, b) => a + b
+  ).mapValues(dist => Math.sqrt(dist))
+```

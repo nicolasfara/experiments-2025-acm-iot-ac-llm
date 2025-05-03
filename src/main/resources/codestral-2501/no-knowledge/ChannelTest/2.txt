@@ -1,0 +1,4 @@
+```scala
+// Create a channel from the source node to the destination node
+val channel = source ~> destination
+```

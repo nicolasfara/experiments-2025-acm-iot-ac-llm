@@ -1,0 +1,3 @@
+```scala
+val maxId = aggregate(Graph[Int]())((g, _) => g.max())
+```

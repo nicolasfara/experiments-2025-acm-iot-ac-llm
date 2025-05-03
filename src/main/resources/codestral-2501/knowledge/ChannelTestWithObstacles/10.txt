@@ -1,0 +1,12 @@
+```scala
+branch(nbr(sense[Boolean]("obstacle"))) {
+  false
+} {
+  if (destination) {
+    true
+  }
+  else {
+    foldhood(false)((a, b) => a || b)(nbr(true))
+  }
+}
+```

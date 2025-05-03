@@ -1,0 +1,14 @@
+```scala
+val edges = Seq(
+  (1, 2),
+  (1, 3),
+  (2, 3),
+  (3, 4)
+)
+
+val graph = edges.groupBy(_._1).mapValues(_.map(_._2))
+
+val neighborsCount = graph.mapValues(_.size).map{ case (vertex, count) => s"$vertex: $count" }
+
+println(neighborsCount.mkString(", "))
+```

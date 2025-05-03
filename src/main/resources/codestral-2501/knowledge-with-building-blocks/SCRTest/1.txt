@@ -1,0 +1,5 @@
+```scala
+val areas = S(5, nbrRange)
+val potential = G[Double](areas, 0, _ + nbrRange(), (if (sense[Double]("temperature") > 30) Double.PositiveInfinity else nbrRange()))
+C[Double, Boolean](potential, _ || _, potential != 0, false) && sense[Double]("temperature") > 30
+```

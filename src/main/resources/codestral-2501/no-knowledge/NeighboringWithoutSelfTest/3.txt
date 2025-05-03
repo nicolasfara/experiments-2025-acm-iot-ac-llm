@@ -1,0 +1,13 @@
+```scala
+import org.scalafi.core._
+import org.scalafi.core.operators._
+import org.scalafi.core.implicits._
+import org.scalafi.core.api._
+
+val graph = Graph.fromEdgeList(Seq((1, 2), (1, 3), (2, 3), (3, 4)))
+val neighbors = graph.neighbors
+
+val count = neighbors.mapValues(_.size - 1)
+
+count.collect
+```

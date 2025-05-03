@@ -1,0 +1,14 @@
+```scala
+import org.scalafi.core._
+import org.scalafi.core.ScaFi._
+
+val program = aggregate {
+  val iterations = 1000
+  var value = 1000
+  for (i <- 1 to iterations) {
+    value = value - 1
+  }
+  emit(value)
+}
+program.run()
+```

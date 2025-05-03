@@ -1,0 +1,12 @@
+```scala
+val area = S(2, nbrRange)
+val temperature = sense[Double]("temperature")
+val areaPotential = G[Int](area, 0, _ + 1, nbrRange)
+val areaTemperature = C[Int, Double](areaPotential, _ + _, if (temperature > 30) temperature else 0, 0)
+val areaAlarm = C[Int, Boolean](areaPotential, _ || _, temperature > 30, false)
+branch(areaAlarm) {
+  foldhood(0.0)(_ + _)(nbr(areaTemperature)) / foldhood(0)(_ + _)(nbr(1))
+} {
+  0.0
+}
+```

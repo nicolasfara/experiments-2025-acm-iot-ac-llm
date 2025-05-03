@@ -1,0 +1,10 @@
+```scala
+import org.scalafi.core._
+
+val sensors = AggregateProperty[Double]("sensor")
+val distance = AggregateProperty[Double]("distance")
+
+val source = sensors("source")
+
+val distanceToSource = distance(source)
+```

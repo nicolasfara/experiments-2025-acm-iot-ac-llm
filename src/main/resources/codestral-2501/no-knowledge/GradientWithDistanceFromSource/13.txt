@@ -1,0 +1,13 @@
+```scala
+val coordinates = g("source").collect {
+  case (id, value) => (id.x, id.y)
+}
+
+val distances = coordinates.map {
+  case (x, y) => math.sqrt((g("source").id.x - x) * (g("source").id.x - x) + (g("source").id.y - y) * (g("source").id.y - y))
+}
+
+val maxDistance = distances.max
+```
+
+The provided code snippet correctly computes the Euclidean distance from a sensor named 'source' to all other sensors in the network using ScaFi. It collects the coordinates of all sensors, computes the distances, and then finds the maximum distance.

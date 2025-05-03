@@ -1,0 +1,25 @@
+To gather a list of IDs of a node's neighbors, you can use the `foldhood` construct along with the `nbr` construct. The `nbr` construct allows you to access data from a neighbor, and `foldhood` aggregates data from all neighbors (including the node itself).
+
+Here is the Scala code for gathering a list of IDs of a node's neighbors:
+
+```scala
+foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```
+
+### Explanation:
+- `foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))`:
+  - `List.empty[ID]`: Initializes an empty list to store the IDs.
+  - `_ ++ _`: Concatenates two lists.
+  - `List(nbr(mid()))`: Creates a list containing the ID of a neighbor.
+
+This code will collect the IDs of all neighbors and return them as a list.
+
+### Example Usage:
+Given a network where each node has neighbors, the above code will return a list of IDs of all neighbors (including the node itself) for each node.
+
+### Full Example in Context:
+```scala
+def main(): List[ID] = foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```
+
+This code can be placed directly into the body of the `main` function as required.

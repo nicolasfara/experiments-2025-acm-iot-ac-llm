@@ -1,0 +1,10 @@
+```scala
+branch(sense[Double]("temperature") > 30) {
+  val sumTemp = foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature")))
+  val sumIds = foldhood(0.0)(_ + _)(nbr(1.0))
+  val avgTemp = sumTemp / sumIds
+  mux(avgTemp > 30) { true } { false }
+} {
+  false
+}
+```

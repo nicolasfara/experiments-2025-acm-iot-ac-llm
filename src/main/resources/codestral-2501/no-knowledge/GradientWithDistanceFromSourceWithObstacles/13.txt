@@ -1,0 +1,17 @@
+```scala
+val distance = Scafi.sensor[Double]("source")
+var currentDistance = 0.0
+var obstacleDetected = Scafi.sensor[Boolean]("obstacle")
+var movement = 1.0
+
+while (distance > currentDistance) {
+  if (obstacleDetected) {
+    movement = -1.0 // Backtrack
+  } else {
+    movement = 1.0 // Move forward
+  }
+  currentDistance += movement
+}
+
+currentDistance
+```

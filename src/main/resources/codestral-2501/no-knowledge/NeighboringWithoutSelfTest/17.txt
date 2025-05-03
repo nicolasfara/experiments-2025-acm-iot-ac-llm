@@ -1,0 +1,7 @@
+```scala
+val graph = scafi.graph[Int, Int]
+val self = graph.self
+val neighbors = graph.aggregateNeighbors(scala.math.max(_: Int, _: Int))
+val count = neighbors.count - (if (self.isDefined) 1 else 0)
+println(count)
+```

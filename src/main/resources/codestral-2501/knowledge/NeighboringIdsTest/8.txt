@@ -1,0 +1,15 @@
+To gather a list of IDs of the neighbors of each node in the distributed system, you can use the `foldhood` construct to aggregate the IDs from all neighbors. Here's how you can do it:
+
+```scala
+foldhood(List.empty[ID])(_ ++ _)(nbr(mid()))
+```
+
+This code snippet will collect the IDs of all neighbors, including the node itself, into a list.
+
+Here is the complete `main` function body:
+
+```scala
+foldhood(List.empty[ID])(_ ++ _)(nbr(mid()))
+```
+
+This will output a list of IDs of the neighbors for each node in the network.

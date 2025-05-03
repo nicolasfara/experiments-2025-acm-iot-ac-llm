@@ -1,0 +1,14 @@
+```scala
+rep(false) { success =>
+  branch(success) {
+    success
+  } {
+    val currentPos = mid()
+    foldhoodPlus(false)(_ || _)(nbr(branch(nbr(mid()) == currentPos && nbr(sense[Boolean]("obstacle"))) {
+      false
+    } {
+      nbr(sense[ID]("destination")) == currentPos
+    }))
+  }
+}
+```

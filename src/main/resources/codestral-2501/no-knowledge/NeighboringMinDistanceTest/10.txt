@@ -1,0 +1,3 @@
+```scala
+val minDistanceFromNeighbors = Graph[Int, Int].filter(e => e.dst == e.src + 1 || e.dst == e.src - 1).min(e => e.weight)
+```

@@ -1,0 +1,8 @@
+```scala
+def main(): Unit = {
+  val source = sensor("source")
+  val destination = sensor("destination")
+  val channel = createChannel(source, destination)
+  channel.transmit()
+}
+```

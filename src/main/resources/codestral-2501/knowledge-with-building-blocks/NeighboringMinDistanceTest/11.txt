@@ -1,0 +1,9 @@
+To calculate the minimum distance from the neighbors, you can use the `foldhoodPlus` construct to exclude the current node itself from the aggregation. The `foldhoodPlus` function will aggregate the distances from all neighbors excluding the current node.
+
+Here is the Scala code for calculating the minimum distance from the neighbors:
+
+```scala
+foldhoodPlus(Double.PositiveInfinity)(_ min _)(nbrRange())
+```
+
+This code will return the minimum distance to any neighbor, excluding the distance to the node itself. If there are no neighbors, it will return `Double.PositiveInfinity` as the default value.

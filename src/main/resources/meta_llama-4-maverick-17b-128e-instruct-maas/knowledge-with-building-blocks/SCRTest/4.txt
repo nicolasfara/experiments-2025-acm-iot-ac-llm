@@ -1,0 +1,7 @@
+```scala
+val isLeader = S(2, nbrRange)
+val potential = G[Double](isLeader, 0, _ + nbrRange, nbrRange)
+val localTemp = sense[Double]("temperature")
+val areaTemp = C[Double, Double](potential, _ + _, localTemp, 0)
+mux(isLeader){ foldhood(true)(_ && _)(nbr(areaTemp < 30)) }{ false }
+```

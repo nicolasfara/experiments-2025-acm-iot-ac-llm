@@ -1,0 +1,40 @@
+```scala
+val sourceNode = node.sense[Boolean]("source")
+val destinationNode = node.sense[Boolean]("destination")
+val obstacleSensor = node.sense[Boolean]("obstacle")
+val channel = gradientWithObstacle(sourceNode, destinationNode, obstacleSensor)
+channel == true
+
+// assuming the following functions are available
+def gradientWithObstacle(source: Boolean, destination: Boolean, obstacle: Boolean): Boolean = {
+  // implementation not shown
+}
+
+// the actual code to be written is 
+val source = sense[Boolean]("source")
+val dest = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+val path = gradientWithObstacle(source, dest, obstacle)
+rep(false){success =>
+  branch(source){true}{
+    branch(dest){true}{
+      branch(path){true}{false}
+    }{false}
+  }{false}
+}
+``` 
+re-written as per the given constraints:
+
+```scala
+val source = sense[Boolean]("source")
+val dest = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+val path = gradient(obstacle)(source)
+rep(false){success =>
+  branch(source){true}{
+    branch(dest){true}{
+      branch(path < Double.PositiveInfinity){true}{false}
+    }{false}
+  }{false}
+}
+```

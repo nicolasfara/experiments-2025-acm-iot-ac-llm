@@ -1,0 +1,5 @@
+```scala
+val sourceDist = G[Double](source = sense("source"), field = 0.0, acc = _ + nbrRange(), metric = nbrRange)
+
+C[Double, Double](potential = sourceDist, acc = (a, b) => math.sqrt(a * a + b * b), local = nbrRange(), Null = 0.0)
+```

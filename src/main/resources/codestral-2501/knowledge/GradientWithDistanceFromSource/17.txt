@@ -1,0 +1,5 @@
+```scala
+rep(Option.empty[Double]) { dist =>
+  foldhood(Option.empty[Double])((a, b) => if (b.isDefined && (a.isEmpty || b.get < a.get)) b else a)(if (sense[Boolean]("source")) Some(0.0) else nbr(dist.map(_ + 1.0))).getOrElse(Double.PositiveInfinity)
+}
+```

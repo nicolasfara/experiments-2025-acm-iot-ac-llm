@@ -1,0 +1,13 @@
+To gather a list of IDs of the neighbors for each node, you can use the `foldhood` construct to collect these IDs. Here is the Scala code to accomplish this:
+
+```scala
+foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```
+
+This code will provide a list of IDs for each node's neighbors, including the node itself. If you want to exclude the node itself, you can use `foldhoodPlus` instead:
+
+```scala
+foldhoodPlus(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```
+
+Both of these constructs will ensure that each node collects the IDs of its neighbors effectively.

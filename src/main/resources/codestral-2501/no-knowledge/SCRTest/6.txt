@@ -1,0 +1,7 @@
+```scala
+val temperature = s"temperature".scafi
+val averageTemperature = temperature.average
+val areaTemp = temperature.map { case (area, temp) => (area, (temp, averageTemperature.apply(area))) }
+val alarm = areaTemp.map { case (area, (temp, avgTemp)) => (area, if (temp > 30.0) "ALARM" else "") }
+val result = alarm.broadcast
+```

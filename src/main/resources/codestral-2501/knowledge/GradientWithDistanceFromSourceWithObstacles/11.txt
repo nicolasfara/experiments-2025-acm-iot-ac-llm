@@ -1,0 +1,35 @@
+```scala
+rep((Double.MaxValue, -1)) { case (dist, from) =>
+  foldhood((Double.MaxValue, -1)) { case ((d1, f1), (d2, f2)) =>
+    if (d1 < d2) (d1, f1) else (d2, f2)
+  } { neighbor =>
+    if (nbr(sense[Boolean]("obstacle"))) (Double.MaxValue, -1) else {
+      val nbrDist = nbr(dist)
+      val nbrFrom = nbr(from)
+      if (nbrDist == Double.MaxValue) {
+        (Double.MaxValue, -1)
+      } else if (nbrDist + nbrRange() < dist) {
+        (nbrDist + nbrRange(), nbrFrom)
+      } else {
+        (dist, from)
+      }
+    }
+  }
+  val mySource = sense[Boolean]("source")
+  if (mySource) (0.0, mid()) else foldhood((Double.MaxValue, -1)) { case ((d1, f1), (d2, f2)) =>
+    if (d1 < d2) (d1, f1) else (d2, f2)
+  } { neighbor =>
+    if (nbr(sense[Boolean]("obstacle"))) (Double.MaxValue, -1) else {
+      val nbrDist = nbr(dist)
+      val nbrFrom = nbr(from)
+      if (nbrDist == Double.MaxValue) {
+        (Double.MaxValue, -1)
+      } else if (nbrDist + nbrRange() < dist) {
+        (nbrDist + nbrRange(), nbrFrom)
+      } else {
+        (dist, from)
+      }
+    }
+  }
+}
+```

@@ -1,0 +1,5 @@
+```scala
+val (src, dst) = ('source', 'destination')
+val result = createChannel(src, dst, 'obstacle')
+result
+```

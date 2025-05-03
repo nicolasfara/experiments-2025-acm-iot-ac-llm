@@ -1,0 +1,10 @@
+```scala
+// Create a Graph from a list of edges
+val graph = List((1, 2), (2, 3), (3, 4), (4, 5), (5, 1)).toScaFi
+
+// Compute the degree of each vertex, excluding self
+val degrees = graph.countNeighborsExcludingSelf
+
+// Print the degrees
+degrees.print
+```

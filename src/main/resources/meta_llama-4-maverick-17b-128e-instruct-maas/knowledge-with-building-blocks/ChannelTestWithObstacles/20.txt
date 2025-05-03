@@ -1,0 +1,7 @@
+```scala
+val gradient = G[Double](sense[Boolean]("source"), 0, _ + nbrRange(), nbrRange)
+val distanceToDestination = G[Double](sense[Boolean]("destination"), 0, _ + nbrRange(), nbrRange)
+val potential = gradient + distanceToDestination
+val isOnPath = branch(sense[Boolean]("obstacle")) { false } { C[Double, Boolean](potential, _ || _, sense[Boolean]("source") || sense[Boolean]("destination"), false) }
+isOnPath && sense[Boolean]("source")
+```

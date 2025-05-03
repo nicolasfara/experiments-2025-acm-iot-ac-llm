@@ -1,0 +1,18 @@
+```scala
+import org.scalafi.field._
+import org.scalafi.scafi._
+import org.scalafi.field.ops._
+import org.scalafi.serialization._
+import org.scalafi.scafi.aggregation._
+
+val source = BooleanField("source")
+val obstacle = BooleanField("obstacle")
+
+val distance = {
+  val init = source.map(_ => 0)
+  val step = init.iterate(distance => distance.aggregate[Int](_ + 1).filter(_ < distance))
+  step.filterNot(obstacle).iterate(distance => distance.aggregate[Int](_ + 1).filter(_ < distance))
+}.filterNot(obstacle).iterate(distance => distance.aggregate[Int](_ + 1).filter(_ < distance))
+
+distance.collect()
+```

@@ -1,0 +1,5 @@
+```scala
+rep(Double.PositiveInfinity) { dist =>
+  foldhood(dist)(_ min _)(mux(nbr(sense[Boolean]("obstacle")))(Double.PositiveInfinity)(nbr(dist + nbrRange())))
+}.min(sense[Boolean]("source") ? 0.0 : Double.PositiveInfinity)
+```

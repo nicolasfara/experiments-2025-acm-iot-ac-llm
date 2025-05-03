@@ -1,0 +1,4 @@
+```
+val sourceCondition = sense[Boolean]("source")
+val euclideanDistance = G[Double](sourceCondition, 0.0, _ + nbrRange(), _ => branch(sense[Boolean]("obstacle"))(Double.PositiveInfinity)(nbrRange()))
+```

@@ -1,0 +1,4 @@
+```val temperatures = agg.collect(agg.keyBy(_._1).mapValues(_._2))(_.maxBy(_._2))
+val alarms = agg.collect(agg.keyBy(_._1).mapValues(_._2))(_.filter(_ > 30))
+val broadcastAlarms = agg.broadcast(alarms)
+```

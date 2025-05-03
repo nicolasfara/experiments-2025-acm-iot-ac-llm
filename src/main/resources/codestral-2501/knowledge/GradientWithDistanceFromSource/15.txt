@@ -1,0 +1,5 @@
+```scala
+rep(Double.MaxValue) { distance =>
+  minHood(nbr(distance + nbrRange())) min distance
+}
+```

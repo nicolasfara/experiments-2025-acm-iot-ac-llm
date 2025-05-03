@@ -1,0 +1,3 @@
+```scala
+val channel = ScaFi.createChannel(ChannelName("channelName"), NodeId("source"), NodeId("destination"))
+```

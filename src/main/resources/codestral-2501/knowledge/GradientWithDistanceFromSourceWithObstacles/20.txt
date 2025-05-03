@@ -1,0 +1,11 @@
+```scala
+rep(Int.MaxValue) {
+  minDist =>
+    mux(sense[Boolean]("obstacle")) {
+      Int.MaxValue
+    } {
+      val newDist = foldhood(minDist)(_ min _)(nbr(minDist) + 1)
+      if (sense[Boolean]("source")) 0 else newDist
+    }
+}
+```

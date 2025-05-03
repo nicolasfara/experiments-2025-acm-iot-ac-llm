@@ -1,0 +1,5 @@
+To calculate the minimum distance from neighbors, you can use the `foldhoodPlus` construct to ensure that the current node is excluded from the aggregation. Here is the Scala code for calculating the minimum distance from neighbors:
+
+```scala
+minHood(nbrRange())
+```

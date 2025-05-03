@@ -1,0 +1,10 @@
+```scala
+val areas = S(2, nbrRange)
+val tempArea = C(areas, _ + _, sense[Double]("temperature"), 0.0)
+val averageTemp = tempArea / foldhood(0)(_ + _)(nbr(1))
+branch(averageTemp > 30)(
+  G[Boolean](areas, true, _ || _, nbrRange)
+)(
+  false
+)
+```

@@ -1,0 +1,5 @@
+```scala
+val obstaclePresent = mux(sense[Boolean]("obstacle"))(Double.PositiveInfinity)(nbrRange())
+val potential = G[Double](sense("source"), 0, _ + obstaclePresent, () => obstaclePresent)
+C[Double, Boolean](potential, _ || _, sense("source"), false)
+```

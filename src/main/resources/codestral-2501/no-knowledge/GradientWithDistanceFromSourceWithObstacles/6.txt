@@ -1,0 +1,11 @@
+```scala
+ScaFi.run {
+  val distance = Aggregate.seq(false).min
+  val range = Aggregate.seq(distance).sum
+  val isObstacle = Aggregate.seq(true).min
+  val path = Aggregate.seq(!isObstacle).min
+
+  val euclideanDistance = Aggregate.seq(path).max
+  euclideanDistance
+}
+```

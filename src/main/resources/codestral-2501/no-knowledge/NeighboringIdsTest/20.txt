@@ -1,0 +1,5 @@
+```scala
+val neighborsList = scaFiContext.collect {
+  case (vertexId, neighbors) => neighbors
+}.flatten
+```

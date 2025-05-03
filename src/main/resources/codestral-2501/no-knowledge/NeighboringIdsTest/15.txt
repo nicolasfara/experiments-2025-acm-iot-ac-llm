@@ -1,0 +1,19 @@
+```scala
+import org.apache.spark.scalafx.api.core.ScaFiApp
+import org.apache.spark.scalafx.api.io.ScaFiFile
+
+val inputFile = "path/to/input/file"
+
+ScaFiApp { implicit sc =>
+  val neighbors = ScaFiFile(inputFile)
+    .map { line =>
+      val parts = line.split(" ")
+      val id = parts(0)
+      val neighbors = parts.drop(1).toSet
+      (id, neighbors)
+    }
+    .reduceByKey(_ ++ _)
+    .map { case (id, neighbors) => s"$id ${neighbors.mkString(" ")}" }
+    .collect()
+}
+```

@@ -1,0 +1,8 @@
+```scala
+val distances = Aggregate[Int]("source") { src =>
+  Aggregate[Boolean]("obstacle") { obs =>
+    if (obs) 0 else 1
+  }.fold(0)((acc, cur) => acc + cur)
+}.fold(0)((acc, cur) => if (cur == 0) acc else acc + 1)
+val result = distances
+```

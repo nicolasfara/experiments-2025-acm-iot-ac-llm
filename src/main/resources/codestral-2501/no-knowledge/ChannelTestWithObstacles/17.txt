@@ -1,0 +1,11 @@
+```scala
+val graph = Graph[Int, Int]
+val source = graph("source")
+val destination = graph("destination")
+
+val obstacles = graph.vertices("obstacle")
+
+val path = graph.shortestPath(source, destination, obstacleAvoidance = true)
+val result = if (path.length > 0) true else false
+result
+```

@@ -1,0 +1,21 @@
+```scala
+import org.apache.spark.sql._
+import org.apache.spark.sql.functions._
+import org.scalafi.spark.RDDFunctions._
+
+val spark = SparkSession.builder.appName("MinDistance").getOrCreate()
+import spark.implicits._
+
+val points = Seq((0, 0), (1, 0), (0, 1), (1, 1), (2, 2))
+val pointsDF = points.toDF("x", "y")
+
+val result = pointsDF
+  .withColumn("coord", struct($"x", $"y"))
+  .crossJoin(pointsDF.as("neighbors"))
+  .filter($"coord.x" =!= $"neighbors.x" || $"coord.y" =!= $"neighbors.y")
+  .withColumn("distance", sqrt(pow($"coord.x" - $"neighbors.x", 2) + pow($"coord.y" - $"neighbors.y", 2)))
+  .groupBy("coord")
+  .agg(min("distance").as("min_distance"))
+
+result.show()
+```

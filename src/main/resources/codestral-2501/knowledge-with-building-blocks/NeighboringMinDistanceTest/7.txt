@@ -1,0 +1,9 @@
+To calculate the minimum distance from neighbors, you can use the `minHood` function provided by the DSL. This function will help you determine the minimum distance among the neighbors.
+
+Here is the Scala code for calculating the minimum distance from neighbors:
+
+```scala
+minHood(nbrRange())
+```
+
+This code snippet uses the `minHood` function to find the minimum value of `nbrRange` among the neighbors.

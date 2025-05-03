@@ -1,0 +1,12 @@
+```scala
+val source = "source"
+val sensorData = Seq(("sensor1", 3.0, 4.0), (sensorData, 0.0, 0.0), ("sensor3", 5.0, 5.0))
+val distances = sensorData.map { case (sensor, x, y) =>
+  if (sensor == source) {
+    0.0
+  } else {
+    math.sqrt(math.pow(x, 2) + math.pow(y, 2))
+  }
+}
+println(distances)
+```

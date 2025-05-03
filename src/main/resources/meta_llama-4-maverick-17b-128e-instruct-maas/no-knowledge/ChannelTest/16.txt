@@ -1,0 +1,7 @@
+```scala
+val source = node.sense[String]("id") == "source"
+val destination = node.sense[String]("id") == "destination"
+val channel = gradient(source)
+val distanceToDestination = distanceTo(destination)
+channel & (distanceToDestination < channel)
+```

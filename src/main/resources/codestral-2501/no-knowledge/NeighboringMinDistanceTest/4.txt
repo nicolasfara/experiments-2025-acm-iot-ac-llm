@@ -1,0 +1,12 @@
+```scala
+val minDistances = input.map { case (id, (x, y)) =>
+  val neighborDistances = edges.filter { case (src, dst) =>
+    src == id || dst == id
+  }.map { case (src, dst) =>
+    val (nx, ny) = if (src == id) (x, y) else (input(dst)._1, input(dst)._2)
+    val (ox, oy) = if (dst == id) (x, y) else (input(src)._1, input(src)._2)
+    math.sqrt(math.pow(nx - ox, 2) + math.pow(ny - oy, 2))
+  }
+  (id, neighborDistances.min)
+}
+```

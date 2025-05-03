@@ -1,0 +1,14 @@
+```scala
+val source = Edge("source", "destination")
+val obstacles = List("obstacle")
+
+val isPathValid = !obstacles.exists(obstacle =>
+  ScaFi.edge(obstacle, "source").isDefined || ScaFi.edge(obstacle, "destination").isDefined
+)
+
+if (isPathValid) {
+  ScaFi.edge("source", "destination")
+}
+
+isPathValid
+```

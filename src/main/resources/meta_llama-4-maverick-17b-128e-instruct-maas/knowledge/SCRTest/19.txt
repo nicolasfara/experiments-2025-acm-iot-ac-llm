@@ -1,0 +1,9 @@
+```scala
+branch(sense[Boolean]("area")) {
+  val temperature = sense[Double]("temperature")
+  val averageTemperature = sumHood(nbr(temperature)) / sumHood(nbr(1))
+  averageTemperature > 30
+} {
+  false
+}
+```

@@ -1,0 +1,10 @@
+```scala
+val source = Sensor[Double]("source")
+val obstacle = Sensor[Boolean]("obstacle")
+val distance = Aggregate[Double](source, obstacle)
+  .withAggregator((acc, value) => {
+    if (obstacle.read()) acc
+    else acc + value
+  })
+  .withInitialValue(0.0)
+```

@@ -1,0 +1,10 @@
+```scala
+val temperature = sense[Double]("temperature")
+val areaId = foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature") * sense[Double]("areaId")))
+val areaTemperature = foldhood(0.0)(_ + _)(nbr(temperature * sense[Double]("areaId")))
+val areaSize = foldhood(0)(_ + _)(nbr(1) * sense[Double]("areaId"))
+val averageTemperature = areaTemperature / areaSize
+val alarmThreshold = 30.0
+val alarm = if (averageTemperature > alarmThreshold) true else false
+G[Boolean](source = true, field = alarm, acc = _ || _, metric = nbrRange)
+```

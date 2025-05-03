@@ -1,0 +1,3 @@
+```scala
+rep(Double.PositiveInfinity)(currentDistance => foldhoodPlus(Double.PositiveInfinity)(_ min _)(mux(sense[Boolean]("obstacle"))(Double.PositiveInfinity)(nbr(currentDistance) + nbrRange())))
+```

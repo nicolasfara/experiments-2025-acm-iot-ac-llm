@@ -1,0 +1,7 @@
+```scala
+{
+  val source = sense[Double]("source")
+  val potential = G[Double](source < 0.5, 0.0, _ + mux(sense[Boolean]("obstacle"))(Double.PositiveInfinity)(nbrRange()), nbrRange)
+  C[Double, Double](potential, _ + _, mux(sense[Boolean]("obstacle"))(Double.PositiveInfinity)(sense[Double]("source")), 0.0)
+}
+```

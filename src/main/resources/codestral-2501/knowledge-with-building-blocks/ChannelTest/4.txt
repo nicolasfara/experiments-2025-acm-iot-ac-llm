@@ -1,0 +1,6 @@
+Here is the Scala code for creating a channel from the source node to the destination node using the Gradient and Collect casts, with obstacle avoidance:
+
+```scala
+val potential = G[Double](source = sense("source"), field = 0, acc = _ + nbrRange(), metric = () => if (sense("obstacle")) Double.PositiveInfinity else nbrRange())
+C[Double, Boolean](potential, _ || _, sense("destination"), false)
+```

@@ -1,0 +1,18 @@
+```scala
+val sensors = ScaFi.collect[Sensor]()
+
+val sourcePosition = sensors.filter(s => s.name == "source").head.position
+val obstaclePositions = sensors.filter(s => s.name.startsWith("obstacle")).map(_.position)
+
+def euclideanDistance(p1: Position, p2: Position): Double = {
+  val dx = p1.x - p2.x
+  val dy = p1.y - p2.y
+  Math.sqrt(dx * dx + dy * dy)
+}
+
+val validPositions = obstaclePositions.filter(p => euclideanDistance(sourcePosition, p) > 1.0)
+
+val nearestValidPosition = validPositions.minBy(p => euclideanDistance(sourcePosition, p))
+
+val distance = euclideanDistance(sourcePosition, nearestValidPosition)
+```

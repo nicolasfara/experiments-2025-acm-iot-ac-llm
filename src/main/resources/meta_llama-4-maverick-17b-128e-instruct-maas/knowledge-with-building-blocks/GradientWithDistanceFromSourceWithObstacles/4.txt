@@ -1,0 +1,1 @@
+G[Double](sense[Boolean]("source"), 0.0, _ + nbrRange(), () => nbrRange() * (if (nbr(sense[Boolean]("obstacle"))) Double.PositiveInfinity else 1.0))

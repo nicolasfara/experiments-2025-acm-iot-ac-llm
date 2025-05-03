@@ -1,0 +1,20 @@
+```scala
+val sourceNode = node.sense[Boolean]("source").asExported().toBoolean
+val destinationNode = node.sense[Boolean]("destination").asExported().toBoolean
+val obstacleSensor = node.sense[Boolean]("obstacle").asExported().toBoolean
+
+val channel = gradientWithObstacle(sourceNode, destinationNode, obstacleSensor)
+
+def gradientWithObstacle(source: Boolean, destination: Boolean, obstacle: Boolean): Boolean = {
+  val distance = gradient(source, (x: Double) => x + 1, (x: Double, y: Double) => Math.min(x, y))
+  val isPathClear = distance < Double.PositiveInfinity && !obstacle
+  val isDestinationReached = distance == 0 && destination
+  isDestinationReached || (isPathClear && rep(Double.PositiveInfinity)(d => {
+    mux(source)(0.0) + mux(obstacle)(Double.PositiveInfinity) + minHoodPlus(nbr(d))
+  }) < Double.PositiveInfinity)
+}
+
+branch(sourceNode || destinationNode) {
+  channel
+}
+```

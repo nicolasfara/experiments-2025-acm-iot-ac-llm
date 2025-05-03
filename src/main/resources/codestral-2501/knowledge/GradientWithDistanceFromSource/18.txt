@@ -1,0 +1,16 @@
+```scala
+rep(Option.empty[(Int, Double)]) {
+  case Some((currentId, currentDistance)) =>
+    foldhoodPlus(Option.empty[(Int, Double)]) {
+      case (Some((minId, minDistance)), Some((nbrId, nbrDistance))) =>
+        if (nbrDistance < minDistance) Some((nbrId, nbrDistance))
+        else Some((minId, minDistance))
+    } {
+      case Some((nbrId, nbrDistance)) =>
+        if (nbrDistance + 1 < currentDistance) Some((nbrId, nbrDistance + 1))
+        else Some((currentId, currentDistance))
+    }(Some((mid(), nbr(sense[Boolean]("source")) ? 0.0 : Double.PositiveInfinity)))
+  case None =>
+    Some((mid(), nbr(sense[Boolean]("source")) ? 0.0 : Double.PositiveInfinity))
+}.get._2
+```

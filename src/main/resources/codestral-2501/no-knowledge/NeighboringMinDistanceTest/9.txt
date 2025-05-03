@@ -1,0 +1,9 @@
+```scala
+import org.scalafi._
+import org.scalafi.core.{Aggregator, _}
+import breeze.linalg._
+
+val graph = Graph.readEdges("edges.csv")
+val neighbors = graph.neighborhood
+val distance = Aggregator.min(neighbors.map(x => x.distance))
+```

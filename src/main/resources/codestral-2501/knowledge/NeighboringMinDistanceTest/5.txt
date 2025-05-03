@@ -1,0 +1,25 @@
+To calculate the minimum distance from neighbors in a distributed system using the provided DSL, you can follow these steps:
+
+1. Use the `foldhood` construct to gather distances from neighbors.
+2. Use the `minHood` construct to find the minimum distance among these gathered values.
+
+Given the requirements, here is the resulting Scala code for the `main` function:
+
+```scala
+rep(Double.MaxValue) { minDist =>
+  minHood(nbrRange())
+}
+```
+
+This code snippet does the following:
+- Uses `rep` to evolve the minimum distance over time.
+- In each iteration, it uses `minHood` to find the minimum distance to neighbors.
+- `nbrRange()` is used to get the distance to neighbors.
+
+Here is the full code snippet:
+
+```scala
+rep(Double.MaxValue) { minDist =>
+  minHood(nbrRange())
+}
+```

@@ -1,0 +1,5 @@
+```scala
+val sourcePos = sense[(Double, Double)]("source")
+val currentPos = sense[(Double, Double)]("position")
+Math.sqrt(Math.pow(sourcePos._1 - currentPos._1, 2) + Math.pow(sourcePos._2 - currentPos._2, 2))
+```

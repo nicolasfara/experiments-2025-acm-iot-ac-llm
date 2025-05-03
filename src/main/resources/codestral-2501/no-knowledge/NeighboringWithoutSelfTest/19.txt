@@ -1,0 +1,4 @@
+```val self = sf.This()
+val neighbors = sf.neighborhood(self)
+val count = sf.count(neighbors) - 1
+sf.emit(count)```

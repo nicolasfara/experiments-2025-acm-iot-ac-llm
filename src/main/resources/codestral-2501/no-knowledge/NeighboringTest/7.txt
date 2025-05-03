@@ -1,0 +1,12 @@
+```scala
+ScaFi.onExecute {
+  // Aggregate the count of neighbors for each node
+  val neighborCount = ScaFi.aggregate {
+    val neighbors = Graph.edges.map(_.target)
+    neighbors.groupBy(identity).mapValues(_.size)
+  }
+
+  // Emit the result
+  ScaFi.emit(neighborCount)
+}
+```

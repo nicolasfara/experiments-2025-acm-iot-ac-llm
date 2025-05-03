@@ -1,0 +1,3 @@
+```scala
+val idsOfNeighbors = neighbors.map(_.id)
+```

@@ -1,0 +1,6 @@
+```scala
+scafi {
+  val maxId = agg(max(id))
+  maxId
+}
+```

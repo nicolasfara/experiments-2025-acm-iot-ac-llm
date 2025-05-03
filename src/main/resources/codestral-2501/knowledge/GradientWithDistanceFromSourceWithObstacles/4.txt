@@ -1,0 +1,9 @@
+```scala
+rep(Double.MaxValue) { dist =>
+  foldhood(Double.MaxValue)(_ min _) {
+    if (sense[Boolean]("obstacle")) Double.MaxValue
+    else if (sense[Boolean]("source")) 0.0
+    else nbr(dist + 1.0)
+  }
+}
+```

@@ -1,0 +1,25 @@
+To solve this problem, we need to implement a spatiotemporal computation where each node calculates the Euclidean distance from the source while avoiding obstacles. The solution will use the `rep` construct to evolve the distance over time and `foldhood` to combine information from neighbors.
+
+Here's the Scala code to achieve this:
+
+```scala
+rep(Double.PositiveInfinity) { distance =>
+  sense[Boolean]("obstacle") match {
+    case true => distance
+    case false =>
+      val sourceDistance = if (sense[Double]("source") == 1.0) 0.0 else Double.PositiveInfinity
+      val minNeighborDistance = minHood(distance)
+      if (sourceDistance < minNeighborDistance) sourceDistance else minNeighborDistance + 1.0
+  }
+}
+```
+
+### Explanation:
+
+1. **Initialization**: We start with `Double.PositiveInfinity` for the distance, indicating that the distance is initially unknown.
+2. **Obstacle Check**: If the current node is an obstacle (`sense[Boolean]("obstacle") == true`), we keep the current distance.
+3. **Source Check**: If the current node is the source (`sense[Double]("source") == 1.0`), the distance from the source is `0.0`.
+4. **Neighbor Distance**: We use `minHood` to find the minimum distance to the source from all neighbors.
+5. **Update Distance**: The new distance is the minimum between the distance from the source (if the node is the source) and the minimum distance from neighbors plus one (to account for the hop to the neighbor).
+
+This code will propagate the distance from the source across the network, avoiding obstacles, and will correctly compute the Euclidean distance while respecting the constraints and recommendations provided.

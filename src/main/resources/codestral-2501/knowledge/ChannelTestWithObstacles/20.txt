@@ -1,0 +1,12 @@
+```scala
+rep(false) { created =>
+  branch(sense[Boolean]("obstacle")) {
+    created
+  } {
+    if (created) created else {
+      val channelCreated = foldhoodPlus(false)(_ || _)(nbr(created))
+      if (destination == mid()) true else channelCreated
+    }
+  }
+}
+```

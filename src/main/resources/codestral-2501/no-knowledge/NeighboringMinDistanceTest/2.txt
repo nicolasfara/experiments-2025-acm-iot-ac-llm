@@ -1,0 +1,50 @@
+```scala
+import it.unibo.alchemist.model.ScafiAlchemistSimulation
+import it.unibo.alchemist.model.implementations.times.DoubleTime
+import it.unibo.alchemist.model.implementations.actions.MacroAction
+import it.unibo.alchemist.model.implementations.molecules.SimpleMolecule
+import it.unibo.alchemist.model.implementations.actions.AbstractContextAction
+import it.unibo.alchemist.model.implementations.reactions.Diffusion
+import it.unibo.alchemist.model.implementations.times.DoubleTime
+import it.unibo.alchemist.model.implementations.actions.EnvironmentAction
+import it.unibo.alchemist.model.implementations.molecules.SimpleMolecule
+
+// Define a molecule to represent the distance
+val distanceMolecule = new SimpleMolecule("distance")
+
+// Define the action to calculate the minimum distance from neighbors
+val minDistanceAction = new AbstractContextAction[DoubleTime]() {
+  override def execute(ctx: Context[DoubleTime]): Unit = {
+    val env = ctx.getEnvironment
+    val neighbors = ctx.getNeighborhood
+    var minDistance = Double.MaxValue
+    neighbors.foreach { neighbor =>
+      val neighborDistance = env.getConcentration(neighbor, distanceMolecule).getOrElse(0.0)
+      if (neighborDistance < minDistance) {
+        minDistance = neighborDistance
+      }
+    }
+    if (minDistance < Double.MaxValue) {
+      ctx.getEnvironment.setConcentration(ctx.getPosition, distanceMolecule, minDistance)
+    }
+  }
+}
+
+// Define the macro action to apply the min distance action
+val macroAction = new MacroAction[DoubleTime](minDistanceAction)
+
+// Define the environment action to apply the macro action
+val environmentAction = new EnvironmentAction[DoubleTime](macroAction)
+
+// Define the diffusion reaction to spread the distance molecule
+val diffusionReaction = new Diffusion[DoubleTime](distanceMolecule)
+
+// Create the simulation
+val simulation = new ScafiAlchemistSimulation(
+  environmentAction,
+  diffusionReaction
+)
+
+// Run the simulation
+simulation.run()
+```

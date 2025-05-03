@@ -1,0 +1,5 @@
+```scala
+val distance = rep(Double.MaxValue) {
+  minDistance => foldhood(minDistance)(_ min _)(nbr(minDistance + nbrRange()) * (1 - sense[Double]("source")) + sense[Double]("source"))
+}
+```

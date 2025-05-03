@@ -1,0 +1,6 @@
+```scala
+val areaID = G[Double](source = sense("source"), field = mid(), acc = a => a, metric = nbrRange)
+val avgTempInArea = foldhood(0.0)(_ + _)(mux(mid() == areaID)(nbr(sense[Double]("temperature")))(0.0)) / foldhood(0)(_ + _)(mux(mid() == areaID)(nbr(1)))(0.0)
+val alarm = avgTempInArea > 30
+val alarmBroadcast = G[Boolean](source = alarm, field = true, acc = a => a, metric = nbrRange)
+```

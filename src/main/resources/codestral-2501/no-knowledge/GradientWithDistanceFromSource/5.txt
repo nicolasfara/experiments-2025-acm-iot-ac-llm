@@ -1,0 +1,7 @@
+```
+val distances = Aggregates.fold(0, (a: Double, b: Double) => a + b)(
+    linkMap.filter(l => l.src == 'source' && l.dst != 'source').map(edges =>
+        edges.map(e => e.distance).reduce(_ + _)
+    )
+)
+```

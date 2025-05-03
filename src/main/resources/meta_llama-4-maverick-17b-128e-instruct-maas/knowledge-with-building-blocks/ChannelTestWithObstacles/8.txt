@@ -1,0 +1,8 @@
+```scala
+val gradient = G[Double](sense[Boolean]("source"), 0.0, _ + nbrRange(), nbrRange)
+val isPathClear = !sense[Boolean]("obstacle")
+val distanceToDestination = G[Double](sense[Boolean]("destination"), 0.0, _ + nbrRange(), nbrRange)
+val potential = distanceToDestination
+val accumulated = C[Double, Boolean](potential, (a, b) => a && b, isPathClear, true)
+mux(sense[Boolean]("source")) { accumulated } { false }
+```

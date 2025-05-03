@@ -1,0 +1,1 @@
+```val maxId = Aggregate.max[Int](EdgeMap[Int](_.id))```

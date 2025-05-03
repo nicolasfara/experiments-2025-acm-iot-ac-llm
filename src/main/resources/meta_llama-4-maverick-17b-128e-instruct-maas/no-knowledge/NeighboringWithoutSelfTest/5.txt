@@ -1,0 +1,1 @@
+nbrRange().count(_=>true) - 1

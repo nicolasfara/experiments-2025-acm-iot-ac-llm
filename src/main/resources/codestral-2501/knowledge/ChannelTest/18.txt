@@ -1,0 +1,11 @@
+```scala
+val sourceNode = nbr(mid() == "source")
+val destinationNode = nbr(mid() == "destination")
+branch(sourceNode) {
+  val channel = foldhood(List.empty[(String, String)])(_ ++ _)(List((mid(), nbr(mid()))))
+  channel
+} {
+  val channel = foldhood(List.empty[(String, String)])(_ ++ _)(List((mid(), nbr(mid()))))
+  channel
+}
+```

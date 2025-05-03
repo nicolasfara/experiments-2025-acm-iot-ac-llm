@@ -1,0 +1,10 @@
+import edu.berkeley.cs.rise.opal.system.ScaFi
+import edu.berkeley.cs.rise.opal.lib._
+
+val network = ScaFi()
+val nodes = network.env.getNodes()
+
+val maxId = nodes.map(node => node.getId()).reduce((a, b) => math.max(a, b))
+
+network.env.set("maxId", maxId)
+network.run()

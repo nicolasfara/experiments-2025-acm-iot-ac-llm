@@ -1,0 +1,9 @@
+Certainly! Below is the Scala code to compute the Euclidean distance from the source using a sensor named 'source' in the context of the DSL for aggregate computing.
+
+```scala
+rep(0.0) { distance =>
+  minHood(nbr((nbr(sense[Double]("source")), nbr(distance))))._2 + 1
+}
+```
+
+This code utilizes the `rep` construct to evolve the value over time and the `minHood` construct to find the minimum distance to the source from the neighbors. The distance is incremented by 1 each time the `rep` construct is called, effectively propagating the distance information across the network.

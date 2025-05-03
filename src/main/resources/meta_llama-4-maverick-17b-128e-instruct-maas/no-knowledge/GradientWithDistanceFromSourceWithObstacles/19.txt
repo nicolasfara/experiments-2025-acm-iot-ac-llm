@@ -1,0 +1,15 @@
+```scala
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+val gradient = G(source, 0, _ + 1, (x, y) => if (x < y) x else y)
+val potential = rep(1000.0)((d: Double) => {
+  val src = minHoodPlus(gradient)
+  mux(source)(0.0)(src + 1)
+})
+val distToObs = G(obstacle, Double.PositiveInfinity, (x: Double) => x + 1, (x: Double, y: Double) => Math.min(x, y))
+branch(!obstacle && potential < distToObs) {
+  gradient
+} {
+  Double.PositiveInfinity
+}
+```

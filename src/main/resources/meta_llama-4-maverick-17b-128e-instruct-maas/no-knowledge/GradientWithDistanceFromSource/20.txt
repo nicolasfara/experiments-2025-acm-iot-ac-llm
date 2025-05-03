@@ -1,0 +1,8 @@
+```scala
+val source = sense[Boolean]("source")
+val distance = aggregateGrain(
+  (0.0, source),
+  (x: (Double, Boolean)) => if(x._2) (0.0, true) else (Double.PositiveInfinity, false),
+  (x: (Double, Boolean), y: (Double, Boolean)) => (min(x._1, y._1) + 1, x._2 || y._2)
+)._1
+```

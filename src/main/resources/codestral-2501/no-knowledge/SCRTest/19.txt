@@ -1,0 +1,16 @@
+```scala
+val areas = 1 to 5
+val temperatures = List(28, 31, 29, 32, 33)
+
+val areaTemps = aggregate(areas, temperatures)(
+  seqOp = (acc, temp) => if (temp > 30) acc :+ temp else acc,
+  combOp = _ ++ _,
+  init = List[Int]()
+).toList.zip(areas)
+
+areaTemps.foreach { case (temps, area) =>
+  if (temps.nonEmpty) {
+    broadcast(area, "Alarm: Temperature above 30 degrees detected")
+  }
+}
+```

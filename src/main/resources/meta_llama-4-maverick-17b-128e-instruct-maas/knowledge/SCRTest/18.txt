@@ -1,0 +1,19 @@
+```scala
+mux(rep(0)((x: Int) => x + 1) < 10) {
+  val localTemp = sense[Double]("temperature")
+  val isHot = localTemp > 30
+  val area = rep(mid()) { (currentArea: ID) =>
+    mux(isHot) {
+      mid()
+    } {
+      currentArea
+    }
+  }
+  val areaTemp = sumHood(mux(nbr(area) == area)(nbr(sense[Double]("temperature")))(0.0))
+  val count = sumHood(mux(nbr(area) == area)(1)(0))
+  val averageTemp = areaTemp / count
+  averageTemp > 30
+} {
+  false
+}
+```

@@ -1,0 +1,14 @@
+```scala
+CaseClass[Neighbor](id: Int, neighborId: Int)
+
+val neighborhoodEdges = Set(Neighbor(1, 2), Neighbor(1, 3), Neighbor(2, 4), Neighbor(3, 4))
+
+val neighborIds = neighborhoodEdges.aggregate(
+  Set[Int]()
+)(
+  { case (set, neighbor) => set + neighbor.neighborId },
+  { _ ++ _ }
+)
+
+neighborIds.toList.sorted
+```

@@ -1,0 +1,9 @@
+```scala
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+val distance = ScafiUtils.gradient(source)
+val distanceToObstacle = ScafiUtils.gradient(obstacle)
+distanceToObstacle.map(d => if(d < 1) Double.PositiveInfinity else d)
+val potential = distance + 1 / (distanceToObstacle + 1)
+ScafiUtils.gradient(potential < Double.PositiveInfinity, potential)
+```

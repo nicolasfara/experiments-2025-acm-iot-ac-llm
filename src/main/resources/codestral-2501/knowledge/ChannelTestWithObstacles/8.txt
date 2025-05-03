@@ -1,0 +1,12 @@
+```scala
+rep(false) { success =>
+  val successNeighbors = foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())).filter(_ => !nbr(sense[Boolean]("obstacle")) && !nbr(success)))
+  if (successNeighbors.contains(destination)) true else {
+    if (mid() == source) {
+      successNeighbors.contains(destination)
+    } else {
+      successNeighbors.contains(source)
+    }
+  }
+}
+```

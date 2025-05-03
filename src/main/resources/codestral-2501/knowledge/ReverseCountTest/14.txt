@@ -1,0 +1,9 @@
+To evolve a value from 1000 back to 0, you can use the `rep` construct in Scala. The `rep` construct allows you to evolve a value over time by applying a function to its previous value.
+
+Here is the Scala code for evolving a value from 1000 to 0:
+
+```scala
+rep(1000)(_ - 1)
+```
+
+This code initializes the value to 1000 and decrements it by 1 on each iteration.

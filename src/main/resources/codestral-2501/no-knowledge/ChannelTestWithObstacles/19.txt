@@ -1,0 +1,18 @@
+```scala
+import org.scalafi._
+import org.scalafi.Circuit._
+import org.scalafi.Circuit.Boolean._
+
+val source = new Node()
+val destination = new Node()
+val obstacle = new Sensor()
+
+val pathClear = !obstacle.value
+val channelCreated = if (pathClear) {
+  true
+} else {
+  false
+}
+
+channelCreated
+```

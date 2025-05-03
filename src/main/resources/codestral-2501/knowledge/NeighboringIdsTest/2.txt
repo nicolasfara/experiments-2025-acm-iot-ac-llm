@@ -1,0 +1,13 @@
+Certainly! Below is the Scala code to gather a list of IDs of their neighbors:
+
+```scala
+foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```
+
+This code utilizes the `foldhood` construct to aggregate the IDs of neighbors into a list. Here’s a breakdown of what this code does:
+
+1. `List.empty[ID]`: Initializes an empty list to gather the neighbor IDs.
+2. `_ ++ _`: This is the combining function that concatenates two lists.
+3. `List(nbr(mid()))`: This expression creates a list containing the ID of the neighbor (`mid()` is a function that returns the ID of the neighbor).
+
+When `foldhood` is executed on each node, it will collect the IDs of all its neighbors (including itself) and return a list of these IDs.

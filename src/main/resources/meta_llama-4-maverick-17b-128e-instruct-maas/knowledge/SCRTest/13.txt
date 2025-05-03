@@ -1,0 +1,10 @@
+```scala
+branch(sense[Boolean]("area")) {
+  val temperature = foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature")))
+  val count = foldhood(0)(_ + _)(nbr(1))
+  val averageTemperature = temperature / count
+  averageTemperature > 30
+} {
+  false
+}
+```

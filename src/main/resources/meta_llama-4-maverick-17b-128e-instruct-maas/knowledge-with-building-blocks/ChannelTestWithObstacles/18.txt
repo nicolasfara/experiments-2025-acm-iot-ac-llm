@@ -1,0 +1,7 @@
+```scala
+val distanceToDestination = G(sense[Boolean]("destination"), 0.0, _ + nbrRange(), nbrRange)
+val distanceToSource = G(sense[Boolean]("source"), 0.0, _ + nbrRange(), nbrRange)
+val isOnPath = distanceToSource + distanceToDestination <= minHood(nbr(distanceToDestination)) + nbrRange()
+val isObstacle = sense[Boolean]("obstacle")
+C(distanceToSource, (a: Boolean, b: Boolean) => a || b, isOnPath && !isObstacle, false)
+```

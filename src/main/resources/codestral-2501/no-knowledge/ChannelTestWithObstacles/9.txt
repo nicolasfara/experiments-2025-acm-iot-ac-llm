@@ -1,0 +1,12 @@
+```scala
+import org.scafi.{Channel, Node, Sensor}
+
+val source = Node("source")
+val destination = Node("destination")
+
+val obstacleSensors = Sensor[Boolean]("obstacle")
+
+val pathExists = Channel(source, destination).avoid(obstacleSensors).isConnected
+
+pathExists
+```

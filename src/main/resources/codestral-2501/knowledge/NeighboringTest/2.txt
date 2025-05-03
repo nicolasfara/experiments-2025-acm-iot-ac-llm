@@ -1,0 +1,7 @@
+To count the number of neighbors (excluding the current node itself), you can use the `foldhoodPlus` construct. Here is the solution:
+
+```scala
+foldhoodPlus(0)(_ + _)(nbr(1))
+```
+
+This code counts the number of neighbors by initializing a fold with `0` and summing `1` for each neighbor using the `foldhoodPlus` construct. The `nbr(1)` expression ensures that each neighbor contributes `1` to the count.

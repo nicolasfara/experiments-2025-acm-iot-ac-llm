@@ -1,0 +1,42 @@
+```scala
+val sourceNode = node.sense[Boolean]("source").asExported().toBoolean
+val destinationNode = node.sense[Boolean]("destination").asExported().toBoolean
+val obstacleSensor = node.sense[Boolean]("obstacle").asExported().toBoolean
+
+val channel = gradientWithObstacle(sourceNode, destinationNode, obstacleSensor)
+
+def gradientWithObstacle(source: Boolean, destination: Boolean, obstacle: Boolean): Boolean = {
+  val distance = classicGradient(source, obstacle)
+  distance < distanceTo(destination, obstacle)
+}
+
+def classicGradient(source: Boolean, obstacle: Boolean): Double = {
+  rep(Double.PositiveInfinity){ distance =>
+    mux(source && !obstacle)(0.0) {
+      minHoodPlus {
+        val neighbourDistance = nbr { distance }
+        val isNbrObstacle = nbr { obstacle }
+        mux(isNbrObstacle)(Double.PositiveInfinity){ neighbourDistance + 1 }
+      }
+    }
+  }
+}
+
+def distanceTo(destination: Boolean, obstacle: Boolean): Double = {
+  rep(Double.PositiveInfinity){ distance =>
+    mux(destination && !obstacle)(0.0) {
+      minHoodPlus {
+        val neighbourDistance = nbr { distance }
+        val isNbrObstacle = nbr { obstacle }
+        mux(isNbrObstacle)(Double.PositiveInfinity){ neighbourDistance + 1 }
+      }
+    }
+  }
+}
+
+branch(sourceNode && !obstacle) {
+  val path = classicGradient(sourceNode, obstacle)
+  val isDestination = distanceTo(destinationNode, obstacle) < path
+  isDestination
+}.getOrElse(false)
+```

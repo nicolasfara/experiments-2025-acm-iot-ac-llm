@@ -1,0 +1,7 @@
+```val graph = Graph.fromCollection(
+  List(Edge(0, 1), Edge(0, 2), Edge(1, 2), Edge(2, 3), Edge(3, 4)),
+  List(VertexAttr(0, 0), VertexAttr(1, 1), VertexAttr(2, 2), VertexAttr(3, 3), VertexAttr(4, 4))
+)
+val minDistance = graph.minimumNeighborDistance
+println(minDistance)
+```

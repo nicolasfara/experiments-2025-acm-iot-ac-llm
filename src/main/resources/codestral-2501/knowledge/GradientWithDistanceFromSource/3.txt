@@ -1,0 +1,7 @@
+```scala
+rep(Double.PositiveInfinity) { distance =>
+  val neighbors = foldhoodPlus(Double.PositiveInfinity)(_ min _)(nbr(distance))
+  val source = sense[Int]("source")
+  if (source == 1) 0.0 else neighbors + 1
+}
+```

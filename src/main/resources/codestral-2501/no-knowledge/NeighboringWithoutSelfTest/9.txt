@@ -1,0 +1,15 @@
+```scala
+val graph = Graph.fromEdgeList(
+  List(
+    Edge(0, 1),
+    Edge(1, 2),
+    Edge(2, 3),
+    Edge(3, 4)
+  )
+)
+
+val countNeighbors = graph.mapVertices( (id, _) => 0 )
+  .outerJoinVertices(graph.mapEdges(e => e.srcId)) { (_, count, srcOpt) => count + (if (srcOpt.isDefined) 1 else 0) }
+
+countNeighbors.collect().foreach(println)
+```

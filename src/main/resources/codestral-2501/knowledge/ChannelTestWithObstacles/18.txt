@@ -1,0 +1,6 @@
+```scala
+rep(List("source"))(path => {
+  val nextStep = foldhoodPlus(List.empty[String])(_ ++ _)(nbr(if (sense[Boolean]("obstacle")) List() else List(nbr(mid()))))
+  if (nextStep.contains("destination")) true else nextStep
+}).contains("destination")
+```

@@ -1,0 +1,7 @@
+```scala
+val source = ScaFi("source")
+val destination = ScaFi("destination")
+val obstacle = ScaFi("obstacle")
+
+source.edges(destination).foreach(_.filter(s => !s(obstacle))).isEmpty
+```

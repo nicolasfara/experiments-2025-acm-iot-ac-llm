@@ -1,0 +1,19 @@
+```scala
+val distance = AggregateCtx.aggregate(
+  (ctx: AggregateCtx) => {
+    val source = ctx.sensor("source")
+    val obstacles = ctx.sensors("obstacle")
+    var dist = 0
+    while (true) {
+      val obstacleFound = obstacles.exists(_.value.getOrElse(false))
+      if (obstacleFound) {
+        ctx.block()
+      } else {
+        dist += 1
+      }
+      ctx.wait(1)
+    }
+    dist
+  }
+)
+```

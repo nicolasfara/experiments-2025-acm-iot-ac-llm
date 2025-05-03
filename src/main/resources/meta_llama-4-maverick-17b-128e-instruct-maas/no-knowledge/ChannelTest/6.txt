@@ -1,0 +1,5 @@
+```scala
+val source = node.sense("node-name").contains("source")
+val destination = node.sense("node-name").contains("destination")
+val channel = gradient(source, destination)
+```

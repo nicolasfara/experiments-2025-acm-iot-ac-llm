@@ -1,0 +1,5 @@
+```scala
+val source = node.sense[Boolean]("source")
+val destination = node.sense[Boolean]("destination")
+val channel = gradient(source).mapWithState((d, s) => if(s == 0 && destination) Some(0) else if(d.isDefined && s < 30) Some(s + d.get) else None)
+```

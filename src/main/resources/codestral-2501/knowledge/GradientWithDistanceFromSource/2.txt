@@ -1,0 +1,6 @@
+```scala
+rep(0.0) { distance =>
+  val sourceDistance = nbr(distance)
+  if (sense[Boolean]("source")) 0.0 else minHood(sourceDistance + nbrRange())
+}
+```

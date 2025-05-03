@@ -1,0 +1,8 @@
+```scala
+val areaId = S(2, nbrRange)
+val areaTemperature = foldhoodPlus(0.0)(_ + _)(mux(areaId)(nbr(sense[Double]("temperature")), 0.0))
+val areaNodes = foldhoodPlus(0)(_ + _)(mux(areaId)(nbr(1), 0))
+val areaAverageTemperature = mux(areaNodes > 0)(areaTemperature / areaNodes, 0.0)
+val alarm = mux(areaAverageTemperature > 30)(true, false)
+G[Boolean](areaId, alarm, _ || _, nbrRange)
+```

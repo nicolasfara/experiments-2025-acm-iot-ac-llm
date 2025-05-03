@@ -1,0 +1,8 @@
+```scala
+val graph = Graph[Int, Int]("G")
+val neighbors = graph.aggregateMessages[Int](
+  trip => trip.sendToSrc(1),
+  (a, b) => a + b
+)
+val result = graph.collectVertices[(Int, Int)]((id, attr, msg) => (id, msg.getOrElse(0) - 1))
+```

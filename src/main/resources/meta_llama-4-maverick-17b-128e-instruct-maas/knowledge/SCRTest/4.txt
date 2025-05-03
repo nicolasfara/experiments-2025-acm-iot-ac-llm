@@ -1,0 +1,11 @@
+```scala
+branch(mid() == 0) {
+  val localTemp = sense[Double]("temperature")
+  val area = foldhood(1)(_ + _)(nbr(1))
+  val sumTemp = foldhood(localTemp)(_ + _)(nbr(localTemp))
+  val avgTemp = sumTemp / area
+  avgTemp > 30
+} {
+  foldhood(false)(_ || _)(nbr(true))
+}
+```

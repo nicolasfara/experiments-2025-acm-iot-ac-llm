@@ -1,0 +1,5 @@
+```
+ 0.until(1000).foreach(_ => {
+    println(scafi.lib.Aggregate.reduce(_ - 1))
+  })
+```

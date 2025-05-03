@@ -1,0 +1,5 @@
+To gather a list of IDs of their neighbors, you can use the `foldhood` construct to aggregate the neighbor IDs. Here is the Scala code for the `main` function that accomplishes this:
+
+```scala
+foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```

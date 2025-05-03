@@ -1,0 +1,20 @@
+To gather a list of IDs of their neighbors, you can use the `foldhood` construct to aggregate the IDs from neighboring nodes. Here is the raw Scala code for this task:
+
+```scala
+foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```
+
+This code snippet collects the IDs of all neighboring nodes, including the node itself, into a list. Here’s a breakdown of the components:
+
+- `foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))`
+  - `List.empty[ID]`: Initial value for the aggregation, an empty list.
+  - `_ ++ _`: The combining function that concatenates two lists.
+  - `List(nbr(mid()))`: The expression to evaluate on each neighbor, which is the ID of the neighbor.
+
+This will produce a list of IDs of all neighbors, including the node itself. If you want to exclude the node itself, you can use `foldhoodPlus` instead:
+
+```scala
+foldhoodPlus(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```
+
+This will produce a list of IDs of all neighboring nodes, excluding the node itself.

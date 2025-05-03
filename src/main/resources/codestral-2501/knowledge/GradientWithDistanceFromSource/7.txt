@@ -1,0 +1,5 @@
+```scala
+rep(100000.0) {
+  minDist => foldhood(minDist)(_.min(_))(nbr(mux(nbr(sense[Boolean]("source")))(0.0)(nbr(minDist) + 1.0)))
+}
+```

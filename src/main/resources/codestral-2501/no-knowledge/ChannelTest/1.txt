@@ -1,0 +1,10 @@
+```scala
+val source = sourceNode
+val destination = destinationNode
+val channel = source.edgeTo(destination)
+```
+```scala
+val source = sourceNode
+val destination = destinationNode
+Channel(source, destination)
+```

@@ -1,0 +1,3 @@
+```
+rep(Int.MinValue) { minId => foldhood(mid())(_ max _)(nbr(minId)) }
+```

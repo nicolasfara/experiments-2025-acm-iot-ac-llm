@@ -1,0 +1,12 @@
+```scala
+rep(Double.MaxValue) { dist =>
+  val neighbors = foldhoodPlus(List.empty[(Double, ID)])(_ ++ _) {
+    branch(nbr(sense[Boolean]("obstacle"))) {
+      List()
+    } {
+      List(((nbr(dist) + nbrRange()) -> nbr(mid())))
+    }
+  }
+  if (sense[Boolean]("source")) 0.0 else neighbors.minBy(_._1)._1
+}
+```

@@ -1,0 +1,7 @@
+```scala
+def main(): Unit = {
+  val source = nbr("source")
+  val destination = nbr("destination")
+  createChannel(source, destination)
+}
+```

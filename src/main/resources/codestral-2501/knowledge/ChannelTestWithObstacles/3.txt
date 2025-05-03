@@ -1,0 +1,12 @@
+```scala
+mux(nbr(sense[Boolean]("source"))) {
+  mux(nbr(sense[Boolean]("destination"))) {
+    val noObstacle = foldhood(true)(_ && _)(nbr(!sense[Boolean]("obstacle")))
+    noObstacle
+  } {
+    false
+  }
+} {
+  false
+}
+```

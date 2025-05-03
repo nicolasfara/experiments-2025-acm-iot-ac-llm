@@ -1,0 +1,12 @@
+```scala
+rep(false) { channelCreated =>
+  !channelCreated && {
+    val hasObstacle = foldhoodPlus(false)(_ || _)(nbr(sense[Boolean]("obstacle")))
+    if (mid() == "source" && !hasObstacle) {
+      nbr(mid() == "destination")
+    } else {
+      channelCreated
+    }
+  }
+}
+```

@@ -1,0 +1,6 @@
+```scala
+val gradient = gradientField(1000, 0, 10)
+val field = rep(1000){ (v: Int) =>
+  if(v > 0) Math.max(v - 1, 0) else v
+}
+```

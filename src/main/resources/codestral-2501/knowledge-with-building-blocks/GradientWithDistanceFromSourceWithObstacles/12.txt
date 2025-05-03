@@ -1,0 +1,10 @@
+```scala
+rep((0.0, Double.PositiveInfinity)) {
+  case (distance, minDistance) =>
+    val newDistance = foldhoodPlus(Double.PositiveInfinity)(_ min _) {
+      nbr(if (sense[Boolean]("obstacle")) Double.PositiveInfinity else distance + nbrRange())
+    }
+    val newMinDistance = foldhoodPlus(Double.PositiveInfinity)(_ min _)(nbr(minDistance))
+    (newDistance, newMinDistance)
+}._2
+```

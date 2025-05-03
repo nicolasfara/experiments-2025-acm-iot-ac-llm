@@ -1,0 +1,12 @@
+To calculate the minimum distance from neighbors, you can use the `foldhoodPlus` construct to exclude the current node and then use the `minHood` construct to find the minimum value among the neighbors.
+
+Here is the Scala code to achieve this:
+
+```scala
+val idsAndNeigh = foldhoodPlus(List.empty[(Double, ID)])(_ ++ _)(List(nbrRange() -> nbr(mid())))
+minHood(idsAndNeigh.map(_._1)).head
+```
+
+This code does the following:
+1. `foldhoodPlus(List.empty[(Double, ID)])(_ ++ _)(List(nbrRange() -> nbr(mid())))`: Aggregates the distance to neighbors while excluding the current node.
+2. `minHood(idsAndNeigh.map(_._1)).head`: Finds the minimum distance from the aggregated list of distances and returns the first element (which is the minimum distance).

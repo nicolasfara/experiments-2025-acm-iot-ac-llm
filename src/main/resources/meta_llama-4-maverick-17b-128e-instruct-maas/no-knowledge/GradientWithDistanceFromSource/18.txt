@@ -1,0 +1,5 @@
+```scala
+val source = sense[Boolean]("source")
+val distance = G[V](source, (x: V) => 0, (x: V, y: V) => x + hopDistance(y), (x: V, y: V) => x.min(y))
+distance
+```

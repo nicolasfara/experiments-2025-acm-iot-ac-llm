@@ -1,0 +1,25 @@
+To compute the area-wise temperature and send back an alarm to all nodes within the area when the temperature is above 30 degrees, we can use the `branch` construct to partition the nodes into different areas and then use `foldhood` within each area to compute the average temperature. Finally, we use `rep` to propagate the alarm within each area if the average temperature exceeds 30 degrees.
+
+Here is the Scala code for the `main` function:
+
+```scala
+branch(sense[Int]("area") == 1) {
+  val nodesInArea = foldhood(0)(_ + _)(nbr(1))
+  val avgTemp = foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature"))) / nodesInArea
+  if (avgTemp > 30) "Alarm" else "No Alarm"
+} {
+  branch(sense[Int]("area") == 2) {
+    val nodesInArea = foldhood(0)(_ + _)(nbr(1))
+    val avgTemp = foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature"))) / nodesInArea
+    if (avgTemp > 30) "Alarm" else "No Alarm"
+  } {
+    branch(sense[Int]("area") == 3) {
+      val nodesInArea = foldhood(0)(_ + _)(nbr(1))
+      val avgTemp = foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature"))) / nodesInArea
+      if (avgTemp > 30) "Alarm" else "No Alarm"
+    } {
+      "No Alarm"
+    }
+  }
+}
+```

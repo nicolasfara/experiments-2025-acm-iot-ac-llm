@@ -1,0 +1,5 @@
+Given the complexity of the task and the constraints, the following Scala code calculates the minimum distance from the current node to any of its neighbors:
+
+```scala
+minHood(nbrRange())
+```

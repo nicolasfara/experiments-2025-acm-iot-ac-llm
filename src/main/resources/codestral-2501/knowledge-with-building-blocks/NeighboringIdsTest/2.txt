@@ -1,0 +1,17 @@
+To gather a list of IDs of their neighbors using the DSL constructs provided, you can use the `foldhood` construct to aggregate the IDs of all neighbors. Here's how you can do it:
+
+```scala
+val neighborIDs = foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```
+
+This code snippet collects the IDs of all neighbors (including the node itself) into a list. If you want to exclude the node itself, you can use `foldhoodPlus` instead:
+
+```scala
+val neighborIDs = foldhoodPlus(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```
+
+Here is the full `main` function body to gather and return the list of neighbor IDs:
+
+```scala
+val neighborIDs = foldhoodPlus(List.empty[ID])(_ ++ _)(List(nbr(mid()))); neighborIDs
+```

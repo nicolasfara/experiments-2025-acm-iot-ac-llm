@@ -1,0 +1,8 @@
+```scala
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+val gradient = G(sense = source, metric = (_: Point) => nbrRange())
+val distance = gradient()
+val avoidObstacles = branch(obstacle){ Double.PositiveInfinity }{ distance }
+rep(avoidObstacles){ (d: Double) => mux(source){ 0.0 }{ minHood(nbr{d} + nbrRange()) } }
+```

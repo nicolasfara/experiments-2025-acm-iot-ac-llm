@@ -1,0 +1,8 @@
+```scala
+import org.bitbucket.inkytonik.kiama.rewriting.properties.SyntacticProperty
+import scafi.aggregates._
+
+val g = Graph.load("graph.json")
+val result = g.aggregate.neighborCount()
+result.save("neighbor_counts.json")
+```

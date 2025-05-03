@@ -1,0 +1,36 @@
+```scala
+branch(sense[Int]("area") == 0) {
+  val temps = foldhood(List.empty[Double])(_ ++ _)(List(nbr(sense[Double]("temperature"))))
+  val avgTemp = temps.sum / temps.size
+  if (avgTemp > 30) {
+    foldhood(())((_, _) => ())(nbr("Alarm: Temperature above 30 degrees!"))
+    "Alarm Triggered"
+  } else {
+    "No Alarm"
+  }
+} {
+  branch(sense[Int]("area") == 1) {
+    val temps = foldhood(List.empty[Double])(_ ++ _)(List(nbr(sense[Double]("temperature"))))
+    val avgTemp = temps.sum / temps.size
+    if (avgTemp > 30) {
+      foldhood(())((_, _) => ())(nbr("Alarm: Temperature above 30 degrees!"))
+      "Alarm Triggered"
+    } else {
+      "No Alarm"
+    }
+  } {
+    branch(sense[Int]("area") == 2) {
+      val temps = foldhood(List.empty[Double])(_ ++ _)(List(nbr(sense[Double]("temperature"))))
+      val avgTemp = temps.sum / temps.size
+      if (avgTemp > 30) {
+        foldhood(())((_, _) => ())(nbr("Alarm: Temperature above 30 degrees!"))
+        "Alarm Triggered"
+      } else {
+        "No Alarm"
+      }
+    } {
+      "No Alarm"
+    }
+  }
+}
+```

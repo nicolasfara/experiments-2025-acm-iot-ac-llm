@@ -1,0 +1,7 @@
+**Example: Finding the Maximum ID in the Network**
+
+```scala
+rep(Int.MinValue) {
+  maxId => foldhood(mid())(_ max _)(nbr(maxId))
+}
+```

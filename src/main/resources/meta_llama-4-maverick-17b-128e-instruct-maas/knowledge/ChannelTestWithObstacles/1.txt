@@ -1,0 +1,9 @@
+```scala
+rep((Double.PositiveInfinity, false)) { case (d, _) =>
+  mux(sense[Boolean]("source")) { (0.0, true) } {
+    mux(sense[Boolean]("destination")) { (0.0, false) } {
+      minHoodPlus((nbr(d) + nbrRange(), nbr(sense[Boolean]("obstacle")) && sense[Boolean]("obstacle")))
+    }
+  }
+}._2
+```

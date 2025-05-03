@@ -1,0 +1,3 @@
+```scala
+minHood(Math.min(nbrRange(), Double.PositiveInfinity))
+```

@@ -1,0 +1,10 @@
+```scala
+branch(sense[Double]("temperature") > 30) {
+  val area = sense[AreaID]("areaID")
+  val areaTemperature = foldhood(0.0)(_ + _)(mux(nbr(sense[AreaID]("areaID")) == area)(nbr(sense[Double]("temperature")))(0.0)) / foldhood(0)(_ + _)(mux(nbr(sense[AreaID]("areaID")) == area)(1)(0))
+  val alarm = areaTemperature > 30
+  mux(nbr(sense[AreaID]("areaID")) == area)(alarm)(false)
+} {
+  false
+}
+```

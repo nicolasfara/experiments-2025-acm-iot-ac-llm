@@ -1,0 +1,5 @@
+```scala
+def main(): Unit = {
+  createChannel("source", "destination")
+}
+```

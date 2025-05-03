@@ -1,0 +1,8 @@
+```scala
+val neighborIdsList = Aggregate[Array[Int]](
+  (a, b) => a ++ b,
+  Array.empty[Int],
+  _.length,
+  _.neighbors.map(_.id).toArray
+)
+```

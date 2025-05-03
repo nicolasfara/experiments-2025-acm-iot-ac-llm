@@ -1,0 +1,6 @@
+```scala
+rep(Double.MaxValue) { distance =>
+  val neighbors = foldhood(0.0)(_ min _)(nbr(distance + nbrRange()))
+  if(sense[Boolean]("source")) 0.0 else neighbors
+}
+```

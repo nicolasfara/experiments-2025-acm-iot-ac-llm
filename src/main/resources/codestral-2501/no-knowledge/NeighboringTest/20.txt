@@ -1,0 +1,11 @@
+```scala
+val graph = Graph.fromFile("path/to/your/graph.txt")
+val result = graph.aggregateMessages[Int, Int](
+  triplet => { // Map Function
+    triplet.sendToDst(triplet.srcAttr) // Send the attribute of the source node to the destination node
+    triplet.sendToSrc(triplet.dstAttr) // Send the attribute of the destination node to the source node
+  },
+  (a, b) => a + b // Reduce Function
+)
+result.collect.foreach(println)
+```

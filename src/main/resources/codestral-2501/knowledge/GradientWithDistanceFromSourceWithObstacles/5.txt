@@ -1,0 +1,5 @@
+```scala
+branch(sense[Boolean]("source")) {
+  rep(0.0){ d => foldhoodPlus(Double.PositiveInfinity)(_ min _)(mux(nbr(sense[Boolean]("obstacle")))(Double.PositiveInfinity)(nbr(d + 1.0)))}
+}{ Double.PositiveInfinity}
+```

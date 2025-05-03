@@ -1,0 +1,6 @@
+```scala
+val source = S(2, nbrRange)
+val potential = G[Double](source, 0, _ + nbrRange(), nbrRange)
+val areaTemperature = C[Double, Double](potential, _ + _, sense[Double]("temperature"), 0)
+val areaAlarm = branch(areaTemperature > 30)(G[Boolean](source, true, _ || _, nbrRange), false)
+```

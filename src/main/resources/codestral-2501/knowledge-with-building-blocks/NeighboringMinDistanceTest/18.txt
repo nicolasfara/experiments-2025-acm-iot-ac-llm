@@ -1,0 +1,5 @@
+Sure, here is the Scala code to calculate the minimum distance from neighbors:
+
+```scala
+foldhood(Double.MaxValue)(_ min _)(nbr(nbrRange()))
+```

@@ -1,0 +1,3 @@
+```scala
+val maxId = network.aggregate(max = 0)((a, b) => if(a > b) a else b)
+```

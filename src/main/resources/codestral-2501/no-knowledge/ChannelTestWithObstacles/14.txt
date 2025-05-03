@@ -1,0 +1,11 @@
+```scala
+val destination = destination()
+val source = source()
+val obstacle = obstacle()
+
+val channel = Channel(source, destination)
+
+val result = channel.connectIf { obstacle.isFalse() }
+
+result
+```

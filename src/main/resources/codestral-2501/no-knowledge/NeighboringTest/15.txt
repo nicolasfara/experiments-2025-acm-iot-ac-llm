@@ -1,0 +1,11 @@
+```scala
+val graph = List(
+  List(0, 1),
+  List(0, 3),
+  List(1, 2),
+  List(2, 3)
+)
+val neighbors = Graph.fromEdgeList(graph, undirected = true)
+val countNeighbors = neighbors.aggregateMessages(init = 0, send = (edge, count) => Iterator((edge.dst, count + 1)), combine = _ + _)
+countNeighbors.toList
+```

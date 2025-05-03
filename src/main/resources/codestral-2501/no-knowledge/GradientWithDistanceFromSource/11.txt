@@ -1,0 +1,15 @@
+```scala
+val distances = new Aggregate[Float] {
+  def createAccumulator: Float = Float.PositiveInfinity
+
+  def mergeAccumulators(a: Float, b: Float): Float = math.min(a, b)
+
+  def accumulate(currentDistance: Float, distanceToSource: Float): Float = {
+    if (distanceToSource < currentDistance) distanceToSource else currentDistance
+  }
+
+  def result(a: Float): Float = a
+}
+
+val distanceFromSource = distances(-1.0f).at("source")
+```

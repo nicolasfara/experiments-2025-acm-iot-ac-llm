@@ -1,0 +1,8 @@
+```scala
+val tempSensor = sensor[Double]("temperature")
+val isHot = tempSensor > 30
+val areas = G[V, (Boolean, Double)](nbrRange(), (false, tempSensor), (b, v) => (b || isHot, if(b) 0.0 else v), (b1, v1, b2, v2) => (b1 || b2, if(b1) v1 else v2))
+val temperature = areas._2
+val alarm = broadcast(temperature > 30)
+rep(0)(nbr{ _ => if(alarm) 1 else 0 })
+```

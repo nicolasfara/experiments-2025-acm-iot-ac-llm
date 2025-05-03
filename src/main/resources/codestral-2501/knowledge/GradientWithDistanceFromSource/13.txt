@@ -1,0 +1,7 @@
+Certainly! Below is the Scala code to compute the Euclidean distance from the source using a sensor named 'source'. This code assumes that the 'source' sensor provides the Euclidean distance value from the source at each node.
+
+```scala
+rep(Double.MaxValue) { distance =>
+  minHood(distance min (nbr(sense[Double]("source")) + nbrRange()))
+}
+```

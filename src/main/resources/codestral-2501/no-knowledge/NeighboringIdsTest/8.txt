@@ -1,0 +1,20 @@
+```
+val graph = Graph.fromCollection(
+  List(
+    Edge(1, 2),
+    Edge(2, 3),
+    Edge(3, 4),
+    Edge(4, 5)
+  )
+)
+
+val neighbors = graph.aggregateMessages[List[Long]](
+  triplet => {
+    triplet.sendToDst(triplet.srcId)
+    triplet.sendToSrc(triplet.dstId)
+  },
+  (a, b) => a ++ b
+)
+
+val result = neighbors.collect()
+```

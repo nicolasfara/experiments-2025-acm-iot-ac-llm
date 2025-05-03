@@ -1,0 +1,16 @@
+```scala
+def main(): Boolean = {
+  val potential = G[Double](
+    source = sense("source"),
+    field = 0,
+    acc = _ + nbrRange(),
+    metric = () => if (sense[Boolean]("obstacle")) Double.PositiveInfinity else nbrRange()
+  )
+  C[Double, Boolean](
+    potential = potential,
+    acc = (_ || _),
+    local = sense("destination"),
+    Null = false
+  )
+}
+```

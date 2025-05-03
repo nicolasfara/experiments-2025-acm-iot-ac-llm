@@ -1,0 +1,15 @@
+```scala
+sense[Boolean]("isSource") match {
+  case true => send("source", mux(sense[Boolean]("isDestination")) {
+    send("source", 1)
+    1
+  } {
+    nbr[Int]("source")
+  })
+  case false => mux(sense[Boolean]("isDestination"))(
+    receive[Int]("source") { case (_, value) => value }
+  ) {
+    nbr[Int]("source")
+  }
+}
+```

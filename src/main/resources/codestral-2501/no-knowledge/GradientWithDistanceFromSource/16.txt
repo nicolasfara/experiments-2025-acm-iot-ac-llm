@@ -1,0 +1,13 @@
+```scala
+case class Sensor(id: String, x: Double, y: Double)
+val sensors = Seq(Sensor("A", 1.0, 2.0), Sensor("B", 4.0, 6.0), Sensor("source", 0.0, 0.0))
+
+val source = sensors.find(_.id == "source").get
+val distances = sensors.map { sensor =>
+  val dx = sensor.x - source.x
+  val dy = sensor.y - source.y
+  val distance = math.sqrt(dx * dx + dy * dy)
+  (sensor.id, distance)
+}
+distances.foreach(println(_))
+```

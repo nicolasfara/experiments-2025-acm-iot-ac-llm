@@ -1,0 +1,16 @@
+```scala
+val distances = ScaFi.collect {
+  case (s, _, "source") => 0.0
+  case (s, _, "target") => Double.PositiveInfinity
+  case (s, t, _) if s.neighbors.contains(t) && !s("obstacle") => 1.0
+  case (s, t, _) if s.neighbors.contains(t) && s("obstacle") => Double.PositiveInfinity
+}
+
+val euclideanDistances = ScaFi.sum {
+  case (s, t, _) => if (distances(t) < Double.PositiveInfinity) distances(t) + 1.0 else Double.PositiveInfinity
+}
+
+ScaFi.result {
+  case (s, _, "target") => euclideanDistances(s)
+}
+```

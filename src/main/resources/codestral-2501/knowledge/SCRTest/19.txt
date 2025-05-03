@@ -1,0 +1,7 @@
+```scala
+val areas = sense[Map[ID, ID]]("areaMap")
+val groupedTemperatures = areas.groupBy(_._2).mapValues(_.map(_._1))
+val areaTemperatures = groupedTemperatures.mapValues(ids => ids.map(id => nbr(id) -> nbr(sense[Double]("temperature"))).toMap)
+val areaAlarm = areaTemperatures.mapValues(_.values.sum / _.size > 30)
+foldhood(0)(_ + _)(nbr(areaAlarm.getOrElse(nbr(mid()), false)))
+```

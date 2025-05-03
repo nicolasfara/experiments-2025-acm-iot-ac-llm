@@ -1,0 +1,14 @@
+```scala
+val edges = List((1,2), (2,3), (3,4), (4,5))
+val vertices = edges.flatMap(t => List(t._1, t._2)).distinct
+
+val neighbors = for {
+  v <- vertices
+  n <- edges if n._1 == v || n._2 == v
+  if n._1 != v || n._2 != v
+} yield (v, if (n._1 == v) n._2 else n._1)
+
+val neighborCount = neighbors.groupBy(_._1).mapValues(_.size)
+
+vertices.map(v => (v, neighborCount.getOrElse(v, 0)))
+```

@@ -1,0 +1,8 @@
+```scala
+rep((Double.PositiveInfinity, mbr(sense[Double]("id")))) { case (dist, sourceID) =>
+  val newDist = foldhood(if (sourceID == mbr(sense[Double]("id"))) 0.0 else Double.PositiveInfinity)(
+    (a, b) => a min b
+  )(if (nbr(sense[Boolean]("obstacle"))) Double.PositiveInfinity else nbr(dist) + nbrRange()))
+  (newDist min dist, sourceID)
+}._1
+```

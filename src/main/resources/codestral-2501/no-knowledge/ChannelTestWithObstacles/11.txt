@@ -1,0 +1,14 @@
+```scala
+import org.scalafi.core._
+import org.scalafi.core.Channel._
+import org.scalafi.core.Sensor._
+
+val source = Node("source")
+val destination = Node("destination")
+val obstacle = Sensor("obstacle")
+
+val path = Channel.create(source, destination)
+val isObstaclePresent = path.sensors.contains(obstacle)
+
+!(isObstaclePresent)
+```

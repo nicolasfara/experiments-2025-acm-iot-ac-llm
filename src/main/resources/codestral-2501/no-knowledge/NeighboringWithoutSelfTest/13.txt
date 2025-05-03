@@ -1,0 +1,17 @@
+```scala
+import distapl._
+
+val N = 10  // Example size of the grid
+val grid = ScaFi.onGrid(N, N) { (x, y) =>
+  Random.nextInt(2)  // Example grid with random binary values
+}
+
+val result = grid.map { (x, y) =>
+  var count = 0
+  if (x > 0 && grid(x - 1, y) == 1) count += 1
+  if (x < N - 1 && grid(x + 1, y) == 1) count += 1
+  if (y > 0 && grid(x, y - 1) == 1) count += 1
+  if (y < N - 1 && grid(x, y + 1) == 1) count += 1
+  count
+}
+```

@@ -1,0 +1,1 @@
+G[Double](source = sense("source"), field = 0.0, acc = (x: Double) => x + nbrRange(), metric = nbrRange)

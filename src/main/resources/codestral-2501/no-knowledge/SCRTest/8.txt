@@ -1,0 +1,15 @@
+```scala
+val areas = List("Area1", "Area2", "Area3")
+val temperatures = Map("Area1" -> 28, "Area2" -> 32, "Area3" -> 35)
+
+val tempThreshold = 30
+
+val alarmMessages = areas.map { area =>
+  if (temperatures(area) > tempThreshold) s"$area: Temperature is above $tempThreshold degrees"
+  else s"$area: Temperature is normal"
+}
+
+alarmMessages.foreach { msg =>
+  broadcast(msg)
+}
+```

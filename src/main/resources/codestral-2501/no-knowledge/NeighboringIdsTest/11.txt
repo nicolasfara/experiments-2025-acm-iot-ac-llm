@@ -1,0 +1,5 @@
+```scala
+val ids = aggregate[Set[Int]](Set())
+val result = ids.map(_ + 1)
+result
+```

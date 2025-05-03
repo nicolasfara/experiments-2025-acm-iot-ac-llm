@@ -1,0 +1,5 @@
+```scala
+val sourceNode = sfc.source("source")
+val destinationNode = sfc.destination("destination")
+val channel = sourceNode to destinationNode
+```

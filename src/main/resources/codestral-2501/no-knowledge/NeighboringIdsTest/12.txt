@@ -1,0 +1,5 @@
+```scala
+val ids = edgeMap.map {
+  case (src, neighbors) => (src, neighbors.map(_._1))
+}.collect()
+```

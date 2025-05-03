@@ -1,0 +1,34 @@
+```scala
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.expressions.Window
+import org.scalafi.spark.SparkContextImplicits._
+
+val spark = SparkSession.builder()
+  .appName("Euclidean Distance Calculation")
+  .getOrCreate()
+
+val sensorData = spark.read.format("csv")
+  .option("header", "true")
+  .option("inferSchema", "true")
+  .load("path/to/sensor/data.csv")
+
+val sourceData = sensorData.filter(col("sensor") === "source")
+val otherSensorsData = sensorData.filter(col("sensor") =!= "source")
+
+val sourceCoords = sourceData.select("x", "y")
+val otherCoords = otherSensorsData.select("x", "y", "sensor")
+
+val euclideanDistance = otherCoords.crossJoin(sourceCoords)
+  .withColumn("distance", sqrt(
+    pow(col("x") - col("x1"), 2) + pow(col("y") - col("y1"), 2)
+  ))
+  .select("sensor", "distance")
+
+val windowSpec = Window.partitionBy("sensor").orderBy(desc("distance"))
+val result = euclideanDistance.withColumn("rank", rank().over(windowSpec))
+  .filter(col("rank") === 1)
+  .drop("rank")
+
+result.show()
+```

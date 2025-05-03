@@ -1,0 +1,9 @@
+```val grid = ScalarGrid(10, 10, grid_data)
+val neighbors = grid.neighbors
+val minDistances = neighbors.map { case (row, col, value) =>
+  val rowDiffs = value.map(row - row)
+  val colDiffs = value.map(col - col)
+  val distances = rowDiffs.zip(colDiffs).map { case (rd, cd) => math.sqrt(rd*rd + cd*cd) }
+  distances.min
+}
+```

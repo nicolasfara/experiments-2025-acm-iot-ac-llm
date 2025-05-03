@@ -1,0 +1,8 @@
+```scala
+rep(1000) { value =>
+  value match {
+    case 0 => 0
+    case _ => value - 1
+  }
+}
+```

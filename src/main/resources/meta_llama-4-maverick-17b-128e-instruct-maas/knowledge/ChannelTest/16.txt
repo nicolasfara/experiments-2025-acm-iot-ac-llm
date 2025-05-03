@@ -1,0 +1,9 @@
+```scala
+rep((Double.PositiveInfinity, "any")) { case (d, _) =>
+  mux(mid() == sense[String]("source")) {
+    (0.0, sense[String]("destination"))
+  } {
+    minHoodPlus((nbr(d), nbr(sense[String]("destination"))))
+  }
+}._2
+```

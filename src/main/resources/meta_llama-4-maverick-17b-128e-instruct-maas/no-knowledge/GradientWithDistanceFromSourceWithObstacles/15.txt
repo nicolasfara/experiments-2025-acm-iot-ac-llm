@@ -1,0 +1,7 @@
+```scala
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+val gradient = G(source, 0, (_:Double)+1)
+val potential = rep(gradient)(g => mux(source){0.0} {if(obstacle){Double.PositiveInfinity} else {GCRF(g, (_:Double)+1, (x:Double,y:Double)=>x+y, 0.0)}})
+potential
+```

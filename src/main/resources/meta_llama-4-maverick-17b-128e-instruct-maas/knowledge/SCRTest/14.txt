@@ -1,0 +1,9 @@
+```scala
+rep((0.0, false)) { case (prevTemp, prevAlarm) =>
+  val isArea = foldhood(true)(_ && _)(nbr(mid()) % 5 == mid() % 5)
+  val localTemp = sense[Double]("temperature")
+  val areaTemp = mux(isArea)(foldhood(0.0)(_ + _)(nbr(localTemp)) / foldhood(0)(_ + _)(nbr(1.0)))(prevTemp)
+  val alarm = mux(isArea)(areaTemp > 30)(prevAlarm)
+  (areaTemp, alarm)
+}._2
+```

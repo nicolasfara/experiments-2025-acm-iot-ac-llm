@@ -1,0 +1,5 @@
+```scala
+val distanceToDestination = G(sense[Boolean]("destination"), 0.0, (x: Double) => x + 1, nbrRange)
+val distanceToSource = G(sense[Boolean]("source"), 0.0, (x: Double) => x + 1, () => if(sense[Boolean]("obstacle")) Double.PositiveInfinity else nbrRange())
+C(distanceToSource, (x: Boolean, y: Boolean) => x || y, distanceToDestination < nbrRange(), false)
+```

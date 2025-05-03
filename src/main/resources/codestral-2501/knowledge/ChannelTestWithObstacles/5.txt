@@ -1,0 +1,10 @@
+```scala
+def main(): Boolean = {
+  rep(false)(success => if (success) true else {
+    foldhoodPlus(false)((a, b) => a || b)(nbr(sense[Boolean]("obstacle"))) match {
+      case false => if (nbr(sense[String]("destination")) == "destination") true else nbr(true)
+      case true => false
+    }
+  })
+}
+```

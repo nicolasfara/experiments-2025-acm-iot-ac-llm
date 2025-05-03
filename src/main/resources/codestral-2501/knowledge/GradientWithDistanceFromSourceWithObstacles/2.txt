@@ -1,0 +1,5 @@
+```scala
+rep(Int.MaxValue) {
+  dist => foldhood(dist)(_ min _)(mux(nbr(sense[Boolean]("obstacle")))(Int.MaxValue)(nbr(dist + 1)))
+}
+```

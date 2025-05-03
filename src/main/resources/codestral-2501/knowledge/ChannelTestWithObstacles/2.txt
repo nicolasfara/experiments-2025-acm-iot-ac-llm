@@ -1,0 +1,23 @@
+```scala
+def main(): Boolean = {
+  def avoidObstacles(path: List[(ID, ID)]): List[(ID, ID)] = {
+    path.filter {
+      case (from, to) => !foldhoodPlus(false)(_ || _)(nbr(sense[Boolean]("obstacle"))) && !mux(nbr(mid()) == to)(nbr(sense[Boolean]("obstacle")))(false)
+    }
+  }
+
+  val source = sense[ID]("source")
+  val destination = sense[ID]("destination")
+
+  val path = rep(List[(ID, ID)]()) { currentPath =>
+    val newPath = foldhoodPlus(List.empty[(ID, ID)])(_ ++ _) {
+      if (nbr(mid()) == destination) List((source, nbr(mid())))
+      else if (nbr(mid()) == source) List((nbr(mid()), destination))
+      else List.empty[(ID, ID)]
+    }
+    avoidObstacles(newPath)
+  }
+
+  path.nonEmpty
+}
+```

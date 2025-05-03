@@ -1,0 +1,15 @@
+```scala
+val areas = foldhoodPlus(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+val areaTemp = foldhood(0.0)(_ + _)(mux(areas.contains(nbr(mid())))(nbr(sense[Double]("temperature")))(0.0))
+val areaSize = foldhood(0)(_ + _)(mux(areas.contains(nbr(mid())))(nbr(1))(0))
+val avgTemp = areaTemp / areaSize
+val alarm = G[Boolean](source = avgTemp > 30, field = avgTemp > 30, acc = _ || _, metric = nbrRange)
+```
+
+This code performs the following steps:
+
+1. **Determine Areas**: It computes the neighborhood of each node excluding itself using `foldhoodPlus`.
+2. **Calculate Area-Wise Temperature**: It calculates the sum of temperatures within the area using `foldhood`.
+3. **Calculate Area Size**: It calculates the number of nodes within the area using `foldhood`.
+4. **Compute Average Temperature**: It computes the average temperature within the area.
+5. **Broadcast Alarm**: It uses `G` to broadcast an alarm if the average temperature exceeds 30 degrees. The `source` is set to `true` if the average temperature is above 30 degrees, otherwise `false`. The `field` is set to `true` if the average temperature is above 30 degrees, otherwise `false`. The `acc` function uses logical OR to propagate the alarm signal. The `metric` is set to `nbrRange` to ensure the alarm is propagated correctly.

@@ -1,0 +1,9 @@
+```scala
+val distances = ScaFi.dist(source, 100, (a, b) => a + b, 0)
+val maxDistance = distances.reduce((a, b) => if (a > b) a else b)
+val filteredDistances = distances.map(d => if (obstacle) -1 else d)
+val validDistances = filteredDistances.filter(_ != -1)
+val minValidDistance = validDistances.reduce((a, b) => if (a < b) a else b)
+val euclideanDistance = minValidDistance
+euclideanDistance
+```

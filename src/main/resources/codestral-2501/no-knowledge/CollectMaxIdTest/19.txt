@@ -1,0 +1,6 @@
+```scala
+val maxId = aggregate(0)(
+    (neighbor, state) => math.max(state, neighbor),
+    (local, neighbor) => math.max(local, neighbor)
+  )
+```

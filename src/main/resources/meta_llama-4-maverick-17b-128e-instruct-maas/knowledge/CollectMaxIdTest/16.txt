@@ -1,0 +1,1 @@
+rep(Int.MinValue){ curMax => foldhood(curMax)(_ max _)(nbr(curMax)) }

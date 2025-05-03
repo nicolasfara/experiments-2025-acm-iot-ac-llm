@@ -1,0 +1,8 @@
+```scala
+val source = sense[Boolean]("source")
+val destination = sense[Boolean]("destination")
+val obstacle = sense[Boolean]("obstacle")
+val metric = if (obstacle) Double.PositiveInfinity else nbrRange()
+val potential = G[Double](source, 0, _ + metric, metric)
+C[Double, Boolean](potential, _ || _, destination, false)
+```

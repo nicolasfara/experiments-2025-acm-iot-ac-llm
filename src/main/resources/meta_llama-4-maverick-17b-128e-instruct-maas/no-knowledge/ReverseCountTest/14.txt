@@ -1,0 +1,5 @@
+```scala
+val gradient = gradientField(0, 1000, 1)
+val field = foldhood(1000)(Math.min(_,_))(gradient)
+exportField("result", field)
+```

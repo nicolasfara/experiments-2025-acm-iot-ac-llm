@@ -1,0 +1,14 @@
+```scala
+val sourceNode = node.sense[Boolean]("source")
+val destinationNode = node.sense[Boolean]("destination")
+val obstacle = node.sense[Boolean]("obstacle")
+val channel = gradientWithObstacle(sourceNode, obstacle)
+val distanceToDestination = distanceTo(destinationNode)
+val path = channel <: distanceToDestination
+rep(false){success =>
+  mux(sourceNode){ 
+    branch(destinationNode){ true } 
+    { path() <= 0 }
+  }{ success }
+}
+```

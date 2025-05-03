@@ -1,0 +1,14 @@
+```scala
+val sourceNode = node.sense[Boolean]("source")
+val destinationNode = node.sense[Boolean]("destination")
+val obstacleSensor = node.sense[Boolean]("obstacle")
+val channel = gradientWithObstacle(sourceNode, destinationNode, obstacleSensor)
+channel <: (nbrhood => !obstacleSensor && (nbrhood.values.exists(_ == true) || (destinationNode && (nbrhood.values.count(_ == true) == 0))))
+
+def gradientWithObstacle(source: Boolean, destination: Boolean, obstacle: Boolean): Boolean = {
+  val distance = G[V](source, (x: V) => x + 1, 0)
+  !obstacle && (distance != Double.PositiveInfinity) && (destination || mux(source){0.0}{distance} <= 1)
+}
+
+gradientWithObstacle(sourceNode, destinationNode, obstacleSensor)
+```

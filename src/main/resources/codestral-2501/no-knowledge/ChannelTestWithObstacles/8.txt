@@ -1,0 +1,6 @@
+```scala
+val result = scafi.Channel.create("source", "destination") { hop =>
+  scafi.Sensor[Boolean]("obstacle", hop) == false
+}.collect()
+result
+```

@@ -1,0 +1,5 @@
+```
+rep(if (sense[Boolean]("source")) 0 else Int.MaxValue) { dist =>
+  minHood(nbr(dist + 1))
+}
+```

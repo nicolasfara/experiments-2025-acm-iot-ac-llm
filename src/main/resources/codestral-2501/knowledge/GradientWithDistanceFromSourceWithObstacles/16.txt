@@ -1,0 +1,13 @@
+```scala
+rep(Int.MaxValue) {
+  distance => foldhood(distance) { (a, b) =>
+    if (a > b) b else a
+  } {
+    if (sense[Boolean]("obstacle")) {
+      Int.MaxValue
+    } else {
+      nbr(distance) + 1
+    }
+  }
+}
+```

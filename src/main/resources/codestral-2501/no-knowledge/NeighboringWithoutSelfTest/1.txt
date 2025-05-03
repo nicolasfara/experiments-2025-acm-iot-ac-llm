@@ -1,0 +1,5 @@
+```scala
+    val nodes = Graph[Int, Int].fromZippedEdges(n, m, e)
+    val counts = nodes.aggregate(nodes.mapValues(1))(_ + _)
+    val result = nodes.mapValues(node => counts(node) - 1)
+```

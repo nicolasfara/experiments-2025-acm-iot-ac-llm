@@ -1,0 +1,15 @@
+```scala
+val source = scafi.Channel[Boolean]("source")
+val destination = scafi.Channel[Boolean]("destination")
+val obstacle = scafi.Flow[Boolean]("obstacle")
+
+val pathAvailable = !obstacle.reduce((a, b) => a || b)
+
+source.foreach { msg =>
+  if (pathAvailable) {
+    destination.send(msg)
+  }
+}.runAsync
+
+pathAvailable
+```

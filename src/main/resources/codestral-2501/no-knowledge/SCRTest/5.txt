@@ -1,0 +1,11 @@
+```scala
+val temperatureThreshold = 30
+val areaTempMap = scaFi.collective.communication.aggregate(
+  data.map { case (area, temperature) => (area, temperature) },
+  (area, temps) => temps.sum / temps.size,
+  (area, temp) => temp > temperatureThreshold
+)
+areaTempMap.values.collect {
+  case (area, true) => (area, "Alarm: Temperature above 30 degrees")
+}.broadcast
+```

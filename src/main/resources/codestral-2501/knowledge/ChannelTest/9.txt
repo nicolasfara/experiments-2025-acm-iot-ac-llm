@@ -1,0 +1,15 @@
+Certainly! Below is the Scala code for creating a channel from a source node to a destination node, following the criteria and constraints specified:
+
+```scala
+branch(nbr(mid()) == "source") {
+  nbrRange()
+} {
+  branch(nbr(mid()) == "destination") {
+    nbr(nbrRange())
+  } {
+    0.0
+  }
+}
+```
+
+This code creates a channel from the node with `mid()` equal to `"source"` to the node with `mid()` equal to `"destination"`. The `branch` construct is used to determine which nodes are the source and destination, and `nbrRange()` is used to access the distance to the neighbor. If the neighbor is the destination, it returns the distance to the neighbor; otherwise, it returns `0.0`.

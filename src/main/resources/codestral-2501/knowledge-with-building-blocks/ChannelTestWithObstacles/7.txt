@@ -1,0 +1,4 @@
+```scala
+val potential = G[Double](source = sense("source"), field = 0, acc = _ + mux(sense("obstacle"))(Double.PositiveInfinity)(nbrRange()), metric = mux(sense("obstacle"))(Double.PositiveInfinity)(nbrRange()))
+C[Double, Boolean](potential, _ || _, sense("destination"), false)
+```

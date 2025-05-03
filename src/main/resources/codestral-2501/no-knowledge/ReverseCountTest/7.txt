@@ -1,0 +1,7 @@
+```scala
+var value = 1000
+while (value > 0) {
+  value -= 1
+}
+println(value)
+```

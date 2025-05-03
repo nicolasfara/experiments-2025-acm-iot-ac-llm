@@ -1,0 +1,9 @@
+```scala
+val channelCreated = if (destination.neighbors.contains(source) && !destination.neighbors.filter(_.hasFeature("obstacle")).exists(_.booleanValue)) {
+  destination.neighbors += source
+  true
+} else {
+  false
+}
+channelCreated
+```

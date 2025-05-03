@@ -1,0 +1,5 @@
+```scala
+val gradient = G[Double](sense[Boolean]("source"), 0.0, _ + nbrRange(), nbrRange)
+val isPath = C[Boolean, Boolean](gradient, _ || _, sense[Boolean]("destination"), false)
+mux(sense[Boolean]("source")) { true } { isPath }
+```

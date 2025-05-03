@@ -1,0 +1,5 @@
+```scala
+if (mid() == "source") {
+  nbr(sense[Boolean]("ready")) && nbr(mid() == "destination")
+}
+```

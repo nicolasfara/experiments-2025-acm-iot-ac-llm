@@ -1,0 +1,28 @@
+```scala
+import org.scalafi.core._
+import org.scalafi.core.Context._
+
+val sndrID = self
+val rcvrID = sndrID
+val msgType = 0
+var maxID = sndrID
+
+sndrID.receive[Int](msgType) {
+  case (sender, id) =>
+    if (id > maxID) {
+      maxID = id
+    }
+    self.send(sender, msgType, maxID)
+}
+
+rcvrID.receive[Int](msgType) {
+  case (sender, id) =>
+    if (id > maxID) {
+      maxID = id
+    }
+    self.send(sender, msgType, maxID)
+}
+
+self.send(sndrID, msgType, sndrID)
+self.send(rcvrID, msgType, sndrID)
+```

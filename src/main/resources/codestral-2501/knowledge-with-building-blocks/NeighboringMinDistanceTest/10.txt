@@ -1,0 +1,7 @@
+Sure, here is the corrected and concise Scala code for calculating the minimum distance using `foldhood` and `nbr` constructs to ensure only neighbors are considered (excluding self):
+
+```scala
+val distances = foldhoodPlus(List.empty[Double])(_ ++ _)(List(nbr(nbrRange()))).min
+```
+
+This code snippet uses `foldhoodPlus` to aggregate the distances from all neighbors (excluding self) and then finds the minimum distance among them.

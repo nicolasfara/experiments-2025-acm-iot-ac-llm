@@ -1,0 +1,7 @@
+To gather a list of IDs of their neighbors, you can use the `foldhoodPlus` construct to aggregate the IDs of the neighbors, excluding the current node's ID. Here is the Scala code for the `main` function:
+
+```scala
+foldhoodPlus(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```
+
+This code uses `foldhoodPlus` to exclude the current node's ID from the aggregation. The `nbr(mid())` call gets the ID of each neighbor, and `List(nbr(mid()))` wraps it in a list. The `combine` function `_ ++ _` concatenates the lists of neighbor IDs.

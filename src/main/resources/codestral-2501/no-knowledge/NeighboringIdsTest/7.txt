@@ -1,0 +1,5 @@
+```scala
+val neighbors = g.collectNeighbors(v => v.id)
+val neighborIds = neighbors.map(_.id).collect()
+```
+In ScaFi, the `collectNeighbors` method is used to gather the neighbors of a vertex, and `map` is used to extract the IDs of these neighbors. Finally, `collect` is called to get the result as a list of IDs.

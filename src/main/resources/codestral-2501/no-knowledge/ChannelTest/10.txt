@@ -1,0 +1,6 @@
+```scala
+val source = Node("source")
+val destination = Node("destination")
+
+val channel = source >> destination
+```

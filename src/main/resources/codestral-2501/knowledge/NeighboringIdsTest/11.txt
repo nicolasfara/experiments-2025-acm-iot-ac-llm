@@ -1,0 +1,14 @@
+To gather a list of IDs of their neighbors in the DSL, you can use the `foldhoodPlus` construct to ensure that the current node is excluded from the aggregation. The `nbr` construct is used to access data from neighbors, and you can collect these IDs into a list.
+
+Here is the Scala code that accomplishes this:
+
+```scala
+foldhoodPlus(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```
+
+This code does the following:
+- `List.empty[ID]`: Initializes an empty list to collect neighbor IDs.
+- `_ ++ _`: Combines two lists by concatenating them.
+- `List(nbr(mid()))`: Creates a list containing the ID of the current neighbor.
+
+This will gather a list of all neighbor IDs in the network, excluding the current node itself.

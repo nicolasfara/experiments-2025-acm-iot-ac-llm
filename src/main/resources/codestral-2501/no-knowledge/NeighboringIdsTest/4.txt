@@ -1,0 +1,14 @@
+```scala
+val edges = Seq(
+  (1, 2),
+  (1, 3),
+  (2, 3),
+  (3, 4)
+)
+
+val neighbors = edges.flatMap { case (src, dst) =>
+  Seq((src, dst), (dst, src))
+}.groupBy(_._1)
+  .mapValues(_.map(_._2).toSet)
+  .toMap
+```

@@ -1,0 +1,18 @@
+```scala
+rep(false) { created =>
+  if (!created) {
+    val pathBlocked = foldhood(false)(_ || _)(mux(!nbr(sense[Boolean]("obstacle")) && nbr(mid() != mid()))(false)(true))
+    if (!pathBlocked) {
+      branch(nbr(mid()) == destination) {
+        true
+      } {
+        foldhood(false)(_ || _)(nbr(created))
+      }
+    } else {
+      false
+    }
+  } else {
+    true
+  }
+}
+```

@@ -1,0 +1,5 @@
+```scala
+val sourceCondition = sense[Boolean]("source")
+val potential = G[Double](source = sourceCondition, field = 0, acc = _ + nbrRange(), metric = () => if (sense[Boolean]("obstacle")) Double.PositiveInfinity else nbrRange())
+C[Double, Boolean](potential, _ || _, sourceCondition, false)
+```

@@ -1,0 +1,5 @@
+```scala
+rep(Double.MaxValue) {
+  currentMinDistance => foldhood(currentMinDistance)(_ min _)(nbr(if (sense[Boolean]("source")) 0.0 else currentMinDistance + 1.0))
+}
+```

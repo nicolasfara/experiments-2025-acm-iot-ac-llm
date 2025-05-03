@@ -1,0 +1,8 @@
+```scala
+val distances = aggregate {
+  case (source, (x1, y1)) => map {
+    case (sensor, (x2, y2)) =>
+      (sensor, math.sqrt(math.pow(x2 - x1, 2) + math.pow(y2 - y1, 2)))
+  }
+}
+```

@@ -1,0 +1,19 @@
+```scala
+val sourceNode = node.sense[Boolean]("source")
+val destinationNode = node.sense[Boolean]("destination")
+val obstacle = node.sense[Boolean]("obstacle")
+val channel = gradientWithObstacle(sourceNode, obstacle)
+val distanceToDestination = distanceTo(destinationNode)
+val isPathAvailable = channel < distanceToDestination
+rep(false){ wasPathAvailable =>
+  mux(sourceNode){ 
+    branch(isPathAvailable){ 
+      true 
+    }{ 
+      wasPathAvailable 
+    } 
+  }{ 
+    false 
+  }
+}
+```

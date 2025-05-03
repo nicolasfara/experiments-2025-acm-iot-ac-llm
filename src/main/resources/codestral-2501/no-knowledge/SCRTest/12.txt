@@ -1,0 +1,18 @@
+```scala
+    val temperatures = scala.collection.mutable.Map[Int, Double]()
+
+    val areas = ScaFi.area(0)
+
+    areas.foreach { area =>
+      val areaId = area.id
+      val temp = ScaFi.readDouble(area, "temperature")
+
+      temperatures(areaId) = temp
+
+      if (temp > 30.0) {
+        ScaFi.write(area, "alarm", true)
+      } else {
+        ScaFi.write(area, "alarm", false)
+      }
+    }
+```

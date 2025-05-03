@@ -1,0 +1,10 @@
+```scala
+branch(mid() == 0) {
+  val areaTemp = foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature")))
+  val areaSize = foldhood(0)(_ + _)(nbr(1))
+  val averageTemp = areaTemp / areaSize
+  if (averageTemp > 30) true else false
+} {
+  false
+}
+```

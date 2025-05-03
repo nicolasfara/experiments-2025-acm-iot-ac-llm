@@ -1,0 +1,12 @@
+To implement a program that evolves a value from 1000 to 0 over time using the `rep` construct in the described DSL, you can follow these steps:
+
+1. Define the initial value as 1000.
+2. Use the `rep` construct to decrement this value by 1 on each call to `main()`.
+
+Here is the Scala code for the `main` function:
+
+```scala
+rep(1000)(_ - 1)
+```
+
+This code initializes the value to 1000 and decrements it by 1 on each successive call to `main()`.

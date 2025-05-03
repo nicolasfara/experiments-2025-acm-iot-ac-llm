@@ -1,0 +1,7 @@
+```scala
+val maxId = aggregate(
+  init = Int.MinValue,
+  combine = (x, y) => math.max(x, y),
+  reduce = (x, y) => math.max(x, y)
+)(_.id)
+```

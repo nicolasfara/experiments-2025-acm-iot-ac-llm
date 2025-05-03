@@ -1,0 +1,8 @@
+```scala
+val euclideanDistance = Aggregate[Double] {
+  case (Some(sensorName), Some(value)) if sensorName == "source" =>
+    Some(math.sqrt(value(0) * value(0) + value(1) * value(1)))
+  case _ =>
+    None
+}
+```

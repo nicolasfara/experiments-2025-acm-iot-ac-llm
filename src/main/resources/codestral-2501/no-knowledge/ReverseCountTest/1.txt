@@ -1,0 +1,8 @@
+```scala
+val initialValue = 1000
+val numSteps = 1000
+val stepSize = initialValue / numSteps
+
+val result = Stream.iterate(initialValue)(_ - stepSize).take(numSteps + 1)
+result.foreach(println)
+```

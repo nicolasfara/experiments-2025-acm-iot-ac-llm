@@ -1,0 +1,6 @@
+```scala
+val distances = sfi"for (sensor <- sensors) yield (sensor.name, sensor.distance)"
+val obstacles = sfi"for (sensor <- sensors) yield (sensor.name, sensor.obstacle)"
+val safeDistances = distances.filter { case (name, distance) => !obstacles.find(_._1 == name).getOrElse((name, false))._2 }
+val minDistance = safeDistances.minBy(_._2)._2
+```

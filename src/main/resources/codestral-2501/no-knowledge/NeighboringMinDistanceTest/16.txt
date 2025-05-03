@@ -1,0 +1,11 @@
+```scala
+val graph = Graph.fromCollections(edges, (e: Int) => (e, e))
+val ranks = graph.aggregateMessages[Int](
+  // Send message
+  sendMsg = ctx => ctx.sendToSrc(ctx.dstAttr),
+  // Merge message
+  mergeMsg = (a, b) => if (a < b) a else b,
+  // Create aggregate result
+  createAggregatedResult = (id: VertexId, attr: Int, msg: Option[Int]) => msg.getOrElse(attr)
+)
+```

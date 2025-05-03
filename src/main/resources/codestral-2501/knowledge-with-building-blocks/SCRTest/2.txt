@@ -1,0 +1,12 @@
+```scala
+val source = sense("source")
+val potential = G[Double](source = source, field = 0, acc = _ + sense("obstacle"), metric = nbrRange)
+val area = G[Double](source = source, field = sense("temperature"), acc = _ + _, metric = () => if (sense("obstacle")) Double.PositiveInfinity else nbrRange)
+val areaWiseTemperature = C[Double, Double](potential, _ + _, area, 0)
+val alarm = branch(areaWiseTemperature > 30) {
+  true
+} {
+  false
+}
+alarm
+```

@@ -1,0 +1,10 @@
+```scala
+rep((Double.MaxValue, "none")) { case (d, _) =>
+  val (newDist, newPath) = foldhood((Double.MaxValue, "none"))((a, b) => if (a._1 < b._1) a else b)(
+    mux(mid() == "source") { (0.0, nbr("source")) } {
+      (nbrRange() + nbr(d), nbr("source"))
+    }
+  )
+  (newDist, newPath)
+}._2
+```

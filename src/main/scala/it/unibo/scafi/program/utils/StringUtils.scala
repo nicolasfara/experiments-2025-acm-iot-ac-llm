@@ -13,6 +13,7 @@ object StringUtils:
   def refineOutput(originalOutput: String): String =
     val cleaned = originalOutput
       .replaceAll("```scala\n", "")
+      .replaceAll("scala", "")
       .replaceAll("```", "")
       .replaceAll("`", "")
     cleaned

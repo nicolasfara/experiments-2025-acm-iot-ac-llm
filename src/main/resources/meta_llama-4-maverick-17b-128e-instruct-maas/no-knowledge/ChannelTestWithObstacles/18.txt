@@ -1,0 +1,32 @@
+```scala
+val sourceNode = node.sense[Boolean]("source").mux(1, 0)
+val destinationNode = node.sense[Boolean]("destination").mux(1, 0)
+val obstacle = node.sense[Boolean]("obstacle")
+val channel = gradientWithObstacle(sourceNode, destinationNode, obstacle)
+channel == 0
+
+// assuming the following functions are available
+def gradientWithObstacle(source: Int, destination: Int, obstacle: Boolean): Int = {
+  // implementation not shown
+}
+
+// the above function should be replaced with actual ScaFi code
+// here's a simple implementation using ScaFi
+val gradient = G[V](node.sense[Boolean]("source"), (d: Double) => d + 1, (x: Double, y: Double) => Math.min(x, y))
+val distanceToDestination = G[V](node.sense[Boolean]("destination"), (d: Double) => d + 1, (x: Double, y: Double) => Math.min(x, y))
+val potential = gradient - distanceToDestination
+val channel = potential < 0 && !obstacle
+
+// simplified to 
+node.sense[Boolean]("source").mux(
+  branch(!obstacle){ G[V](node.sense[Boolean]("destination"), (d: Double) => d + 1, (x: Double, y: Double) => Math.min(x, y)) < 0 },
+  false
+)
+``` 
+replaced with 
+```scala
+branch(node.sense[Boolean]("source")) { 
+  val gradient = G[V](node.sense[Boolean]("destination"), (d: Double) => d + 1, (x: Double, y: Double) => Math.min(x, y)); 
+  !node.sense[Boolean]("obstacle") && gradient == 0 
+}
+```

@@ -1,0 +1,16 @@
+To calculate the minimum distance from neighbors using the `foldhoodPlus` construct, you can follow these steps:
+
+1. Use the `nbrRange` construct to get the distance to each neighbor.
+2. Use `foldhoodPlus` to aggregate these distances, excluding the current node.
+3. Find the minimum distance from the aggregated list of distances.
+
+Here is the Scala code for this computation:
+
+```scala
+foldhoodPlus(List.empty[Double])(_ ++ _)(List(nbrRange())).min
+```
+
+This code does the following:
+- `List(nbrRange())` creates a list containing the distance to each neighbor.
+- `foldhoodPlus(List.empty[Double])(_ ++ _)(List(nbrRange()))` aggregates the distances from all neighbors (excluding the current node) into a single list.
+- `.min` finds the minimum distance from the aggregated list.

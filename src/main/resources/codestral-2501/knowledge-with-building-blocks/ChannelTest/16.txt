@@ -1,0 +1,5 @@
+```scala
+val potential = G[Double](source = sense("source"), field = 0, acc = _ + nbrRange(), metric = () => if (sense("obstacle")) Double.PositiveInfinity else nbrRange())
+val pathConfirmed = C[Double, Boolean](potential, _ || _, sense("destination"), false)
+if (pathConfirmed) G[Double](source = sense("source"), field = sense("temperature"), acc = a => a, metric = () => if (sense("obstacle")) Double.PositiveInfinity else nbrRange())
+```

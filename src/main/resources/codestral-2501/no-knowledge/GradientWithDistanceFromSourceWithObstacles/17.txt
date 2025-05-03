@@ -1,0 +1,19 @@
+```scala
+val source = scafi.sensor("source")
+val obstacles = scafi.sensors("obstacle")
+
+val distance = source.aggregate {
+  val distanceToSource = source.value
+  val obstaclesAhead = obstacles.values
+
+  val adjustedDistance = if (obstaclesAhead.exists(_ == true)) {
+    0.0  // Obstacle detected, distance is zero
+  } else {
+    distanceToSource  // No obstacle, distance is as measured
+  }
+
+  adjustedDistance
+}
+
+distance
+```

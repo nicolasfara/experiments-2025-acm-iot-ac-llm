@@ -1,0 +1,7 @@
+```scala
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+val gradient = G(source, 0, _ + 1, (x, y) => if (x < y) x else y)
+val potential = rep(1000.0)((d: Double) => mux(obstacle || source) { d } { minHoodPlus(gradient + nbr(d)) })
+val distance = potential
+```

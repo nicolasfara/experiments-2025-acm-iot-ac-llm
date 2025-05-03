@@ -1,0 +1,24 @@
+To gather a list of IDs of the neighbors for each node in the network, you can use the `nbr` construct within the `foldhood` construct. Here is the Scala code to achieve this:
+
+```scala
+val neighborIds = foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```
+
+This code snippet does the following:
+- `List.empty[ID]`: Initializes an empty list to hold the neighbor IDs.
+- `_ ++ _`: Concatenates two lists.
+- `List(nbr(mid()))`: Creates a list containing the ID of the current neighbor.
+
+This will gather the IDs of all neighbors (including the node itself) and store them in a list. If you want to exclude the node itself, you can use the `foldhoodPlus` construct instead:
+
+```scala
+val neighborIds = foldhoodPlus(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```
+
+This will exclude the node itself from the list of neighbor IDs.
+
+For completeness, here is the complete `main` function that returns the list of neighbor IDs:
+
+```scala
+foldhoodPlus(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+```

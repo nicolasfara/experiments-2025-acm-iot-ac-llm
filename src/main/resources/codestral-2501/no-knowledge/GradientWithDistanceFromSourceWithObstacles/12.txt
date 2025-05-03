@@ -1,0 +1,34 @@
+```scala
+val source = AggregateSource('source)
+val distances = source.aggregate { node =>
+  val distances = AggregateVariable(0)
+  val visited = AggregateVariable(false)
+  if (node == 'source) {
+    distances.set(0)
+    visited.set(true)
+  }
+  AggregateContext { ctx =>
+    ctx.send(('node, distances.get, visited.get))
+  }
+  AggregateContext { ctx =>
+    while (!visited.get) {
+      ctx.receive { msg =>
+        val (node, dist, visited) = msg
+        if (!visited) {
+          distances.set(dist + 1)
+          visited.set(true)
+          ctx.send(('node, distances.get, visited.get))
+        }
+      }
+    }
+  }
+  distances.get
+}
+val distancesWithObstacles = distances.filter { node =>
+  val obstacle = AggregateSource('obstacle)
+  obstacle.aggregate { obs =>
+    if (obs) 0 else 1
+  }(node) == 1
+}
+distancesWithObstacles.toMap
+```

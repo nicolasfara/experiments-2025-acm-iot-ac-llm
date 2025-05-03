@@ -1,0 +1,14 @@
+```scala
+val potential = G[Int](
+  source = sense("source") == 1,
+  field = Int.MaxValue,
+  acc = _ min _,
+  metric = () => if (nbr(sense("obstacle")) == 1) Double.PositiveInfinity else nbrRange()
+)
+C[Int, Boolean](
+  potential,
+  (a, b) => a || b,
+  sense("destination") == 1,
+  false
+)
+```

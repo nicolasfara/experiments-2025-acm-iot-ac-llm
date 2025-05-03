@@ -1,0 +1,12 @@
+```scala
+def message: String = branch(sense[Boolean]("source")) {
+  val destination = foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+  if (destination.contains(sense[ID]("destination"))) {
+    "Channel created from source to destination"
+  } else {
+    "Destination not found"
+  }
+} {
+  "Not a source node"
+}
+```

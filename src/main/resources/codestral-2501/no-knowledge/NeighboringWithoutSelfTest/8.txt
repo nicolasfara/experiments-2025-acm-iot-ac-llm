@@ -1,0 +1,8 @@
+```scala
+val graph = io.Source.fromFile("graph.txt").getLines.toList
+val adjacencyList = graph.map(_.split(" ").map(_.toInt)).zipWithIndex.toMap
+val counts = adjacencyList.keys.flatMap { node =>
+  adjacencyList(node).filter(_ != node).map { neighbor => (neighbor, 1) }
+}.reduceByKey(_ + _)
+counts foreach println
+```

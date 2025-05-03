@@ -1,0 +1,5 @@
+Here is the Scala code for counting neighbors excluding the current node itself using the `foldhoodPlus` construct:
+
+```scala
+foldhoodPlus(0)(_ + _)(nbr(1))
+```

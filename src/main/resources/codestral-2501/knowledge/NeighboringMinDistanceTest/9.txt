@@ -1,0 +1,5 @@
+```scala
+rep(Int.MaxValue) {
+  minDist => foldhoodPlus(minDist)(_ min _)(nbrRange())
+}
+```

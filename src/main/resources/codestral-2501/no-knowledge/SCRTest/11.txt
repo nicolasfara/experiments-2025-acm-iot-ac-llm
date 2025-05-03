@@ -1,0 +1,12 @@
+```scala
+val areas = List("Area1", "Area2", "Area3")
+val temperatures = List(32.5, 28.0, 34.5) // Example temperatures for each area
+
+val areaWithTemperature = areas.zip(temperatures)
+val alarms = areaWithTemperature.map { case (area, temp) => (area, if (temp > 30) s"Alarm: Temperature is above 30 degrees in $area" else "") }
+
+val alarmMessages = alarms.map(_._2).filter(_.nonEmpty)
+val broadcast = alarmMessages.headOption.getOrElse("No alarms")
+
+println(broadcast)
+```

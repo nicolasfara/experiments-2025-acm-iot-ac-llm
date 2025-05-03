@@ -1,0 +1,5 @@
+```scala
+val sourceChannel = Channel("source", source)
+val destinationChannel = Channel("destination", destination)
+sourceChannel.connect(destinationChannel)
+```

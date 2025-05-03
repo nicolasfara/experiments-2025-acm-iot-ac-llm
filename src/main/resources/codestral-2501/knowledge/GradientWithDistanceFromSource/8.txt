@@ -1,0 +1,5 @@
+```scala
+rep(if (sense[Boolean]("source")) 0 else Int.MaxValue) {
+  dist => minHood(dist + 1)
+}
+```

@@ -1,0 +1,9 @@
+```scala
+rep(Double.MaxValue){ distance =>
+  mux(sense[Boolean]("source")) {
+    0.0
+  } {
+    minHoodPlus((nbr(distance) + nbrRange()).min(Double.MaxValue))
+  }
+}
+```

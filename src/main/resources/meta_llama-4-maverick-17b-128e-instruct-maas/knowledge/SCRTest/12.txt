@@ -1,0 +1,10 @@
+```scala
+rep((0.0, false)) { case (prevTemp, prevAlarm) =>
+  val isAreaLeader = mid() == minHood((nbr(sense[Double]("temperature")), mid()))._2
+  val areaTemp = foldhood(0.0)(_ + _)(mux(isAreaLeader)(nbr(sense[Double]("temperature")))(0.0))
+  val areaNodes = foldhood(0)(_ + _)(mux(isAreaLeader)(nbr(1))(0))
+  val avgTemp = if (areaNodes > 0) areaTemp / areaNodes else 0.0
+  val alarm = avgTemp > 30
+  (avgTemp, foldhood(false)(_ || _)(nbr(alarm)))
+}
+```

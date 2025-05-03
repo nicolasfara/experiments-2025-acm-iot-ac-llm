@@ -1,0 +1,7 @@
+```scala
+val g = Graph.fromCollections(vertices, edges)
+
+val counts = g.aggregateMessages[Int](triplet => Iterator((triplet.dstId, 1)))(_+_)
+
+counts.collect
+```

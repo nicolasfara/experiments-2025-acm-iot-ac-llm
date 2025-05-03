@@ -1,0 +1,25 @@
+```scala
+import org.scalafi.core.AggregateProgram
+import org.scalafi.graph.Graph
+import org.scalafi.graph.Node
+import org.scalafi.graph.Edge
+import org.scalafi.graph.GraphBuilder
+import org.scalafi.graph.Msg
+
+val graph = GraphBuilder.empty[Int, Int]()
+graph.addNode(1)
+graph.addNode(2)
+graph.addNode(3)
+graph.addEdge(1, 2, 1)
+graph.addEdge(2, 3, 1)
+graph.addEdge(3, 1, 1)
+
+val program = AggregateProgram[Graph[Int, Int], Int, Boolean](
+  (g, _) => g.mapNodes((id, _) => (id, 0)),
+  (g, _) => g.mapEdges((src, dst, _) => (src, dst, 1)),
+  (msg, state) => state + msg,
+  (g, state) => g.mapNodes((id, _) => (id, state.apply(id)))
+)
+
+program.run(graph).map((id, count) => (id, count - 1))
+```

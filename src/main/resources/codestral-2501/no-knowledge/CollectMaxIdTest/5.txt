@@ -1,0 +1,7 @@
+```scala
+ScaFi {
+  import ScaFi._
+  val maxId = id.max
+  id = maxId
+}.run
+```

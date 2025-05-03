@@ -1,0 +1,8 @@
+import org.scalafi._
+import org.scalafi.graph._
+
+val graph: Graph[Int, Int] = Graph.fromEdges(List(Edge(1, 2), Edge(1, 3), Edge(2, 3), Edge(3, 4)))
+
+val neighborIds: DistributedCollection[Int] = graph.neighbors(1).map(_.id)
+
+neighborIds.collect().foreach(println)

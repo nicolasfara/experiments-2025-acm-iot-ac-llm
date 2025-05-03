@@ -1,0 +1,3 @@
+```scala
+val neighborIds = neighbors.collect { case (id, _) => id }
+```

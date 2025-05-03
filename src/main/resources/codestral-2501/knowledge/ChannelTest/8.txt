@@ -1,0 +1,3 @@
+```scala
+channel("source", "destination")
+```

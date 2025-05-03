@@ -9,36 +9,36 @@
   {
     "testName" : "collect the max ID in the network on each node",
     "succeeded" : 5,
-    "nonCompiling" : 3,
-    "failed" : 12,
+    "nonCompiling" : 1,
+    "failed" : 14,
     "genericErrors" : 0
   },
   {
     "testName" : "calculate the gradient with distance from source",
-    "succeeded" : 2,
-    "nonCompiling" : 17,
-    "failed" : 1,
+    "succeeded" : 8,
+    "nonCompiling" : 6,
+    "failed" : 6,
     "genericErrors" : 0
   },
   {
     "testName" : "calculate the gradient (with obstacles) with distance from source",
     "succeeded" : 0,
-    "nonCompiling" : 19,
-    "failed" : 1,
+    "nonCompiling" : 9,
+    "failed" : 11,
     "genericErrors" : 0
   },
   {
     "testName" : "count neighbors excluding self",
-    "succeeded" : 19,
-    "nonCompiling" : 1,
+    "succeeded" : 20,
+    "nonCompiling" : 0,
     "failed" : 0,
     "genericErrors" : 0
   },
   {
     "testName" : "create a channel (with obstacles) from the source node to the destination node",
     "succeeded" : 0,
-    "nonCompiling" : 20,
-    "failed" : 0,
+    "nonCompiling" : 14,
+    "failed" : 6,
     "genericErrors" : 0
   },
   {
@@ -50,29 +50,29 @@
   },
   {
     "testName" : "SCR where temperature is above 30 degrees within the area",
-    "succeeded" : 0,
-    "nonCompiling" : 20,
-    "failed" : 0,
+    "succeeded" : 1,
+    "nonCompiling" : 13,
+    "failed" : 6,
     "genericErrors" : 0
   },
   {
     "testName" : "calculate the min distance from neighbors, in a grid",
-    "succeeded" : 0,
-    "nonCompiling" : 10,
-    "failed" : 10,
+    "succeeded" : 2,
+    "nonCompiling" : 0,
+    "failed" : 18,
     "genericErrors" : 0
   },
   {
     "testName" : "count neighbors",
-    "succeeded" : 5,
-    "nonCompiling" : 4,
-    "failed" : 11,
+    "succeeded" : 7,
+    "nonCompiling" : 0,
+    "failed" : 13,
     "genericErrors" : 0
   },
   {
     "testName" : "gather the IDs of their neighbors",
-    "succeeded" : 13,
-    "nonCompiling" : 7,
+    "succeeded" : 20,
+    "nonCompiling" : 0,
     "failed" : 0,
     "genericErrors" : 0
   }

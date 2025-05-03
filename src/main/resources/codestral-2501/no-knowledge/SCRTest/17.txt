@@ -1,0 +1,16 @@
+```scala
+val temperatureField = env.aggregate[Double, Option[Double]](
+  _.map(identity),
+  (a, b) => a.map(_ + b.getOrElse(0.0)).orElse(b),
+  _ / 2
+)
+
+val alarmField = temperatureField.map {
+  case Some(temp) if temp > 30 => "ALARM: Temperature above 30 degrees"
+  case _ => "Temperature within normal range"
+}
+
+val alarmBroadcast = env.broadcast(alarmField)
+
+env.run()
+```

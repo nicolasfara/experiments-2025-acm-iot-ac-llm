@@ -1,0 +1,11 @@
+```scala
+import org.scalafi.core._
+import org.scalafi.core.HDAG._
+
+val hdag = HDAG[Int]()
+
+val v = hdag.vertex(0)
+val p = v.aggregate[Int](1000)(_ - 1)
+hdag.run
+p.value
+```

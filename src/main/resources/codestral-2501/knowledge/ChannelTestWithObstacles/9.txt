@@ -1,0 +1,19 @@
+```scala
+def main(): Boolean = {
+  val pathFound = rep(false) { found =>
+    if (found) {
+      true
+    } else {
+      val obstacles = foldhood(false)(_ || _)(
+        branch(nbr(sense[Boolean]("obstacle")))(
+          true
+        )(
+          nbr(found)
+        )
+      )
+      !obstacles
+    }
+  }
+  pathFound
+}
+```

@@ -1,0 +1,12 @@
+```scala
+val tempGrid = Grid(10, 10, 0)
+val threshold = 30
+
+tempGrid.foreach { case (i, j) =>
+  val temp = Random.nextInt(40)
+  tempGrid(i, j) = temp
+  if (temp > threshold) {
+    broadcast(i, j, "ALARM: Temperature above 30 degrees")
+  }
+}
+```

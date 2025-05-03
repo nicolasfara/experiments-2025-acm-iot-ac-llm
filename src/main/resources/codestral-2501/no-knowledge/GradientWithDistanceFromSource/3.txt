@@ -1,0 +1,13 @@
+```scala
+val sensors = Seq("source", "sensor1", "sensor2")
+val distances = for {
+  sensor <- sensors
+} yield {
+  val distance = sensor match {
+    case "source" => 0.0
+    case _ => 100.0  // Assuming a fixed distance for other sensors
+  }
+  (sensor, distance)
+}
+distances
+```

@@ -1,0 +1,10 @@
+```scala
+val world = new World(10, 10);
+val neighbors = world.aggregate(
+  Msg(0),
+  (self, msg) => if(msg.sum > 0) Msg(0) else self,
+  (a, b) => Msg(a.sum + b.sum)
+);
+
+printf("%d", neighbors.sum)
+```

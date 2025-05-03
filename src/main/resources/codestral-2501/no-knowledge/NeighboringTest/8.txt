@@ -1,0 +1,10 @@
+```scala
+val neighbors = Map( (1,2), (2,3), (3,4) )
+val neighborCount = neighbors.aggregate( (0,0) )(
+  (acc, elem) => (acc._1 + 1, acc._2 + elem._1 + elem._2),
+  (acc1, acc2) => (acc1._1 + acc2._1, acc1._2 + acc2._2)
+)
+val totalNeighbors = neighborCount._1
+val sumOfNeighbors = neighborCount._2
+totalNeighbors
+```

@@ -1,0 +1,9 @@
+```Scala
+val sourceNode = Aggregate[Boolean]("source")
+val destinationNode = Aggregate[Boolean]("destination")
+val obstacleNodes = Aggregate[Boolean]("obstacle")
+
+val pathExists = sourceNode.join(destinationNode, !obstacleNodes.exists)
+
+pathExists.get
+```

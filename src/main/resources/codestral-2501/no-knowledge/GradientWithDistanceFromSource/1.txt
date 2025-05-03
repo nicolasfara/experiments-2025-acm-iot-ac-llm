@@ -1,0 +1,12 @@
+```scala
+val sensorData = ScaFi.collectData("sensor")
+val sourceData = sensorData.filter(_.name == "source")
+val distances = sensorData
+  .filter(_.name != "source")
+  .map { sensor =>
+    val xDiff = sensor.x - sourceData.head.x
+    val yDiff = sensor.y - sourceData.head.y
+    Math.sqrt(xDiff * xDiff + yDiff * yDiff)
+  }
+ScaFi.emit(distances)
+```

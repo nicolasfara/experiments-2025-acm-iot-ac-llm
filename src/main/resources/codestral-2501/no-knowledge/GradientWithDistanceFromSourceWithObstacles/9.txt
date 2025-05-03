@@ -1,0 +1,8 @@
+```scala
+val euclideanDistance = if (sensors.source.distance > 0) {
+  sensors.obstacle.map(o => if (o.value) 0 else 1).sum match {
+    case 0 => 0
+    case _ => sensors.source.distance
+  }
+} else 0
+```

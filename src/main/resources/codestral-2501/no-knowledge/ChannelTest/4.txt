@@ -1,0 +1,5 @@
+```scala
+val source = Source("source")
+val destination = Destination("destination")
+source.to(destination)
+```

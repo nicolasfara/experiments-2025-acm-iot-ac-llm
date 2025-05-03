@@ -1,0 +1,8 @@
+```val result = G.runAggregate(
+    AggregateMessages(
+      (ctx, msg) => msg + ctx.inNeighbors.size,
+      _ + _,
+      1
+    )
+  )
+```

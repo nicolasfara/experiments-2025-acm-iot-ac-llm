@@ -1,0 +1,23 @@
+```scala
+val graph = sc.graphFromEdges(Seq(
+  Edge(1, 2, 1.0),
+  Edge(2, 3, 3.0),
+  Edge(3, 4, 2.0),
+  Edge(4, 5, 1.0),
+  Edge(5, 6, 4.0)
+))
+
+val minDistances = graph.aggregateMessages[Double, Double](
+  triplet => {
+    val src = triplet.srcAttr
+    val dst = triplet.dstAttr
+    val weight = triplet.attr
+    triplet.sendToDst(weight)
+  },
+  (a, b) => Math.min(a, b),
+  TripletFields.Src | TripletFields.Dst
+)
+
+val result = minDistances.collect
+result.foreach { case Vertex(id, value) => println(s"Vertex $id: $value") }
+```

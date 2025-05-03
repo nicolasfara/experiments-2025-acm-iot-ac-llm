@@ -1,0 +1,3 @@
+```scala
+foldhood(List.empty[(Double, ID)])(_ ++ _)(List(nbrRange() -> nbr(mid()))).minBy(_._1)._1
+```

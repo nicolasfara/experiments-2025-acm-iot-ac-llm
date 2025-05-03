@@ -1,0 +1,11 @@
+To gather a list of neighbors' IDs using the DSL constructs provided, you can use the following Scala code:
+
+```scala
+foldhood(List[ID]())(_ ++ _)(List(nbr(mid())))
+```
+
+This snippet uses the `foldhood` construct to aggregate a list of neighbor IDs. Here's a breakdown of the components:
+- `foldhood(List[ID]())(_ ++ _)(List(nbr(mid())))`: This expression combines the IDs of neighbors into a single list.
+  - `List[ID]()`: Initial empty list of IDs.
+  - `_ ++ _`: Combining function that concatenates two lists.
+  - `List(nbr(mid()))`: Expression that gets the ID of a neighbor and wraps it in a list.

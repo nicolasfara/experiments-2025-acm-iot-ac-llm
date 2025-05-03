@@ -1,0 +1,5 @@
+To gather a list of IDs of their neighbors in this DSL, you can use the `foldhoodPlus` construct to aggregate the IDs of all neighbors (excluding the node itself). Here is the Scala code to achieve this:
+
+```scala
+foldhoodPlus(List.empty[ID])(_ ++ _)(nbr(mid()))
+```

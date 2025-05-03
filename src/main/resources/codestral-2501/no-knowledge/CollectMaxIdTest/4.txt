@@ -1,0 +1,21 @@
+```scala
+import org.scalafi.Field
+import org.scalafi.FieldElement
+import org.scalafi.circuit.Context
+import org.scalafi.circuit.OpCode
+import org.scalafi.circuit.Verifier
+
+val maxId = FieldElement.max(
+  FieldElement(
+    Context(OpCode.Input(0)), // Assuming the first input is the first ID
+    Context(OpCode.Input(1)), // Assuming the second input is the second ID
+    ...
+    Context(OpCode.Input(n-1)) // Assuming the n-th input is the n-th ID
+  )
+)
+
+Verifier.verify(
+  maxId,
+  FieldElement.maxContext(OpCode.Input(0), OpCode.Input(1), ..., OpCode.Input(n-1))
+)
+```

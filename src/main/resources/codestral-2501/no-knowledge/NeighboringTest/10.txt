@@ -1,0 +1,12 @@
+```scala
+val graph = Graph.fromFile("graph.txt")
+val neighbors = graph.mapVertices[Int]((id, attr) => 0)
+val neighborsCount = neighbors.aggregateMessages[(Int, Int)](
+  triplet => {
+    triplet.sendToDst(1)
+    triplet.sendToSrc(1)
+  },
+  (a, b) => (a._1 + b._1, a._2 + b._2)
+).mapValues(v => v._1 + v._2)
+neighborsCount.collect().foreach(println)
+```

@@ -1,0 +1,14 @@
+```scala
+val temperatureField = Aggregate[Double]
+val areaAlarmField = Aggregate[Boolean]
+
+val temperature = temperatureField.aggregate((x, y) => (x + y) / 2)
+val alarm = areaAlarmField.aggregate((x, y) => x || y)
+
+val areaTemperature = temperature.map(_ > 30)
+
+val alarmSignal = areaAlarmField.map(t => if (t) "ALARM" else "NORMAL")
+
+val result = alarmSignal.broadcast
+result
+```

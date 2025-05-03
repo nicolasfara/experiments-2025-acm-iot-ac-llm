@@ -1,0 +1,5 @@
+```scala
+rep(Double.PositiveInfinity) {
+  dist => minHood(nbr(dist) + sense[Double]("source"))
+}
+```

@@ -1,0 +1,25 @@
+```scala
+val distances = ScaFi.aggregate {
+  // Initialize the distance from the source sensor
+  var dist = if (sensor.name == "source") 0.0 else Double.PositiveInfinity
+
+  // Propagate the distance information across the network
+  foreachNeighbor(sensors => {
+    for (neighbor <- sensors) {
+      if (neighbor.sensorType == "obstacle") {
+        // If there's an obstacle, set the distance to infinity
+        dist = Double.PositiveInfinity
+      } else {
+        // Update the distance if a shorter path is found
+        dist = math.min(dist, neighbor.dist + 1.0)
+      }
+    }
+  })
+
+  // Output the final distance
+  dist
+}
+
+// Collect the results
+val results = distances.collect()
+```

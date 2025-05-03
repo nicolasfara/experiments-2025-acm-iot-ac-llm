@@ -1,0 +1,11 @@
+```scala
+val areas = (0 until 100).map { i =>
+  val temperature = scala.util.Random.nextInt(40)
+  (i, temperature)
+}
+
+ScalaFi.on(areas) { a =>
+  val (id, temp) = a
+  if (temp > 30) s"Alarm: Area $id has temperature $temp" else s"No alarm: Area $id has temperature $temp"
+}
+```

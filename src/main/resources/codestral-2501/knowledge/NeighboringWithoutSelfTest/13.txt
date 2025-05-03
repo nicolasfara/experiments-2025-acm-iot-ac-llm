@@ -1,0 +1,7 @@
+Given the requirement to count neighbors excluding the current node, we can use the `foldhoodPlus` construct. Here is the resulting Scala code for counting neighbors excluding the current node:
+
+```scala
+foldhoodPlus(0)(_ + _)(nbr(1))
+```
+
+This code will ensure that each node counts its neighbors (excluding itself) and outputs the total count.

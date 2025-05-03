@@ -1,0 +1,5 @@
+```scala
+G[Double](sense("source"), field = 0, acc = x => x + 1, metric = () => {
+  if (sense("obstacle")) Double.PositiveInfinity else nbrRange()
+})
+```

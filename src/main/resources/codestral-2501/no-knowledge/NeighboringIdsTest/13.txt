@@ -1,0 +1,5 @@
+```scala
+val graph = Graph[Int, Int]()
+
+graph.getNeighbors(v => v.neighbors.map(n => n.id).sum).value
+```

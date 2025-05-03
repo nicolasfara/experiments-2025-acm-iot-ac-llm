@@ -1,0 +1,16 @@
+```scala
+import org.scalafi.core._
+
+val graph = Graph[Int, Int]()
+
+val count = graph.mapReduce(
+  (ctx, _) => {
+    val neighbors = ctx.getNeighbours
+    neighbors.foreach(neighbor => ctx.emitValue(neighbor, 1))
+  },
+  (ctx, values) => {
+    val count = values.sum
+    ctx.emitValue(count)
+  }
+)
+```

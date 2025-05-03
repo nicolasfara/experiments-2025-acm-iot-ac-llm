@@ -1,0 +1,5 @@
+```scala
+rep(Double.PositiveInfinity) { dist =>
+  if (sense[Boolean]("obstacle")) dist else minHood(nbr(dist) + 1.0)
+}
+```

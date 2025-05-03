@@ -1,0 +1,7 @@
+```source((true, true))
+
+     |>
+     [(x, y) => !x || !y]
+     |>
+     destination((true, true))
+```

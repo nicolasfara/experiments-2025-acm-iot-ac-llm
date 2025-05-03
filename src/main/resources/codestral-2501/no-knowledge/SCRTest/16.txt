@@ -1,0 +1,9 @@
+```scala
+val areaTempThreshold = 30
+val areaTemps = area.mapNodes(area => area.neighbors.map(n => (n, n.temperature)).toMap)
+val areaTempsAboveThreshold = areaTemps.mapValues(_.filter(_._2 > areaTempThreshold))
+val areasWithAlarm = areaTempsAboveThreshold.mapValues(_.nonEmpty)
+val alarmBroadcast = areasWithAlarm.mapValues(hasAlarm => if (hasAlarm) "ALARM" else "OK")
+val result = alarmBroadcast.aggregate((_, _)).mapValues(_.head)
+result.broadcast
+```

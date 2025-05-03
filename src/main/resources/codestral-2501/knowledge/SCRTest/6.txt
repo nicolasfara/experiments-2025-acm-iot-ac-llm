@@ -1,0 +1,11 @@
+```scala
+branch(sense[Double]("area") > 0) {
+  val nodesInArea = foldhood(0)(_ + _)(nbr(1))
+  val totalTemperatureInArea = foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature")))
+  val avgTemperatureInArea = totalTemperatureInArea / nodesInArea
+  val isAlarm = avgTemperatureInArea > 30
+  branch(isAlarm)(true)(false)
+} {
+  false
+}
+```

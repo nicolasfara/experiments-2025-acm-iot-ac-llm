@@ -1,0 +1,6 @@
+```scala
+val tempSensor = sensor[Double]("temperature")
+val isHot = tempSensor > 30
+val areas = G[V, Boolean](nbr(isHot), isHot, (v1, v2) => v1 || v2)
+broadcast(areas, isHot)
+```

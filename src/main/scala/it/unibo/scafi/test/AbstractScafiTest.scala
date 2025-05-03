@@ -32,10 +32,12 @@ abstract class AbstractScafiProgramTest(
       OpenRouterService(Model.MISTRAL_SMALL_3_1_24B),
       OpenRouterService(Model.MISTRAL_8B),
       OpenRouterService(Model.QWEN_2_5_CODER_32B),
-      //      OpenRouterService(Model.DEEPSEEK_R1), // NOT WORKING !
+//      //      OpenRouterService(Model.DEEPSEEK_R1), // NOT WORKING !
       OpenRouterService(Model.GPT_4_1_MINI),
       FileBasedReplayer("claude-3-7-sonnet"),
       FileBasedReplayer("meta_llama-3.1-405b-instruct-maas"),
+      FileBasedReplayer("meta_llama-4-maverick-17b-128e-instruct-maas"),
+      FileBasedReplayer("codestral-2501"),
     ),
     private val runs: Int = 20,
 ):

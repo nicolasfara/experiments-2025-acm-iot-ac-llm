@@ -1,0 +1,7 @@
+```scala
+val isLeader = S(2, nbrRange)
+val potential = G[Double](isLeader, 0, _ + nbrRange(), nbrRange)
+val areaTemperature = C[Double, Double](potential, _ + _, sense[Double]("temperature"), 0)
+val averageTemperature = areaTemperature / C[Double, Double](potential, _ + _, 1, 0)
+mux(isLeader)(averageTemperature > 30)(false)
+```

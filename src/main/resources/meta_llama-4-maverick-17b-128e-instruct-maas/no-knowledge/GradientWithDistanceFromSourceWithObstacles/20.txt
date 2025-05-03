@@ -1,0 +1,14 @@
+```scala
+val source = sense[Boolean]("source")
+val obstacle = sense[Boolean]("obstacle")
+val gradient = G(source, 0, (x: Double) => x + 1)
+val distanceToSource = gradient
+val avoidingObstacles = CBR(obstacle){ 
+  rep(Double.PositiveInfinity){ case d => 
+    mux(obstacle){ d } { 
+      minHoodPlus { nbr{d} + 1 } 
+    } 
+  }
+}
+distanceToSource + avoidingObstacles
+```

@@ -1,0 +1,14 @@
+```scala
+val source = mid()
+val destination = nbr(mid())
+
+def pathExists(current: ID, target: ID, visited: Set[ID]): Boolean = {
+  if (current == target) true
+  else {
+    val neighbors = foldhoodPlus(Set.empty[ID])(_ ++ _)(nbr(mid())) -- visited
+    neighbors.exists(n => !sense[Boolean]("obstacle") && pathExists(n, target, visited + current))
+  }
+}
+
+pathExists(source, destination, Set.empty)
+```

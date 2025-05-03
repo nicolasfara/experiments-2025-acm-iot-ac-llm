@@ -1,0 +1,4 @@
+```scala
+val potential = G[Double](sense[Boolean]("source"), 0, _ + nbrRange(), nbrRange)
+C[Double, Boolean](potential, _ || _, sense[Boolean]("destination"), false)
+```

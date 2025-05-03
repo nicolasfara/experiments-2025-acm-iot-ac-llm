@@ -1,0 +1,10 @@
+```scala
+val sourceLocation = ScaFi.source("source").get
+val distances = ScaFi.sensorSources.map { s =>
+  val sLocation = s.get
+  val dx = sourceLocation._1 - sLocation._1
+  val dy = sourceLocation._2 - sLocation._2
+  (s._1, math.sqrt(dx * dx + dy * dy))
+}
+ScaFi.collect(distances)
+```

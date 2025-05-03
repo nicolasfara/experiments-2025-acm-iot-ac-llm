@@ -1,0 +1,5 @@
+```scala
+val potential = G[Double](source = sense("source"), field = 0, acc = _ + mux(sense("obstacle"))(Double.PositiveInfinity)(nbrRange()), metric = mux(sense("obstacle"))(Double.PositiveInfinity)(nbrRange()))
+val distance = C[Double, Double](potential, (a, b) => Math.sqrt(a * a + b * b), sense("euclidean_distance"), 0.0)
+distance
+```

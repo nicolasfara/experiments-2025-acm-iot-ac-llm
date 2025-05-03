@@ -1,0 +1,14 @@
+```scala
+import org.scalafi.core._
+import org.scalafi.core.crypto._
+import org.scalafi.core.types._
+import org.scalafi.core.types.aggregate._
+
+val nodes = Seq((0, Seq(1, 2)), (1, Seq(0, 3)), (2, Seq(0, 3)), (3, Seq(1, 2))) // Example graph
+
+val result = nodes.map { case (node, neighbors) =>
+  node -> Aggregate.compute(neighbors.length)
+}
+
+result
+```

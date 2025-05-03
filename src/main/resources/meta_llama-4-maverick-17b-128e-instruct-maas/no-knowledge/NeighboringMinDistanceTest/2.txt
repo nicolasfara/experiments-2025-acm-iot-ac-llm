@@ -1,0 +1,6 @@
+```scala
+val neighborsDist = rep(Double.PositiveInfinity){ case d => 
+  mux(isSource) 0.0 
+  minHoodPlus { nbr { d } + nbrRange() }
+}
+```

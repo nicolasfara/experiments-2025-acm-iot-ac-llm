@@ -1,0 +1,11 @@
+```scala
+val sensorValues = getSensorValues()
+val source = sensorValues("source")
+val obstacle = sensorValues("obstacle")
+
+val euclideanDistance = if (obstacle) {
+  0.0
+} else {
+  math.sqrt(math.pow(source.diffX, 2) + math.pow(source.diffY, 2))
+}
+```

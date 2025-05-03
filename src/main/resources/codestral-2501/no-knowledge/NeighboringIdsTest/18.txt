@@ -1,0 +1,5 @@
+```gatherNeighbors(ids: Set[VertexId]): Set[VertexId] = {
+  val neighbors = ScaFi.collectNeighbors(ids)
+  ids ++ neighbors
+}
+```

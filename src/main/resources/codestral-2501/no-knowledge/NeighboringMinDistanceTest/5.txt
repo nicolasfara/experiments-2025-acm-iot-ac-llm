@@ -1,0 +1,8 @@
+```val nodes = graph.nodes
+val distances = Map(nodes.map(node => (node, Double.MaxValue)).toSeq: _*)
+val source = graph.getNode("sourceNode") // Replace with actual source node
+val initialDistance = Map(source -> 0.0)
+val newDistances = distances ++ initialDistance
+
+val minDistance = newDistances.mapValues(distance => distance.min)
+```

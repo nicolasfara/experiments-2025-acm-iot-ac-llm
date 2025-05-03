@@ -1,0 +1,7 @@
+```scala
+val sensors = Seq(('source', 0.0), ('obstacle' -> 0.0), ('obstacle' -> 1.0))
+val source = sensors.find(sensor => sensor._1 == 'source').get
+val obstacles = sensors.filter(sensor => sensor._1 == 'obstacle')
+val validPath = obstacles.forall(obstacle => obstacle._2 != source._2)
+val euclideanDistance = if (validPath) Math.sqrt(source._2 * source._2 + source._2 * source._2) else 0
+```

@@ -1,0 +1,15 @@
+```scala
+import org.scalafi.Edge
+import org.scalafi.Vertex
+import org.scalafi._
+import org.scalafi.core._
+
+val g = new Graph[Int, Int]()
+val neighbors = g.aggregateVertices[List[Int]](
+  v => List(v.id),
+  (a, b) => a ++ b,
+  (a, b) => a ++ b,
+  v => v.neighborIds.toList
+)
+println(neighbors)
+```

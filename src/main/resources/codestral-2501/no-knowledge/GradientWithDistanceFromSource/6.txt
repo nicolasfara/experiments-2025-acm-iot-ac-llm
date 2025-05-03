@@ -1,0 +1,17 @@
+```scala
+import it.unibo.alchemist.model.implementations.positions.LatLongPosition
+import it.unibo.alchemist.model.maths.{EuclideanDistance, LatLongDistance}
+import it.unibo.alchemist.model.{Agent, Environment, Position}
+import it.unibo.scafi.core._
+
+val environment: Environment = Environment.getInstance()
+
+val sourcePosition: Position = environment.getPosition(environment.getAgent("source"))
+
+val distances = environment.getAgents.map { agent =>
+  val agentPosition = environment.getPosition(agent)
+  EuclideanDistance.compute(sourcePosition, agentPosition)
+}
+
+distances
+```

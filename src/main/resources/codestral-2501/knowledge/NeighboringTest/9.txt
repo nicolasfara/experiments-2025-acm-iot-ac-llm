@@ -1,0 +1,9 @@
+Given the provided DSL for aggregate computing, we need to count the number of neighbors (including the node itself) using the `foldhood` construct.
+
+Here is the Scala code for counting neighbors (including the node itself):
+
+```scala
+foldhood(0)(_ + _)(nbr(1))
+```
+
+This code uses the `foldhood` construct to accumulate the values from all neighbors (including the node itself) by adding 1 for each neighbor. The `nbr(1)` expression provides the value 1 for each neighbor, and the `foldhood` construct sums these values.

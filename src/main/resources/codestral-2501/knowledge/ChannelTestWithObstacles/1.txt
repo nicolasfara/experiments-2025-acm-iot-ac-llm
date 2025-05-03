@@ -1,0 +1,13 @@
+```scala
+rep(None: Option[ID]) { sourceId =>
+  if (sourceId.isEmpty && sense[Boolean]("obstacle")) {
+    None
+  } else if (sourceId.isEmpty && mid() == source) {
+    Some(mid())
+  } else if (sourceId.isDefined && mid() == destination) {
+    Some(mid())
+  } else {
+    foldhoodPlus(None: Option[ID])((a, b) => if (a.isDefined) a else b)(nbr(sourceId))
+  }
+}.isDefined
+```

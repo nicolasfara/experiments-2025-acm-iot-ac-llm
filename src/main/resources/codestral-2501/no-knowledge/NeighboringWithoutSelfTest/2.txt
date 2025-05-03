@@ -1,0 +1,7 @@
+```scala
+val neighbors = sfc.graph.neighbors(myVertex)
+val neighborCount = neighbors.foldLeft(0) { (count, neighbor) =>
+  if (neighbor != myVertex) count + 1 else count
+}
+println(neighborCount)
+```

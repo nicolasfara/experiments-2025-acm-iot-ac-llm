@@ -1,0 +1,17 @@
+```scala
+def main(): Unit = {
+  val averageTemperature = foldhood(0.0)(_ + _)(nbr(sense[Double]("temperature"))) / foldhood(0)(_ + _)(nbr(1))
+  val areaId = foldhood(mid())(_ min _)(nbr(mid())) // Find the smallest ID in the area (assuming IDs are unique)
+  val isCriticalTemp = averageTemperature > 30.0
+  val alarmMessage = if (isCriticalTemp) "TEMPERATURE ALARM" else ""
+  // Broadcast the alarm message within the area
+  def broadcastAlarm(): Unit = {
+    val areaNodes = foldhood(0)(_ + _)(nbr(1))
+    val areaNodeIds = foldhood(List.empty[ID])(_ ++ _)(List(nbr(mid())))
+    areaNodeIds.foreach(nodeId => nbr(nodeId -> alarmMessage))
+  }
+  broadcastAlarm()
+}
+```
+
+This Scala code computes the area-wise average temperature and sends back an alarm message within the area when the temperature exceeds 30 degrees. The `broadcastAlarm` function ensures that the alarm message is communicated to all nodes in the area.
