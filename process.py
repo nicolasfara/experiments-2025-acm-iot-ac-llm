@@ -288,13 +288,24 @@ def create_latex_table(pass_at_k_table):
 
 def create_knowledge_heatmaps_row():
     """
-    Creates a row of three heatmaps showing pass@10 values for different models and test names
-    across all knowledge levels, with a single color legend and consistent heatmap sizes.
-    Model names are shown only on the leftmost heatmap.
+    Creates a column of three heatmaps (3 rows x 1 column) showing pass@10 values
+    for different models and test names across three knowledge levels.
+    Uses a shared colorbar and consistent formatting.
     """
+    # Plot setup
     k = 10
-    # Create a mapping for shorter test names
-    test_name_mapping = {
+    sns.set(style="whitegrid", context="paper", font="serif", font_scale=1.4)
+    fig, axes = plt.subplots(3, 1, figsize=(14, 18))
+
+    # Knowledge levels
+    knowledge_levels = [
+        "No Knowledge",
+        "Basic Knowledge",
+        "Knowledge with Building Blocks"
+    ]
+
+    # Short test labels for cleaner axis
+    short_labels = {
         "Count Down": "Count Down",
         "Neighbors Count": "Neighbors",
         "Neighbors Count Excluding Self": "Neighbors Ex-Self",
@@ -308,77 +319,56 @@ def create_knowledge_heatmaps_row():
         "SCR Temperature Above 30": "SCR Temp"
     }
 
-    # Create figure with subplots in one row and space for colorbar
-    fig, axes = plt.subplots(1, 3, figsize=(30, 7))
-
-    # Get global model ranking to keep consistent order across heatmaps
+    # Consistent model ordering
     all_data = pass_at_k_table.copy()
     all_data[f"pass@{k}"] = all_data[f"pass@{k}"].astype(float)
-    model_avg = all_data.groupby("model")[f"pass@{k}"].mean().sort_values(ascending=False)
-    sorted_models = model_avg.index.tolist()
+    sorted_models = all_data.groupby("model")[f"pass@{k}"].mean().sort_values(ascending=False).index.tolist()
 
-    knowledge_order = [
-        "No Knowledge", 
-        "Basic Knowledge", 
-        "Knowledge with Building Blocks"
-    ]
-    # Create heatmaps without colorbars first
-    for i, knowledge in enumerate(knowledge_order):
-        # Filter data for the specific knowledge level
-        filtered_data = pass_at_k_table[pass_at_k_table["knowledge"] == knowledge].copy()
-        filtered_data[f"pass@{k}"] = filtered_data[f"pass@{k}"].astype(float)
-        
-        # Create a pivot table with models as rows and testNames as columns
-        pivot_data = filtered_data.pivot_table(
-            index="model", 
-            columns="testName", 
+    # Create each heatmap
+    for i, level in enumerate(knowledge_levels):
+        ax = axes[i]
+
+        level_data = pass_at_k_table[pass_at_k_table["knowledge"] == level].copy()
+        level_data[f"pass@{k}"] = level_data[f"pass@{k}"].astype(float)
+
+        pivot = level_data.pivot_table(
+            index="model",
+            columns="testName",
             values=f"pass@{k}",
             aggfunc="mean"
-        )
-        
-        # Reorder models by global performance
-        pivot_data = pivot_data.reindex(sorted_models)
-        
-        # Rename columns with shorter test names
-        pivot_data.columns = [test_name_mapping[col] for col in pivot_data.columns]
-        
-        # Create the heatmap without colorbar for consistent sizing
+        ).reindex(index=sorted_models)
+
+        pivot.columns = [short_labels.get(col, col) for col in pivot.columns]
+
         sns.heatmap(
-            pivot_data, 
-            annot=True, 
-            fmt=".2f", 
-            cmap="YlGnBu", 
-            vmin=0, 
+            pivot,
+            ax=ax,
+            cmap="viridis",
+            annot=True,
+            fmt=".2f",
+            vmin=0,
             vmax=1,
-            linewidths=0.5, 
-            cbar=False,  # No colorbar yet
-            ax=axes[i]
+            linewidths=0.5,
+            cbar=False,
+            annot_kws={"fontsize": 11}
         )
-        
-        axes[i].set_title(knowledge)
-        axes[i].set_xlabel("Test")
-        
-        # Only show y-axis labels (model names) on the first heatmap
-        if i == 0:
-            axes[i].set_ylabel("Model")
-        else:
-            axes[i].set_ylabel("")
-            axes[i].set_yticks([])  # Remove y-ticks for non-first heatmaps
-            axes[i].set_yticklabels([])  # Remove y-tick labels for non-first heatmaps
-        
-        axes[i].set_xticklabels(axes[i].get_xticklabels(), rotation=45, ha="right")
 
-    # Adjust layout to make space for colorbar while keeping heatmaps the same size
-    plt.tight_layout(rect=[0, 0, 0.9, 1])  # Leave space on right for colorbar
-    
-    # Add a single colorbar to the right of all subplots
-    cbar_ax = fig.add_axes([0.92, 0.20, 0.02, 0.75])  # [left, bottom, width, height]
+        ax.set_title(level, fontsize=14, weight="bold")
+        ax.set_xlabel("Test", fontsize=13)
+        ax.set_ylabel("Model", fontsize=13)
+        ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right", fontsize=11)
+        ax.tick_params(axis='y', labelsize=11)
+
+    # Add shared colorbar
+    plt.tight_layout(rect=[0, 0, 0.92, 1])
+    cbar_ax = fig.add_axes([0.93, 0.1, 0.015, 0.8])
     norm = plt.Normalize(0, 1)
-    sm = plt.cm.ScalarMappable(cmap="YlGnBu", norm=norm)
+    sm = plt.cm.ScalarMappable(cmap="viridis", norm=norm)
     sm.set_array([])
-    fig.colorbar(sm, cax=cbar_ax, label=f"pass@{k}")
+    fig.colorbar(sm, cax=cbar_ax, label=f"pass@{k}", format="%.1f")
 
-    plt.savefig(Path(statistics_path) / f"knowledge_comparison_heatmaps_pass@{k}.png", 
+    # Save
+    plt.savefig(Path(statistics_path) / f"knowledge_comparison_heatmaps_pass@{k}.png",
                 dpi=300, bbox_inches="tight")
     plt.close()
 
@@ -478,170 +468,163 @@ def create_test_group_barplots_row():
     plt.savefig(Path(statistics_path) / f"test_group_comparison_barplots_pass@{k}.png", 
                 dpi=300, bbox_inches="tight")
     plt.close()
-    
+
 
 def plot_knowledge_improvement():
     """
-    Creates a line chart showing how each model's performance improves across knowledge levels.
-    This helps visualize which models benefit most from additional knowledge.
+    Creates a publication-quality Seaborn line chart showing model performance improvement
+    across knowledge levels (pass@10). Left margin reduced for better layout.
     """
-    k = 10  # Focus on pass@10 as the primary metric
-    
-    # Get unique models and ensure they're sorted by overall performance
+    k = 10
+
+    # Prepare data
     all_data = pass_at_k_table.copy()
     all_data[f"pass@{k}"] = all_data[f"pass@{k}"].astype(float)
     model_avg = all_data.groupby("model")[f"pass@{k}"].mean().sort_values(ascending=False)
-    top_models = model_avg.index[:10].tolist()  # Focus on top 10 models for clarity
-    
-    # Knowledge levels in the correct order
-    knowledge_order = ["No Knowledge", "Basic Knowledge", "Knowledge with Building Blocks"]
-    
-    # Create a pivot table with models as rows and knowledge levels as columns
-    pivot_data = all_data.pivot_table(
-        index="model", 
-        columns="knowledge", 
-        values=f"pass@{k}",
-        aggfunc="mean"
-    ).reindex(columns=knowledge_order)
-    
-    # Filter for top models and sort
-    pivot_data = pivot_data.loc[top_models]
-    
-    # Create the line plot with more horizontal space
-    plt.figure(figsize=(14, 9))
-    
-    # Define distinct markers and line styles
-    markers = ['o', 's', 'D', '^', 'v', '<', '>', 'p', '*', 'h']
-    line_styles = ['-', '--', '-.', ':']
-    
-    # Use a color palette with high contrast
-    colors = sns.color_palette("bright", len(top_models))
-    
-    # Plot each model as a line with unique styling
-    for i, model in enumerate(pivot_data.index):
-        # Calculate small x-offset for each model to avoid overlap at exact points
-        x_positions = [j + (i - len(top_models)/2) * 0.03 for j in range(len(knowledge_order))]
-        
-        plt.plot(
-            x_positions, 
-            pivot_data.loc[model], 
-            marker=markers[i % len(markers)],
-            linestyle=line_styles[i % len(line_styles)],
-            linewidth=2.5, 
-            markersize=9,
-            label=model,
-            color=colors[i],
-            alpha=0.9
-        )
-    
-    # Add reference line for average improvement
-    avg_values = pivot_data.mean()
-    plt.plot(
-        range(len(knowledge_order)), 
-        avg_values, 
-        'k--', 
-        linewidth=3,
-        marker='X',
-        markersize=10,
-        label='Average'
+    top_models = model_avg.index[:10].tolist()
+
+    # Rename knowledge levels for better layout
+    knowledge_map = {
+        "No Knowledge": "No Knowledge",
+        "Basic Knowledge": "Basic Knowledge",
+        "Knowledge with Building Blocks": "Knowledge with BB"
+    }
+    all_data["knowledge"] = all_data["knowledge"].map(knowledge_map)
+    knowledge_order = ["No Knowledge", "Basic Knowledge", "Knowledge with BB"]
+
+    # Filter top models and apply ordering
+    plot_data = all_data[all_data["model"].isin(top_models)].copy()
+    plot_data["knowledge"] = pd.Categorical(plot_data["knowledge"], categories=knowledge_order, ordered=True)
+
+    # Aesthetic settings
+    sns.set(style="whitegrid", context="paper", font="serif", font_scale=1.4)
+
+    # Wider and shorter figure to reduce margin
+    plt.figure(figsize=(8.5, 5.8))  # Wider to occupy left space
+    ax = sns.lineplot(
+        data=plot_data,
+        x="knowledge",
+        y=f"pass@{k}",
+        hue="model",
+        marker="o",
+        palette="colorblind",
+        linewidth=2,
+        markersize=6,
+        errorbar=None
     )
-    
-    # Set chart properties
-    plt.xticks(range(len(knowledge_order)), knowledge_order, rotation=45)
-    plt.ylabel(f'Average pass@{k}', fontsize=12)
-    plt.xlabel('Knowledge Level', fontsize=12)
-    plt.title(f'Model Performance Improvement Across Knowledge Levels (pass@{k})', fontsize=14)
-    plt.grid(True, linestyle='--', alpha=0.7)
-    plt.ylim(0, 1.0)
-    
-    # Add legend with smaller font and outside the plot area
-    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize='medium', 
-                frameon=True, framealpha=0.9, edgecolor='gray')
-    
-    # Add subtle vertical lines at each knowledge level
-    for i in range(len(knowledge_order)):
-        plt.axvline(x=i, color='gray', alpha=0.15)
-    
-    plt.tight_layout()
-    plt.savefig(Path(statistics_path) / f"knowledge_improvement_pass@{k}.png", 
-                dpi=300, bbox_inches="tight")
+
+    # Average line
+    avg_data = plot_data.groupby("knowledge")[f"pass@{k}"].mean().reset_index()
+    sns.lineplot(
+        data=avg_data,
+        x="knowledge",
+        y=f"pass@{k}",
+        label="Average",
+        color="black",
+        linestyle="--",
+        marker="X",
+        linewidth=2.5,
+        markersize=8
+    )
+
+    # Axis and layout
+    ax.set_title(f"Model Performance vs. Knowledge Level (pass@{k})", fontsize=14, weight='bold')
+    ax.set_xlabel("Knowledge Level", fontsize=13)
+    ax.set_ylabel(f"pass@{k}", fontsize=13)
+    ax.set_ylim(0, 1.0)
+    ax.tick_params(axis='both', which='major', labelsize=11)
+    ax.legend(loc='lower right', fontsize=10, frameon=False, ncol=2)  # Move legend inside plot
+    plt.xticks(rotation=0)
+
+    # Reduce left margin
+    plt.subplots_adjust(left=0.12, right=0.98, top=0.88, bottom=0.18)
+
+    # Save
+    plt.savefig(Path(statistics_path) / f"knowledge_improvement_pass@{k}.pdf", dpi=300, bbox_inches="tight")
     plt.close()
 
 def plot_error_distribution():
     """
-    Creates a stacked bar chart showing the distribution of error types for each model.
-    This visualizes whether models tend to have compilation errors or runtime errors.
+    Creates a publication-quality stacked horizontal bar chart showing the distribution
+    of error types (compilation, runtime, etc.) for each model. Optimized for scientific layout.
     """
-    # Prepare data: need to unstack the multi-index to get the error counts
+    # Prepare data
     error_data = dataset.reset_index()
-    
-    # Get model ordering based on success rate
     model_success = error_data.groupby("model")["succeeded"].sum() / error_data.groupby("model").size()
     sorted_models = model_success.sort_values().index.tolist()
-    
-    # Calculate proportions for each error type
+
     model_stats = error_data.groupby("model").agg({
         "succeeded": "sum",
-        "nonCompiling": "sum", 
+        "nonCompiling": "sum",
         "failed": "sum",
         "genericErrors": "sum"
     })
-    
-    # Calculate total attempts per model
     model_stats["total"] = model_stats.sum(axis=1)
-    
-    # Convert to proportions
+
     for col in ["succeeded", "nonCompiling", "failed", "genericErrors"]:
         model_stats[f"{col}_prop"] = model_stats[col] / model_stats["total"]
-    
-    # Reorder based on success rate
+
     model_stats = model_stats.reindex(sorted_models)
-    
-    # Create stacked bar chart
-    fig, ax = plt.subplots(figsize=(12, 10))
-    
-    # Plot stacked bars
+
+    # Plot setup
+    sns.set(style="whitegrid", context="paper", font="serif", font_scale=1.4)
+    fig, ax = plt.subplots(figsize=(8.5, 6))
+
+    # Stack bars
     bottom = np.zeros(len(model_stats))
-    
-    # Define colors and labels
-    colors = ['#2ecc71', '#e74c3c', '#f39c12', '#3498db']  # green, red, orange, blue
+    colors = ['#2ecc71', '#e74c3c', '#f39c12', '#3498db']
     labels = ['Succeeded', 'Non-Compiling', 'Failed', 'Generic Errors']
-    
+
     for i, col in enumerate(["succeeded_prop", "nonCompiling_prop", "failed_prop", "genericErrors_prop"]):
         ax.barh(
-            model_stats.index, 
+            model_stats.index,
             model_stats[col],
-            left=bottom, 
-            color=colors[i], 
+            left=bottom,
+            color=colors[i],
             label=labels[i],
             edgecolor='white',
             height=0.7
         )
         bottom += model_stats[col]
-    
-    # Customize plot
-    ax.set_xlabel('Proportion of Attempts')
-    ax.set_ylabel('Model')
-    ax.set_title('Distribution of Outcomes by Model')
-    ax.legend(loc='lower right', bbox_to_anchor=(1, 0))
-    
-    # Add success rate as text
+
+    # Labels and title
+    ax.set_xlabel('Proportion of Attempts', fontsize=13)
+    ax.set_ylabel('Model', fontsize=13)
+    ax.set_title('Outcomes Distributions by Model', fontsize=14, weight='bold')
+    ax.tick_params(axis='both', which='major', labelsize=11)
+
+    # Legend inside plot area
+    ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.12), ncol=4, fontsize=11, frameon=False)
+
+    # Add success rate inside the green bar (centered) or to the right of the failed bar if success is 0
     for i, model in enumerate(model_stats.index):
         success_rate = model_stats.loc[model, "succeeded_prop"]
+        print(success_rate)
+        if success_rate < 0.01:  # Skip the label if success rate is 0
+            continue
+
+        # Otherwise, place text at the center of the green (Succeeded) bar
+        x_pos = success_rate / 2
+        ha = 'center'
+
         ax.text(
-            1.01, 
-            i, 
-            f"{success_rate:.2f}", 
+            x_pos,
+            i,
+            f"{success_rate:.2f}",
             va='center',
-            fontweight='bold'
+            ha=ha,
+            fontweight='bold',
+            fontsize=10,
+            color='black',
+            clip_on=True
         )
-    
-    ax.set_xlim(0, 1.15)  # Make room for the success rate text
-    ax.grid(axis='x', linestyle='--', alpha=0.7)
-    
-    plt.tight_layout()
-    plt.savefig(Path(statistics_path) / "error_distribution.png", 
-                dpi=300, bbox_inches="tight")
+
+    ax.set_xlim(0, 1.05)
+    ax.grid(axis='x', linestyle='--', alpha=0.6)
+
+    # Tighten layout
+    plt.subplots_adjust(left=0.22, right=0.97, top=0.9, bottom=0.18)
+    plt.savefig(Path(statistics_path) / "error_distribution.pdf", dpi=300, bbox_inches="tight")
     plt.close()
 
 
@@ -719,8 +702,10 @@ if __name__ == '__main__':
         pass_at_k_table[f"pass@{k}"] = pass_at_k_table[f"pass@{k}"].astype(float)
         pass_at_k_table[f"compile@{k}"] = pass_at_k_table[f"compile@{k}"].astype(float)
 
-
     ## Rendering
+
+    # Set scientific publication-style fonts
+    sns.set(style="whitegrid", context="paper", font="serif", font_scale=1.4)
     
     create_metric_plots("pass", "Pass", "average_pass_at_k.png", k_values, palette)
     create_metric_plots("compile", "Compile", "average_compile_at_k.png", k_values, palette)
