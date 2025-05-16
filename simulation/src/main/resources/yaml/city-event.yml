@@ -1,0 +1,66 @@
+incarnation: scafi
+
+variables:
+  seed: &seed
+    min: 0
+    max: 2
+    step: 1
+    default: 0
+  nodeCount: &nodeCount
+    type: ArbitraryVariable
+    parameters: [ 300, [300, 600] ]
+
+_constants:
+  retentionTime: &retentionTime 25.0
+
+seeds:
+  scenario: *seed
+  simulation: *seed
+
+monitors:
+  - type: SwingGUI
+    parameters:
+      graphics: effects/city-event.json
+
+launcher:
+  parameters: [ ]
+  autoStart: true
+
+network-model:
+  type: ConnectWithinDistance #*connectionType
+  parameters: [1000]
+
+_reproduceGpsTrace: &ReproduceGPSTrace
+  type: GPSTraceWalker
+  parameters: ["vcmuser.gpx", false, AlignToTime, [1365922800, false, false]]
+
+_programs:
+  - program: &runtime
+      - time-distribution: 0.5
+        type: Event
+        actions:
+          - type: RunScafiProgram
+            parameters: [ it.unibo.alchemist.programs.CityEvent, *retentionTime ]
+
+environment:
+  type: OSMEnvironment
+  parameters: ["vcm.pbf", false]
+
+deployments:
+  - type: FromGPSTrace
+    parameters: [ *nodeCount, "vcmuser.gpx", false, AlignToTime, [ 1365922800, false, false ] ]
+    programs:
+      - *runtime
+
+export:
+  - type: CSVExporter
+    parameters:
+      fileNameRoot: "vcm"
+      interval: 1
+      exportPath: "data"
+    data:
+      - time
+
+terminate:
+  type: AfterTime
+  parameters: 1800

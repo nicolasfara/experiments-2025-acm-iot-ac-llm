@@ -288,23 +288,18 @@ def create_latex_table(pass_at_k_table):
 
 def create_knowledge_heatmaps_row():
     """
-    Creates a column of three heatmaps (3 rows x 1 column) showing pass@10 values
-    for different models and test names across three knowledge levels.
-    Uses a shared colorbar and consistent formatting.
+    Creates a row of three heatmaps showing pass@10 values for different models
+    and test names across knowledge levels. Model labels are shown only on the leftmost plot.
     """
-    # Plot setup
     k = 10
-    sns.set(style="whitegrid", context="paper", font="serif", font_scale=1.4)
-    fig, axes = plt.subplots(3, 1, figsize=(14, 18))
+    sns.set_theme(style="whitegrid", context="paper", font="serif", font_scale=1.4)
 
-    # Knowledge levels
     knowledge_levels = [
         "No Knowledge",
         "Basic Knowledge",
         "Knowledge with Building Blocks"
     ]
 
-    # Short test labels for cleaner axis
     short_labels = {
         "Count Down": "Count Down",
         "Neighbors Count": "Neighbors",
@@ -319,56 +314,46 @@ def create_knowledge_heatmaps_row():
         "SCR Temperature Above 30": "SCR Temp"
     }
 
-    # Consistent model ordering
     all_data = pass_at_k_table.copy()
     all_data[f"pass@{k}"] = all_data[f"pass@{k}"].astype(float)
     sorted_models = all_data.groupby("model")[f"pass@{k}"].mean().sort_values(ascending=False).index.tolist()
 
-    # Create each heatmap
-    for i, level in enumerate(knowledge_levels):
-        ax = axes[i]
+    fig, axes = plt.subplots(1, 3, figsize=(20, 6), sharey=True)
+    vmin, vmax = 0, 1
 
-        level_data = pass_at_k_table[pass_at_k_table["knowledge"] == level].copy()
-        level_data[f"pass@{k}"] = level_data[f"pass@{k}"].astype(float)
-
-        pivot = level_data.pivot_table(
-            index="model",
-            columns="testName",
-            values=f"pass@{k}",
-            aggfunc="mean"
-        ).reindex(index=sorted_models)
-
+    for i, (level, ax) in enumerate(zip(knowledge_levels, axes)):
+        data = all_data[all_data["knowledge"] == level]
+        pivot = data.pivot_table(index="model", columns="testName", values=f"pass@{k}", aggfunc="mean")
+        pivot = pivot.reindex(index=sorted_models)
         pivot.columns = [short_labels.get(col, col) for col in pivot.columns]
 
         sns.heatmap(
             pivot,
             ax=ax,
             cmap="viridis",
-            annot=True,
-            fmt=".2f",
-            vmin=0,
-            vmax=1,
-            linewidths=0.5,
+            vmin=vmin,
+            vmax=vmax,
             cbar=False,
-            annot_kws={"fontsize": 11}
+            linewidths=0.3,
+            xticklabels=True,
+            yticklabels=True  # Always set this to True
         )
 
-        ax.set_title(level, fontsize=14, weight="bold")
-        ax.set_xlabel("Test", fontsize=13)
-        ax.set_ylabel("Model", fontsize=13)
-        ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right", fontsize=11)
-        ax.tick_params(axis='y', labelsize=11)
+        ax.set_title(level, weight="bold")
+        ax.set_xlabel("")
+        ax.set_ylabel("")
+        if i == 0:
+            ax.set_yticklabels(pivot.index, rotation=0)  # Explicitly set model names
+        ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right")
 
-    # Add shared colorbar
-    plt.tight_layout(rect=[0, 0, 0.92, 1])
+    # Shared colorbar
     cbar_ax = fig.add_axes([0.93, 0.1, 0.015, 0.8])
-    norm = plt.Normalize(0, 1)
-    sm = plt.cm.ScalarMappable(cmap="viridis", norm=norm)
+    sm = plt.cm.ScalarMappable(cmap="viridis", norm=plt.Normalize(vmin, vmax))
     sm.set_array([])
     fig.colorbar(sm, cax=cbar_ax, label=f"pass@{k}", format="%.1f")
 
-    # Save
-    plt.savefig(Path(statistics_path) / f"knowledge_comparison_heatmaps_pass@{k}.png",
+    plt.tight_layout(rect=[0.05, 0, 0.92, 1])
+    plt.savefig(Path(statistics_path) / f"knowledge_comparison_heatmaps_pass@{k}.pdf",
                 dpi=300, bbox_inches="tight")
     plt.close()
 
@@ -383,7 +368,8 @@ def create_test_group_barplots_row():
     group_order = ["Basic", "Spatio-Temporal", "BB"]
     
     # Create figure with subplots in one row
-    fig, axes = plt.subplots(1, 3, figsize=(24, 10), sharey=True)
+    sns.set_theme(style="whitegrid", context="paper", font="serif", font_scale=1.5)
+    fig, axes = plt.subplots(1, 3, figsize=(17, 7), sharey=True)
     
     # Get global model ranking to keep consistent order across plots
     all_data = pass_at_k_table.copy()
@@ -407,11 +393,11 @@ def create_test_group_barplots_row():
         # Compute averages and standard errors per model and test group
         group_stats = knowledge_data.groupby(["model", "test_group"])[f"pass@{k}"].agg(
             ["mean", "std", "count"]).reset_index()
-        
+        group_stats["sem"] = group_stats["std"] / np.sqrt(group_stats["count"])
         
         # Plot each test group as a separate set of bars
         y_positions = {}
-        height = 0.25  # Height of each bar
+        height = 0.30  # Height of each bar
         
         for idx, group in enumerate(group_order):
             group_data = group_stats[group_stats["test_group"] == group]
@@ -426,35 +412,31 @@ def create_test_group_barplots_row():
             else:
                 y_pos = y_positions["base"] - idx * height
                 
-            # Plot horizontal bars with error bars
+            # Plot horizontal bars with error bars (SEM)
             axes[i].barh(
                 y_pos, 
                 group_data["mean"], 
+                xerr=group_data["sem"],
                 height=height, 
                 label=group,
                 color=group_palette[group],
                 edgecolor="black",
-                # use ci as error, not the standard error
-                
-                capsize=5
+                capsize=2,
+                error_kw=dict(lw=0.75)
             )
         
         # Set title and labels
-        axes[i].set_title(knowledge)
+        axes[i].set_title(knowledge, weight="bold")
         axes[i].set_xlabel("Average pass@10")
-        if i == 0:
-            axes[i].set_ylabel("Model")
-        else:
-            axes[i].set_ylabel("")
+        # if i == 0:
+        #     axes[i].set_ylabel("Model", fontsize=14)
+        # else:
+        #     axes[i].set_ylabel("", fontsize=14)
         
         # Set y-ticks in the middle of the grouped bars
         if "base" in y_positions:
             axes[i].set_yticks(y_positions["base"] - height)
-            
-            # Get model names in order
             model_labels = [m for m in sorted_models if m in group_stats["model"].values]
-            
-            # Set model names as y-tick labels
             axes[i].set_yticklabels(model_labels)
         
         # Add legend only to the first plot
@@ -465,7 +447,7 @@ def create_test_group_barplots_row():
         axes[i].grid(axis="x", linestyle="--", alpha=0.7)
     
     plt.tight_layout()
-    plt.savefig(Path(statistics_path) / f"test_group_comparison_barplots_pass@{k}.png", 
+    plt.savefig(Path(statistics_path) / f"test_group_comparison_barplots_pass@{k}.pdf", 
                 dpi=300, bbox_inches="tight")
     plt.close()
 
@@ -500,7 +482,7 @@ def plot_knowledge_improvement():
     sns.set(style="whitegrid", context="paper", font="serif", font_scale=1.4)
 
     # Wider and shorter figure to reduce margin
-    plt.figure(figsize=(8.5, 5.8))  # Wider to occupy left space
+    plt.figure(figsize=(13.5, 5.8))  # Wider to occupy left space
     ax = sns.lineplot(
         data=plot_data,
         x="knowledge",
@@ -568,7 +550,7 @@ def plot_error_distribution():
 
     # Plot setup
     sns.set(style="whitegrid", context="paper", font="serif", font_scale=1.4)
-    fig, ax = plt.subplots(figsize=(8.5, 6))
+    fig, ax = plt.subplots(figsize=(13.5, 5.8))
 
     # Stack bars
     bottom = np.zeros(len(model_stats))
