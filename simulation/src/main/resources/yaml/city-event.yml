@@ -12,6 +12,7 @@ variables:
 
 _constants:
   retentionTime: &retentionTime 25.0
+  moveFrequency: &moveFrequency 0.5
 
 seeds:
   scenario: *seed
@@ -41,7 +42,12 @@ _programs:
         actions:
           - type: RunScafiProgram
             parameters: [ it.unibo.alchemist.programs.CityEvent, *retentionTime ]
-
+      - program: send
+  - program: &moveWithTraces
+      - time-distribution: *moveFrequency
+        type: Event
+        actions:
+          - *ReproduceGPSTrace
 environment:
   type: OSMEnvironment
   parameters: ["vcm.pbf", false]
@@ -51,6 +57,7 @@ deployments:
     parameters: [ *nodeCount, "vcmuser.gpx", false, AlignToTime, [ 1365922800, false, false ] ]
     programs:
       - *runtime
+      - *moveWithTraces
 
 export:
   - type: CSVExporter
@@ -63,4 +70,4 @@ export:
 
 terminate:
   type: AfterTime
-  parameters: 1800
+  parameters: 12000
