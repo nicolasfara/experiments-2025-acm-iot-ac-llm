@@ -1,8 +1,9 @@
 package it.unibo.scafi.program.llm
 
 import scala.collection.mutable
-import scala.io.{BufferedSource, Source}
-import cats.effect.{IO, Resource}
+import scala.io.{ BufferedSource, Source }
+
+import cats.effect.{ IO, Resource }
 import it.unibo.scafi.program.utils.PromptUtils.generatePreamblePrompt
 import it.unibo.scafi.program.utils.StringUtils
 
