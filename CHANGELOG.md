@@ -1,3 +1,19 @@
+## [1.4.0](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/compare/v1.3.0...v1.4.0) (2025-05-26)
+
+### Features
+
+* add more data from LLM, add some visualization ([4fe8251](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/4fe8251a1e0ecca57e0680c0e50a8626b9df8ff2))
+* increase chart size ([fc4c3c2](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/fc4c3c2d5b9c7472a658657772db1094ee4d04d7))
+* new charts and setup city event in simulations ([adc1307](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/adc13077993854f4fdfb1df85d53b0dfd822ef4f))
+
+### Build and continuous integration
+
+* remove simulation from tasks checks ([85d19b3](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/85d19b3e87e8a7031364d6e9705661e27f759988))
+
+### Refactoring
+
+* reformat code ([4f856e5](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/commit/4f856e5605c8d707bc39d8c87de9beb6d7a0d702))
+
 ## [1.3.0](https://github.com/nicolasfara/experiments-2025-acm-iot-ac-llm/compare/v1.2.0...v1.3.0) (2025-05-02)
 
 ### Features
