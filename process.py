@@ -9,6 +9,7 @@ import os
 import xarray
 import pprint
 import math
+from matplotlib.gridspec import GridSpec
 
 def build_dataframe_from_results(directory):
     data = []
@@ -288,11 +289,13 @@ def create_latex_table(pass_at_k_table):
 
 def create_knowledge_heatmaps_row():
     """
-    Creates a row of three heatmaps showing pass@10 values for different models
-    and test names across knowledge levels. Model labels are shown only on the leftmost plot.
+    Creates three heatmaps:
+    - Top row: two heatmaps side by side (no space between them)
+    - Bottom row: one heatmap centered
+    - Shows xticks on all, model names on first and last
     """
     k = 10
-    sns.set_theme(style="whitegrid", context="paper", font="serif", font_scale=1.4)
+    sns.set_theme(style="whitegrid", context="paper", font="serif", font_scale=1.5)
 
     knowledge_levels = [
         "No Knowledge",
@@ -314,16 +317,26 @@ def create_knowledge_heatmaps_row():
         "SCR Temperature Above 30": "SCR Temp"
     }
 
-    all_data = pass_at_k_table.copy()
-    all_data[f"pass@{k}"] = all_data[f"pass@{k}"].astype(float)
-    sorted_models = all_data.groupby("model")[f"pass@{k}"].mean().sort_values(ascending=False).index.tolist()
+    data = pass_at_k_table.copy()
+    data[f"pass@{k}"] = data[f"pass@{k}"].astype(float)
+    sorted_models = data.groupby("model")[f"pass@{k}"].mean().sort_values(ascending=False).index.tolist()
 
-    fig, axes = plt.subplots(1, 3, figsize=(20, 6), sharey=True)
+    fig = plt.figure(figsize=(16, 12))
+
+    # GridSpec: no width space between first two plots
+    grid = GridSpec(2, 4, figure=fig, wspace=0.3, hspace=0.5)
+
+    axes = [
+        fig.add_subplot(grid[0, 0:2]),
+        fig.add_subplot(grid[0, 2:4], sharey=None),  # sharey=None to avoid tick conflicts
+        fig.add_subplot(grid[1, 1:3])
+    ]
+
     vmin, vmax = 0, 1
 
-    for i, (level, ax) in enumerate(zip(knowledge_levels, axes)):
-        data = all_data[all_data["knowledge"] == level]
-        pivot = data.pivot_table(index="model", columns="testName", values=f"pass@{k}", aggfunc="mean")
+    for i, (ax, level) in enumerate(zip(axes, knowledge_levels)):
+        subset = data[data["knowledge"] == level]
+        pivot = subset.pivot_table(index="model", columns="testName", values=f"pass@{k}", aggfunc="mean")
         pivot = pivot.reindex(index=sorted_models)
         pivot.columns = [short_labels.get(col, col) for col in pivot.columns]
 
@@ -336,19 +349,24 @@ def create_knowledge_heatmaps_row():
             cbar=False,
             linewidths=0.3,
             xticklabels=True,
-            yticklabels=True  # Always set this to True
+            yticklabels=True
         )
 
         ax.set_title(level, weight="bold")
         ax.set_xlabel("")
         ax.set_ylabel("")
-        if i == 0:
-            ax.set_yticklabels(pivot.index, rotation=0)  # Explicitly set model names
+
         ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right")
+
+        # Y-ticks (model names) only on first and third plots
+        if i == 0 or i == 2:
+            ax.set_yticklabels(ax.get_yticklabels(), rotation=0)
+        else:
+            ax.set_yticklabels([])
 
     # Shared colorbar
     cbar_ax = fig.add_axes([0.93, 0.1, 0.015, 0.8])
-    sm = plt.cm.ScalarMappable(cmap="viridis", norm=plt.Normalize(vmin, vmax))
+    sm = plt.cm.ScalarMappable(cmap="viridis", norm=plt.Normalize(vmin=vmax))
     sm.set_array([])
     fig.colorbar(sm, cax=cbar_ax, label=f"pass@{k}", format="%.1f")
 
@@ -359,95 +377,84 @@ def create_knowledge_heatmaps_row():
 
 def create_test_group_barplots_row():
     """
-    Creates a row of three bar plots showing average pass@10 values for different models,
-    grouped by test category (Basic, Spatio-Temporal, BB), with one plot per knowledge level.
-    Models are displayed vertically with a standard color palette for test groups.
+    Creates grouped bar plots for pass@10 grouped by test group and model,
+    with three bars per model (one per test group),
+    laid out as two plots on the first row and one centered on the second row.
     """
     k = 10
     knowledge_order = ["No Knowledge", "Basic Knowledge", "Knowledge with Building Blocks"]
     group_order = ["Basic", "Spatio-Temporal", "BB"]
-    
-    # Create figure with subplots in one row
-    sns.set_theme(style="whitegrid", context="paper", font="serif", font_scale=1.5)
-    fig, axes = plt.subplots(1, 3, figsize=(17, 7), sharey=True)
-    
-    # Get global model ranking to keep consistent order across plots
+
+    sns.set_theme(style="whitegrid", context="paper", font="serif", font_scale=3.5)
+
+    # Prepare data
     all_data = pass_at_k_table.copy()
     all_data[f"pass@{k}"] = all_data[f"pass@{k}"].astype(float)
-    model_avg = all_data.groupby("model")[f"pass@{k}"].mean().sort_values(ascending=True)
-    sorted_models = model_avg.index.tolist()
-    
-    # Use standard seaborn palette
+    all_data["test_group"] = all_data["testName"].map(group_test_name)
+
+    # Model ordering by overall average
+    sorted_models = (
+        all_data.groupby("model")[f"pass@{k}"]
+        .mean()
+        .sort_values(ascending=True)
+        .index.tolist()
+    )
+    all_data["model"] = pd.Categorical(all_data["model"], categories=sorted_models, ordered=True)
+
+    # Setup 2x2 layout and disable unused subplot
+    fig, axes = plt.subplots(2, 2, figsize=(40, 38), gridspec_kw={"height_ratios": [1, 1]})
+    axes[1, 1].axis("off")  # hide unused bottom-right
+
     palette = sns.color_palette("tab10", len(group_order))
     group_palette = dict(zip(group_order, palette))
-    
-    # Process each knowledge level
-    for i, knowledge in enumerate(knowledge_order):
-        # Filter data for this knowledge level
-        knowledge_data = pass_at_k_table[pass_at_k_table["knowledge"] == knowledge].copy()
-        knowledge_data[f"pass@{k}"] = knowledge_data[f"pass@{k}"].astype(float)
-        
-        # Add test group information to the data
-        knowledge_data["test_group"] = knowledge_data["testName"].map(group_test_name)
-        
-        # Compute averages and standard errors per model and test group
-        group_stats = knowledge_data.groupby(["model", "test_group"])[f"pass@{k}"].agg(
-            ["mean", "std", "count"]).reset_index()
-        group_stats["sem"] = group_stats["std"] / np.sqrt(group_stats["count"])
-        
-        # Plot each test group as a separate set of bars
-        y_positions = {}
-        height = 0.30  # Height of each bar
-        
-        for idx, group in enumerate(group_order):
-            group_data = group_stats[group_stats["test_group"] == group]
-            
-            # Align with model order
-            group_data = group_data.set_index("model").reindex(sorted_models).dropna().reset_index()
-            
-            # Calculate y positions for this group's bars
-            if idx == 0:
-                y_pos = np.arange(len(group_data))
-                y_positions["base"] = y_pos
-            else:
-                y_pos = y_positions["base"] - idx * height
-                
-            # Plot horizontal bars with error bars (SEM)
-            axes[i].barh(
-                y_pos, 
-                group_data["mean"], 
-                xerr=group_data["sem"],
-                height=height, 
-                label=group,
-                color=group_palette[group],
-                edgecolor="black",
-                capsize=2,
-                error_kw=dict(lw=0.75)
-            )
-        
-        # Set title and labels
-        axes[i].set_title(knowledge, weight="bold")
-        axes[i].set_xlabel("Average pass@10")
-        # if i == 0:
-        #     axes[i].set_ylabel("Model", fontsize=14)
-        # else:
-        #     axes[i].set_ylabel("", fontsize=14)
-        
-        # Set y-ticks in the middle of the grouped bars
-        if "base" in y_positions:
-            axes[i].set_yticks(y_positions["base"] - height)
-            model_labels = [m for m in sorted_models if m in group_stats["model"].values]
-            axes[i].set_yticklabels(model_labels)
-        
-        # Add legend only to the first plot
-        if i == 0:
-            axes[i].legend(title="Test Group")
-        
-        axes[i].set_xlim(0, 1.1)
-        axes[i].grid(axis="x", linestyle="--", alpha=0.7)
-    
-    plt.tight_layout()
-    plt.savefig(Path(statistics_path) / f"test_group_comparison_barplots_pass@{k}.pdf", 
+
+    for idx, knowledge in enumerate(knowledge_order):
+        row, col = divmod(idx, 2)
+        ax = axes[row, col]
+
+        # Filter for current knowledge level
+        data = all_data[all_data["knowledge"] == knowledge]
+
+        sns.barplot(
+            data=data,
+            x=f"pass@{k}",
+            y="model",
+            hue="test_group",
+            hue_order=group_order,
+            palette=group_palette,
+            dodge=True,
+            errorbar="se",
+            ax=ax
+        )
+
+        ax.set_title(knowledge, weight="bold")
+        ax.set_xlim(0, 1.1)
+        ax.set_xlabel(f"Average pass@{k}")
+        ax.grid(axis="x", linestyle="--", alpha=0.7)
+
+        if idx == 0:
+            ax.set_ylabel("Model")
+            ax.legend(title="Test Group", loc="upper right")
+        elif idx == 1:
+            # Hide y-axis labels and ticks on second plot
+            ax.set_ylabel("")
+            ax.set_yticklabels([])
+            ax.tick_params(axis='y', which='both', length=0)
+            ax.get_legend().remove()
+        else:
+            ax.set_ylabel("")
+            ax.get_legend().remove()
+
+    plt.tight_layout(rect=[0.05, 0, 0.95, 1])
+
+    # Center the last plot (bottom-left subplot)
+    last_ax = axes[1, 0]
+    axes[0, 0].set_ylabel("")
+    pos = last_ax.get_position()
+    new_x0 = 0.57 - pos.width / 2
+    last_ax.set_position([new_x0, pos.y0, pos.width, pos.height])
+
+    plt.savefig(Path(statistics_path) / f"test_group_comparison_barplots_pass@{k}.pdf",
                 dpi=300, bbox_inches="tight")
     plt.close()
 
